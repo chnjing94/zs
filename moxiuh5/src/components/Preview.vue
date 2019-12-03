@@ -21,7 +21,7 @@ export default {
 <style scoped>
 #image-wapper {
     width: 750px;
-    height: 1280px;
+    height: 2656px;
     /* background-image: url('../image/背景.png') */
 }
 </style>
