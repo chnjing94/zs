@@ -12,15 +12,12 @@ export default new Vuex.Store({
 
   mutations: {
     changeBackgroundLongImg(state, url) {
-      state.backgroundLongImgStyle.backgroundImage = url
+      state.backgroundLongImgStyle.backgroundImage = 'url(' + require('../' + url) + ')'
     }
   },
 
   actions: {
-    changeBackgroundLongImg({commit}) {
-      setTimeout(()=>{
-        commit('changeBackgroundLongImg', 'url(' + require('../image/背景.png') + ')')
-      }, 2000)
+    changeBackgroundLongImg() {
     }
   },
 })

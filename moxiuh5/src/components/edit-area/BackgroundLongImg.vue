@@ -1,7 +1,7 @@
 <template>
   <div id="background-long-img-wrapper">
     <Title />
-    <ImageUploader />
+    <ImageUploader v-bind:imgPrefix="'BackgroundLongImg'" @uploadImgResponse="handleUploadImageResponse" />
     <ButtonGroup />
   </div>
 </template>
@@ -17,6 +17,11 @@ export default {
     ButtonGroup,
     ImageUploader,
     Title
+  },
+  methods: {
+    handleUploadImageResponse (res) {
+      this.$store.commit('changeBackgroundLongImg', res.data.RelativePath)
+    }
   }
 }
 </script>

@@ -1,12 +1,12 @@
 <template>
   <div id="button-group-wrapper">
-    <div class="msg">
-      <span>配置成功，可在左侧预览区查看</span>
+    <div class="msg" >
+      <span v-show="showMsg">配置成功，可在左侧预览区查看</span>
     </div>
     <div class="line"></div>
     <div class="buttons">
       <div class="button cancel">取消</div>
-      <div class="button confirm">确定</div>
+      <div class="button confirm" @click="ToggleMsg">确定</div>
     </div>
     <div class="notification">
       <span>注：带*为必须配置项，其余配置项无配置内容不展示相关组件</span>
@@ -17,6 +17,16 @@
 <script>
 export default {
     name: 'ButtonGroup',
+    data () {
+      return {
+        showMsg: false,
+      }
+    },
+    methods: {
+      ToggleMsg () {
+        this.showMsg = true
+      }
+    }
 }
 </script>
 
@@ -33,7 +43,7 @@ export default {
     justify-content flex-start
     align-items center
     padding-left 1rem
-    color rgb(77, 201, 159)
+    color rgb(51, 187, 172)
     font-weight 500 
 
   .line
@@ -51,7 +61,7 @@ export default {
   .button
     flex 0 0 8rem
     margin 1rem 1rem 0 1rem
-    border solid 1px rgb(77, 201, 159)
+    border solid 1px rgb(51, 187, 172)
     display flex
     align-items center
     justify-content center
@@ -71,6 +81,6 @@ export default {
     display flex
     justify-content center
     align-items center
-    color #D1D1D2
+    color rgb(189, 189, 189)
     font-size 14px
 </style>

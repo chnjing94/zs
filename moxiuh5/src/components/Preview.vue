@@ -1,5 +1,5 @@
 <template>
-  <div id="background-long-img" :style="backgroundLongImgStyle" @click="onClick">
+  <div id="background-long-img" :style="backgroundLongImgStyle">
   </div>
 </template>
 
@@ -14,9 +14,7 @@ export default {
     }
   },
   methods: {
-    onClick () {
-      this.$store.dispatch('changeBackgroundLongImg', '../image/背景.png')
-    }
+      
   },
   computed: {
     ...mapState({
