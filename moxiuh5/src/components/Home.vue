@@ -4,7 +4,7 @@
     <main>
       <div id="left-panel"></div>
       <div id="preview"><Preview /></div>
-      <div id="right-panel"></div>
+      <div id="right-panel"><RightPanel /></div>
     </main>
     <footer>Footer</footer>
   </div>
@@ -12,11 +12,13 @@
 
 <script>
 import Preview from './Preview'
+import RightPanel from './RightPanel'
 
 export default {
   name: 'Home',
   components: {
-    Preview
+    Preview,
+    RightPanel
   }
 }
 </script>

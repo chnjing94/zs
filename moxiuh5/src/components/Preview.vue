@@ -1,27 +1,34 @@
 <template>
-    <div id="image-wapper" :style="style">
-
-    </div>
+  <div id="background-long-img" :style="backgroundLongImgStyle" @click="onClick">
+  </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-    name: 'Preview',
-    data () {
-        return {
-            style: {
-                backgroundImage: 'url(' + require('../image/背景.png') + ')',
-                backgroundSize: 'auto'
-            }
-        }
+  name: 'Preview',
+  data () {
+    return {
+
     }
+  },
+  methods: {
+    onClick () {
+      this.$store.dispatch('changeBackgroundLongImg', '../image/背景.png')
+    }
+  },
+  computed: {
+    ...mapState({
+        backgroundLongImgStyle: state => state.backgroundLongImgStyle
+    }),
+  }
 }
 </script>
 
 <style scoped>
-#image-wapper {
-    width: 750px;
-    height: 2656px;
-    /* background-image: url('../image/背景.png') */
+#background-long-img {
+  width: 750px;
+  height: 2656px;
 }
 </style>
