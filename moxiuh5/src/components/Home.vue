@@ -6,19 +6,23 @@
       <div id="preview"><Preview /></div>
       <div id="right-panel"><RightPanel /></div>
     </main>
-    <footer>Footer</footer>
+    <footer>
+      <Footer />
+    </footer>
   </div>
 </template>
 
 <script>
 import Preview from './Preview'
 import RightPanel from './RightPanel'
+import Footer from './Footer'
 
 export default {
   name: 'Home',
   components: {
     Preview,
-    RightPanel
+    RightPanel,
+    Footer
   }
 }
 </script>
