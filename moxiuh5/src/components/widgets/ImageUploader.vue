@@ -5,13 +5,16 @@
         <span style="color: red">*</span>{{picTitle}}
       </div>
       <div class="sub-hint">
-        <span>（支持10M以内，{{picSize}}jpg/jpeg/png/gif图片格式）</span>
+        （支持10M以内，{{picSize}}jpg/jpeg/png/gif图片格式）
       </div>
     </div>
     <div class="image-uploader">
       <div class="text">点击浏览图片上传...</div>
       <div class="button" @click="onClick">浏览</div>
       <input v-show="false" type="file" accept="image/*" ref="imgInput" @change="onChange">
+    </div>
+    <div class="warning">
+      <!-- <span style="color: red">图片大小超出限制</span> -->
     </div>
   </div>
 </template>
@@ -34,7 +37,7 @@ export default {
       type: String,
       required: true,
       default: ""
-    },
+    }
   },
   methods: {
     onClick () {
@@ -90,6 +93,7 @@ export default {
     .sub-hint
       flex 1 1 auto
       color #868686
+      word-break break-all
 
   .image-uploader
     flex 1 0 auto
@@ -116,4 +120,7 @@ export default {
       cursor pointer
       &:hover
         background-color #F1F1F1
+  .warning
+    flex 1 0 auto
+    margin 0 1rem
 </style>

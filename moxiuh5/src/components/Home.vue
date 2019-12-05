@@ -1,6 +1,6 @@
 <template>
   <div id='content'>
-    <header></header>
+    <header />
     <main>
       <div id="left-panel"></div>
       <div id="preview"><Preview /></div>
@@ -33,7 +33,7 @@ export default {
   grid-template-columns: repeat(1, 1fr);
   grid-template-rows: repeat(20, 5vh);
   margin: 0 auto;
-  min-width: 1650px;
+  min-width: 1350px;
 }
 
 header {
@@ -47,14 +47,15 @@ main {
   grid-row-start: 2;
   grid-row-end: 20;
   display: flex;
+  justify-content: center;
 }
 
 #left-panel {
-  flex: 1 0 auto;
+  flex: 2 0 auto;
 }
 
 #preview {
-  flex: 0 0 750px;
+  flex: 0 0 375px;
   background-color: white;
   overflow-x: auto;
 }

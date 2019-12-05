@@ -1,12 +1,18 @@
 <template>
   <div id="title-wrapper">
-    <div class="title">背景长图</div>
+    <div class="title">{{title}}</div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Title',
+  props: {
+    title: {
+      type: String,
+      required: true,
+    }
+  }
 }
 </script>
 
@@ -16,9 +22,10 @@ export default {
     flex-direction column
     height 3rem
     border-bottom solid 2px #ddd
+    padding-left 1rem
   .title 
     flex 1 0 auto
-    margin 1rem
+    display flex
     align-items center
     font-size 20px
     font-weight 700

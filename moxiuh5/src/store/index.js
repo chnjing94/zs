@@ -6,13 +6,18 @@ export default new Vuex.Store({
   state: {
     backgroundLongImgStyle: {
       backgroundImage: '',
-      backgroundSize: 'auto'
+      backgroundSize: 'contain',
+      backgroundRepeat: 'no-repeat',
     },
   },
 
   mutations: {
     changeBackgroundLongImg(state, url) {
-      state.backgroundLongImgStyle.backgroundImage = 'url(' + require('../' + url) + ')'
+      if (url) {
+        state.backgroundLongImgStyle.backgroundImage = 'url(' + require('../' + url) + ')'
+      } else {
+        state.backgroundLongImgStyle.backgroundImage = ''
+      }
     }
   },
 

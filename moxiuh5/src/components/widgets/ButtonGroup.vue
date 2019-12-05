@@ -5,8 +5,8 @@
     </div>
     <div class="line"></div>
     <div class="buttons">
-      <div class="button cancel">取消</div>
-      <div class="button confirm" @click="ToggleMsg">确定</div>
+      <div class="button cancel" @click="Cancel">取消</div>
+      <div class="button confirm" @click="Confirm">确定</div>
     </div>
     <div class="notification">
       <span>注：带*为必须配置项，其余配置项无配置内容不展示相关组件</span>
@@ -17,14 +17,30 @@
 <script>
 export default {
     name: 'ButtonGroup',
+    props: {
+      editCounter: {
+        type: Number,
+        default: 0
+      }
+    },
     data () {
       return {
         showMsg: false,
       }
     },
     methods: {
-      ToggleMsg () {
+      Confirm () {
         this.showMsg = true
+        this.$emit('buttonConfirmed')
+      },
+      Cancel () {
+        this.showMsg = false
+        this.$emit('buttonCanceled')
+      }
+    },
+    watch: {
+      editCounter () {
+        this.showMsg = false
       }
     }
 }

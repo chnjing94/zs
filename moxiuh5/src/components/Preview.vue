@@ -26,7 +26,7 @@ export default {
 
 <style scoped>
 #background-long-img {
-  width: 750px;
-  height: 2656px;
+  width: 375px;
+  height: 1328px;
 }
 </style>

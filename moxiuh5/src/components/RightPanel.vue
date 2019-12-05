@@ -1,17 +1,20 @@
 <template>
   <div id="edit-area">
-    <BackgroundLongImg />
+    <BackgroundLongImg v-show="false"/>
+    <FixedFloatWindow v-show="true"/>
   </div>
   
 </template>
 
 <script>
 import BackgroundLongImg from './edit-area/BackgroundLongImg'
+import FixedFloatWindow from './edit-area/FixedFloatWindow'
 
 export default {
   name: 'RightPanel',
   components: {
     BackgroundLongImg,
+    FixedFloatWindow
   }
 }
 </script>
