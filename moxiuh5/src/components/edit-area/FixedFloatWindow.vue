@@ -2,8 +2,9 @@
   <div id="fixed-float-window">
     <Title v-bind:title="title"/>
     <ComponentName @componentNameChanged="saveComponentName"/>
-    <ImageUploader v-bind:picSize="picSize"/>
+    <ImageUploader v-bind:imgPrefix="imgPrefix" v-bind:picSize="picSize"/>
     <Link />
+    <RedictWay />
     <ButtonGroup v-bind:editCounter="editCounter" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
@@ -14,6 +15,7 @@ import ButtonGroup from '../widgets/ButtonGroup'
 import ComponentName from '../widgets/ComponentName'
 import ImageUploader from '../widgets/ImageUploader'
 import Link from '../widgets/Link'
+import RedictWay from '../widgets/RedictWay'
 
 export default {
     name: 'FixedFloatWindow',
@@ -22,13 +24,15 @@ export default {
       ButtonGroup,
       ComponentName,
       ImageUploader,
-      Link
+      Link,
+      RedictWay
     },
     data () {
       return {
         title: '固定悬浮窗',
         editCounter: 0,
         picSize: '建议160*145px尺寸的',
+        imgPrefix: 'FixedFloatWindow',
 
         componentName: '',
       }

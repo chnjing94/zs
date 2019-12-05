@@ -31,15 +31,14 @@ export default {
   #component-name
     display flex
     flex-direction column
+    padding 0.5rem 1rem
   
   .hint
     flex 1 0 2rem
-    padding 0 1rem
     display flex
     align-items center
 
   .test-area
     flex 1 0 2rem
-    padding 0 1rem
   
 </style>

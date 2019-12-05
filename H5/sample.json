@@ -230,5 +230,10 @@
         "backgroundImgUrl": "粉色.png",
         "link": "http://",
         "way": 0
+    },
+    "footText": {
+        "text": "基金过往业绩并不预示其未来表现市场有风险，投资需谨慎",
+        "fontSize": 13,
+        "fontColor": "black"
     }
 }

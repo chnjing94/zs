@@ -70,12 +70,12 @@ export default {
 
   .buttons
     display flex
-    flex 1 0 auto
+    flex 0 0 3rem
     flex-direction row
     justify-content center
 
   .button
-    flex 0 0 8rem
+    flex 1 0 8rem
     margin 1rem 1rem 0 1rem
     border solid 1px rgb(51, 187, 172)
     display flex

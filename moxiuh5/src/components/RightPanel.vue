@@ -2,19 +2,21 @@
   <div id="edit-area">
     <BackgroundLongImg v-show="false"/>
     <FixedFloatWindow v-show="true"/>
+    <BottomState v-show="false"/>
   </div>
-  
 </template>
 
 <script>
 import BackgroundLongImg from './edit-area/BackgroundLongImg'
 import FixedFloatWindow from './edit-area/FixedFloatWindow'
+import BottomState from './edit-area/BottomState'
 
 export default {
   name: 'RightPanel',
   components: {
     BackgroundLongImg,
-    FixedFloatWindow
+    FixedFloatWindow,
+    BottomState
   }
 }
 </script>

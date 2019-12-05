@@ -80,14 +80,13 @@ export default {
     flex-direction column
     height 6rem
     width 100%
-    margin 1rem 0
+    padding 0.5rem 1rem
 
   .hint 
     flex 1 0 auto
     display flex
     justify-content center
     align-items flex-start
-    padding 0.5rem 1rem 0 1rem
     .main-hint
       flex 1 0 auto
     .sub-hint
@@ -98,11 +97,10 @@ export default {
   .image-uploader
     flex 1 0 auto
     display flex
-    height 3rem
     flex-direction row
     .text
       flex 1 1 70%
-      margin 0.5rem 1rem
+      margin   0.5rem 1rem 0 0
       border 1px solid #ddd
       color #AEADAD
       display flex
@@ -110,7 +108,7 @@ export default {
       align-items center
     .button
       flex 1 1 30%
-      margin 0.5rem 1rem
+      margin  0.5rem 0 0 1rem
       border 1px solid #ddd
       color #868686
       font-weight 500 
