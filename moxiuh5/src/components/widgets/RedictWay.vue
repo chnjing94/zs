@@ -38,6 +38,7 @@ export default {
     flex 1 0 2rem
     display flex
     align-items center
+    font-weight 600
 
   .select-area
     flex 1 0 2rem

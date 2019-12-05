@@ -1,7 +1,7 @@
 <template>
   <div id="link">
     <div class="hint">
-      <span style="color: red">*</span>跳转链接<span style="color: #868686">（必须以一些http://或https://开始）</span>
+      <span style="color: red">*</span><span style="font-weight:600">跳转链接</span><span style="color: #868686">（必须以一些http://或https://开始）</span>
     </div>
     <div class="test-area">
       <a-input placeholder="请输入跳转链接" @change="onInputChanged" v-model="value"/>

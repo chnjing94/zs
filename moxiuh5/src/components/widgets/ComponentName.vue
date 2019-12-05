@@ -37,6 +37,7 @@ export default {
     flex 1 0 2rem
     display flex
     align-items center
+    font-weight 600
 
   .test-area
     flex 1 0 2rem

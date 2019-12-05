@@ -23,7 +23,7 @@ export default {
     border solid 1px rgb(51, 187, 172)
     border-radius 0.3rem
     cursor pointer
-    min-height 2rem
+    min-height 1rem
   
   .last-step
     flex 0 1 7rem

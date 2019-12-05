@@ -35,7 +35,7 @@ export default {
   #simple-text
     display flex
     flex-direction column
-    padding 1rem
+    padding 0.5rem 1rem
   
   .hint
     flex 1 0 2rem
@@ -50,5 +50,7 @@ export default {
 
   .test-area
     flex 1 0 2rem
+    display flex
+    align-items center
   
 </style>

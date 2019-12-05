@@ -2,6 +2,9 @@
   <div id="bottom-state">
     <Title v-bind:title="title"/>
     <SimpleText />
+    <FontSize />
+    <FontColor />
+    <BackgroundColor />
     <ButtonGroup v-bind:editCounter="editCounter" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
@@ -10,13 +13,19 @@
 import Title from '../widgets/Title'
 import ButtonGroup from '../widgets/ButtonGroup'
 import SimpleText from '../widgets/SimpleText'
+import FontSize from '../widgets/FontSize'
+import FontColor from '../widgets/FontColor'
+import BackgroundColor from '../widgets/BackgroundColor'
 
 export default {
     name: 'BottomState',
     components: {
       Title,
       ButtonGroup,
-      SimpleText
+      SimpleText,
+      FontSize,
+      FontColor,
+      BackgroundColor
     },
     data () {
       return {

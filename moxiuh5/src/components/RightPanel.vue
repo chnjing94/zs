@@ -1,8 +1,8 @@
 <template>
   <div id="edit-area">
     <BackgroundLongImg v-show="false"/>
-    <FixedFloatWindow v-show="true"/>
-    <BottomState v-show="false"/>
+    <FixedFloatWindow v-show="false"/>
+    <BottomState v-show="true"/>
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
 
 <style scoped>
   #edit-area {
-    width: 400px;
+    width: 20rem;
     margin-left: 10px;
     background-color: white;
     margin: 1rem

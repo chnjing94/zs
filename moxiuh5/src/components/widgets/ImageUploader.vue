@@ -89,6 +89,7 @@ export default {
     align-items flex-start
     .main-hint
       flex 1 0 auto
+      font-weight 600
     .sub-hint
       flex 1 1 auto
       color #868686
