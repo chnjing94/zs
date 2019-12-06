@@ -2,7 +2,7 @@
   <div id="background-color">
     <div class="hint">
       <div class="main-hint">
-        背景颜色
+        {{title}}
       </div>
       <div class="sub-hint">
         （若配置了背景图片，背景颜色和透明度不在手机端展示）
@@ -32,7 +32,7 @@
     <div class="opacity-bar">
       <div class="opacity-title">透明度: {{opacity}}</div>
       <div class="bar">
-        <a-slider :defaultValue="0" style="width: 80%" v-model="opacity"/>
+        <a-slider :defaultValue="0" style="width: 80%" v-model="opacity" :tipFormatter="null"/>
       </div>
     </div>
   </div>
@@ -41,13 +41,18 @@
 <script>
 export default {
   name: 'BackgroundColor',
+  props: {
+    title: {
+      type: String,
+      default: '背景颜色'
+    }
+  },
   data () {
     return {
       value: '16',
       opacity: 0,
       selectedColor: '',
-      colors: ['#000000', '#676767', '#FFFFFF', '#FF0000', '#FF5547', '#F1A553', '#A78D43', '#FDC927',
-                '#21A775', '#0FCD9D', '#DFEFE7', '#4F5975', '#2D4D7D', '#4D8FF3', '#5BC7F7', '#6F6FEF']
+      colors: ['#000000', '#676767', '#FFFFFF', '#FF0000', '#FF5547', '#F1A553', '#A78D43', '#FDC927', '#21A775', '#0FCD9D', '#DFEFE7', '#4F5975', '#2D4D7D', '#4D8FF3', '#5BC7F7', '#6F6FEF']
     }
   },
   methods: {
@@ -73,7 +78,7 @@ export default {
   #background-color
     display flex
     flex-direction column
-    padding 0.5rem 1rem
+    padding 0.5rem 1rem 0 1rem
   
   .hint
     flex 1 0 2rem
@@ -103,6 +108,7 @@ export default {
       border solid 1px grey
       .transparent-block
         flex 0 0 12.5%
+        opacity 0.5
     .color-panel
       flex 0 0 60%
       display flex
@@ -110,6 +116,7 @@ export default {
       .color-block
         flex 0 0 1.15rem
         margin 0.1rem
+        cursor pointer
     .more-color
       flex 0 0 10%
       display flex
@@ -132,4 +139,6 @@ export default {
       display flex
       align-items center
       justify-content center
+  .ant-slider
+    margin: 8px 6px 10px;
 </style>

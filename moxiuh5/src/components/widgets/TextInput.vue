@@ -1,22 +1,37 @@
 <template>
-  <div id="simple-text">
+  <div id="test-input">
     <div class="hint">
       <div class="main-hint">
-        文字
+        <span style="color: red" v-if="required">*</span>{{title}}
       </div>
-      <div class="sub-hint">
-        <span style="color: #868686">（支持16位中文汉字和英文输入，超过展示区域文字的内容不在手机端展示）</span>
+      <div class="sub-hint" v-if="hint">
+        <span style="color: #868686">{{hint}}</span>
       </div>
     </div>
     <div class="test-area">
-      <a-input placeholder="请输入浮动文字" @change="onInputChanged" v-model="value"/>
+      <a-input :placeholder="placeholder" @change="onInputChanged" v-model="value"/>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ComponentName',
+  name: 'TextInput',
+  props: {
+    required: {
+      type: Boolean,
+      default: false
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    hint: String,
+    placeholder: {
+      type: String,
+      default: "请输入文字"
+    }
+  },
   data () {
     return {
       value: '',
@@ -25,25 +40,24 @@ export default {
   methods: {
     onInputChanged () {
       this.value = this.value.slice(0, 20)
-      this.$emit('TextChanged', this.value)
+      this.$emit('change', this.value)
     }
   }
 }
 </script>
 
 <style scoped lang="stylus">
-  #simple-text
+  #test-input
     display flex
     flex-direction column
     padding 0.5rem 1rem
   
   .hint
-    flex 1 0 2rem
+    flex 1 0 auto
     display flex
-    align-items center
     align-items flex-start
     .main-hint
-      flex 1 0 auto
+      flex 0 0 auto
       font-weight 600
     .sub-hint
       flex 1 1 auto

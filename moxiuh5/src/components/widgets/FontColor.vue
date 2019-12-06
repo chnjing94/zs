@@ -6,7 +6,7 @@
     <div class="color-picker">
       <div class="selected-color" :style="{backgroundColor: selectedColor}"></div>
       <div class="color-panel">
-        <div class="color-block" v-for="(color,index) of colors" :key="index" 
+        <div class="color-block" v-for="(color,index) in colors" :key="index" 
         :style="{backgroundColor: color}"
         @click="setColor(color)">
 
@@ -57,7 +57,7 @@ export default {
     padding 0.5rem 1rem
   
   .hint
-    flex 1 0 2rem
+    flex 1 0 auto
     display flex
     align-items center
 
@@ -74,6 +74,7 @@ export default {
       .color-block
         flex 0 0 1.15rem
         margin 0.1rem
+        cursor pointer
     .more-color
       flex 0 0 10%
       display flex

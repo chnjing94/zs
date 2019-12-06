@@ -35,7 +35,7 @@ export default {
     padding 0.5rem 1rem
   
   .hint
-    flex 1 0 2rem
+    flex 1 0 auto
     display flex
     align-items center
     font-weight 600

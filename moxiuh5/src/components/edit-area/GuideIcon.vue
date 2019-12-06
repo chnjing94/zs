@@ -1,9 +1,7 @@
 <template>
-  <div id="bottom-state">
-    <Title :title="'底部说明'"/>
-    <TextInput :title="'文字'" :placeholder="'请输入浮动文字'" :hint="'（支持20位字符、中文汉字和英文输入，超过展示区手机端不展示）'"/>
-    <FontSize />
-    <FontColor />
+  <div id="guide-icon">
+    <Title :title="'引导图标'"/>
+    <ImageUploader :preferSize="'175*50px'" :imgPrefix="'GuideIcon'" :required="false"/>
     <ButtonGroup :editCounter="editCounter" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
@@ -11,18 +9,14 @@
 <script>
 import Title from '../widgets/Title'
 import ButtonGroup from '../widgets/ButtonGroup'
-import TextInput from '../widgets/TextInput'
-import FontSize from '../widgets/FontSize'
-import FontColor from '../widgets/FontColor'
+import ImageUploader from '../widgets/ImageUploader'
 
 export default {
-    name: 'BottomState',
+    name: 'GuideIcon',
     components: {
       Title,
       ButtonGroup,
-      TextInput,
-      FontSize,
-      FontColor
+      ImageUploader
     },
     data () {
       return {
@@ -41,7 +35,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  #bottom-state
+  #guide-icon
     display flex
     flex-direction column
 </style>

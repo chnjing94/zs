@@ -28,5 +28,6 @@ export default {
 #background-long-img {
   width: 375px;
   height: 1328px;
+  background-color: white;
 }
 </style>

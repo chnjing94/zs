@@ -225,7 +225,7 @@
             "guideIconUrl": "青绿色.png"
         }
     },
-    "fixBanner": {
+    "fixedBanner": {
         "componentName": "",
         "backgroundImgUrl": "粉色.png",
         "link": "http://",

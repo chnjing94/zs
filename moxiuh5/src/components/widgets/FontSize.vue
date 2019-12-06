@@ -4,7 +4,7 @@
         <span style="font-weight:600">文字大小</span><span style="color: #868686">（PX）</span>
     </div>
     <div class="select-area">
-      <a-select defaultValue="16" style="width: 100%" @change="handleChange" v-model="value">
+      <a-select style="width: 100%" @change="handleChange" v-model="value">
         <a-select-option value="10">10</a-select-option>
         <a-select-option value="11">11</a-select-option>
         <a-select-option value="12">12</a-select-option>
@@ -23,9 +23,15 @@
 <script>
 export default {
   name: 'FontSize',
+  props: {
+    defaultSize: {
+      type: Number,
+      default: 16
+    }
+  },
   data () {
     return {
-      value: '16',
+      value: this.defaultSize
     }
   },
   methods: {
@@ -43,11 +49,13 @@ export default {
     padding 0.5rem 1rem
   
   .hint
-    flex 1 0 2rem
+    flex 1 0 auto
     display flex
     align-items center
 
   .select-area
+    display flex
+    align-items center
     flex 1 0 2rem
   
 </style>

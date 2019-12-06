@@ -9,7 +9,8 @@
       <div class="button confirm" @click="Confirm">确定</div>
     </div>
     <div class="notification">
-      <span>注：带*为必须配置项，其余配置项无配置内容不展示相关组件</span>
+
+      <span>注：{{notes}}</span>
     </div>
   </div>
 </template>
@@ -21,6 +22,10 @@ export default {
       editCounter: {
         type: Number,
         default: 0
+      },
+      notes: {
+        type: String,
+        default: '带*为必须配置项，其余配置项无配置内容不展示相关组件'
       }
     },
     data () {
@@ -68,10 +73,10 @@ export default {
   .buttons
     display flex
     align-items center
-    justify-content space-between
+    justify-content space-around
     padding 0.5rem 0
     .button
-      flex 0 0 45%
+      flex 0 0 30%
       line-height 2rem
       border solid 1px rgb(51, 187, 172)
       display flex

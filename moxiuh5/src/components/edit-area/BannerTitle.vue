@@ -1,9 +1,10 @@
 <template>
-  <div id="bottom-state">
-    <Title :title="'底部说明'"/>
-    <TextInput :title="'文字'" :placeholder="'请输入浮动文字'" :hint="'（支持20位字符、中文汉字和英文输入，超过展示区手机端不展示）'"/>
-    <FontSize />
+  <div id="banner-title">
+    <Title :title="'分区主标题'"/>
+    <TextInput :title="'文字'" :placeholder="'请输入主标题文字'" :hint="'（支持12位字符、中文汉字和英文输入，超过7位不在手机端展示）'"/>
     <FontColor />
+    <ImageUploader :title="'背景图片'" :preferSize="'250*50px'" :imgPrefix="'Subtitle'" :required="false"/>
+    <BackgroundColor />
     <ButtonGroup :editCounter="editCounter" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
@@ -12,17 +13,19 @@
 import Title from '../widgets/Title'
 import ButtonGroup from '../widgets/ButtonGroup'
 import TextInput from '../widgets/TextInput'
-import FontSize from '../widgets/FontSize'
 import FontColor from '../widgets/FontColor'
+import ImageUploader from '../widgets/ImageUploader'
+import BackgroundColor from '../widgets/BackgroundColor'
 
 export default {
-    name: 'BottomState',
+    name: 'BannerTitle',
     components: {
       Title,
       ButtonGroup,
       TextInput,
-      FontSize,
-      FontColor
+      FontColor,
+      ImageUploader,
+      BackgroundColor
     },
     data () {
       return {
@@ -41,7 +44,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  #bottom-state
+  #banner-title
     display flex
     flex-direction column
 </style>

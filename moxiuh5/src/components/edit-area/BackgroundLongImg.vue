@@ -1,8 +1,8 @@
 <template>
   <div id="background-long-img-wrapper">
-    <Title v-bind:title="title"/>
-    <ImageUploader v-bind:imgPrefix="imgPrefix" @uploadImgResponse="handleUploadImageResponse" />
-    <ButtonGroup v-bind:editCounter="editCounter" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <Title :title="title"/>
+    <ImageUploader :imgPrefix="imgPrefix" @uploadImgResponse="handleUploadImageResponse" />
+    <ButtonGroup :editCounter="editCounter" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 

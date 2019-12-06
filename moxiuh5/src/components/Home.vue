@@ -56,12 +56,14 @@ main {
 
 #preview {
   flex: 0 0 375px;
-  background-color: white;
-  overflow-x: auto;
+  margin-top: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 #right-panel {
   flex: 1 0 auto;
+  overflow-y: auto;
 }
 
 footer {

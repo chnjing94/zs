@@ -2,10 +2,10 @@
   <div id="image-uploader-wrapper">
     <div class="hint">
       <div class="main-hint">
-        <span style="color: red" v-if="required">*</span>{{picTitle}}
+        <span style="color: red" v-if="required">*</span>{{title}}
       </div>
       <div class="sub-hint">
-        （支持10M以内，<span v-if="picSize">建议{{picSize}}尺寸的</span>jpg/jpeg/png/gif图片格式）
+        （支持10M以内，<span v-if="preferSize">建议{{preferSize}}尺寸的</span>jpg/jpeg/png/gif图片格式）
       </div>
     </div>
     <div class="image-uploader">
@@ -29,11 +29,11 @@ export default {
       type: Boolean,
       default: true
     },
-    picTitle: {
+    title: {
       type: String,
       default: "图片"
     },
-    picSize: {
+    preferSize: {
       type: String,
     },
     imgPrefix: {
@@ -90,7 +90,7 @@ export default {
     justify-content center
     align-items flex-start
     .main-hint
-      flex 1 0 auto
+      flex 0 0 auto
       font-weight 600
     .sub-hint
       flex 1 1 auto
@@ -105,7 +105,7 @@ export default {
     justify-content space-between
     .text
       line-height 2rem
-      flex 0 0 65%
+      flex 0 0 83%
       border 1px solid #ddd
       color #AEADAD
       display flex
@@ -113,7 +113,7 @@ export default {
       align-items center
     .button
       line-height 2rem
-      flex 0 0 25%
+      flex 0 0 15%
       border 1px solid #ddd
       color #868686
       font-weight 500 
