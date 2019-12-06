@@ -1,6 +1,7 @@
 <template>
   <div id="title-wrapper">
     <div class="title">{{title}}</div>
+    <div class="subtitle" v-if="subtitle">{{subtitle}}</div>
   </div>
 </template>
 
@@ -11,7 +12,10 @@ export default {
     title: {
       type: String,
       required: true,
-    }
+    },
+    subtitle: {
+      type: String,
+    },
   }
 }
 </script>
@@ -20,13 +24,17 @@ export default {
   #title-wrapper
     display flex
     flex-direction column
-    height 3rem
     border-bottom solid 2px #ddd
-    padding-left 1rem
+    padding 0.5rem 1rem
   .title 
     flex 1 0 auto
     display flex
     align-items center
     font-size 20px
     font-weight 700
+  .subtitle
+    flex 1 0 auto
+    display flex
+    align-items center
+
 </style>

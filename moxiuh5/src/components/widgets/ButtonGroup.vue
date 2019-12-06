@@ -1,7 +1,7 @@
 <template>
   <div id="button-group-wrapper">
-    <div class="msg" >
-      <span v-show="showMsg">配置成功，可在左侧预览区查看</span>
+    <div class="msg" v-show="showMsg">
+      <span >配置成功，可在左侧预览区查看</span>
     </div>
     <div class="line"></div>
     <div class="buttons">
@@ -50,50 +50,45 @@ export default {
   #button-group-wrapper
     display flex
     flex-direction column
-    height 9rem
-    width 100%
+    padding 0.5rem 1rem
 
   .msg
-    flex 0 0 3rem
+    flex 0 0 2rem
     display flex
     justify-content flex-start
     align-items center
-    padding-left 1rem
     color rgb(51, 187, 172)
     font-weight 500 
 
   .line
-    margin 0 1rem
     height 1px
     border-top 1px solid #ddd
     text-align center
 
   .buttons
     display flex
-    flex 0 0 3rem
-    flex-direction row
-    justify-content center
-
-  .button
-    flex 1 0 8rem
-    margin 1rem 1rem 0 1rem
-    border solid 1px rgb(51, 187, 172)
-    display flex
     align-items center
-    justify-content center
-    cursor pointer
-
-  .cancel
-    color rgb(0, 125, 113)
-    &:hover
-      background-color rgb(226, 243, 241)
-  
-  .confirm
-    background-color rgb(0, 125, 113)
-    color white
+    justify-content space-between
+    padding 0.5rem 0
+    .button
+      flex 0 0 45%
+      line-height 2rem
+      border solid 1px rgb(51, 187, 172)
+      display flex
+      align-items center
+      justify-content center
+      cursor pointer
+    .cancel
+      color rgb(0, 125, 113)
+      &:hover
+        background-color rgb(226, 243, 241)
+    .confirm
+      background-color rgb(0, 125, 113)
+      color white
+      &:hover
+        opacity 0.8
 
   .notification
-    flex 0 0 40px
     display flex
     justify-content center
     align-items center

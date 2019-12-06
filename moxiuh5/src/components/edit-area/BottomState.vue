@@ -4,7 +4,6 @@
     <SimpleText />
     <FontSize />
     <FontColor />
-    <BackgroundColor />
     <ButtonGroup v-bind:editCounter="editCounter" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
@@ -15,7 +14,6 @@ import ButtonGroup from '../widgets/ButtonGroup'
 import SimpleText from '../widgets/SimpleText'
 import FontSize from '../widgets/FontSize'
 import FontColor from '../widgets/FontColor'
-import BackgroundColor from '../widgets/BackgroundColor'
 
 export default {
     name: 'BottomState',
@@ -24,8 +22,7 @@ export default {
       ButtonGroup,
       SimpleText,
       FontSize,
-      FontColor,
-      BackgroundColor
+      FontColor
     },
     data () {
       return {

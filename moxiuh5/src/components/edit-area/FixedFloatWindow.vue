@@ -1,11 +1,11 @@
 <template>
   <div id="fixed-float-window">
-    <Title v-bind:title="title"/>
+    <Title :title="title"/>
     <ComponentName @componentNameChanged="saveComponentName"/>
-    <ImageUploader v-bind:imgPrefix="imgPrefix" v-bind:picSize="picSize"/>
+    <ImageUploader :imgPrefix="imgPrefix" :picSize="picSize"/>
     <Link />
     <RedictWay />
-    <ButtonGroup v-bind:editCounter="editCounter" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup :editCounter="editCounter" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -34,7 +34,7 @@ export default {
         picSize: '建议160*145px尺寸的',
         imgPrefix: 'FixedFloatWindow',
 
-        componentName: '',
+        componentName: ''
       }
     },
     methods: {
