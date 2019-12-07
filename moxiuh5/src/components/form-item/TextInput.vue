@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="test-area">
-      <a-input :placeholder="placeholder" @change="onInputChanged" v-model="value"/>
+      <a-input :placeholder="placeholder" @change="onInputChanged" v-model="text"/>
     </div>
   </div>
 </template>
@@ -17,7 +17,15 @@
 <script>
 export default {
   name: 'TextInput',
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   props: {
+    value: {
+      type: String,
+      default: ''
+    },
     required: {
       type: Boolean,
       default: false
@@ -30,17 +38,28 @@ export default {
     placeholder: {
       type: String,
       default: "请输入文字"
+    },
+    noSymbol: {
+      type: Boolean,
+      default: false
+    },
+    maxLength: {
+      type: Number,
+      default: Number.MAX_VALUE
     }
   },
   data () {
     return {
-      value: '',
+      text: this.value
     }
   },
   methods: {
     onInputChanged () {
-      this.value = this.value.slice(0, 20)
-      this.$emit('change', this.value)
+      this.text = this.text.slice(0, this.maxLength)
+      if (this.noSymbol) {
+        this.text = this.text.replace(/[^a-zA-Z0-9\u4E00-\u9FA5]/g,'')
+      }
+      this.$emit('change', this.text)
     }
   }
 }

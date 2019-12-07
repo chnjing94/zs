@@ -13,8 +13,8 @@
       <div class="button" @click="onClick">浏览</div>
       <input v-show="false" type="file" accept="image/*" ref="imgInput" @change="onChange">
     </div>
-    <div class="warning">
-      <!-- <span style="color: red">图片大小超出限制</span> -->
+    <div class="warning" v-if="exceedMaxFileSize" >
+      <span style="color: red">图片大小超出限制</span>
     </div>
   </div>
 </template>
@@ -42,12 +42,25 @@ export default {
       default: ""
     }
   },
+  data () {
+    return {
+      exceedMaxFileSize: false
+    }
+  },
   methods: {
     onClick () {
       this.$refs.imgInput.click()
     },
 
     onChange () {
+      if (this.$refs.imgInput.files[0].size > 10000000) {
+        this.exceedMaxFileSize = true
+        this.$refs.imgInput.value = ''
+        setTimeout(()=> {
+          this.exceedMaxFileSize = false
+        }, 3000)
+        return
+      }
       const formData = new FormData();
       formData.append('filename', this.imgPrefix + '-' + this.uuid() + '.' + this.$refs.imgInput.files[0].type.split('/')[1])
       formData.append('pictype', '0')
@@ -55,7 +68,7 @@ export default {
       axios
         .post('/Mpage/PicUpload_1573460781472', formData, { 'Content-Type':'multipart/form-data' })
         .then(response => {
-          this.$emit('uploadImgResponse', response)
+          this.$emit('success', response)
           this.$refs.imgInput.value = ''
         })
     },

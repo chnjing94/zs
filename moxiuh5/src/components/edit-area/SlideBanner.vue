@@ -1,34 +1,38 @@
 <template>
   <div id="slide-banner">
-    <Title :title="title" :subtitle="subtitle"/>
-    <div v-for="(banner,index) in data.banners" :key="index" @click="selectBanner(index)">
-      <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required/>
-      <ImageUploader :title="'背景图片'+(index+1)" :imgPrefix="'SlideBannerBG'" :preferSize="'502*224px'" :required="false"/>
-      <BackgroundColor :title="'背景颜色'+(index+1)"/>
-      <ImageUploader :title="'引导图标'+(index+1)" :imgPrefix="'SlideBannerGuide'" :preferSize="'72x72px'" :required="false"/>
-      <TextInput :title="'主标题'" :hint="'（支持16位中文汉字和英文输入，超过展示区域文字的内容不在手机端展示）'" :placeholder="'请输入主标题文字'"/>
-      <FontColor />
-      <TextInput :title="'副标题'" :hint="'（支持7位中文汉字和英文输入输入，超过7位不展示）'" :placeholder="'请输入副标题文字'"/>
-      <FontColor />
-      <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" required/>
-      <RedictWay />
+    <Title :title="'滑动banner图'" :subtitle="'配置多张可滑动，5秒自动切换，最多可配置5张'"/>
+    <div v-for="(banner,index) in banners" :key="index" @click="selectBanner(index)" :class="{delete: index===deleteIndex}">
+      <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="banner.componentName"/>
+      <ErrorMsg :message="validateComponentName(index)" v-if="validateComponentName(index)&&showValidationMsg"/>
+
+      <ImageUploader :title="'背景图片'+(index+1)" :imgPrefix="'SlideBannerBG'" :preferSize="'502*224px'" :required="false" @success="uploadImageSuccess"/>
+      <BackgroundColor :title="'背景颜色'+(index+1)" v-model="banner.backgroundColor" :opacity.sync="banner.backgroundOpacity"/>
+      <ImageUploader :title="'引导图标'+(index+1)" :imgPrefix="'SlideBannerGuide'" :preferSize="'72x72px'" :required="false" @success="uploadGuideIconSuccess"/>
+      <TextInput :title="'主标题'" :hint="'（支持7位中文汉字和英文输入，超过展示区域文字的内容不在手机端展示）'" :placeholder="'请输入主标题文字'" noSymbol :maxLength="7" v-model="banner.title"/>
+      <FontColor v-model="banner.fontColor"/>
+      <TextInput :title="'副标题'" :hint="'（支持7位中文汉字和英文输入输入，超过7位不展示）'" :placeholder="'请输入副标题文字'" noSymbol :maxLength="7" v-model="banner.subtitle"/>
+      <FontColor v-model="banner.subtitleFontColor"/>
+      <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" required v-model="banner.link"/>
+      <ErrorMsg :message="validateLink(index)" v-if="validateLink(index)&&showValidationMsg"/>
+      <RedictWay v-model="banner.way"/>
       <div class="edit-button">
-        <div class="button add" v-if="index==data.banners.length-1" @click="addBanner"><a-icon type="plus" /></div>
+        <div class="button add" v-if="index==banners.length-1" @click="addBanner"><a-icon type="plus" /></div>
         <div class="button delete" @click="deleteBanner(index)"><a-icon type="minus" /></div>
       </div>
     </div>
-    <ButtonGroup :editCounter="editCounter" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup :success="validated&&!editing&&showValidationMsg" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
 <script>
-import Title from '../widgets/Title'
-import ButtonGroup from '../widgets/ButtonGroup'
-import TextInput from '../widgets/TextInput'
-import FontColor from '../widgets/FontColor'
-import ImageUploader from '../widgets/ImageUploader'
-import BackgroundColor from '../widgets/BackgroundColor'
-import RedictWay from '../widgets/RedictWay'
+import Title from '../form-item/Title'
+import ButtonGroup from '../form-item/ButtonGroup'
+import TextInput from '../form-item/TextInput'
+import FontColor from '../form-item/FontColor'
+import ImageUploader from '../form-item/ImageUploader'
+import BackgroundColor from '../form-item/BackgroundColor'
+import RedictWay from '../form-item/RedictWay'
+import ErrorMsg from '../form-item/ErrorMsg'
 
 export default {
   name: 'SlideBanner',
@@ -39,66 +43,133 @@ export default {
     FontColor,
     ImageUploader,
     BackgroundColor,
-    RedictWay
+    RedictWay,
+    ErrorMsg
   },
   data () {
     return {
-      title: '滑动banner图',
-      subtitle: '配置多张可滑动，5秒自动切换，最多可配置5张',
-      editCounter: 0,
+      showValidationMsg: false,
+      editing: false,
       currentBannerIndex: -1,
-      data: {
-        banners: [
-          {
-            "componentName": "banner1",
-            "backgroundImgUrl": "广告.png",
-            "backgroundColor": "",
-            "backgroundOpacity": 1,
-            "guideIconUrl": "go.png",
-            "title": "参与竞猜 赢取超大奖励",
-            "fontColor": "black",
-            "subtitle": "中奖可获得999元红包",
-            "subtitleFontColor": "black",
-            "link": "http://",
-            "way": 0
-          }
-        ]
-      }
+      deleteIndex: '',
+      
+      banners: [
+        {
+          "componentName": "",
+          "backgroundImgUrl": "",
+          "backgroundImgUrlRel": "",
+          "backgroundColor": "",
+          "backgroundOpacity": 0,
+          "guideIconUrl": "",
+          "title": "",
+          "titleFontSize": 16,
+          "fontColor": "#000000",
+          "subtitle": "",
+          "subtitleFontSize": 14,
+          "subtitleFontColor": "#000000",
+          "link": "",
+          "way": 0
+        }
+      ]
+    }
+  },
+  watch: {
+    listenChange () {
+      this.editing = true
+    }
+  },
+  computed: {
+    listenChange () {
+      const { banners } = this
+      return { ...banners[0], ...banners[1], ...banners[2], ...banners[3], ...banners[4] }
+    },
+    validateAllComponentName () {
+      let success = true
+      this.banners.forEach(banner => {
+        if (!banner.componentName) {
+          success = false
+        }
+      });
+      return success
+    },
+    validateAllLink () {
+      let success = true
+      this.banners.forEach(banner => {
+        if (!banner.link || (!banner.link.startsWith('http://') && !banner.link.startsWith('https://'))) {
+          success = false
+        } 
+      });
+      return success
+    },
+    validated () {
+      return this.validateAllComponentName && this.validateAllLink
     }
   },
   methods: {
+    validateComponentName (index) {
+      if (!this.banners[index].componentName) {
+        return '必填项不能为空'
+      }
+      return ''
+    },
+    validateLink (index) {
+      const link = this.banners[index].link
+      if (!link) {
+        return '必填项不能为空'
+      } else if (!link.startsWith('http://') && !link.startsWith('https://')) {
+        return '格式不正确'
+      }
+      return ''
+    },
+    uploadGuideIconSuccess () {
+      window.console.log('guide icon upload success' + this.currentBannerIndex)
+    },
+    uploadImageSuccess () {
+      window.console.log('background image upload success' + this.currentBannerIndex)
+    },
     addBanner () {
-      if (this.data.banners.length >=5) {
+      if (this.banners.length >=5) {
         return
       }
-      this.data.banners.push({
+      
+      this.banners.push({
         "componentName": "",
         "backgroundImgUrl": "",
+        "backgroundImgUrlRel": "",
         "backgroundColor": "",
         "backgroundOpacity": 0,
         "guideIconUrl": "",
         "title": "",
+        "titleFontSize": 16,
         "fontColor": "#000000",
         "subtitle": "",
+        "subtitleFontSize": 14,
         "subtitleFontColor": "#000000",
         "link": "",
         "way": 0
       })
     },
     deleteBanner (index) {
-      this.data.banners.splice(index, 1)
-      if (this.data.banners.length == 0) {
-        this.addBanner()
+      if (this.banners.length === 1) {
+        return
       }
+      this.deleteIndex = index
+      setTimeout(()=>{
+        this.banners.splice(index, 1)
+        this.deleteIndex = ''
+      }, 600)
+
     },
     selectBanner (index) {
       this.currentBannerIndex = index
     },
     confirm () {
-      window.console.log('Confirm')
+      this.showValidationMsg = true
+      this.editing = false
     },
     cancel () {
-      window.console.log('Cancel')
+      this.showValidationMsg = false
+      this.editing = false
     }
   }
 }
@@ -109,6 +180,13 @@ export default {
     display flex
     flex-direction column
   
+  .delete
+    animation: hide 0.5s;
+  
+  @keyframes hide{
+    0%{ opacity: 1; }
+    100%{ opacity: 0; }
+  }
   .edit-button
     display flex
     justify-content center

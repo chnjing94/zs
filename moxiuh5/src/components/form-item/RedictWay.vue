@@ -4,7 +4,7 @@
       <span style="color: red">*</span>站外点击唤起方式
     </div>
     <div class="select-area">
-      <a-select defaultValue="0" style="width: 100%" @change="handleChange" v-model="value">
+      <a-select style="width: 100%" v-model="wayLocal">
         <a-select-option value="0">点击唤起招商银行APP</a-select-option>
         <a-select-option value="1">点击仅跳转链接</a-select-option>
       </a-select>
@@ -15,14 +15,21 @@
 <script>
 export default {
   name: 'RedictWay',
+  model: {
+    prop: 'way',
+    event: 'select'
+  },
+  props: {
+    way: Number
+  },
   data () {
     return {
-      value: '0',
+      wayLocal: String(this.way)
     }
   },
-  methods: {
-    handleChange () {
-
+  watch: {
+    wayLocal (val) {
+      this.$emit('select', Number(val))
     }
   }
 }

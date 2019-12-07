@@ -1,6 +1,6 @@
 <template>
   <div id="button-group-wrapper">
-    <div class="msg" v-show="showMsg">
+    <div class="msg" v-show="success">
       <span >配置成功，可在左侧预览区查看</span>
     </div>
     <div class="line"></div>
@@ -19,33 +19,21 @@
 export default {
     name: 'ButtonGroup',
     props: {
-      editCounter: {
-        type: Number,
-        default: 0
+      success: {
+        type: Boolean,
+        default: false
       },
       notes: {
         type: String,
         default: '带*为必须配置项，其余配置项无配置内容不展示相关组件'
       }
     },
-    data () {
-      return {
-        showMsg: false,
-      }
-    },
     methods: {
       Confirm () {
-        this.showMsg = true
         this.$emit('buttonConfirmed')
       },
       Cancel () {
-        this.showMsg = false
         this.$emit('buttonCanceled')
-      }
-    },
-    watch: {
-      editCounter () {
-        this.showMsg = false
       }
     }
 }

@@ -20,19 +20,19 @@
       <div class="color-panel">
         <div class="color-block" v-for="(color,index) of colors" :key="index" 
         :style="{backgroundColor: color}"
-        @click="setColor(color)">
+        @click="$emit('change', color)">
 
         </div>
       </div>
       <div class="more-color" @click="onClick">
         更多
-        <input type="color" v-show="false" ref="moreColor" @change="colorChange">
+        <input type="color" v-show="false" ref="moreColor" @change="$emit('change', $event.target.value)">
       </div>
     </div>
     <div class="opacity-bar">
       <div class="opacity-title">透明度: {{opacity}}</div>
       <div class="bar">
-        <a-slider :defaultValue="0" style="width: 80%" v-model="opacity" :tipFormatter="null"/>
+        <a-slider style="width: 80%" v-model="opacityLocal" :tipFormatter="null" @change="$emit('update:opacity', opacityLocal)" :disabled="!selectedColor"/>
       </div>
     </div>
   </div>
@@ -41,17 +41,24 @@
 <script>
 export default {
   name: 'BackgroundColor',
+  model: {
+    prop: 'selectedColor',
+    event: 'change'
+  },
   props: {
+    selectedColor: String,
     title: {
       type: String,
       default: '背景颜色'
+    },
+    opacity: {
+      type: Number,
+      default: 0
     }
   },
   data () {
     return {
-      value: '16',
-      opacity: 0,
-      selectedColor: '',
+      opacityLocal: this.opacity,
       colors: ['#000000', '#676767', '#FFFFFF', '#FF0000', '#FF5547', '#F1A553', '#A78D43', '#FDC927', '#21A775', '#0FCD9D', '#DFEFE7', '#4F5975', '#2D4D7D', '#4D8FF3', '#5BC7F7', '#6F6FEF']
     }
   },
