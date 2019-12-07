@@ -1,15 +1,18 @@
 {
     "backgroundLongImg": {
-        "backgroundImgUrl": "背景.png"
+        "backgroundImgUrl": "背景.png",
+        "backgroundImgUrlRel": "",
     },
     "fixedFloatingWindow": {
         "componentName": "注册送iphone",
         "backgroundImgUrl": "浮窗.png",
+        "backgroundImgUrlRel": "",
         "link": "http://",
-        "way": 0
+        "way": "0"
     },
     "subtitle": {
         "backgroundImgUrl": "好礼送不停  优质企业专享.png",
+        "backgroundImgUrlRel": "",
         "backgroundColor": "white",
         "backgroundOpacity": 1,
         "text": "好礼送不停  优质企业专享",
@@ -19,6 +22,7 @@
     "floatText": {
         "componentName": "领导寄语",
         "backgroundImgUrl": "领导寄语.png",
+        "backgroundImgUrlRel": "",
         "backgroundColor": "",
         "backgroundOpacity": 1,
         "text": "领导寄语",
@@ -30,6 +34,7 @@
     },
     "floatWindow": {
         "backgroundImgUrl": "",
+        "backgroundImgUrlRel": "",
         "backgroundColor": "red",
         "backgroundOpacity": 1,
         "title": "领导寄语",
@@ -40,6 +45,7 @@
     "slideBanner": {
         "title": "活动专区",
         "backgroundImgUrl": "标题.png",
+        "backgroundImgUrlRel": "",
         "fontColor": "black",
         "backgroundColor": "white",
         "backgroundOpacity": 1,
@@ -49,6 +55,7 @@
             {
                 "componentName": "banner1",
                 "backgroundImgUrl": "广告.png",
+                "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 1,
                 "guideIconUrl": "go.png",
@@ -57,11 +64,12 @@
                 "subtitle": "中奖可获得999元红包",
                 "subtitleFontColor": "black",
                 "link": "http://",
-                "way": 0
+                "way": "0"
             },
             {
                 "componentName": "banner2",
                 "backgroundImgUrl": "广告.png",
+                "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 1,
                 "guideIconUrl": "go.png",
@@ -70,11 +78,12 @@
                 "subtitle": "中奖可获得999元红包",
                 "subtitleFontColor": "black",
                 "link": "http://",
-                "way": 0
+                "way": "0"
             },
             {
                 "componentName": "banner3",
                 "backgroundImgUrl": "广告.png",
+                "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 1,
                 "guideIconUrl": "go.png",
@@ -83,13 +92,14 @@
                 "subtitle": "中奖可获得999元红包",
                 "subtitleFontColor": "black",
                 "link": "http://",
-                "way": 0
+                "way": "0"
             }
         ]
     },
     "adAreaMid": {
         "title": "福利票券",
         "backgroundImgUrl": "标题.png",
+        "backgroundImgUrlRel": "",
         "fontColor": "black",
         "backgroundColor": "",
         "backgroundOpacity": 1,
@@ -99,16 +109,18 @@
             "banner": {
                 "componentName": "",
                 "backgroundImgUrl": "1.png",
+                "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 1,
                 "link": "http://",
-                "way": 0
+                "way": "0"
             },
             "title": {
                 "text": "影票、饭票免费领！",
                 "fontSize": 16,
                 "fontColor": "black",
                 "backgroundImgUrl": "",
+                "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 1
             },
@@ -123,16 +135,18 @@
             "banner": {
                 "componentName": "",
                 "backgroundImgUrl": "2.png",
+                "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 1,
                 "link": "http://",
-                "way": 0
+                "way": "0"
             },
             "title": {
                 "text": "资产达标、商品券马上拿！",
                 "fontSize": 16,
                 "fontColor": "black",
                 "backgroundImgUrl": "",
+                "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 1
             },
@@ -147,6 +161,7 @@
     "adAreaBottm": {
         "title": "薪享理财",
         "backgroundImgUrl": "标题.png",
+        "backgroundImgUrlRel": "",
         "fontColor": "black",
         "backgroundColor": "",
         "backgroundOpacity": 1,
@@ -156,16 +171,18 @@
             "banner": {
                 "componentName": "",
                 "backgroundImgUrl": "组 20.png",
+                "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 1,
                 "link": "http://",
-                "way": 0
+                "way": "0"
             },
             "title": {
                 "text": "聚益生金系列90天A款",
                 "fontSize": 16,
                 "fontColor": "black",
                 "backgroundImgUrl": "",
+                "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 1
             },
@@ -180,16 +197,18 @@
             "banner": {
                 "componentName": "",
                 "backgroundImgUrl": "绿色.png",
+                "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 1,
                 "link": "http://",
-                "way": 0
+                "way": "0"
             },
             "title": {
                 "text": "聚益生金系列90天A款",
                 "fontSize": 16,
                 "fontColor": "black",
                 "backgroundImgUrl": "",
+                "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 1
             },
@@ -204,16 +223,18 @@
             "banner": {
                 "componentName": "",
                 "backgroundImgUrl": "蓝色.png",
+                "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 1,
                 "link": "http://",
-                "way": 0
+                "way": "0"
             },
             "title": {
                 "text": "聚益生金系列90天A款",
                 "fontSize": 16,
                 "fontColor": "black",
                 "backgroundImgUrl": "",
+                "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 1
             },
@@ -228,8 +249,9 @@
     "fixedBanner": {
         "componentName": "",
         "backgroundImgUrl": "粉色.png",
+        "backgroundImgUrlRel": "",
         "link": "http://",
-        "way": 0
+        "way": "0"
     },
     "footText": {
         "text": "基金过往业绩并不预示其未来表现市场有风险，投资需谨慎",
