@@ -70,7 +70,7 @@ export default {
       if (!this.link) {
         return '必填项不能为空'
       } else if (!this.link.startsWith('http://') && !this.link.startsWith('https://')) {
-        return '格式不正确'
+        return '请输入正确的跳转链接'
       }
       return ''
     },

@@ -21,6 +21,12 @@ export default {
     TextInput,
     FontColor
   },
+  props: {
+    bannerId: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       showValidationMsg: false,

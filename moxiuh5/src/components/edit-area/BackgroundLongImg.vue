@@ -34,25 +34,26 @@ export default {
     uploadImageSuccess (res) {
       this.backgroundImgUrl = res.data.AbsPath
       this.backgroundImgUrlRel = res.data.RelativePath
-      const { backgroundImgUrl, backgroundImgUrlRel } = this
-      this.$store.commit('changeBackgroundLongImg', { backgroundImgUrl, backgroundImgUrlRel })
+      this.commitImage()
+    },
+    commitImage () {
+      const { backgroundImgUrlRel } = this
+      this.$store.commit('changeBackgroundLongImg', { backgroundImgUrlRel })
     },
     confirm () {
       this.showValidationMsg = true
       this.editing = false
     },
     cancel () {
-      this.backgroundImgUrl = '',
-      this.backgroundImgUrlRel = ''
+      this.reset()
+      this.commitImage()
 
-      const payload = {
-        backgroundImgUrl: '',
-        backgroundImgUrlRel: ''
-      }
-      this.$store.commit('changeBackgroundLongImg', payload)
-      
       this.showValidationMsg = false
       this.editing = false
+    },
+    reset () {
+      this.backgroundImgUrl = '',
+      this.backgroundImgUrlRel = ''
     }
   },
   watch: {

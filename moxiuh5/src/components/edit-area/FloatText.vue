@@ -1,5 +1,5 @@
 <template>
-  <div id="float-text">
+  <div id="float-text" v-if="refresh">
     <Title :title="'浮动文字'"/>
     <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="componentName"/>
     <ErrorMsg :message="validateComponentName" v-if="validateComponentName&&showValidationMsg"/>
@@ -41,6 +41,7 @@ export default {
   },
   data () {
     return {
+      refresh: true,
       showValidationMsg: false,
       editing: false,
       notes: '1.浮动文字可输入领导寄语，支持拖拽调整位置，大小。2.带*为必须配置项，其余配置项无配置内容不展示相关组件',
@@ -86,17 +87,46 @@ export default {
     uploadImageSuccess (res) {
       this.backgroundImgUrl = res.data.AbsPath
       this.backgroundImgUrlRel = res.data.RelativePath
+      const { backgroundImgUrlRel } = this
+      this.$store.commit('changeFloatText', { backgroundImgUrlRel })
+    },
+    commit () {
+      const { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor, show } = this
+      this.$store.commit('changeFloatText', { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor, show })
     },
     confirm () {
+      if (this.validated) {
+        this.commit()
+      }
       this.showValidationMsg = true
       this.editing = false
     },
     cancel () {
+      this.reset()
+      this.commit()
+      this.rerender()
       this.showValidationMsg = false
       this.editing = false
     },
     onChange (e) {
       this.show = e.target.checked
+    },
+    reset () {
+      this.componentName = '',
+      this.backgroundImgUrl = '',
+      this.backgroundImgUrlRel = '',
+      this.backgroundColor = '',
+      this.backgroundOpacity = 0,
+      this.text = '领导寄语',
+      this.fontSize = 16,
+      this.fontColor = "#000000",
+      this.show = true
+    },
+    rerender () {
+      this.refresh= false
+      this.$nextTick(()=>{
+        this.refresh = true
+      })
     }
   }
 }

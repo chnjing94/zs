@@ -117,7 +117,7 @@ export default {
       if (!link) {
         return '必填项不能为空'
       } else if (!link.startsWith('http://') && !link.startsWith('https://')) {
-        return '格式不正确'
+        return '请输入正确的跳转链接'
       }
       return ''
     },

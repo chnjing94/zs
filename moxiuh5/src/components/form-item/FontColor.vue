@@ -63,7 +63,7 @@ export default {
     .color-panel
       flex 0 0 60%
       display flex
-      flex-wrap: wrap;
+      flex-wrap: wrap
       .color-block
         flex 0 0 1.15rem
         margin 0.1rem

@@ -1,5 +1,5 @@
 <template>
-  <div id="fixed-float-window">
+  <div id="fixed-float-window" v-if="refresh">
     <Title :title="'固定悬浮窗'"/>
 
     <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" v-model="componentName" :maxLength="16" required noSymbol/>
@@ -36,6 +36,7 @@ export default {
   },
   data () {
     return {
+      refresh: true,
       showValidationMsg: false,
       editing: false,
 
@@ -72,7 +73,7 @@ export default {
       if (!this.link) {
         return '必填项不能为空'
       } else if (!this.link.startsWith('http://') && !this.link.startsWith('https://')) {
-        return '格式不正确'
+        return '请输入正确的跳转链接'
       }
       return ''
     },
@@ -84,14 +85,39 @@ export default {
     uploadImageSuccess (res) {
       this.backgroundImgUrl = res.data.AbsPath
       this.backgroundImgUrlRel = res.data.RelativePath
+      const { backgroundImgUrlRel } = this
+      this.$store.commit('changeFixedFloatWindow', { backgroundImgUrlRel })
+    },
+    commit () {
+      const { componentName, backgroundImgUrl, backgroundImgUrlRel, link, way } = this
+      this.$store.commit('changeFixedFloatWindow', { componentName, backgroundImgUrl, backgroundImgUrlRel, link, way })
     },
     confirm () {
+      if (this.validated) {
+        this.commit()
+      }
       this.showValidationMsg = true
       this.editing = false
     },
     cancel () {
+      this.reset()
+      this.commit()
+      this.rerender()
       this.showValidationMsg = false
       this.editing = false
+    },
+    reset () {
+      this.componentName = '',
+      this.backgroundImgUrl = '',
+      this.backgroundImgUrlRel = '',
+      this.link = '',
+      this.way = 0
+    },
+    rerender () {
+      this.refresh= false
+      this.$nextTick(()=>{
+        this.refresh = true
+      })
     }
   }
 }

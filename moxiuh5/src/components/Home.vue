@@ -2,7 +2,7 @@
   <div id='content'>
     <header />
     <main>
-      <div id="left-panel"></div>
+      <div id="left-panel"><LeftPannel /></div>
       <div id="preview"><Preview /></div>
       <div id="right-panel"><RightPanel /></div>
     </main>
@@ -15,6 +15,7 @@
 <script>
 import Preview from './Preview'
 import RightPanel from './RightPanel'
+import LeftPannel from './LeftPanel'
 import Footer from './Footer'
 
 export default {
@@ -22,6 +23,7 @@ export default {
   components: {
     Preview,
     RightPanel,
+    LeftPannel,
     Footer
   }
 }
@@ -55,7 +57,7 @@ main {
 }
 
 #preview {
-  flex: 0 0 375px;
+  flex: 0 0 390px;
   margin-top: 0.5rem;
   overflow-x: hidden;
   overflow-y: auto;

@@ -14,7 +14,7 @@ import ImageUploader from '../form-item/ImageUploader'
 export default {
   name: 'GuideIcon',
   props: {
-    guideIconId: {
+    bannerId: {
       type: String,
       required: true
     }
