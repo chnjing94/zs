@@ -32,14 +32,25 @@ export default {
   },
   methods: {
     uploadImageSuccess (res) {
-        this.backgroundImgUrl = res.data.AbsPath
-        this.backgroundImgUrlRel = res.data.RelativePath
+      this.backgroundImgUrl = res.data.AbsPath
+      this.backgroundImgUrlRel = res.data.RelativePath
+      const { backgroundImgUrl, backgroundImgUrlRel } = this
+      this.$store.commit('changeBackgroundLongImg', { backgroundImgUrl, backgroundImgUrlRel })
     },
     confirm () {
       this.showValidationMsg = true
       this.editing = false
     },
     cancel () {
+      this.backgroundImgUrl = '',
+      this.backgroundImgUrlRel = ''
+
+      const payload = {
+        backgroundImgUrl: '',
+        backgroundImgUrlRel: ''
+      }
+      this.$store.commit('changeBackgroundLongImg', payload)
+      
       this.showValidationMsg = false
       this.editing = false
     }
@@ -55,7 +66,7 @@ export default {
       return { backgroundImgUrl, backgroundImgUrlRel }
     },
     validteBackgroundImg () {
-      if (!!this.backgroundImgUrl || !!this.backgroundImgUrlRel) {
+      if (!this.backgroundImgUrl || !this.backgroundImgUrlRel) {
         return '必填项不能为空'
       }
       return ''

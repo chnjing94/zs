@@ -1,6 +1,6 @@
 <template>
   <div id="edit-area">
-    <BackgroundLongImg v-show="false"/>
+    <BackgroundLongImg v-show="true"/>
     <FixedFloatWindow v-show="false"/>
     <BottomState v-show="false"/>
     <SlideBanner v-show="false"/>
@@ -12,7 +12,7 @@
     <BannerSubtitle v-show="false"/>
     <GuideIcon v-show="false"/>
     <BannerBackgroundImg v-show="false"/>
-    <FixedBanner v-show="true"/>
+    <FixedBanner v-show="false"/>
   </div>
 </template>
 

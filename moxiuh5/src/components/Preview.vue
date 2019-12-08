@@ -10,7 +10,6 @@ export default {
   name: 'Preview',
   data () {
     return {
-
     }
   },
   methods: {
@@ -18,8 +17,17 @@ export default {
   },
   computed: {
     ...mapState({
-        backgroundLongImgStyle: state => state.backgroundLongImgStyle
+        backgroundLongImg: state => state.backgroundLongImg
     }),
+    backgroundLongImgStyle () {
+      const imgUrl = this.backgroundLongImg.backgroundImgUrlRel
+      return {
+        backgroundImage: imgUrl ? 'url(' + require('../' + imgUrl) + ')' : imgUrl,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
+      
+    }
   }
 }
 </script>

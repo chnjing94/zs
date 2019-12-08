@@ -29,8 +29,6 @@
         "fontSize": 16,
         "fontColor": "black",
         "show": true,
-        "positionX": 100,
-        "positionY": 100
     },
     "floatWindow": {
         "backgroundImgUrl": "",
@@ -135,7 +133,8 @@
                 "fontSize": 13,
                 "fontColor": "black"
             },
-            "guideIconUrl": "立即参与.png"
+            "guideIconUrl": "立即参与.png",
+            "guideIconUrlRel": "立即参与.png"
         },
         "ad2": {
             "banner": {
