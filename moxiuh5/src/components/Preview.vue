@@ -20,9 +20,8 @@ export default {
         backgroundLongImg: state => state.backgroundLongImg
     }),
     backgroundLongImgStyle () {
-      const imgUrl = this.backgroundLongImg.backgroundImgUrlRel
       return {
-        backgroundImage: imgUrl ? 'url(' + require('../' + imgUrl) + ')' : imgUrl,
+        backgroundImage: 'url(' + this.backgroundLongImg.backgroundImgUrlRel + ')',
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
       }
