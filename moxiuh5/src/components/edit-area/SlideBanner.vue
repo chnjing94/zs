@@ -1,5 +1,5 @@
 <template>
-  <div id="slide-banner">
+  <div id="slide-banner" v-if="refresh">
     <Title :title="'滑动banner图'" :subtitle="'配置多张可滑动，5秒自动切换，最多可配置5张'"/>
     <div v-for="(banner,index) in banners" :key="index" @click="selectBanner(index)" :class="{delete: index===deleteIndex}">
       <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="banner.componentName"/>
@@ -48,38 +48,21 @@ export default {
   },
   data () {
     return {
+      refresh: true,
       showValidationMsg: false,
       editing: false,
-      currentBannerIndex: -1,
+      currentBannerIndex: 0,
       deleteIndex: '',
-      
-      banners: [
-        {
-          "componentName": "",
-          "backgroundImgUrl": "",
-          "backgroundImgUrlRel": "",
-          "backgroundColor": "",
-          "backgroundOpacity": 0,
-          "guideIconUrl": "",
-          "title": "",
-          "titleFontSize": 16,
-          "fontColor": "#000000",
-          "subtitle": "",
-          "subtitleFontSize": 14,
-          "subtitleFontColor": "#000000",
-          "link": "",
-          "way": 0
-        }
-      ]
+      banners: []
     }
   },
   watch: {
-    listenChange () {
+    output () {
       this.editing = true
     }
   },
   computed: {
-    listenChange () {
+    output () {
       const { banners } = this
       return { ...banners[0], ...banners[1], ...banners[2], ...banners[3], ...banners[4] }
     },
@@ -107,31 +90,48 @@ export default {
   },
   methods: {
     validateComponentName (index) {
-      if (!this.banners[index].componentName) {
-        return '必填项不能为空'
-      }
-      return ''
+      const error = !this.banners[index].componentName ? '必填项不能为空' : ''
+      return error
     },
     validateLink (index) {
       const link = this.banners[index].link
+      let error = ''
       if (!link) {
-        return '必填项不能为空'
+        error = '必填项不能为空'
       } else if (!link.startsWith('http://') && !link.startsWith('https://')) {
-        return '请输入正确的跳转链接'
+        error = '请输入正确的跳转链接'
       }
-      return ''
+      return error
     },
-    uploadGuideIconSuccess () {
-      window.console.log('guide icon upload success' + this.currentBannerIndex)
+    uploadGuideIconSuccess (res) {
+      const index = this.currentBannerIndex
+      this.banners[index].guideIconUrl = res.data.AbsPath
+      this.banners[index].guideIconUrlRel = res.data.RelativePath
+      this.commit({
+        payload: { guideIconUrlRel: res.data.RelativePath },
+        n: index
+      })
+      this.$store.commit('setCurrentBannerIndex', -1 )
+      this.$store.commit('setCurrentBannerIndex', index )
     },
-    uploadImageSuccess () {
-      window.console.log('background image upload success' + this.currentBannerIndex)
+    uploadImageSuccess (res) {
+      const index = this.currentBannerIndex
+      this.banners[index].backgroundImgUrl = res.data.AbsPath
+      this.banners[index].backgroundImgUrlRel = res.data.RelativePath
+      this.commit({
+        payload: { backgroundImgUrlRel: res.data.RelativePath },
+        n: index
+      })
+      this.$store.commit('setCurrentBannerIndex', -1 )
+      this.$store.commit('setCurrentBannerIndex', index )
+    },
+    commit (payload) {
+      this.$store.commit('changeSlideBanner', payload )
     },
     addBanner () {
       if (this.banners.length >=5) {
         return
       }
-      
       this.banners.push({
         "componentName": "",
         "backgroundImgUrl": "",
@@ -157,20 +157,49 @@ export default {
       setTimeout(()=>{
         this.banners.splice(index, 1)
         this.deleteIndex = ''
+        this.currentBannerIndex = 0
+        this.$store.commit('deleteSlideBanner', index )
+        this.$store.commit('setCurrentBannerIndex', 0 )
       }, 600)
 
     },
     selectBanner (index) {
       this.currentBannerIndex = index
+      this.$store.commit('setCurrentBannerIndex', index )
     },
     confirm () {
+      this.banners.forEach((banner,index) => {
+        this.commit({
+          payload: banner,
+          n: index
+        })
+      })
       this.showValidationMsg = true
       this.editing = false
     },
     cancel () {
+      for (let i = 0; i < this.banners.length; i++) { 
+        this.$store.commit('deleteSlideBanner', 0 )
+      }
+      this.$store.commit('setCurrentBannerIndex', '' )
+      this.reset()
+      this.rerender()
       this.showValidationMsg = false
       this.editing = false
+    },
+    reset () {
+      this.banners = []
+      this.addBanner()
+    },
+    rerender () {
+      this.refresh= false
+      this.$nextTick(()=>{
+        this.refresh = true
+      })
     }
+  },
+  mounted () {
+    this.addBanner()
   }
 }
 </script>

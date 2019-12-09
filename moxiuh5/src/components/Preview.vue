@@ -6,7 +6,8 @@
     <div id="subtitle" @click.stop="changeEditArea('Subtitle')" :style="subtitleStyle"></div>
 
     <div id="subregion-title-top" @click.stop="changeEditArea('SubregionTitleTop')" :style="slideBannerTitleStyle"></div>
-    <div id="slide-banner" @click.stop="changeEditArea('SlideBanner')"></div>
+    <div id="slide-banner" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerStyle" ></div>
+    <div id="slide-banner-guide-icon" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerGuideIconStyle"></div>
 
     <div id="subregion-title-mid" @click.stop="changeEditArea('SubregionTitleMid')">
       <div class="subregion-title" :style="subregionTitleMidStyle"></div>
@@ -18,10 +19,10 @@
     </div>
 
     <div v-for="n in [1,2,3,4,5]" :key="'banner'+n">
-      <div :id="'banner-title-'+n" @click.stop="changeEditArea('BannerTitle'+n)"></div>
-      <div :id="'banner-subtitle-'+n" @click.stop="changeEditArea('BannerSubtitle'+n)"></div>
-      <div :id="'guide-icon-'+n" @click.stop="changeEditArea('GuideIcon'+n)"></div>
-      <div :id="'banner-background-img-'+n" @click.stop="changeEditArea('BannerBackgroundImg'+n)" :style="bannerBackgroundImgStyle"></div>
+      <div :id="'banner-title-'+n" @click.stop="changeEditArea('BannerTitle'+n)" :style="bannerTitleStyle(n)"></div>
+      <div :id="'banner-subtitle-'+n" @click.stop="changeEditArea('BannerSubtitle'+n)" :style="bannerSubtitleStyle(n)"></div>
+      <div :id="'guide-icon-'+n" @click.stop="changeEditArea('GuideIcon'+n)" :style="bannerGuideIconStyle(n)"></div>
+      <div :id="'banner-background-img-'+n" @click.stop="changeEditArea('BannerBackgroundImg'+n)" :style="bannerBackgroundImgStyle(n)"></div>
     </div>
 
     <div id="fixed-banner" @click.stop="changeEditArea('FixedBanner')" :style="fixedBannerStyle"></div>
@@ -39,8 +40,32 @@ export default {
     }
   },
   methods: {
-    clicked () {
-      this.bannerId = 2
+    bannerBackgroundImgStyle (n) {
+      return {
+        backgroundImage: 'url(' + this.fiveBanners['ad'+n].banner.backgroundImgUrlRel + ')',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
+    },
+    bannerTitleStyle (n) {
+      return {
+        backgroundImage: 'url(' + this.fiveBanners['ad'+n].title.backgroundImgUrlRel + ')',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
+    },
+    bannerSubtitleStyle (n) {
+      return {
+        color: this.fiveBanners['ad'+n].subtitle.fontColor,
+        fontSize: this.fiveBanners['ad'+n].subtitle.fontSize + 'px'
+      }
+    },
+    bannerGuideIconStyle (n) {
+      return {
+        backgroundImage: 'url(' + this.fiveBanners['ad'+n].guideIconUrlRel + ')',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
     },
     changeEditArea (editAreaId) {
       window.console.log(editAreaId)
@@ -49,16 +74,17 @@ export default {
   },
   computed: {
     ...mapState({
-        editAreaId: state => state.editAreaId,
-        backgroundLongImg: state => state.backgroundLongImg,
-        fixedFloatingWindow: state => state.fixedFloatingWindow,
-        floatText: state => state.floatText,
-        subtitle: state => state.subtitle,
-        fixedBanner: state => state.fixedBanner,
-        slideBanner: state => state.slideBanner,
-        adAreaMid: state => state.adAreaMid,
-        adAreaBottm: state => state.adAreaBottm,
-        fiveBanners: state => state.fiveBanners,
+      currentBannerIndex: state => state.currentBannerIndex,
+      editAreaId: state => state.editAreaId,
+      backgroundLongImg: state => state.backgroundLongImg,
+      fixedFloatingWindow: state => state.fixedFloatingWindow,
+      floatText: state => state.floatText,
+      subtitle: state => state.subtitle,
+      fixedBanner: state => state.fixedBanner,
+      slideBanner: state => state.slideBanner,
+      adAreaMid: state => state.adAreaMid,
+      adAreaBottm: state => state.adAreaBottm,
+      fiveBanners: state => state.fiveBanners,
     }),
 
     backgroundLongImgStyle () {
@@ -125,16 +151,22 @@ export default {
       }
     },
 
-    bannerBackgroundImgStyle() {
-      return {}
-      // if (!this.fiveBanners[n].banner) {
-      //   return {}
-      // }
-      // return {
-      //   backgroundImage: 'url(' + this.fiveBanners[n].banner.backgroundImgUrlRel + ')',
-      //   backgroundSize: 'contain',
-      //   backgroundRepeat: 'no-repeat',
-      // }
+    slideBannerStyle () {
+      const banner = this.slideBanner.banners[this.currentBannerIndex]
+      return {
+        backgroundImage: banner ? 'url(' + banner.backgroundImgUrlRel + ')' : '',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
+    },
+
+    slideBannerGuideIconStyle () {
+      const banner = this.slideBanner.banners[this.currentBannerIndex]
+      return {
+        backgroundImage: banner ? 'url(' + banner.guideIconUrlRel + ')' : '',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
     }
   }
 }
@@ -189,6 +221,14 @@ export default {
     width 339px
     height 81px
     box-shadow 0px 0px 0px 0.1rem grey
+    z-index 1
+  #slide-banner-guide-icon
+    position absolute
+    top 465px
+    left 283px
+    width 54px
+    height 54px
+    z-index 2 
 
   #subregion-title-mid
     position absolute

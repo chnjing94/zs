@@ -1,7 +1,7 @@
 const backgroundLongImg = {
   Status: "0",
   AbsPath: "/MiddlePage/operation/191028112117427/image/pic1570444892779111.JPG",
-  RelativePath: "http://localhost:8888/背景.png",
+  RelativePath: "http://localhost:8888/backlong.png",
   Msg: "",
 }
 
@@ -75,6 +75,61 @@ const BannerBackgroundImgad5 = {
   Msg: "",
 }
 
+const BannerTitle = {
+  Status: "0",
+  AbsPath: "/MiddlePage/operation/191028112117427/image/pic1570444892779111.JPG",
+  RelativePath: "http://localhost:8888/6.png",
+  Msg: "",
+}
+
+const BannerGuideIcon1 = {
+  Status: "0",
+  AbsPath: "/MiddlePage/operation/191028112117427/image/pic1570444892779111.JPG",
+  RelativePath: "http://localhost:8888/g1.png",
+  Msg: "",
+}
+
+const BannerGuideIcon2 = {
+  Status: "0",
+  AbsPath: "/MiddlePage/operation/191028112117427/image/pic1570444892779111.JPG",
+  RelativePath: "http://localhost:8888/g2.png",
+  Msg: "",
+}
+
+const BannerGuideIcon3 = {
+  Status: "0",
+  AbsPath: "/MiddlePage/operation/191028112117427/image/pic1570444892779111.JPG",
+  RelativePath: "http://localhost:8888/g3.png",
+  Msg: "",
+}
+
+const BannerGuideIcon4 = {
+  Status: "0",
+  AbsPath: "/MiddlePage/operation/191028112117427/image/pic1570444892779111.JPG",
+  RelativePath: "http://localhost:8888/g4.png",
+  Msg: "",
+}
+
+const BannerGuideIcon5 = {
+  Status: "0",
+  AbsPath: "/MiddlePage/operation/191028112117427/image/pic1570444892779111.JPG",
+  RelativePath: "http://localhost:8888/g5.png",
+  Msg: "",
+}
+
+const SlideBannerBG = {
+  Status: "0",
+  AbsPath: "/MiddlePage/operation/191028112117427/image/pic1570444892779111.JPG",
+  RelativePath: "http://localhost:8888/slidebanner.png",
+  Msg: "",
+}
+
+const SlideBannerGuide = {
+  Status: "0",
+  AbsPath: "/MiddlePage/operation/191028112117427/image/pic1570444892779111.JPG",
+  RelativePath: "http://localhost:8888/go.png",
+  Msg: "",
+}
 
 const MockData = {
   backgroundLongImg,
@@ -87,6 +142,15 @@ const MockData = {
   BannerBackgroundImgad2,
   BannerBackgroundImgad3,
   BannerBackgroundImgad4,
-  BannerBackgroundImgad5
+  BannerBackgroundImgad5,
+  BannerTitle,
+  BannerGuideIcon1,
+  BannerGuideIcon2,
+  BannerGuideIcon3,
+  BannerGuideIcon4,
+  BannerGuideIcon5,
+  SlideBannerBG,
+  SlideBannerGuide
 }
+
 export default MockData

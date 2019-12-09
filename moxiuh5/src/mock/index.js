@@ -29,6 +29,30 @@ Mock.mock('/Mpage/PicUpload_1573460781472', 'post', (req) => {
       return MockData.BannerBackgroundImgad4 
     case "BannerBackgroundImgad5":
       return MockData.BannerBackgroundImgad5
+    case "BannerTitlead1":
+        return MockData.BannerTitle
+    case "BannerTitlead2":
+      return MockData.BannerTitle
+    case "BannerTitlead3":
+      return MockData.BannerTitle
+    case "BannerTitlead4":
+      return MockData.BannerTitle 
+    case "BannerTitlead5":
+      return MockData.BannerTitle
+    case "GuideIconad1":
+        return MockData.BannerGuideIcon1
+    case "GuideIconad2":
+      return MockData.BannerGuideIcon2
+    case "GuideIconad3":
+      return MockData.BannerGuideIcon3
+    case "GuideIconad4":
+      return MockData.BannerGuideIcon4
+    case "GuideIconad5":
+      return MockData.BannerGuideIcon5
+    case "SlideBannerBG":
+      return MockData.SlideBannerBG
+    case "SlideBannerGuide":
+      return MockData.SlideBannerGuide
     default:
 } 
   return {}

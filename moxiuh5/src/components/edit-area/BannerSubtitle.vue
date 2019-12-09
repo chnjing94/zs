@@ -1,5 +1,5 @@
 <template>
-  <div id="banner-subtitle">
+  <div id="banner-subtitle" v-if="refresh">
     <Title :title="'分区副标题'"/>
     <TextInput :title="'文字'" :placeholder="'请输入副标题文字'" :hint="'（支持12位字符、中文汉字和英文输入，超过展示区域手机端不展示）'" :maxLength="12" v-model="text"/>
     <FontColor v-model="fontColor"/>
@@ -29,6 +29,7 @@ export default {
   },
   data () {
     return {
+      refresh: true,
       showValidationMsg: false,
       editing: false,
 
@@ -38,24 +39,45 @@ export default {
     }
   },
   watch: {
-    listenChange () {
+    output () {
       this.editing = true
     }
   },
   computed: {
-    listenChange () {
+    output () {
       const { text, fontSize, fontColor } = this
-      return { text, fontSize, fontColor }
+      return {
+        payload: { text, fontSize, fontColor },
+        n: this.bannerId
+      }
     },
   },
   methods: {
+    commit () {
+      this.$store.commit('changeFiveBannersSubtitle', this.output)
+    },
     confirm () {
+      this.commit()
       this.showValidationMsg = true
       this.editing = false
     },
     cancel () {
+      this.reset()
+      this.commit()
+      this.rerender()
       this.showValidationMsg = false
       this.editing = false
+    },
+    reset () {
+      this.text = '',
+      this.fontSize = 13,
+      this.fontColor = '#000000'
+    },
+    rerender () {
+      this.refresh= false
+      this.$nextTick(()=>{
+        this.refresh = true
+      })
     }
   }
 }

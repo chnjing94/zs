@@ -56,6 +56,7 @@
                 "backgroundColor": "",
                 "backgroundOpacity": 1,
                 "guideIconUrl": "go.png",
+                "guideIconUrlRel": "go.png",
                 "title": "参与竞猜 赢取超大奖励",
                 "titleFontSize": 16,
                 "fontColor": "black",
@@ -72,6 +73,7 @@
                 "backgroundColor": "",
                 "backgroundOpacity": 1,
                 "guideIconUrl": "go.png",
+                "guideIconUrlRel": "go.png",
                 "title": "参与竞猜 赢取超大奖励",
                 "titleFontSize": 16,
                 "fontColor": "black",
@@ -88,6 +90,7 @@
                 "backgroundColor": "",
                 "backgroundOpacity": 1,
                 "guideIconUrl": "go.png",
+                "guideIconUrlRel": "go.png",
                 "title": "参与竞猜 赢取超大奖励",
                 "titleFontSize": 16,
                 "fontColor": "black",
@@ -171,7 +174,8 @@
                 "fontSize": 13,
                 "fontColor": "black"
             },
-            "guideIconUrl": "黄色.png"
+            "guideIconUrl": "黄色.png",
+            "guideIconUrlRel": "go.png",
         },
         "ad3": {
             "banner": {
@@ -197,7 +201,8 @@
                 "fontSize": 13,
                 "fontColor": "black"
             },
-            "guideIconUrl": "红色.png"
+            "guideIconUrl": "红色.png",
+            "guideIconUrlRel": "go.png",
         },
         "ad4": {
             "banner": {
@@ -223,7 +228,8 @@
                 "fontSize": 13,
                 "fontColor": "black"
             },
-            "guideIconUrl": "橘色.png"
+            "guideIconUrl": "橘色.png",
+            "guideIconUrlRel": "go.png",
         },
         "ad5": {
             "banner": {
@@ -249,7 +255,8 @@
                 "fontSize": 13,
                 "fontColor": "black"
             },
-            "guideIconUrl": "青绿色.png"
+            "guideIconUrl": "青绿色.png",
+            "guideIconUrlRel": "go.png",
         }
     },
     "fixedBanner": {

@@ -5,6 +5,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     editAreaId: 'BackgroundLongImg',
+    currentBannerIndex: 0,
     backgroundLongImg: {},
     fixedFloatingWindow: {},
     floatText: {},
@@ -12,15 +13,37 @@ export default new Vuex.Store({
     subtitle: {},
     fixedBanner: {},
     footText: {},
-    slideBanner: {},
+    slideBanner: {
+      banners: [{}]
+    },
     adAreaMid: {},
     adAreaBottm: {},
     fiveBanners: {
-      ad1: {},
-      ad2: {},
-      ad3: {},
-      ad4: {},
-      ad5: {}
+      ad1: {
+        banner: {},
+        title: {},
+        subtitle: {}
+      },
+      ad2: {
+        banner: {},
+        title: {},
+        subtitle: {}
+      },
+      ad3: {
+        banner: {},
+        title: {},
+        subtitle: {}
+      },
+      ad4: {
+        banner: {},
+        title: {},
+        subtitle: {}
+      },
+      ad5: {
+        banner: {},
+        title: {},
+        subtitle: {}
+      }
     },
   },
 
@@ -73,5 +96,28 @@ export default new Vuex.Store({
       state.fiveBanners[data.n].banner = {...state.fiveBanners[data.n].banner, ...data.payload}
     },
 
+    changeFiveBannersTitle (state, data) {
+      state.fiveBanners[data.n].title = {...state.fiveBanners[data.n].title, ...data.payload}
+    },
+
+    changeFiveBannersSubtitle (state, data) {
+      state.fiveBanners[data.n].subtitle = {...state.fiveBanners[data.n].subtitle, ...data.payload}
+    },
+
+    changeFiveBannersGuideIcon (state, data) {
+      state.fiveBanners[data.n] = {...state.fiveBanners[data.n], ...data.payload}
+    },
+
+    changeSlideBanner (state, data) {
+      state.slideBanner.banners[data.n] = {...state.slideBanner.banners[data.n], ...data.payload}
+    },
+
+    deleteSlideBanner (state, data) {
+      state.slideBanner.banners.splice(data, 1)
+    },
+
+    setCurrentBannerIndex (state, data) {
+      state.currentBannerIndex = data
+    }
   },
 })

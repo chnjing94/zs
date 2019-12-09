@@ -1,7 +1,7 @@
 <template>
-  <div id="guide-icon">
+  <div id="guide-icon" v-if="refresh">
     <Title :title="'引导图标'"/>
-    <ImageUploader :preferSize="'175*50px'" :imgPrefix="'GuideIcon'" :required="false" @success="uploadImageSuccess"/>
+    <ImageUploader :preferSize="'175*50px'" :imgPrefix="'GuideIcon'+bannerId" :required="false" @success="uploadImageSuccess"/>
     <ButtonGroup :success="!editing&&showValidationMsg" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
@@ -26,6 +26,7 @@ export default {
   },
   data () {
     return {
+      refresh: true,
       showValidationMsg: false,
       editing: false,
       
@@ -34,28 +35,52 @@ export default {
     }
   },
   watch: {
-    listenChange () {
+    output () {
       this.editing = true
     }
   },
   computed: {
-    listenChange () {
+    output () {
       const { guideIconUrl, guideIconUrlRel } = this
-      return { guideIconUrl, guideIconUrlRel }
+      return {
+        payload: { guideIconUrl, guideIconUrlRel },
+        n: this.bannerId
+      }
     },
   },
   methods: {      
     uploadImageSuccess (res) {
       this.guideIconUrl = res.data.AbsPath
       this.guideIconUrlRel = res.data.RelativePath
+      this.commit({
+        payload: {guideIconUrlRel: res.data.RelativePath },
+        n: this.bannerId
+      })
+    },
+    commit (payload) {
+      this.$store.commit('changeFiveBannersGuideIcon', payload ? payload : this.output)
     },
     confirm () {
+      this.commit()
       this.showValidationMsg = true
       this.editing = false
     },
     cancel () {
+      this.reset()
+      this.commit()
+      this.rerender()
       this.showValidationMsg = false
       this.editing = false
+    },
+    reset () {
+      this.guideIconUrl = '',
+      this.guideIconUrlRel = ''
+    },
+    rerender () {
+      this.refresh= false
+      this.$nextTick(()=>{
+        this.refresh = true
+      })
     }
   }
 }
