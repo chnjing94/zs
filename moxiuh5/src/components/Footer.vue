@@ -41,6 +41,7 @@ export default {
     display flex
     justify-content center
     align-items center
+    opacity 0.8
     &:hover
-      opacity 0.8
+      opacity 1
 </style>

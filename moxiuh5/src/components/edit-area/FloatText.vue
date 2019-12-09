@@ -58,26 +58,22 @@ export default {
     }
   },
   watch: {
-    listenChange () {
+    output () {
       this.editing = true
     }
   },
   computed: {
-    listenChange () {
+    output () {
       const { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor, show } = this
       return { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor, show }
     },
     validateComponentName () {
-      if (!this.componentName) {
-        return '必填项不能为空'
-      }
-      return ''
+      const error = !this.componentName ? '必填项不能为空' : ''
+      return error
     },
     validateText () {
-      if (!this.text) {
-        return '必填项不能为空'
-      }
-      return ''
+      const error = !this.text ? '必填项不能为空' : ''
+      return error
     },
     validated () {
       return !this.validateText && !this.validateComponentName
@@ -87,12 +83,13 @@ export default {
     uploadImageSuccess (res) {
       this.backgroundImgUrl = res.data.AbsPath
       this.backgroundImgUrlRel = res.data.RelativePath
-      const { backgroundImgUrlRel } = this
-      this.$store.commit('changeFloatText', { backgroundImgUrlRel })
+      this.commit({ backgroundImgUrlRel: res.data.RelativePath})
     },
-    commit () {
-      const { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor, show } = this
-      this.$store.commit('changeFloatText', { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor, show })
+    onChange (evt) {
+      this.show = evt.target.checked
+    },
+    commit (payload) {
+      this.$store.commit('changeFloatText', payload ? payload : this.output)
     },
     confirm () {
       if (this.validated) {
@@ -107,9 +104,6 @@ export default {
       this.rerender()
       this.showValidationMsg = false
       this.editing = false
-    },
-    onChange (e) {
-      this.show = e.target.checked
     },
     reset () {
       this.componentName = '',

@@ -1,7 +1,7 @@
 {
     "backgroundLongImg": {
         "backgroundImgUrl": "背景.png",
-        "backgroundImgUrlRel": "",
+        "backgroundImgUrlRel": ""
     },
     "fixedFloatingWindow": {
         "componentName": "注册送iphone",
@@ -28,14 +28,13 @@
         "text": "领导寄语",
         "fontSize": 16,
         "fontColor": "black",
-        "show": true,
+        "show": true
     },
     "floatWindow": {
         "backgroundImgUrl": "",
         "backgroundImgUrlRel": "",
         "backgroundColor": "red",
         "backgroundOpacity": 1,
-        "title": "领导寄语",
         "text": "",
         "fontSize": 24,
         "fontColor": "black"
@@ -108,7 +107,19 @@
         "backgroundColor": "",
         "backgroundOpacity": 1,
         "subtitle": "你想要的我都有",
-        "subtitleFontColor": "",
+        "subtitleFontColor": ""
+    },
+    "adAreaBottm": {
+        "title": "薪享理财",
+        "backgroundImgUrl": "标题.png",
+        "backgroundImgUrlRel": "",
+        "fontColor": "black",
+        "backgroundColor": "",
+        "backgroundOpacity": 1,
+        "subtitle": "工资卡专享，限时抢购！",
+        "subtitleFontColor": "black"
+    },
+    "fiveBanners": {
         "ad1": {
             "banner": {
                 "componentName": "",
@@ -161,18 +172,8 @@
                 "fontColor": "black"
             },
             "guideIconUrl": "黄色.png"
-        }
-    },
-    "adAreaBottm": {
-        "title": "薪享理财",
-        "backgroundImgUrl": "标题.png",
-        "backgroundImgUrlRel": "",
-        "fontColor": "black",
-        "backgroundColor": "",
-        "backgroundOpacity": 1,
-        "subtitle": "工资卡专享，限时抢购！",
-        "subtitleFontColor": "black",
-        "ad1": {
+        },
+        "ad3": {
             "banner": {
                 "componentName": "",
                 "backgroundImgUrl": "组 20.png",
@@ -198,7 +199,7 @@
             },
             "guideIconUrl": "红色.png"
         },
-        "ad2": {
+        "ad4": {
             "banner": {
                 "componentName": "",
                 "backgroundImgUrl": "绿色.png",
@@ -224,7 +225,7 @@
             },
             "guideIconUrl": "橘色.png"
         },
-        "ad3": {
+        "ad5": {
             "banner": {
                 "componentName": "",
                 "backgroundImgUrl": "蓝色.png",

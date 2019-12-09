@@ -48,34 +48,31 @@ export default {
     }
   },
   watch: {
-    listenChange () {
+    output () {
       this.editing = true
     }
   },
   computed: {
-    listenChange () {
+    output () {
       const { componentName, backgroundImgUrl, backgroundImgUrlRel, link, way } = this
       return { componentName, backgroundImgUrl, backgroundImgUrlRel, link, way }
     },
     validateComponentName () {
-      if (!this.componentName) {
-        return '必填项不能为空'
-      }
-      return ''
+      const error = !this.componentName ? '必填项不能为空' : ''
+      return error
     },
     validteBackgroundImg () {
-      if (!this.backgroundImgUrl || !this.backgroundImgUrlRel) {
-        return '必填项不能为空'
-      }
-      return ''
+      const error = (!this.backgroundImgUrl || !this.backgroundImgUrlRel) ? '必填项不能为空' : ''
+      return error
     },
     validteLink () {
+      let error = ''
       if (!this.link) {
-        return '必填项不能为空'
+        error = '必填项不能为空'
       } else if (!this.link.startsWith('http://') && !this.link.startsWith('https://')) {
-        return '请输入正确的跳转链接'
+        error = '请输入正确的跳转链接'
       }
-      return ''
+      return error
     },
     validated () {
       return !this.validateComponentName && !this.validteBackgroundImg && !this.validteLink
@@ -85,12 +82,10 @@ export default {
     uploadImageSuccess (res) {
       this.backgroundImgUrl = res.data.AbsPath
       this.backgroundImgUrlRel = res.data.RelativePath
-      const { backgroundImgUrlRel } = this
-      this.$store.commit('changeFixedFloatWindow', { backgroundImgUrlRel })
+      this.commit({ backgroundImgUrlRel: res.data.RelativePath })
     },
-    commit () {
-      const { componentName, backgroundImgUrl, backgroundImgUrlRel, link, way } = this
-      this.$store.commit('changeFixedFloatWindow', { componentName, backgroundImgUrl, backgroundImgUrlRel, link, way })
+    commit (payload) {
+      this.$store.commit('changeFixedFloatWindow', payload ? payload : this.output)
     },
     confirm () {
       if (this.validated) {

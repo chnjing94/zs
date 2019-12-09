@@ -7,23 +7,23 @@
 
     <Subtitle v-show="editAreaId==='Subtitle'"/>
 
-    <SubregionTitle :subregionId="'top'" v-show="editAreaId==='SubregionTitleTop'"/>
+    <SubregionTitle :subregionId="'SlideBanner'" v-show="editAreaId==='SubregionTitleTop'"/>
     <SlideBanner v-show="editAreaId==='SlideBanner'"/>
     
-    <SubregionTitle :subregionId="'mid'" v-show="editAreaId==='SubregionTitleMid'"/>
-    <div v-for="n in [1,2]" :key="'mid'+n">
-      <BannerTitle :bannerId="'mid_'+n" v-show="editAreaId==='BannerTitleMid'+n"/>
-      <BannerSubtitle :bannerId="'mid_'+n" v-show="editAreaId==='BannerSubtitleMid'+n"/>
-      <GuideIcon :bannerId="'mid_'+n" v-show="editAreaId==='GuideIconMid'+n"/>
-      <BannerBackgroundImg :bannerId="'mid_'+n" v-show="editAreaId==='BannerBackgroundImgMid'+n"/>
+    <SubregionTitle :subregionId="'AdAreaMid'" v-show="editAreaId==='SubregionTitleMid'"/>
+    <div v-for="n in [1,2]" :key="'banner'+n">
+      <BannerTitle :bannerId="'ad'+n" v-show="editAreaId==='BannerTitle'+n"/>
+      <BannerSubtitle :bannerId="'ad'+n" v-show="editAreaId==='BannerSubtitle'+n"/>
+      <GuideIcon :bannerId="'ad'+n" v-show="editAreaId==='GuideIcon'+n"/>
+      <BannerBackgroundImg :bannerId="'ad'+n" v-show="editAreaId==='BannerBackgroundImg'+n"/>
     </div>
     
-    <SubregionTitle :subregionId="'bottom'" v-show="editAreaId==='SubregionTitleBottom'"/>
-    <div v-for="n in [1,2,3]" :key="'bottom'+n">
-      <BannerTitle :bannerId="'bottom_'+n" v-show="editAreaId==='BannerTitleBottom'+n"/>
-      <BannerSubtitle :bannerId="'bottom_'+n" v-show="editAreaId==='BannerSubtitleBottom'+n"/>
-      <GuideIcon :bannerId="'bottom_'+n" v-show="editAreaId==='GuideIconBottom'+n"/>
-      <BannerBackgroundImg :bannerId="'bottom_'+n" v-show="editAreaId==='BannerBackgroundImgBottom'+n"/>
+    <SubregionTitle :subregionId="'AdAreaBottm'" v-show="editAreaId==='SubregionTitleBottom'"/>
+    <div v-for="n in [3,4,5]" :key="'banner'+n">
+      <BannerTitle :bannerId="'ad'+n" v-show="editAreaId==='BannerTitle'+n"/>
+      <BannerSubtitle :bannerId="'ad'+n" v-show="editAreaId==='BannerSubtitle'+n"/>
+      <GuideIcon :bannerId="'ad'+n" v-show="editAreaId==='GuideIcon'+n"/>
+      <BannerBackgroundImg :bannerId="'ad'+n" v-show="editAreaId==='BannerBackgroundImg'+n"/>
     </div>
     
     <FixedBanner v-show="editAreaId==='FixedBanner'"/>

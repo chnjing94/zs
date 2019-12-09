@@ -1,5 +1,5 @@
 <template>
-  <div id="float-window">
+  <div id="float-window" v-if="refresh">
     <Title :title="'浮动弹窗'"/>
     <ImageUploader :title="'背景图片'" :preferSize="'540*60px'" :imgPrefix="'Subtitle'" :required="false" @success="uploadImgSuccess"/>
     <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
@@ -32,6 +32,7 @@ export default {
   },
   data () {
     return {
+      refresh: true,
       showValidationMsg: false,
       editing: false,
       
@@ -39,35 +40,57 @@ export default {
       backgroundImgUrlRel: '',
       backgroundColor: '',
       backgroundOpacity: 0,
-      title: '',
       text: '',
       fontSize: 16,
       fontColor: '#000000'
     }
   },
   watch: {
-    listenChange () {
+    output () {
       this.editing = true
     }
   },
   computed: {
-    listenChange () {
-      const { backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, title, text, fontSize, fontColor } = this
-      return { backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, title, text, fontSize, fontColor }
+    output () {
+      const { backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor } = this
+      return { backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor }
     },
   },
   methods: {
     uploadImgSuccess (res) {
       this.backgroundImgUrl = res.data.AbsPath
       this.backgroundImgUrlRel = res.data.RelativePath
+      this.commit({ backgroundImgUrlRel: res.data.RelativePath})
+    },
+    commit (payload) {
+      this.$store.commit('changeFloatWindow', payload ? payload : this.output)
     },
     confirm () {
+      this.commit()
       this.showValidationMsg = true
       this.editing = false
     },
     cancel () {
+      this.reset()
+      this.commit()
+      this.rerender()
       this.showValidationMsg = false
       this.editing = false
+    },
+    reset () {
+      this.backgroundImgUrl = '',
+      this.backgroundImgUrlRel = '',
+      this.backgroundColor = '',
+      this.backgroundOpacity = 0,
+      this.text = '',
+      this.fontSize = 16,
+      this.fontColor = '#000000'
+    },
+    rerender () {
+      this.refresh= false
+      this.$nextTick(()=>{
+        this.refresh = true
+      })
     }
   }
 }

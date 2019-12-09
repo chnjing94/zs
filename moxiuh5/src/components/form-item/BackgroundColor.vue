@@ -124,6 +124,8 @@ export default {
         flex 0 0 1.15rem
         margin 0.1rem
         cursor pointer
+        &:hover
+          box-shadow 0px 0px 0px 0.1rem #007d71
     .more-color
       flex 0 0 10%
       display flex

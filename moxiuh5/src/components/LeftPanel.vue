@@ -7,7 +7,7 @@
       <div class="title">领导寄语</div>
       <div class="text">输入文字</div>
     </div>
-    <div class="selectPhone">
+    <div class="select-phone">
       <a-select defaultValue="IPhoneX" style="width: 120px">
         <a-select-option value="IPhoneX">IPhoneX</a-select-option>
       </a-select>
@@ -38,7 +38,7 @@ export default {
   #left-panel
     position relative
   
-  .selectPhone
+  .select-phone
     position absolute
     right 1rem
     top 35rem

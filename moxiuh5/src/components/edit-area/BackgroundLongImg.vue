@@ -25,7 +25,7 @@ export default {
     return {
       showValidationMsg: false,
       editing: false,
-      
+
       backgroundImgUrl: '',
       backgroundImgUrlRel: '',
     }
@@ -34,43 +34,42 @@ export default {
     uploadImageSuccess (res) {
       this.backgroundImgUrl = res.data.AbsPath
       this.backgroundImgUrlRel = res.data.RelativePath
-      this.commitImage()
-    },
-    commitImage () {
-      const { backgroundImgUrlRel } = this
-      this.$store.commit('changeBackgroundLongImg', { backgroundImgUrlRel })
+      this.commit({ backgroundImgUrlRel: res.data.RelativePath })
     },
     confirm () {
+      if (this.validated) {
+        this.commit()
+      }
       this.showValidationMsg = true
       this.editing = false
     },
     cancel () {
       this.reset()
-      this.commitImage()
-
+      this.commit()
       this.showValidationMsg = false
       this.editing = false
     },
     reset () {
       this.backgroundImgUrl = '',
       this.backgroundImgUrlRel = ''
-    }
+    },
+    commit (payload) {
+      this.$store.commit('changeBackgroundLongImg', payload ? payload : this.output)
+    },
   },
   watch: {
-    listenChange () {
+    output () {
       this.editing = true
     }
   },
   computed: {
-    listenChange () {
+    output () {
       const { backgroundImgUrl, backgroundImgUrlRel } = this
       return { backgroundImgUrl, backgroundImgUrlRel }
     },
     validteBackgroundImg () {
-      if (!this.backgroundImgUrl || !this.backgroundImgUrlRel) {
-        return '必填项不能为空'
-      }
-      return ''
+      const error = (!this.backgroundImgUrl || !this.backgroundImgUrlRel) ? '必填项不能为空' : ''
+      return error
     },
     validated () {
       return !this.validteBackgroundImg

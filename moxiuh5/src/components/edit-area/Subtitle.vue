@@ -1,5 +1,5 @@
 <template>
-  <div id="subtitle-wrapper">
+  <div id="subtitle-wrapper" v-if="refresh">
     <Title :title="'副标题'"/>
     <ImageUploader :title="'背景图片'" :preferSize="'540*60px'" :imgPrefix="'Subtitle'" :required="false" @success="uploadImageSuccess"/>
     <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
@@ -32,6 +32,7 @@ export default {
   },
   data () {
     return {
+      refresh: true,
       showValidationMsg: false,
       editing: false,
 
@@ -45,12 +46,12 @@ export default {
     }
   },
   watch: {
-    listenChange () {
+    output () {
       this.editing = true
     }
   },
   computed: {
-    listenChange () {
+    output () {
       const { backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor } = this
       return { backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor }
     },
@@ -59,14 +60,37 @@ export default {
     uploadImageSuccess (res) {
       this.backgroundImgUrl = res.data.AbsPath
       this.backgroundImgUrlRel = res.data.RelativePath
+      this.commit({ backgroundImgUrlRel: res.data.RelativePath})
+    },
+    commit (payload) {
+      this.$store.commit('changeSubtitle', payload ? payload : this.output)
     },
     confirm () {
+      this.commit()
       this.showValidationMsg = true
       this.editing = false
     },
     cancel () {
+      this.reset()
+      this.commit()
+      this.rerender()
       this.showValidationMsg = false
       this.editing = false
+    },
+    reset () {
+      this.backgroundImgUrl = '',
+      this.backgroundImgUrlRel = '',
+      this.backgroundColor = '',
+      this.backgroundOpacity = 0,
+      this.text = '',
+      this.fontSize = 24,
+      this.fontColor = '#000000'
+    },
+    rerender () {
+      this.refresh= false
+      this.$nextTick(()=>{
+        this.refresh = true
+      })
     }
   }
 }

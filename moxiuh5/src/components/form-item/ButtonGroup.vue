@@ -78,8 +78,9 @@ export default {
     .confirm
       background-color rgb(0, 125, 113)
       color white
+      opacity 0.8
       &:hover
-        opacity 0.8
+        opacity 1
 
   .notification
     display flex

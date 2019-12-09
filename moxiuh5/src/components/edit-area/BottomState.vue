@@ -1,5 +1,5 @@
 <template>
-  <div id="bottom-state">
+  <div id="bottom-state" v-if="refresh">
     <Title :title="'底部说明'"/>
     <TextInput :title="'文字'" :placeholder="'请输入浮动文字'" :hint="'（支持20位字符、中文汉字和英文输入，超过展示区手机端不展示）'" v-model="text" :maxLength="20"/>
     <FontSize v-model="fontSize"/>
@@ -26,6 +26,7 @@ export default {
   },
   data () {
     return {
+      refresh: true,
       showValidationMsg: false,
       editing: false,
 
@@ -35,24 +36,42 @@ export default {
     }
   },
   watch: {
-    listenChange () {
+    output () {
       this.editing = true
     }
   },
   computed: {
-    listenChange () {
+    output () {
       const { text, fontSize, fontColor } = this
       return { text, fontSize, fontColor }
     },
   },
   methods: {
+    commit () {
+      this.$store.commit('changeFootText', this.output)
+    },
     confirm () {
+      this.commit()
       this.showValidationMsg = true
       this.editing = false
     },
     cancel () {
+      this.reset()
+      this.commit()
+      this.rerender()
       this.showValidationMsg = false
       this.editing = false
+    },
+    reset () {
+      this.text = '',
+      this.fontSize = 16,
+      this.fontColor = '#000000'
+    },
+    rerender () {
+      this.refresh= false
+      this.$nextTick(()=>{
+        this.refresh = true
+      })
     }
   }
 }

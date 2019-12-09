@@ -1,5 +1,5 @@
 <template>
-  <div id="fixed-banner">
+  <div id="fixed-banner" v-if="refresh">
     <Title :title="'固定banner图'"/>
     <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="componentName"/>
     <ErrorMsg :message="validateComponentName" v-if="validateComponentName&&showValidationMsg"/>
@@ -34,6 +34,7 @@ export default {
   },
   data () {
     return {
+      refresh: true,
       showValidationMsg: false,
       editing: false,
       
@@ -45,34 +46,31 @@ export default {
     }
   },
   watch: {
-    listenChange () {
+    output () {
       this.editing = true
     }
   },
   computed: {
-    listenChange () {
+    output () {
       const { componentName, backgroundImgUrl, backgroundImgUrlRel, link, way } = this
       return { componentName, backgroundImgUrl, backgroundImgUrlRel, link, way }
     },
     validateComponentName () {
-      if (!this.componentName) {
-        return '必填项不能为空'
-      }
-      return ''
+      const error = !this.componentName ? '必填项不能为空' : ''
+      return error
     },
     validteBackgroundImg () {
-      if (!this.backgroundImgUrl || !this.backgroundImgUrlRel) {
-        return '必填项不能为空'
-      }
-      return ''
+      const error = (!this.backgroundImgUrl || !this.backgroundImgUrlRel) ? '必填项不能为空' : ''
+      return error
     },
     validteLink () {
+      let error = ''
       if (!this.link) {
-        return '必填项不能为空'
+        error = '必填项不能为空'
       } else if (!this.link.startsWith('http://') && !this.link.startsWith('https://')) {
-        return '请输入正确的跳转链接'
+        error = '请输入正确的跳转链接'
       }
-      return ''
+      return error
     },
     validated () {
       return !this.validateComponentName && !this.validteBackgroundImg && !this.validteLink
@@ -82,14 +80,37 @@ export default {
     uploadImageSuccess (res) {
       this.backgroundImgUrl = res.data.AbsPath
       this.backgroundImgUrlRel = res.data.RelativePath
+      this.commit({ backgroundImgUrlRel: res.data.RelativePath })
+    },
+    commit (payload) {
+      this.$store.commit('changeFixedBanner', payload ? payload : this.output)
     },
     confirm () {
+      if (this.validated) {
+        this.commit()
+      }
       this.showValidationMsg = true
       this.editing = false
     },
     cancel () {
+      this.reset()
+      this.commit()
+      this.rerender()
       this.showValidationMsg = false
       this.editing = false
+    },
+    reset () {
+      this.componentName = '',
+      this.backgroundImgUrl = '',
+      this.backgroundImgUrlRel = '',
+      this.link = '',
+      this.way = 0
+    },
+    rerender () {
+      this.refresh= false
+      this.$nextTick(()=>{
+        this.refresh = true
+      })
     }
   }
 }

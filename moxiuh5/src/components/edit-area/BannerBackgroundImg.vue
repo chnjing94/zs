@@ -1,10 +1,10 @@
 <template>
-  <div id="banner-background-img">
+  <div id="banner-background-img" v-if="refresh">
     <Title :title="'banner图背景'"/>
     <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="componentName"/>
     <ErrorMsg :message="validateComponentName" v-if="validateComponentName&&showValidationMsg"/>
 
-    <ImageUploader :title="'背景图片'" :imgPrefix="'BannerBackgroundImg'" :preferSize="'468*60px'" :required="false" @success="uploadImageSuccess"/>
+    <ImageUploader :title="'背景图片'" :imgPrefix="'BannerBackgroundImg'+bannerId" :preferSize="'468*60px'" :required="false" @success="uploadImageSuccess"/>
     <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
     <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" required v-model="link"/>
     <ErrorMsg :message="validteLink" v-if="validteLink&&showValidationMsg"/>
@@ -42,6 +42,7 @@ export default {
   },
   data () {
     return {
+      refresh: true,
       showValidationMsg: false,
       editing: false,
       
@@ -55,28 +56,30 @@ export default {
     }
   },
   watch: {
-    listenChange () {
+    output () {
       this.editing = true
     }
   },
   computed: {
-    listenChange () {
+    output () {
       const { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, link, way } = this
-      return { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, link, way }
+      return { 
+        payload: { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, link, way },
+        n: this.bannerId
+      }
     },    
     validateComponentName () {
-      if (!this.componentName) {
-        return '必填项不能为空'
-      }
-      return ''
+      const error = !this.componentName ? '必填项不能为空' : ''
+      return error
     },    
     validteLink () {
+      let error = ''
       if (!this.link) {
-        return '必填项不能为空'
+        error = '必填项不能为空'
       } else if (!this.link.startsWith('http://') && !this.link.startsWith('https://')) {
-        return '请输入正确的跳转链接'
+        error = '请输入正确的跳转链接'
       }
-      return ''
+      return error
     },
     validated () {
       return !this.validateComponentName && !this.validteLink
@@ -86,14 +89,39 @@ export default {
     uploadImageSuccess (res) {
       this.backgroundImgUrl = res.data.AbsPath
       this.backgroundImgUrlRel = res.data.RelativePath
+      this.commit({ payload: { backgroundImgUrlRel: res.data.RelativePath }, n: this.bannerId })
+    },
+    commit (payload) {
+      this.$store.commit('changeFiveBannersBackground', payload ? payload : this.output)
     },
     confirm () {
+      if (this.validated) {
+        this.commit()
+      }
       this.showValidationMsg = true
       this.editing = false
     },
     cancel () {
+      this.reset()
+      this.commit()
+      this.rerender()
       this.showValidationMsg = false
       this.editing = false
+    },
+    reset () {
+      this.componentName = '',
+      this.backgroundImgUrl = '',
+      this.backgroundImgUrlRel = '',
+      this.backgroundColor = '',
+      this.backgroundOpacity = 0,
+      this.link = '',
+      this.way = 0
+    },
+    rerender () {
+      this.refresh= false
+      this.$nextTick(()=>{
+        this.refresh = true
+      })
     }
   }
 }

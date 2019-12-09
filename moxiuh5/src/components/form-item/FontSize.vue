@@ -4,7 +4,7 @@
         <span style="font-weight:600">文字大小</span><span style="color: #868686">（PX）</span>
     </div>
     <div class="select-area">
-      <a-select style="width: 100%" @change="$emit('select', Number(size))" v-model="size">
+      <a-select style="width: 100%" @change="$emit('select', Number(sizeLocal))" v-model="sizeLocal">
         <a-select-option value="10">10</a-select-option>
         <a-select-option value="11">11</a-select-option>
         <a-select-option value="12">12</a-select-option>
@@ -29,6 +29,11 @@ export default {
   },
   props: {
     size: Number
+  },
+  data () {
+    return {
+      sizeLocal: this.size
+    }
   }
 }
 </script>

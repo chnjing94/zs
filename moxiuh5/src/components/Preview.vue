@@ -3,28 +3,28 @@
     <div id="fixed-float-window" @click.stop="changeEditArea('FixedFloatWindow')" :style="fixedFloatWindowStyle"></div>
     <div id="float-text" @click.stop="changeEditArea('FloatText')" :style="floatTextStyle"></div>
 
-    <div id="subtitle" @click.stop="changeEditArea('Subtitle')"></div>
+    <div id="subtitle" @click.stop="changeEditArea('Subtitle')" :style="subtitleStyle"></div>
 
-    <div id="subregion-title-top" @click.stop="changeEditArea('SubregionTitleTop')"></div>
+    <div id="subregion-title-top" @click.stop="changeEditArea('SubregionTitleTop')" :style="slideBannerTitleStyle"></div>
     <div id="slide-banner" @click.stop="changeEditArea('SlideBanner')"></div>
 
-    <div id="subregion-title-mid" @click.stop="changeEditArea('SubregionTitleMid')"></div>
-    <div v-for="n in [1,2]" :key="'mid'+n">
-      <div :id="'banner-title-mid'+n" @click.stop="changeEditArea('BannerTitleMid'+n)"></div>
-      <div :id="'banner-subtitle-mid'+n" @click.stop="changeEditArea('BannerSubtitleMid'+n)"></div>
-      <div :id="'guide-icon-mid'+n" @click.stop="changeEditArea('GuideIconMid'+n)"></div>
-      <div :id="'banner-background-img-mid'+n" @click.stop="changeEditArea('BannerBackgroundImgMid'+n)"></div>
+    <div id="subregion-title-mid" @click.stop="changeEditArea('SubregionTitleMid')">
+      <div class="subregion-title" :style="subregionTitleMidStyle"></div>
+      <div class="subregion-sub-title"></div>
+    </div>
+    <div id="subregion-title-bottom" @click.stop="changeEditArea('SubregionTitleBottom')">
+      <div class="subregion-title" :style="subregionTitleBottomStyle"></div>
+      <div class="subregion-sub-title"></div>
     </div>
 
-    <div id="subregion-title-bottom" @click.stop="changeEditArea('SubregionTitleBottom')"></div>
-    <div v-for="n in [1,2,3]" :key="'bottom'+n">
-      <div :id="'banner-title-bottom'+n" @click.stop="changeEditArea('BannerTitleBottom'+n)"></div>
-      <div :id="'banner-subtitle-bottom'+n" @click.stop="changeEditArea('BannerSubtitleBottom'+n)"></div>
-      <div :id="'guide-icon-bottom'+n" @click.stop="changeEditArea('GuideIconBottom'+n)"></div>
-      <div :id="'banner-background-img-bottom'+n" @click.stop="changeEditArea('BannerBackgroundImgBottom'+n)"></div>
+    <div v-for="n in [1,2,3,4,5]" :key="'banner'+n">
+      <div :id="'banner-title-'+n" @click.stop="changeEditArea('BannerTitle'+n)"></div>
+      <div :id="'banner-subtitle-'+n" @click.stop="changeEditArea('BannerSubtitle'+n)"></div>
+      <div :id="'guide-icon-'+n" @click.stop="changeEditArea('GuideIcon'+n)"></div>
+      <div :id="'banner-background-img-'+n" @click.stop="changeEditArea('BannerBackgroundImg'+n)" :style="bannerBackgroundImgStyle"></div>
     </div>
 
-    <div id="fixed-banner" @click.stop="changeEditArea('FixedBanner')"></div>
+    <div id="fixed-banner" @click.stop="changeEditArea('FixedBanner')" :style="fixedBannerStyle"></div>
     <div id="bottom-state" @click.stop="changeEditArea('BottomState')"></div>
   </div>
 </template>
@@ -39,17 +39,26 @@ export default {
     }
   },
   methods: {
-      changeEditArea (editAreaId) {
-        window.console.log(editAreaId)
-        this.$store.commit('changeEditArea', editAreaId)
-      }
+    clicked () {
+      this.bannerId = 2
+    },
+    changeEditArea (editAreaId) {
+      window.console.log(editAreaId)
+      this.$store.commit('changeEditArea', editAreaId)
+    },
   },
   computed: {
     ...mapState({
+        editAreaId: state => state.editAreaId,
         backgroundLongImg: state => state.backgroundLongImg,
         fixedFloatingWindow: state => state.fixedFloatingWindow,
         floatText: state => state.floatText,
-        editAreaId: state => state.editAreaId
+        subtitle: state => state.subtitle,
+        fixedBanner: state => state.fixedBanner,
+        slideBanner: state => state.slideBanner,
+        adAreaMid: state => state.adAreaMid,
+        adAreaBottm: state => state.adAreaBottm,
+        fiveBanners: state => state.fiveBanners,
     }),
 
     backgroundLongImgStyle () {
@@ -74,6 +83,58 @@ export default {
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
       }
+    },
+
+    subtitleStyle () {
+      return {
+        backgroundImage: 'url(' + this.subtitle.backgroundImgUrlRel + ')',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
+    },
+
+    fixedBannerStyle () {
+      return {
+        backgroundImage: 'url(' + this.fixedBanner.backgroundImgUrlRel + ')',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
+    },
+
+    slideBannerTitleStyle () {
+      return {
+        backgroundImage: 'url(' + this.slideBanner.backgroundImgUrlRel + ')',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
+    },
+
+    subregionTitleMidStyle () {
+      return {
+        backgroundImage: 'url(' + this.adAreaMid.backgroundImgUrlRel + ')',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
+    },
+
+    subregionTitleBottomStyle () {
+      return {
+        backgroundImage: 'url(' + this.adAreaBottm.backgroundImgUrlRel + ')',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
+    },
+
+    bannerBackgroundImgStyle() {
+      return {}
+      // if (!this.fiveBanners[n].banner) {
+      //   return {}
+      // }
+      // return {
+      //   backgroundImage: 'url(' + this.fiveBanners[n].banner.backgroundImgUrlRel + ')',
+      //   backgroundSize: 'contain',
+      //   backgroundRepeat: 'no-repeat',
+      // }
     }
   }
 }
@@ -82,6 +143,7 @@ export default {
 <style scoped lang="stylus">
   .selected
     border solid 2px #007d71
+
   #background-long-img
     position relative
     width 375px
@@ -91,10 +153,10 @@ export default {
   #float-text
     position absolute
     top 60px
-    left 0
+    left 1px
     width 77px
     height 30px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
 
   #fixed-float-window
     position absolute
@@ -102,7 +164,7 @@ export default {
     left 285px
     width 83px
     height 75px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
 
   #subtitle
     position absolute
@@ -110,7 +172,7 @@ export default {
     left 53px
     width 270px
     height 30px
-    border solid 2px grey  
+    box-shadow 0px 0px 0px 0.1rem grey  
 
   #subregion-title-top
     position absolute
@@ -118,7 +180,7 @@ export default {
     left 128px
     width 120px
     height 30px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
 
   #slide-banner
     position absolute
@@ -126,86 +188,94 @@ export default {
     left 18px
     width 339px
     height 81px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
 
   #subregion-title-mid
     position absolute
     top 561px
     left 128px
     width 120px
-    height 50px
-    border solid 2px grey
+    height 55px
+    box-shadow 0px 0px 0px 0.1rem grey
+    display flex
+    flex-direction column
   
-  #banner-title-mid1
+  .subregion-title
+    flex 6 0 auto
+
+  .subregion-sub-title
+    flex 5 0 auto
+
+  #banner-title-1
     position absolute
     top 656px
     left 43px
     width 150px
     height 19px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #banner-subtitle-mid1
+  #banner-subtitle-1
     position absolute
     top 678px
     left 43px
     width 75px
     height 15px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #guide-icon-mid1
+  #guide-icon-1
     position absolute
     top 657px
     left 241px
     width 94px
     height 30px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #banner-background-img-mid1
+  #banner-background-img-1
     position absolute
     top 633px
     left 28px
     width 319px
     height 80px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 1
 
-  #banner-title-mid2
+  #banner-title-2
     position absolute
     top 743px
     left 43px
     width 150px
     height 19px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #banner-subtitle-mid2
+  #banner-subtitle-2
     position absolute
     top 765px
     left 43px
     width 75px
     height 15px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #guide-icon-mid2
+  #guide-icon-2
     position absolute
     top 744px
     left 241px
     width 94px
     height 30px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #banner-background-img-mid2
+  #banner-background-img-2
     position absolute
     top 720px
     left 28px
     width 319px
     height 80px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 1
 
   #subregion-title-bottom
@@ -213,124 +283,126 @@ export default {
     top 836px
     left 128px
     width 120px
-    height 50px
-    border solid 2px grey
+    height 55px
+    box-shadow 0px 0px 0px 0.1rem grey
+    display flex
+    flex-direction column
 
-  #banner-title-bottom1
+  #banner-title-3
     position absolute
     top 914px
     left 28px
     width 125px
     height 25px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #banner-subtitle-bottom1
+  #banner-subtitle-3
     position absolute
     top 943px
     left 28px
     width 125px
     height 25px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #guide-icon-bottom1
+  #guide-icon-3
     position absolute
     top 926px
     left 244px
     width 94px
     height 30px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #banner-background-img-bottom1
+  #banner-background-img-3
     position absolute
     top 907px
     left 28px
     width 319px
     height 70px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 1
 
-  #banner-title-bottom2
+  #banner-title-4
     position absolute
     top 992px
     left 28px
     width 125px
     height 25px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #banner-subtitle-bottom2
+  #banner-subtitle-4
     position absolute
     top 1021px
     left 28px
     width 125px
     height 25px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #guide-icon-bottom2
+  #guide-icon-4
     position absolute
     top 1004px
     left 244px
     width 94px
     height 30px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #banner-background-img-bottom2
+  #banner-background-img-4
     position absolute
     top 985px
     left 28px
     width 319px
     height 70px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 1
 
-  #banner-title-bottom3
+  #banner-title-5
     position absolute
     top 1070px
     left 28px
     width 125px
     height 25px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #banner-subtitle-bottom3
+  #banner-subtitle-5
     position absolute
     top 1099px
     left 28px
     width 125px
     height 25px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #guide-icon-bottom3
+  #guide-icon-5
     position absolute
     top 1082px
     left 244px
     width 94px
     height 30px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 2
 
-  #banner-background-img-bottom3
+  #banner-background-img-5
     position absolute
     top 1063px
     left 28px
     width 319px
     height 70px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 1
 
   #bottom-state
     position absolute
-    top 1293px
-    left 0
-    width 375px
+    top 1292px
+    left 1px
+    width 374px
     height 35px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
 
   #fixed-banner
     position absolute
@@ -338,6 +410,6 @@ export default {
     left 28px
     width 319px
     height 70px
-    border solid 2px grey
+    box-shadow 0px 0px 0px 0.1rem grey
     z-index 1 
 </style>
