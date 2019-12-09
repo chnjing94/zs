@@ -106,8 +106,8 @@ var pageLog = {
             widgetNo: target.getAttribute("widgetNo"),
             widgetNoForOut: target.getAttribute("widgetNoForOut")
         }
-        var mPageObj = logUtils.getMPageCode(attrbutes.url);
-        var actPrdCode = logUtils.getActPrdCode(attrbutes.url);
+        var mPageObj = pageLog.logUtils.getMPageCode(attrbutes.url);
+        var actPrdCode = pageLog.logUtils.getActPrdCode(attrbutes.url);
         var logParams = {};
         logParams = {
             WidgetName: attrbutes.widgetName,
