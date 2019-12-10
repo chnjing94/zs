@@ -1,11 +1,15 @@
 <template>
   <div id="background-long-img" :style="backgroundLongImgStyle" @click="changeEditArea('BackgroundLongImg')">
     <div id="fixed-float-window" @click.stop="changeEditArea('FixedFloatWindow')" :style="fixedFloatWindowStyle"></div>
-    <div id="float-text" @click.stop="changeEditArea('FloatText')" :style="floatTextStyle"></div>
+    <div id="float-text" @click.stop="changeEditArea('FloatText')" >
+      <div v-if="floatText.show" :style="floatTextStyle" class="float-text-content text-content">{{floatText.text}}</div>
+    </div>
 
-    <div id="subtitle" @click.stop="changeEditArea('Subtitle')" :style="subtitleStyle"></div>
+    <div id="subtitle" class="text-content" @click.stop="changeEditArea('Subtitle')" :style="subtitleStyle">
+      {{subtitle.text}}
+    </div>
 
-    <div id="subregion-title-top" @click.stop="changeEditArea('SubregionTitleTop')" :style="slideBannerTitleStyle"></div>
+    <div id="subregion-title-top" class="text-content" @click.stop="changeEditArea('SubregionTitleTop')" :style="slideBannerTitleStyle">{{slideBanner.title}}</div>
     <div id="slide-banner" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerStyle" ></div>
     <div id="slide-banner-guide-icon" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerGuideIconStyle"></div>
 
@@ -71,6 +75,15 @@ export default {
       window.console.log(editAreaId)
       this.$store.commit('changeEditArea', editAreaId)
     },
+    hexOpacity2rgba (color, opacity) {
+      let colorChange = [];
+      for (var i = 1; i < 7; i += 2) {
+        colorChange.push(parseInt("0x" + color.slice(i, i + 2)));
+      }
+      let alph = 1 - opacity / 100
+      colorChange.push(alph)
+      return "rgba(" + colorChange.join(',') + ')'
+    }
   },
   computed: {
     ...mapState({
@@ -104,19 +117,35 @@ export default {
     },
 
     floatTextStyle () {
-      return {
-        backgroundImage: 'url(' + this.floatText.backgroundImgUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
+      let style = {}
+      if (this.floatText.backgroundImgUrlRel){
+        style = {
+          backgroundImage: 'url(' + this.floatText.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
+      } else if (this.floatText.backgroundColor){
+        style = {
+          backgroundColor: this.hexOpacity2rgba(this.floatText.backgroundColor, this.floatText.backgroundOpacity)
+        }
       }
+      return {...style, ...{color: this.floatText.fontColor, fontSize: this.floatText.fontSize+'px'}}
     },
 
     subtitleStyle () {
-      return {
-        backgroundImage: 'url(' + this.subtitle.backgroundImgUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
+      let style = {}
+      if (this.subtitle.backgroundImgUrlRel){
+        style = {
+          backgroundImage: 'url(' + this.subtitle.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
+      } else if (this.subtitle.backgroundColor){
+        style = {
+          backgroundColor: this.hexOpacity2rgba(this.subtitle.backgroundColor, this.subtitle.backgroundOpacity)
+        }
       }
+      return {...style, ...{color: this.subtitle.fontColor, fontSize: this.subtitle.fontSize+'px'}}
     },
 
     fixedBannerStyle () {
@@ -128,11 +157,19 @@ export default {
     },
 
     slideBannerTitleStyle () {
-      return {
-        backgroundImage: 'url(' + this.slideBanner.backgroundImgUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
+      let style = {}
+      if (this.slideBanner.backgroundImgUrlRel){
+        style = {
+          backgroundImage: 'url(' + this.slideBanner.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
+      } else if (this.slideBanner.backgroundColor){
+        style = {
+          backgroundColor: this.hexOpacity2rgba(this.slideBanner.backgroundColor, this.slideBanner.backgroundOpacity)
+        }
       }
+      return {...style, ...{color: this.slideBanner.fontColor, fontSize: this.slideBanner.fontSize+'px'}}
     },
 
     subregionTitleMidStyle () {
@@ -153,11 +190,19 @@ export default {
 
     slideBannerStyle () {
       const banner = this.slideBanner.banners[this.currentBannerIndex]
-      return {
-        backgroundImage: banner ? 'url(' + banner.backgroundImgUrlRel + ')' : '',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
+      let style = {}
+      if (banner.backgroundImgUrlRel){
+        style = {
+          backgroundImage: 'url(' + banner.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
+      } else if (banner.backgroundColor){
+        style = {
+          backgroundColor: this.hexOpacity2rgba(banner.backgroundColor, banner.backgroundOpacity)
+        }
       }
+      return style
     },
 
     slideBannerGuideIconStyle () {
@@ -189,6 +234,17 @@ export default {
     width 77px
     height 30px
     box-shadow 0px 0px 0px 0.1rem grey
+  .float-text-content
+    height 100%
+    width 100%
+  
+  .text-content
+    display flex
+    align-items center
+    justify-content center
+    overflow hidden
+    text-overflow clip
+    white-space nowrap
 
   #fixed-float-window
     position absolute
@@ -204,7 +260,8 @@ export default {
     left 53px
     width 270px
     height 30px
-    box-shadow 0px 0px 0px 0.1rem grey  
+    box-shadow 0px 0px 0px 0.1rem grey
+    
 
   #subregion-title-top
     position absolute

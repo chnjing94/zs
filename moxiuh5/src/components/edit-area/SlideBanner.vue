@@ -111,8 +111,6 @@ export default {
         payload: { guideIconUrlRel: res.data.RelativePath },
         n: index
       })
-      this.$store.commit('setCurrentBannerIndex', -1 )
-      this.$store.commit('setCurrentBannerIndex', index )
     },
     uploadImageSuccess (res) {
       const index = this.currentBannerIndex
@@ -122,8 +120,6 @@ export default {
         payload: { backgroundImgUrlRel: res.data.RelativePath },
         n: index
       })
-      this.$store.commit('setCurrentBannerIndex', -1 )
-      this.$store.commit('setCurrentBannerIndex', index )
     },
     commit (payload) {
       this.$store.commit('changeSlideBanner', payload )
@@ -150,9 +146,6 @@ export default {
       })
     },
     deleteBanner (index) {
-      if (this.banners.length === 1) {
-        return
-      }
       this.deleteIndex = index
       setTimeout(()=>{
         this.banners.splice(index, 1)
@@ -160,6 +153,9 @@ export default {
         this.currentBannerIndex = 0
         this.$store.commit('deleteSlideBanner', index )
         this.$store.commit('setCurrentBannerIndex', 0 )
+        if (this.banners.length === 0) {
+          this.addBanner()
+        }
       }, 600)
 
     },

@@ -8,7 +8,9 @@ export default new Vuex.Store({
     currentBannerIndex: 0,
     backgroundLongImg: {},
     fixedFloatingWindow: {},
-    floatText: {},
+    floatText: {
+      text: '领导寄语'
+    },
     floatWindow: {},
     subtitle: {},
     fixedBanner: {},
@@ -109,7 +111,7 @@ export default new Vuex.Store({
     },
 
     changeSlideBanner (state, data) {
-      state.slideBanner.banners[data.n] = {...state.slideBanner.banners[data.n], ...data.payload}
+      Vue.set(state.slideBanner.banners, data.n, {...state.slideBanner.banners[data.n], ...data.payload})
     },
 
     deleteSlideBanner (state, data) {
