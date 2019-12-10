@@ -107,20 +107,24 @@
         "backgroundImgUrl": "标题.png",
         "backgroundImgUrlRel": "",
         "fontColor": "black",
+        "fontSize": 16,
         "backgroundColor": "",
         "backgroundOpacity": 1,
         "subtitle": "你想要的我都有",
-        "subtitleFontColor": ""
+        "subtitleFontColor": "",
+        "subtitleFontSize": 13
     },
     "adAreaBottm": {
         "title": "薪享理财",
         "backgroundImgUrl": "标题.png",
         "backgroundImgUrlRel": "",
         "fontColor": "black",
+        "fontSize": 16,
         "backgroundColor": "",
         "backgroundOpacity": 1,
         "subtitle": "工资卡专享，限时抢购！",
-        "subtitleFontColor": "black"
+        "subtitleFontColor": "black",
+        "subtitleFontSize": 13
     },
     "fiveBanners": {
         "ad1": {

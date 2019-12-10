@@ -45,10 +45,12 @@ export default {
       backgroundImgUrl: '',
       backgroundImgUrlRel: '',
       fontColor: "#000000",
+      fontSize: 16,
       backgroundColor: '',
       backgroundOpacity: 0,
       subtitle: '',
       subtitleFontColor: '#000000',
+      subtitleFontSize: 13
     }
   },
   watch: {
@@ -58,8 +60,8 @@ export default {
   },
   computed: {
     output () {
-      const { title, backgroundImgUrl, backgroundImgUrlRel, fontColor, backgroundColor, backgroundOpacity, subtitle, subtitleFontColor } = this
-      return { title, backgroundImgUrl, backgroundImgUrlRel, fontColor, backgroundColor, backgroundOpacity, subtitle, subtitleFontColor }
+      const { title, backgroundImgUrl, backgroundImgUrlRel, fontColor, fontSize, backgroundColor, backgroundOpacity, subtitle, subtitleFontColor, subtitleFontSize } = this
+      return { title, backgroundImgUrl, backgroundImgUrlRel, fontColor, fontSize, backgroundColor, backgroundOpacity, subtitle, subtitleFontColor, subtitleFontSize }
     },
   },
   methods: {
@@ -88,10 +90,12 @@ export default {
       this.backgroundImgUrl = '',
       this.backgroundImgUrlRel = '',
       this.fontColor = "#000000",
+      this.fontSize = 16,
       this.backgroundColor = '',
       this.backgroundOpacity = 0,
       this.subtitle = '',
-      this.subtitleFontColor = '#000000'
+      this.subtitleFontColor = '#000000',
+      this.subtitleFontSize = 13
     },
     rerender () {
       this.refresh= false

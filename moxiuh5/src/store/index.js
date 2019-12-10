@@ -47,6 +47,15 @@ export default new Vuex.Store({
         subtitle: {}
       }
     },
+    hexOpacity2rgba: (color, opacity) => {
+      let colorChange = [];
+      for (var i = 1; i < 7; i += 2) {
+        colorChange.push(parseInt("0x" + color.slice(i, i + 2)));
+      }
+      let alph = 1 - opacity / 100
+      colorChange.push(alph)
+      return "rgba(" + colorChange.join(',') + ')'
+    },
   },
 
   mutations: {
@@ -122,4 +131,213 @@ export default new Vuex.Store({
       state.currentBannerIndex = data
     }
   },
+
+  getters: {
+    floatTextStyle: state => {
+      let style = {}
+      if (state.floatText.backgroundImgUrlRel){
+        style = {
+          backgroundImage: 'url(' + state.floatText.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
+      } else if (state.floatText.backgroundColor){
+        style = {
+          backgroundColor: state.hexOpacity2rgba(state.floatText.backgroundColor, state.floatText.backgroundOpacity)
+        }
+      }
+      return {...style, ...{color: state.floatText.fontColor, fontSize: state.floatText.fontSize+'px'}}
+    },
+
+    slideBannerTitleStyle: state => {
+      const banner  = state.slideBanner.banners[state.currentBannerIndex]
+      if (banner) {
+        return {color: banner.fontColor, fontSize: banner.titleFontSize + 'px' }
+      }
+    },
+    
+    slideBannerSubtitleStyle: state => {
+      const banner  = state.slideBanner.banners[state.currentBannerIndex]
+      if (banner) {
+        return {color: banner.subtitleFontColor, fontSize: banner.subtitleFontSize + 'px' }
+      }
+    },
+
+    slideBannerGuideIconStyle: state => {
+      const banner = state.slideBanner.banners[state.currentBannerIndex]
+      return {
+        backgroundImage: banner ? 'url(' + banner.guideIconUrlRel + ')' : '',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
+    },
+
+    slideBannerStyle: state => {
+      const banner = state.slideBanner.banners[state.currentBannerIndex]
+      let style = {}
+      if (banner && banner.backgroundImgUrlRel){
+        style = {
+          backgroundImage: 'url(' + banner.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
+      } else if (banner && banner.backgroundColor){
+        style = {
+          backgroundColor: state.hexOpacity2rgba(banner.backgroundColor, banner.backgroundOpacity)
+        }
+      }
+      return style
+    },
+
+    slideBannerTopStyle: state => {
+      let style = {}
+      if (state.slideBanner.backgroundImgUrlRel){
+        style = {
+          backgroundImage: 'url(' + state.slideBanner.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
+      } else if (state.slideBanner.backgroundColor){
+        style = {
+          backgroundColor: state.hexOpacity2rgba(state.slideBanner.backgroundColor, state.slideBanner.backgroundOpacity)
+        }
+      }
+      return {...style, ...{color: state.slideBanner.fontColor, fontSize: state.slideBanner.fontSize+'px'}}
+    },
+
+    subtitleStyle: state => {
+      let style = {}
+      if (state.subtitle.backgroundImgUrlRel){
+        style = {
+          backgroundImage: 'url(' + state.subtitle.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
+      } else if (state.subtitle.backgroundColor){
+        style = {
+          backgroundColor: state.hexOpacity2rgba(state.subtitle.backgroundColor, state.subtitle.backgroundOpacity)
+        }
+      }
+      return {...style, ...{color: state.subtitle.fontColor, fontSize: state.subtitle.fontSize+'px'}}
+    },
+
+    backgroundLongImgStyle: state => {
+      return {
+        backgroundImage: 'url(' + state.backgroundLongImg.backgroundImgUrlRel + ')',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
+    },
+
+    fixedFloatWindowStyle: state => {
+      return {
+        backgroundImage: 'url(' + state.fixedFloatingWindow.backgroundImgUrlRel + ')',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
+    },
+
+    fixedBannerStyle: state => {
+      return {
+        backgroundImage: 'url(' + state.fixedBanner.backgroundImgUrlRel + ')',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
+    },
+
+    subregionTitleMidStyle: state => {
+      let style = {}
+      if (state.adAreaMid.backgroundImgUrlRel){
+        style = {
+          backgroundImage: 'url(' + state.adAreaMid.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
+      } else if (state.adAreaMid.backgroundColor){
+        style = {
+          backgroundColor: state.hexOpacity2rgba(state.adAreaMid.backgroundColor, state.adAreaMid.backgroundOpacity)
+        }
+      }
+      return {...style, ...{color: state.adAreaMid.fontColor, fontSize: state.adAreaMid.fontSize+'px'}}
+    },
+
+    subregionTitleBottomStyle: state => {
+      let style = {}
+      if (state.adAreaBottm.backgroundImgUrlRel){
+        style = {
+          backgroundImage: 'url(' + state.adAreaBottm.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
+      } else if (state.adAreaBottm.backgroundColor){
+        style = {
+          backgroundColor: state.hexOpacity2rgba(state.adAreaBottm.backgroundColor, state.adAreaBottm.backgroundOpacity)
+        }
+      }
+      return {...style, ...{color: state.adAreaBottm.fontColor, fontSize: state.adAreaBottm.fontSize+'px'}}
+    },
+
+    bannerBackgroundImgStyle: (state) => (n) => {
+      const banner  = state.fiveBanners['ad'+n].banner
+      let style = {}
+      if (banner.backgroundImgUrlRel){
+        style = {
+          backgroundImage: 'url(' + banner.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
+      } else if (banner.backgroundColor){
+        style = {
+          backgroundColor: state.hexOpacity2rgba(banner.backgroundColor, banner.backgroundOpacity)
+        }
+      }
+      return style
+    },
+
+    bannerGuideIconStyle: (state) => (n) => {
+      return {
+        backgroundImage: 'url(' + state.fiveBanners['ad'+n].guideIconUrlRel + ')',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+      }
+    },
+
+    bannerSubtitleStyle: (state) => (n) => {
+      return {
+        color: state.fiveBanners['ad'+n].subtitle.fontColor,
+        fontSize: state.fiveBanners['ad'+n].subtitle.fontSize + 'px'
+      }
+    },
+
+    getSlideBannerTitle: (state) => {
+      if (state.slideBanner.banners[state.currentBannerIndex]) {
+        return state.slideBanner.banners[state.currentBannerIndex].title
+      }
+      return ''
+    },
+
+    getSlideBannerSubtitle: (state) => {
+      if (state.slideBanner.banners[state.currentBannerIndex]) {
+        return state.slideBanner.banners[state.currentBannerIndex].subtitle
+      }
+      return ''
+    },
+
+    bannerTitleStyle: (state) => (n) => {
+      const title  = state.fiveBanners['ad'+n].title
+      let style = {}
+      if (title.backgroundImgUrlRel){
+        style = {
+          backgroundImage: 'url(' + title.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
+      } else if (title.backgroundColor){
+        style = {
+          backgroundColor: state.hexOpacity2rgba(title.backgroundColor, title.backgroundOpacity)
+        }
+      }
+      return {...style, ...{color: title.fontColor, fontSize: title.fontSize+'px'}}
+    },
+  }
 })

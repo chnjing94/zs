@@ -155,6 +155,7 @@ export default {
         this.$store.commit('setCurrentBannerIndex', 0 )
         if (this.banners.length === 0) {
           this.addBanner()
+          this.rerender()
         }
       }, 600)
 
@@ -164,12 +165,14 @@ export default {
       this.$store.commit('setCurrentBannerIndex', index )
     },
     confirm () {
-      this.banners.forEach((banner,index) => {
-        this.commit({
-          payload: banner,
-          n: index
+      if (this.validated) {
+        this.banners.forEach((banner,index) => {
+          this.commit({
+            payload: banner,
+            n: index
+          })
         })
-      })
+      }
       this.showValidationMsg = true
       this.editing = false
     },

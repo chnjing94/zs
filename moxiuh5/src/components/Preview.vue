@@ -9,33 +9,35 @@
       {{subtitle.text}}
     </div>
 
-    <div id="subregion-title-top" class="text-content" @click.stop="changeEditArea('SubregionTitleTop')" :style="slideBannerTitleStyle">{{slideBanner.title}}</div>
+    <div id="subregion-title-top" class="text-content" @click.stop="changeEditArea('SubregionTitleTop')" :style="slideBannerTopStyle">{{slideBanner.title}}</div>
     <div id="slide-banner" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerStyle" ></div>
+    <div id="slide-banner-title"  @click.stop="changeEditArea('SlideBanner')" :style="slideBannerTitleStyle">{{getSlideBannerTitle}}</div>
+    <div id="slide-banner-subtitle" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerSubtitleStyle">{{getSlideBannerSubtitle}}</div>
     <div id="slide-banner-guide-icon" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerGuideIconStyle"></div>
 
     <div id="subregion-title-mid" @click.stop="changeEditArea('SubregionTitleMid')">
-      <div class="subregion-title" :style="subregionTitleMidStyle"></div>
-      <div class="subregion-sub-title"></div>
+      <div class="subregion-title text-content" :style="subregionTitleMidStyle">{{adAreaMid.title}}</div>
+      <div class="subregion-sub-title text-content" :style="{color: adAreaMid.subtitleFontColor, fontSize: adAreaMid.subtitleFontSize+'px'}">{{adAreaMid.subtitle}}</div>
     </div>
     <div id="subregion-title-bottom" @click.stop="changeEditArea('SubregionTitleBottom')">
-      <div class="subregion-title" :style="subregionTitleBottomStyle"></div>
-      <div class="subregion-sub-title"></div>
+      <div class="subregion-title text-content" :style="subregionTitleBottomStyle">{{adAreaBottm.title}}</div>
+      <div class="subregion-sub-title text-content" :style="{color: adAreaBottm.subtitleFontColor, fontSize: adAreaBottm.subtitleFontSize+'px'}">{{adAreaBottm.subtitle}}</div>
     </div>
 
     <div v-for="n in [1,2,3,4,5]" :key="'banner'+n">
-      <div :id="'banner-title-'+n" @click.stop="changeEditArea('BannerTitle'+n)" :style="bannerTitleStyle(n)"></div>
-      <div :id="'banner-subtitle-'+n" @click.stop="changeEditArea('BannerSubtitle'+n)" :style="bannerSubtitleStyle(n)"></div>
+      <div :id="'banner-title-'+n" class="text-content-left" @click.stop="changeEditArea('BannerTitle'+n)" :style="bannerTitleStyle(n)">{{fiveBanners['ad'+n].title.text}}</div>
+      <div :id="'banner-subtitle-'+n" class="text-content-left" @click.stop="changeEditArea('BannerSubtitle'+n)" :style="bannerSubtitleStyle(n)">{{fiveBanners['ad'+n].subtitle.text}}</div>
       <div :id="'guide-icon-'+n" @click.stop="changeEditArea('GuideIcon'+n)" :style="bannerGuideIconStyle(n)"></div>
       <div :id="'banner-background-img-'+n" @click.stop="changeEditArea('BannerBackgroundImg'+n)" :style="bannerBackgroundImgStyle(n)"></div>
     </div>
 
     <div id="fixed-banner" @click.stop="changeEditArea('FixedBanner')" :style="fixedBannerStyle"></div>
-    <div id="bottom-state" @click.stop="changeEditArea('BottomState')"></div>
+    <div id="bottom-state" class="text-content" @click.stop="changeEditArea('BottomState')" :style="{color: footText.fontColor, fontSize: footText.fontSize+'px'}">{{footText.text}}</div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Preview',
@@ -44,46 +46,9 @@ export default {
     }
   },
   methods: {
-    bannerBackgroundImgStyle (n) {
-      return {
-        backgroundImage: 'url(' + this.fiveBanners['ad'+n].banner.backgroundImgUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-      }
-    },
-    bannerTitleStyle (n) {
-      return {
-        backgroundImage: 'url(' + this.fiveBanners['ad'+n].title.backgroundImgUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-      }
-    },
-    bannerSubtitleStyle (n) {
-      return {
-        color: this.fiveBanners['ad'+n].subtitle.fontColor,
-        fontSize: this.fiveBanners['ad'+n].subtitle.fontSize + 'px'
-      }
-    },
-    bannerGuideIconStyle (n) {
-      return {
-        backgroundImage: 'url(' + this.fiveBanners['ad'+n].guideIconUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-      }
-    },
     changeEditArea (editAreaId) {
-      window.console.log(editAreaId)
       this.$store.commit('changeEditArea', editAreaId)
     },
-    hexOpacity2rgba (color, opacity) {
-      let colorChange = [];
-      for (var i = 1; i < 7; i += 2) {
-        colorChange.push(parseInt("0x" + color.slice(i, i + 2)));
-      }
-      let alph = 1 - opacity / 100
-      colorChange.push(alph)
-      return "rgba(" + colorChange.join(',') + ')'
-    }
   },
   computed: {
     ...mapState({
@@ -98,121 +63,28 @@ export default {
       adAreaMid: state => state.adAreaMid,
       adAreaBottm: state => state.adAreaBottm,
       fiveBanners: state => state.fiveBanners,
+      footText: state => state.footText,
     }),
-
-    backgroundLongImgStyle () {
-      return {
-        backgroundImage: 'url(' + this.backgroundLongImg.backgroundImgUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-      }
-    },
-
-    fixedFloatWindowStyle () {
-      return {
-        backgroundImage: 'url(' + this.fixedFloatingWindow.backgroundImgUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-      }
-    },
-
-    floatTextStyle () {
-      let style = {}
-      if (this.floatText.backgroundImgUrlRel){
-        style = {
-          backgroundImage: 'url(' + this.floatText.backgroundImgUrlRel + ')',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-        }
-      } else if (this.floatText.backgroundColor){
-        style = {
-          backgroundColor: this.hexOpacity2rgba(this.floatText.backgroundColor, this.floatText.backgroundOpacity)
-        }
-      }
-      return {...style, ...{color: this.floatText.fontColor, fontSize: this.floatText.fontSize+'px'}}
-    },
-
-    subtitleStyle () {
-      let style = {}
-      if (this.subtitle.backgroundImgUrlRel){
-        style = {
-          backgroundImage: 'url(' + this.subtitle.backgroundImgUrlRel + ')',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-        }
-      } else if (this.subtitle.backgroundColor){
-        style = {
-          backgroundColor: this.hexOpacity2rgba(this.subtitle.backgroundColor, this.subtitle.backgroundOpacity)
-        }
-      }
-      return {...style, ...{color: this.subtitle.fontColor, fontSize: this.subtitle.fontSize+'px'}}
-    },
-
-    fixedBannerStyle () {
-      return {
-        backgroundImage: 'url(' + this.fixedBanner.backgroundImgUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-      }
-    },
-
-    slideBannerTitleStyle () {
-      let style = {}
-      if (this.slideBanner.backgroundImgUrlRel){
-        style = {
-          backgroundImage: 'url(' + this.slideBanner.backgroundImgUrlRel + ')',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-        }
-      } else if (this.slideBanner.backgroundColor){
-        style = {
-          backgroundColor: this.hexOpacity2rgba(this.slideBanner.backgroundColor, this.slideBanner.backgroundOpacity)
-        }
-      }
-      return {...style, ...{color: this.slideBanner.fontColor, fontSize: this.slideBanner.fontSize+'px'}}
-    },
-
-    subregionTitleMidStyle () {
-      return {
-        backgroundImage: 'url(' + this.adAreaMid.backgroundImgUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-      }
-    },
-
-    subregionTitleBottomStyle () {
-      return {
-        backgroundImage: 'url(' + this.adAreaBottm.backgroundImgUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-      }
-    },
-
-    slideBannerStyle () {
-      const banner = this.slideBanner.banners[this.currentBannerIndex]
-      let style = {}
-      if (banner.backgroundImgUrlRel){
-        style = {
-          backgroundImage: 'url(' + banner.backgroundImgUrlRel + ')',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-        }
-      } else if (banner.backgroundColor){
-        style = {
-          backgroundColor: this.hexOpacity2rgba(banner.backgroundColor, banner.backgroundOpacity)
-        }
-      }
-      return style
-    },
-
-    slideBannerGuideIconStyle () {
-      const banner = this.slideBanner.banners[this.currentBannerIndex]
-      return {
-        backgroundImage: banner ? 'url(' + banner.guideIconUrlRel + ')' : '',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-      }
-    }
+    ...mapGetters([
+      'floatTextStyle',
+      'slideBannerTitleStyle',
+      'slideBannerSubtitleStyle',
+      'slideBannerGuideIconStyle',
+      'slideBannerStyle',
+      'slideBannerTopStyle',
+      'subtitleStyle',
+      'backgroundLongImgStyle',
+      'fixedFloatWindowStyle',
+      'fixedBannerStyle',
+      'subregionTitleMidStyle',
+      'subregionTitleBottomStyle',
+      'bannerBackgroundImgStyle',
+      'bannerGuideIconStyle',
+      'bannerSubtitleStyle',
+      'getSlideBannerTitle',
+      'getSlideBannerSubtitle',
+      'bannerTitleStyle'
+    ]),
   }
 }
 </script>
@@ -246,6 +118,13 @@ export default {
     text-overflow clip
     white-space nowrap
 
+  .text-content-left
+    display flex
+    align-items center
+    overflow hidden
+    text-overflow clip
+    white-space nowrap
+
   #fixed-float-window
     position absolute
     top 18px
@@ -261,7 +140,6 @@ export default {
     width 270px
     height 30px
     box-shadow 0px 0px 0px 0.1rem grey
-    
 
   #subregion-title-top
     position absolute
@@ -279,6 +157,24 @@ export default {
     height 81px
     box-shadow 0px 0px 0px 0.1rem grey
     z-index 1
+  #slide-banner-title
+    position absolute
+    top 483px
+    left 107px
+    width 170px
+    height 15px
+    z-index 2
+    display flex
+    align-items center
+  #slide-banner-subtitle
+    position absolute
+    top 500px
+    left 107px
+    width 170px
+    height 12px
+    z-index 2
+    display flex
+    align-items center
   #slide-banner-guide-icon
     position absolute
     top 465px

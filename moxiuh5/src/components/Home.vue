@@ -65,7 +65,7 @@ main {
 
 #right-panel {
   flex: 1 0 auto;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 footer {
