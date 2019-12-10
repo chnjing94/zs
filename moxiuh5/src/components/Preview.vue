@@ -52,13 +52,9 @@ export default {
   },
   computed: {
     ...mapState({
-      currentBannerIndex: state => state.currentBannerIndex,
       editAreaId: state => state.editAreaId,
-      backgroundLongImg: state => state.backgroundLongImg,
-      fixedFloatingWindow: state => state.fixedFloatingWindow,
       floatText: state => state.floatText,
       subtitle: state => state.subtitle,
-      fixedBanner: state => state.fixedBanner,
       slideBanner: state => state.slideBanner,
       adAreaMid: state => state.adAreaMid,
       adAreaBottm: state => state.adAreaBottm,
