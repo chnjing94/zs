@@ -18,6 +18,7 @@ import FontSize from '../form-item/FontSize'
 import FontColor from '../form-item/FontColor'
 import ImageUploader from '../form-item/ImageUploader'
 import BackgroundColor from '../form-item/BackgroundColor'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Subtitle',
@@ -48,9 +49,18 @@ export default {
   watch: {
     output () {
       this.editing = true
+    },
+    dataLoaded () {
+      if (this.dataLoaded) {
+        this.reset(this.subtitle)
+      }
     }
   },
   computed: {
+    ...mapState({
+      dataLoaded: state => state.dataLoaded,
+      subtitle: state => state.subtitle,
+    }),
     output () {
       const { backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor } = this
       return { backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor }
@@ -77,14 +87,14 @@ export default {
       this.showValidationMsg = false
       this.editing = false
     },
-    reset () {
-      this.backgroundImgUrl = '',
-      this.backgroundImgUrlRel = '',
-      this.backgroundColor = '',
-      this.backgroundOpacity = 0,
-      this.text = '',
-      this.fontSize = 24,
-      this.fontColor = '#000000'
+    reset (data) {
+      this.backgroundImgUrl = data ? data.backgroundImgUrl : '',
+      this.backgroundImgUrlRel = data ? data.backgroundImgUrlRel : '',
+      this.backgroundColor = data ? data.backgroundColor : '',
+      this.backgroundOpacity = data ? data.backgroundOpacity : 0,
+      this.text = data ? data.text : '',
+      this.fontSize = data ? data.fontSize : 24,
+      this.fontColor = data ? data.fontColor : '#000000'
     },
     rerender () {
       this.refresh= false

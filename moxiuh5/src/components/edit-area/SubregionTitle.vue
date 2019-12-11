@@ -18,6 +18,7 @@ import TextInput from '../form-item/TextInput'
 import FontColor from '../form-item/FontColor'
 import ImageUploader from '../form-item/ImageUploader'
 import BackgroundColor from '../form-item/BackgroundColor'
+import { mapState } from 'vuex'
 
 export default {
   name: 'SubregionTitle',
@@ -56,9 +57,32 @@ export default {
   watch: {
     output () {
       this.editing = true
+    },
+    dataLoaded () {
+      if (this.dataLoaded) {
+        switch(this.subregionId) {
+          case 'SlideBanner':
+            this.reset(this.slideBanner)
+            break
+          case 'AdAreaMid':
+            this.reset(this.adAreaMid)
+            break
+          case 'AdAreaBottm':
+            this.reset(this.adAreaBottm)
+            break
+          default:
+        }
+        
+      }
     }
   },
   computed: {
+    ...mapState({
+      dataLoaded: state => state.dataLoaded,
+      slideBanner: state => state.slideBanner,
+      adAreaMid: state => state.adAreaMid,
+      adAreaBottm: state => state.adAreaBottm
+    }),
     output () {
       const { title, backgroundImgUrl, backgroundImgUrlRel, fontColor, fontSize, backgroundColor, backgroundOpacity, subtitle, subtitleFontColor, subtitleFontSize } = this
       return { title, backgroundImgUrl, backgroundImgUrlRel, fontColor, fontSize, backgroundColor, backgroundOpacity, subtitle, subtitleFontColor, subtitleFontSize }
@@ -85,17 +109,17 @@ export default {
       this.showValidationMsg = false
       this.editing = false
     },
-    reset () {
-      this.title = '',
-      this.backgroundImgUrl = '',
-      this.backgroundImgUrlRel = '',
-      this.fontColor = "#000000",
-      this.fontSize = 16,
-      this.backgroundColor = '',
-      this.backgroundOpacity = 0,
-      this.subtitle = '',
-      this.subtitleFontColor = '#000000',
-      this.subtitleFontSize = 13
+    reset (data) {
+      this.title = data ? data.title : '',
+      this.backgroundImgUrl = data ? data.backgroundImgUrl : '',
+      this.backgroundImgUrlRel = data ? data.backgroundImgUrlRel : '',
+      this.fontColor = data ? data.fontColor : "#000000",
+      this.fontSize = data ? data.fontSize : 16,
+      this.backgroundColor = data ? data.backgroundColor : '',
+      this.backgroundOpacity = data ? data.backgroundOpacity : 0,
+      this.subtitle = data ? data.subtitle : '',
+      this.subtitleFontColor = data ? data.subtitleFontColor : '#000000',
+      this.subtitleFontSize = data ? data.subtitleFontSize : 13
     },
     rerender () {
       this.refresh= false

@@ -53,6 +53,11 @@ export default {
       text: this.value
     }
   },
+  watch: {
+    value () {
+      this.text = this.value
+    }
+  },
   methods: {
     onInputChanged () {
       this.text = this.text.slice(0, this.maxLength)

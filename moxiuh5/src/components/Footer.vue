@@ -1,13 +1,23 @@
 <template>
   <div id="foot-wrapper">
     <div class="button last-step">上一步</div>
-    <div class="button save">保存</div>
+    <div class="button save" @click="save">保存</div>
   </div>
 </template>
 
 <script>
 export default {
     name: 'Footer',
+    methods: {
+      save () {
+        const { backgroundLongImg, fixedFloatingWindow, floatText, floatWindow, subtitle, fixedBanner, footText, slideBanner, adAreaMid, adAreaBottm, fiveBanners} = this.$store.state
+
+        window.parent.postMessage({
+          code:"save",
+          tplObj: { backgroundLongImg, fixedFloatingWindow, floatText, floatWindow, subtitle, fixedBanner, footText, slideBanner, adAreaMid, adAreaBottm, fiveBanners}
+        }, '*');
+      }
+    }
 }
 </script>
 

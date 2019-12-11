@@ -26,6 +26,7 @@ import FontColor from '../form-item/FontColor'
 import ImageUploader from '../form-item/ImageUploader'
 import BackgroundColor from '../form-item/BackgroundColor'
 import ErrorMsg from '../form-item/ErrorMsg'
+import { mapState } from 'vuex'
 
 export default {
   name: 'FloatText',
@@ -60,9 +61,18 @@ export default {
   watch: {
     output () {
       this.editing = true
+    },
+    dataLoaded () {
+      if (this.dataLoaded) {
+        this.reset(this.floatText)
+      }
     }
   },
   computed: {
+    ...mapState({
+      dataLoaded: state => state.dataLoaded,
+      floatText: state => state.floatText,
+    }),
     output () {
       const { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor, show } = this
       return { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor, show }
@@ -105,16 +115,16 @@ export default {
       this.showValidationMsg = false
       this.editing = false
     },
-    reset () {
-      this.componentName = '',
-      this.backgroundImgUrl = '',
-      this.backgroundImgUrlRel = '',
-      this.backgroundColor = '',
-      this.backgroundOpacity = 0,
-      this.text = '领导寄语',
-      this.fontSize = 16,
-      this.fontColor = "#000000",
-      this.show = true
+    reset (data) {
+      this.componentName = data ? data.componentName : '',
+      this.backgroundImgUrl = data ? data.backgroundImgUrl : '',
+      this.backgroundImgUrlRel = data ? data.backgroundImgUrlRel : '',
+      this.backgroundColor = data ? data.backgroundColor : '',
+      this.backgroundOpacity = data ? data.backgroundOpacity : 0,
+      this.text = data ? data.text : '领导寄语',
+      this.fontSize = data ? data.fontSize : 16,
+      this.fontColor = data ? data.fontColor : "#000000",
+      this.show = data ? data.show : true
     },
     rerender () {
       this.refresh= false

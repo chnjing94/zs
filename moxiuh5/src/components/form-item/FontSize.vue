@@ -34,6 +34,11 @@ export default {
     return {
       sizeLocal: this.size
     }
+  },
+  watch: {
+    size () {
+      this.sizeLocal = this.size
+    }
   }
 }
 </script>

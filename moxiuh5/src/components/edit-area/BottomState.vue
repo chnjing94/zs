@@ -14,6 +14,7 @@ import ButtonGroup from '../form-item/ButtonGroup'
 import TextInput from '../form-item/TextInput'
 import FontSize from '../form-item/FontSize'
 import FontColor from '../form-item/FontColor'
+import { mapState } from 'vuex'
 
 export default {
   name: 'BottomState',
@@ -38,9 +39,18 @@ export default {
   watch: {
     output () {
       this.editing = true
+    },
+    dataLoaded () {
+      if (this.dataLoaded) {
+        this.reset(this.footText)
+      }
     }
   },
   computed: {
+    ...mapState({
+      dataLoaded: state => state.dataLoaded,
+      footText: state => state.footText,
+    }),
     output () {
       const { text, fontSize, fontColor } = this
       return { text, fontSize, fontColor }
@@ -62,10 +72,10 @@ export default {
       this.showValidationMsg = false
       this.editing = false
     },
-    reset () {
-      this.text = '',
-      this.fontSize = 16,
-      this.fontColor = '#000000'
+    reset (data) {
+      this.text = data ? data.text : '',
+      this.fontSize = data ? data.fontSize : 16,
+      this.fontColor = data ? data.fontColor : '#000000'
     },
     rerender () {
       this.refresh= false

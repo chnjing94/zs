@@ -14,13 +14,12 @@ export default {
   },
   methods: {
     handleMessage (event) {
-      // const data = event.data.data
-      window.console.log(event)
-      // this.$store.commit('loadData', data)
+      const data = event.data
 
-      // if(data.code === "success"){
-      //     alert(data.test)
-      // }
+      if(data && data.code === "loadData"){
+          window.console.log(data.tplObj)
+          this.$store.commit('loadData', data.tplObj)
+      }
     }
   },
   mounted() {
@@ -50,29 +49,5 @@ export default {
   time, mark, audio, video {
     margin: 0;
     padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-  }
-  /* HTML5 display-role reset for older browsers */
-  article, aside, details, figcaption, figure, 
-  footer, header, hgroup, menu, nav, section {
-    display: block;
-  }
-  ol, ul {
-    list-style: none;
-  }
-  blockquote, q {
-    quotes: none;
-  }
-  blockquote:before, blockquote:after,
-  q:before, q:after {
-    content: '';
-    content: none;
-  }
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
   }
 </style>

@@ -10,6 +10,7 @@
 import Title from '../form-item/Title'
 import ButtonGroup from '../form-item/ButtonGroup'
 import ImageUploader from '../form-item/ImageUploader'
+import { mapState } from 'vuex'
 
 export default {
   name: 'GuideIcon',
@@ -37,9 +38,18 @@ export default {
   watch: {
     output () {
       this.editing = true
+    },
+    dataLoaded () {
+      if (this.dataLoaded) {
+        this.reset(this.fiveBanners[this.bannerId])
+      }
     }
   },
   computed: {
+    ...mapState({
+      dataLoaded: state => state.dataLoaded,
+      fiveBanners: state => state.fiveBanners,
+    }),
     output () {
       const { guideIconUrl, guideIconUrlRel } = this
       return {
@@ -72,9 +82,9 @@ export default {
       this.showValidationMsg = false
       this.editing = false
     },
-    reset () {
-      this.guideIconUrl = '',
-      this.guideIconUrlRel = ''
+    reset (data) {
+      this.guideIconUrl = data ? data.guideIconUrl : '',
+      this.guideIconUrlRel = data ? data.guideIconUrlRel : ''
     },
     rerender () {
       this.refresh= false

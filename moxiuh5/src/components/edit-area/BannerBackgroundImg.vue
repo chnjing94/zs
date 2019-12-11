@@ -22,6 +22,7 @@ import ImageUploader from '../form-item/ImageUploader'
 import BackgroundColor from '../form-item/BackgroundColor'
 import RedictWay from '../form-item/RedictWay'
 import ErrorMsg from '../form-item/ErrorMsg'
+import { mapState } from 'vuex'
 
 export default {
   name: 'BannerBackgroundImg',
@@ -58,9 +59,18 @@ export default {
   watch: {
     output () {
       this.editing = true
+    },
+    dataLoaded () {
+      if (this.dataLoaded) {
+        this.reset(this.fiveBanners[this.bannerId].banner)
+      }
     }
   },
   computed: {
+    ...mapState({
+      dataLoaded: state => state.dataLoaded,
+      fiveBanners: state => state.fiveBanners,
+    }),
     output () {
       const { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, link, way } = this
       return { 
@@ -108,14 +118,14 @@ export default {
       this.showValidationMsg = false
       this.editing = false
     },
-    reset () {
-      this.componentName = '',
-      this.backgroundImgUrl = '',
-      this.backgroundImgUrlRel = '',
-      this.backgroundColor = '',
-      this.backgroundOpacity = 0,
-      this.link = '',
-      this.way = 0
+    reset (data) {
+      this.componentName = data ? data.componentName : '',
+      this.backgroundImgUrl = data ? data.backgroundImgUrl : '',
+      this.backgroundImgUrlRel = data ? data.backgroundImgUrlRel : '',
+      this.backgroundColor = data ? data.backgroundColor : '',
+      this.backgroundOpacity = data ? data.backgroundOpacity : 0,
+      this.link = data ? data.link : '',
+      this.way = data ? data.way : 0
     },
     rerender () {
       this.refresh= false

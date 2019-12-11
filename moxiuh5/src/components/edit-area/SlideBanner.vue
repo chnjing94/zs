@@ -33,6 +33,7 @@ import ImageUploader from '../form-item/ImageUploader'
 import BackgroundColor from '../form-item/BackgroundColor'
 import RedictWay from '../form-item/RedictWay'
 import ErrorMsg from '../form-item/ErrorMsg'
+import { mapState } from 'vuex'
 
 export default {
   name: 'SlideBanner',
@@ -59,9 +60,18 @@ export default {
   watch: {
     output () {
       this.editing = true
+    },
+    dataLoaded () {
+      if (this.dataLoaded) {
+        this.reset(this.slideBanner.banners)
+      }
     }
   },
   computed: {
+    ...mapState({
+      dataLoaded: state => state.dataLoaded,
+      slideBanner: state => state.slideBanner
+    }),
     output () {
       const { banners } = this
       return { ...banners[0], ...banners[1], ...banners[2], ...banners[3], ...banners[4] }
@@ -186,9 +196,13 @@ export default {
       this.showValidationMsg = false
       this.editing = false
     },
-    reset () {
-      this.banners = []
-      this.addBanner()
+    reset (data) {
+      if (data) {
+        this.banners = JSON.parse(JSON.stringify(data))
+      } else {
+        this.banners = []
+        this.addBanner()
+      }
     },
     rerender () {
       this.refresh= false

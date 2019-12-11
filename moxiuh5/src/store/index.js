@@ -11,7 +11,8 @@ export default new Vuex.Store({
     backgroundLongImg: {},
     fixedFloatingWindow: {},
     floatText: {
-      text: '领导寄语'
+      text: '领导寄语',
+      show: true
     },
     floatWindow: {},
     subtitle: {},
@@ -62,7 +63,18 @@ export default new Vuex.Store({
 
   mutations: {
     loadData (state, data) {
-      state = {...state, ...data}
+      const { backgroundLongImg, fixedFloatingWindow, floatText, floatWindow, subtitle, fixedBanner, footText, slideBanner, adAreaMid, adAreaBottm, fiveBanners} = data
+      state.backgroundLongImg = backgroundLongImg
+      state.fixedFloatingWindow = fixedFloatingWindow
+      state.floatText = floatText
+      state.floatWindow = floatWindow
+      state.subtitle = subtitle
+      state.fixedBanner = fixedBanner
+      state.footText = footText
+      state.slideBanner = slideBanner
+      state.adAreaMid = adAreaMid
+      state.adAreaBottm = adAreaBottm
+      state.fiveBanners = fiveBanners
       state.dataLoaded = true
     },
 
@@ -172,7 +184,7 @@ export default new Vuex.Store({
 
     slideBannerGuideIconStyle: state => {
       const banner = state.slideBanner.banners[state.currentBannerIndex]
-      if (banner.guideIconUrlRel) {
+      if (banner && banner.guideIconUrlRel) {
         return {
           backgroundImage: banner ? 'url(' + banner.guideIconUrlRel + ')' : '',
           backgroundSize: 'contain',
@@ -241,7 +253,7 @@ export default new Vuex.Store({
     },
 
     fixedFloatWindowStyle: state => {
-      if (state.backgroundLongImg.backgroundImgUrlRel) {
+      if (state.fixedFloatingWindow.backgroundImgUrlRel) {
         return {
           backgroundImage: 'url(' + state.fixedFloatingWindow.backgroundImgUrlRel + ')',
           backgroundSize: 'contain',

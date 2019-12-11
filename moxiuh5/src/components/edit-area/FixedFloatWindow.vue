@@ -23,6 +23,7 @@ import TextInput from '../form-item/TextInput'
 import ImageUploader from '../form-item/ImageUploader'
 import RedictWay from '../form-item/RedictWay'
 import ErrorMsg from '../form-item/ErrorMsg'
+import { mapState } from 'vuex'
 
 export default {
   name: 'FixedFloatWindow',
@@ -50,9 +51,18 @@ export default {
   watch: {
     output () {
       this.editing = true
+    },
+    dataLoaded () {
+      if (this.dataLoaded) {
+        this.reset(this.fixedFloatingWindow)
+      }
     }
   },
   computed: {
+    ...mapState({
+      dataLoaded: state => state.dataLoaded,
+      fixedFloatingWindow: state => state.fixedFloatingWindow,
+    }),
     output () {
       const { componentName, backgroundImgUrl, backgroundImgUrlRel, link, way } = this
       return { componentName, backgroundImgUrl, backgroundImgUrlRel, link, way }
@@ -101,12 +111,12 @@ export default {
       this.showValidationMsg = false
       this.editing = false
     },
-    reset () {
-      this.componentName = '',
-      this.backgroundImgUrl = '',
-      this.backgroundImgUrlRel = '',
-      this.link = '',
-      this.way = 0
+    reset (data) {
+      this.componentName = data ? data.componentName : '',
+      this.backgroundImgUrl = data ? data.backgroundImgUrl : '',
+      this.backgroundImgUrlRel = data ? data.backgroundImgUrlRel : '',
+      this.link = data ? data.link : '',
+      this.way = data ? data.way : 0
     },
     rerender () {
       this.refresh= false

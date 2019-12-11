@@ -12,6 +12,7 @@ import Title from '../form-item/Title'
 import ButtonGroup from '../form-item/ButtonGroup'
 import TextInput from '../form-item/TextInput'
 import FontColor from '../form-item/FontColor'
+import { mapState } from 'vuex'
 
 export default {
   name: 'BannerSubtitle',
@@ -41,9 +42,18 @@ export default {
   watch: {
     output () {
       this.editing = true
+    },
+    dataLoaded () {
+      if (this.dataLoaded) {
+        this.reset(this.fiveBanners[this.bannerId].subtitle)
+      }
     }
   },
   computed: {
+    ...mapState({
+      dataLoaded: state => state.dataLoaded,
+      fiveBanners: state => state.fiveBanners,
+    }),
     output () {
       const { text, fontSize, fontColor } = this
       return {
@@ -68,10 +78,10 @@ export default {
       this.showValidationMsg = false
       this.editing = false
     },
-    reset () {
-      this.text = '',
-      this.fontSize = 13,
-      this.fontColor = '#000000'
+    reset (data) {
+      this.text = data ? data.text : '',
+      this.fontSize = data ? data.fontSize : 13,
+      this.fontColor = data ? data.fontColor : '#000000'
     },
     rerender () {
       this.refresh= false
