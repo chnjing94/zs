@@ -1,10 +1,10 @@
 <template>
   <div id="left-panel">
-    <div class="float-text-preview" v-if="editAreaId==='FloatText' || editAreaId==='FloatWindow'" @click.stop="changeEditArea('FloatWindow')" :style="floatWindowStyle">
+    <div class="float-text-preview" v-if="(editAreaId==='FloatText'||editAreaId==='FloatWindow')&&floatText.componentName" @click.stop="changeEditArea('FloatWindow')" :style="floatWindowStyle">
       <div class="close">
         <a-icon type="close-circle" />
       </div>
-      <div class="title">{{floatText.text}}</div>
+      <div class="title" :style="{color: floatText.fontColor}">{{floatText.text}}</div>
       <div class="text" :style="textStyle">{{floatWindow.text || '请输入文字'}}</div>
     </div>
     <div class="select-phone">
