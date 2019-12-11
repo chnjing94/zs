@@ -12,6 +12,7 @@ import Title from '../form-item/Title'
 import ButtonGroup from '../form-item/ButtonGroup'
 import ImageUploader from '../form-item/ImageUploader'
 import ErrorMsg from '../form-item/ErrorMsg'
+import { mapState } from 'vuex'
 
 export default {
   name: 'BackgroundLongImg',
@@ -49,9 +50,9 @@ export default {
       this.showValidationMsg = false
       this.editing = false
     },
-    reset () {
-      this.backgroundImgUrl = '',
-      this.backgroundImgUrlRel = ''
+    reset (data) {
+      this.backgroundImgUrl = data ? data.backgroundImgUrl : '',
+      this.backgroundImgUrlRel = data ? data.backgroundImgUrl : ''
     },
     commit (payload) {
       this.$store.commit('changeBackgroundLongImg', payload ? payload : this.output)
@@ -60,9 +61,18 @@ export default {
   watch: {
     output () {
       this.editing = true
+    },
+    dataLoaded () {
+      if (this.dataLoaded) {
+        this.reset(this.backgroundLongImg)
+      }
     }
   },
   computed: {
+    ...mapState({
+      dataLoaded: state => state.dataLoaded,
+      backgroundLongImg: state => state.backgroundLongImg,
+    }),
     output () {
       const { backgroundImgUrl, backgroundImgUrlRel } = this
       return { backgroundImgUrl, backgroundImgUrlRel }

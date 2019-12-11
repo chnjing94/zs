@@ -11,11 +11,25 @@ export default {
   name: 'app',
   components: {
     Home
-  }
+  },
+  methods: {
+    handleMessage (event) {
+      // const data = event.data.data
+      window.console.log(event)
+      // this.$store.commit('loadData', data)
+
+      // if(data.code === "success"){
+      //     alert(data.test)
+      // }
+    }
+  },
+  mounted() {
+    window.addEventListener('message', this.handleMessage);
+  },
 }
 </script>
 
-<style>
+<style scoped>
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -45,9 +59,6 @@ export default {
   article, aside, details, figcaption, figure, 
   footer, header, hgroup, menu, nav, section {
     display: block;
-  }
-  body {
-    line-height: 1;
   }
   ol, ul {
     list-style: none;

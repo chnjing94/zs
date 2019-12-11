@@ -6,6 +6,8 @@ export default new Vuex.Store({
   state: {
     editAreaId: 'BackgroundLongImg',
     currentBannerIndex: 0,
+    dataLoaded: false,
+
     backgroundLongImg: {},
     fixedFloatingWindow: {},
     floatText: {
@@ -59,6 +61,11 @@ export default new Vuex.Store({
   },
 
   mutations: {
+    loadData (state, data) {
+      state = {...state, ...data}
+      state.dataLoaded = true
+    },
+
     changeEditArea(state, data) {
       state.editAreaId = data
     },
@@ -165,10 +172,12 @@ export default new Vuex.Store({
 
     slideBannerGuideIconStyle: state => {
       const banner = state.slideBanner.banners[state.currentBannerIndex]
-      return {
-        backgroundImage: banner ? 'url(' + banner.guideIconUrlRel + ')' : '',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
+      if (banner.guideIconUrlRel) {
+        return {
+          backgroundImage: banner ? 'url(' + banner.guideIconUrlRel + ')' : '',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
       }
     },
 
@@ -222,26 +231,32 @@ export default new Vuex.Store({
     },
 
     backgroundLongImgStyle: state => {
-      return {
-        backgroundImage: 'url(' + state.backgroundLongImg.backgroundImgUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
+      if (state.backgroundLongImg.backgroundImgUrlRel) {
+        return {
+          backgroundImage: 'url(' + state.backgroundLongImg.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
       }
     },
 
     fixedFloatWindowStyle: state => {
-      return {
-        backgroundImage: 'url(' + state.fixedFloatingWindow.backgroundImgUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
+      if (state.backgroundLongImg.backgroundImgUrlRel) {
+        return {
+          backgroundImage: 'url(' + state.fixedFloatingWindow.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
       }
     },
 
     fixedBannerStyle: state => {
-      return {
-        backgroundImage: 'url(' + state.fixedBanner.backgroundImgUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
+      if (state.fixedBanner.backgroundImgUrlRel) {
+        return {
+          backgroundImage: 'url(' + state.fixedBanner.backgroundImgUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
       }
     },
 
@@ -295,10 +310,12 @@ export default new Vuex.Store({
     },
 
     bannerGuideIconStyle: (state) => (n) => {
-      return {
-        backgroundImage: 'url(' + state.fiveBanners['ad'+n].guideIconUrlRel + ')',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
+      if (state.fiveBanners['ad'+n].guideIconUrlRel) {
+        return {
+          backgroundImage: 'url(' + state.fiveBanners['ad'+n].guideIconUrlRel + ')',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }
       }
     },
 

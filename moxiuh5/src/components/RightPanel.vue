@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     ...mapState({
-        editAreaId: state => state.editAreaId
+        editAreaId: state => state.editAreaId,
     })
   }
 }

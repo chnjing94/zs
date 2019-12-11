@@ -41,14 +41,10 @@ import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Preview',
-  data () {
-    return {
-    }
-  },
   methods: {
     changeEditArea (editAreaId) {
       this.$store.commit('changeEditArea', editAreaId)
-    },
+    }
   },
   computed: {
     ...mapState({

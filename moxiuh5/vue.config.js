@@ -1,5 +1,6 @@
 // vue.config.js
 module.exports = {
+  publicPath: '/zs/',
   css: {
     loaderOptions: {
       less: {
@@ -9,7 +10,8 @@ module.exports = {
           'border-radius-base': '2px',
         },
         javascriptEnabled: true
-      }
+      },
+      stylus: {}
     }
   }
 }
