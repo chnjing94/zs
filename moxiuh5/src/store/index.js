@@ -165,6 +165,7 @@ export default new Vuex.Store({
           backgroundColor: state.hexOpacity2rgba(state.floatText.backgroundColor, state.floatText.backgroundOpacity)
         }
       }
+      style.boxShadow = state.editAreaId==='FloatText' ? '0px 0px 0px 1px #007d71' : ''
       return {...style, ...{color: state.floatText.fontColor, fontSize: state.floatText.fontSize+'px'}}
     },
 
@@ -207,6 +208,7 @@ export default new Vuex.Store({
           backgroundColor: state.hexOpacity2rgba(banner.backgroundColor, banner.backgroundOpacity)
         }
       }
+      style.boxShadow = state.editAreaId==='SlideBanner' ? '0px 0px 0px 1px #007d71' : ''
       return style
     },
 
@@ -223,6 +225,7 @@ export default new Vuex.Store({
           backgroundColor: state.hexOpacity2rgba(state.slideBanner.backgroundColor, state.slideBanner.backgroundOpacity)
         }
       }
+      style.boxShadow = state.editAreaId==='SubregionTitleTop' ? '0px 0px 0px 1px #007d71' : ''
       return {...style, ...{color: state.slideBanner.fontColor, fontSize: state.slideBanner.fontSize+'px'}}
     },
 
@@ -239,6 +242,7 @@ export default new Vuex.Store({
           backgroundColor: state.hexOpacity2rgba(state.subtitle.backgroundColor, state.subtitle.backgroundOpacity)
         }
       }
+      style.boxShadow = state.editAreaId==='Subtitle' ? '0px 0px 0px 1px #007d71' : ''
       return {...style, ...{color: state.subtitle.fontColor, fontSize: state.subtitle.fontSize+'px'}}
     },
 
@@ -253,13 +257,16 @@ export default new Vuex.Store({
     },
 
     fixedFloatWindowStyle: state => {
+      let style = {}
       if (state.fixedFloatingWindow.backgroundImgUrlRel) {
-        return {
+        style =  {
           backgroundImage: 'url(' + state.fixedFloatingWindow.backgroundImgUrlRel + ')',
           backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
+          backgroundRepeat: 'no-repeat'
         }
       }
+      style.boxShadow = state.editAreaId==='FixedFloatWindow' ? '0px 0px 0px 1px #007d71' : ''
+      return style
     },
 
     fixedBannerStyle: state => {

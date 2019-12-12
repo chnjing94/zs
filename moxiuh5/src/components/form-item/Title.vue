@@ -1,5 +1,5 @@
 <template>
-  <div id="title-wrapper" :style="{height: subtitle ? auto : '48px' }">
+  <div id="title-wrapper" :style="{height: subtitle ? 'auto' : '48px' }">
     <div class="title">{{title}}</div>
     <div class="subtitle" v-if="subtitle">{{subtitle}}</div>
   </div>

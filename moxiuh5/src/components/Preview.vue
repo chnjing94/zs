@@ -15,24 +15,24 @@
     <div id="slide-banner-subtitle" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerSubtitleStyle">{{getSlideBannerSubtitle}}</div>
     <div id="slide-banner-guide-icon" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerGuideIconStyle"></div>
 
-    <div id="subregion-title-mid" @click.stop="changeEditArea('SubregionTitleMid')">
+    <div id="subregion-title-mid" :class="{'selected': editAreaId==='SubregionTitleMid'}" @click.stop="changeEditArea('SubregionTitleMid')">
       <div class="subregion-title text-content" :style="subregionTitleMidStyle">{{adAreaMid.title}}</div>
       <div class="subregion-sub-title text-content" :style="{color: adAreaMid.subtitleFontColor, fontSize: adAreaMid.subtitleFontSize+'px'}">{{adAreaMid.subtitle}}</div>
     </div>
-    <div id="subregion-title-bottom" @click.stop="changeEditArea('SubregionTitleBottom')">
+    <div id="subregion-title-bottom" :class="{'selected': editAreaId==='SubregionTitleBottom'}" @click.stop="changeEditArea('SubregionTitleBottom')">
       <div class="subregion-title text-content" :style="subregionTitleBottomStyle">{{adAreaBottm.title}}</div>
       <div class="subregion-sub-title text-content" :style="{color: adAreaBottm.subtitleFontColor, fontSize: adAreaBottm.subtitleFontSize+'px'}">{{adAreaBottm.subtitle}}</div>
     </div>
 
     <div v-for="n in [1,2,3,4,5]" :key="'banner'+n">
-      <div :id="'banner-title-'+n" class="text-content-left" @click.stop="changeEditArea('BannerTitle'+n)" :style="bannerTitleStyle(n)">{{fiveBanners['ad'+n].title.text}}</div>
-      <div :id="'banner-subtitle-'+n" class="text-content-left" @click.stop="changeEditArea('BannerSubtitle'+n)" :style="bannerSubtitleStyle(n)">{{fiveBanners['ad'+n].subtitle.text}}</div>
-      <div :id="'guide-icon-'+n" @click.stop="changeEditArea('GuideIcon'+n)" :style="bannerGuideIconStyle(n)"></div>
-      <div :id="'banner-background-img-'+n" @click.stop="changeEditArea('BannerBackgroundImg'+n)" :style="bannerBackgroundImgStyle(n)"></div>
+      <div :id="'banner-title-'+n" class="text-content-left" :class="{'selected': editAreaId==='BannerTitle'+n}" @click.stop="changeEditArea('BannerTitle'+n)" :style="bannerTitleStyle(n)">{{fiveBanners['ad'+n].title.text}}</div>
+      <div :id="'banner-subtitle-'+n" class="text-content-left" :class="{'selected': editAreaId==='BannerSubtitle'+n}" @click.stop="changeEditArea('BannerSubtitle'+n)" :style="bannerSubtitleStyle(n)">{{fiveBanners['ad'+n].subtitle.text}}</div>
+      <div :id="'guide-icon-'+n" :class="{'selected': editAreaId==='GuideIcon'+n}" @click.stop="changeEditArea('GuideIcon'+n)" :style="bannerGuideIconStyle(n)"></div>
+      <div :id="'banner-background-img-'+n" :class="{'selected': editAreaId==='BannerBackgroundImg'+n}" @click.stop="changeEditArea('BannerBackgroundImg'+n)" :style="bannerBackgroundImgStyle(n)"></div>
     </div>
 
-    <div id="fixed-banner" @click.stop="changeEditArea('FixedBanner')" :style="fixedBannerStyle"></div>
-    <div id="bottom-state" class="text-content" @click.stop="changeEditArea('BottomState')" :style="{color: footText.fontColor, fontSize: footText.fontSize+'px'}">{{footText.text}}</div>
+    <div id="fixed-banner" :class="{'selected': editAreaId==='FixedBanner'}" @click.stop="changeEditArea('FixedBanner')" :style="fixedBannerStyle"></div>
+    <div id="bottom-state" class="text-content" :class="{'selected': editAreaId==='BottomState'}" @click.stop="changeEditArea('BottomState')" :style="{color: footText.fontColor, fontSize: footText.fontSize+'px'}">{{footText.text}}</div>
   </div>
 </template>
 
@@ -83,7 +83,7 @@ export default {
 
 <style scoped lang="stylus">
   .selected
-    border solid 2px #007d71
+    box-shadow 0px 0px 0px 1px #007d71
 
   #background-long-img
     position relative
@@ -97,7 +97,7 @@ export default {
     left 1px
     width 77px
     height 30px
-    border dashed 1px #007d71
+    
   .float-text-content
     height 100%
     width 100%
@@ -123,7 +123,7 @@ export default {
     left 285px
     width 83px
     height 75px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
 
   #subtitle
     position absolute
@@ -131,7 +131,7 @@ export default {
     left 53px
     width 270px
     height 30px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
 
   #subregion-title-top
     position absolute
@@ -139,7 +139,7 @@ export default {
     left 128px
     width 120px
     height 30px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
 
   #slide-banner
     position absolute
@@ -147,7 +147,7 @@ export default {
     left 18px
     width 339px
     height 81px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 1
   #slide-banner-title
     position absolute
@@ -181,7 +181,7 @@ export default {
     left 128px
     width 120px
     height 55px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     display flex
     flex-direction column
   
@@ -197,7 +197,7 @@ export default {
     left 43px
     width 150px
     height 19px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #banner-subtitle-1
@@ -206,7 +206,7 @@ export default {
     left 43px
     width 75px
     height 15px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #guide-icon-1
@@ -215,7 +215,7 @@ export default {
     left 241px
     width 94px
     height 30px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #banner-background-img-1
@@ -224,7 +224,7 @@ export default {
     left 28px
     width 319px
     height 80px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 1
 
   #banner-title-2
@@ -233,7 +233,7 @@ export default {
     left 43px
     width 150px
     height 19px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #banner-subtitle-2
@@ -242,7 +242,7 @@ export default {
     left 43px
     width 75px
     height 15px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #guide-icon-2
@@ -251,7 +251,7 @@ export default {
     left 241px
     width 94px
     height 30px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #banner-background-img-2
@@ -260,7 +260,7 @@ export default {
     left 28px
     width 319px
     height 80px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 1
 
   #subregion-title-bottom
@@ -269,7 +269,7 @@ export default {
     left 128px
     width 120px
     height 55px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     display flex
     flex-direction column
 
@@ -279,7 +279,7 @@ export default {
     left 28px
     width 125px
     height 25px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #banner-subtitle-3
@@ -288,7 +288,7 @@ export default {
     left 28px
     width 125px
     height 25px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #guide-icon-3
@@ -297,7 +297,7 @@ export default {
     left 244px
     width 94px
     height 30px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #banner-background-img-3
@@ -306,7 +306,7 @@ export default {
     left 28px
     width 319px
     height 70px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 1
 
   #banner-title-4
@@ -315,7 +315,7 @@ export default {
     left 28px
     width 125px
     height 25px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #banner-subtitle-4
@@ -324,7 +324,7 @@ export default {
     left 28px
     width 125px
     height 25px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #guide-icon-4
@@ -333,7 +333,7 @@ export default {
     left 244px
     width 94px
     height 30px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #banner-background-img-4
@@ -342,7 +342,7 @@ export default {
     left 28px
     width 319px
     height 70px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 1
 
   #banner-title-5
@@ -351,7 +351,7 @@ export default {
     left 28px
     width 125px
     height 25px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #banner-subtitle-5
@@ -360,7 +360,7 @@ export default {
     left 28px
     width 125px
     height 25px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #guide-icon-5
@@ -369,7 +369,7 @@ export default {
     left 244px
     width 94px
     height 30px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 2
 
   #banner-background-img-5
@@ -378,7 +378,7 @@ export default {
     left 28px
     width 319px
     height 70px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 1
 
   #bottom-state
@@ -387,7 +387,7 @@ export default {
     left 1px
     width 374px
     height 35px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
 
   #fixed-banner
     position absolute
@@ -395,6 +395,6 @@ export default {
     left 28px
     width 319px
     height 70px
-    box-shadow 0px 0px 0px 0.1rem grey
+    
     z-index 1 
 </style>
