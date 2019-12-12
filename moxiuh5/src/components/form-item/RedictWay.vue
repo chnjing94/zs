@@ -4,7 +4,7 @@
       <span style="color: red">*</span>站外点击唤起方式
     </div>
     <div class="select-area">
-      <a-select style="width: 100%" v-model="wayLocal">
+      <a-select style="width: 100%; height: 40px" v-model="wayLocal">
         <a-select-option value="0">点击唤起招商银行APP</a-select-option>
         <a-select-option value="1">点击仅跳转链接</a-select-option>
       </a-select>
@@ -39,15 +39,21 @@ export default {
   #redirect-way
     display flex
     flex-direction column
-    padding 0.5rem 1rem
+    width 385px
+    margin 5px 0px
+    padding 0 0 0 5px
   
   .hint
     flex 1 0 auto
     display flex
+    height 40px
+    width 356px
     align-items center
     font-weight 600
 
   .select-area
+    width 356px
+    height 40px
     flex 1 0 2rem
   
 </style>

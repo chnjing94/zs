@@ -1,10 +1,10 @@
 <template>
   <div id="image-uploader-wrapper">
     <div class="hint">
-      <div class="main-hint">
+      <div class="main-hint" :style="{alignItems: preferSize ? '' : 'center'}">
         <span style="color: red" v-if="required">*</span>{{title}}
       </div>
-      <div class="sub-hint">
+      <div class="sub-hint" :class="{'no-prefer-size': !preferSize}">
         （支持10M以内，<span v-if="preferSize">建议{{preferSize}}尺寸的</span>jpg/jpeg/png/gif图片格式）
       </div>
     </div>
@@ -94,25 +94,31 @@ export default {
   #image-uploader-wrapper
     display flex
     flex-direction column
-    width 100%
-    padding 0.5rem 1rem
-
+    width 385px
+    margin 5px 0px
+    padding 0 0 0 5px
   .hint 
     flex 1 0 auto
     display flex
+    width 356px
     justify-content center
     align-items flex-start
     .main-hint
       flex 0 0 auto
+      height 40px
       font-weight 600
+      display flex
     .sub-hint
+      height 40px
       flex 1 1 auto
       color #868686
       word-break break-all
 
   .image-uploader
     flex 1 0 auto
-    padding-top 0.5rem
+    height 40px
+    width 356px
+    margin-top 0.5rem
     display flex
     flex-direction row
     justify-content space-between
@@ -138,4 +144,8 @@ export default {
         background-color #F1F1F1
   .warning
     flex 1 0 auto
+
+  .no-prefer-size
+    display flex
+    align-items center
 </style>

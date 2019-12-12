@@ -47,16 +47,22 @@ export default {
   #font-color
     display flex
     flex-direction column
-    padding 0.5rem 1rem
+    width 385px
+    margin 5px 0px
+    padding 0 0 0 5px
   
   .hint
     flex 1 0 auto
     display flex
+    width 356px
+    height 40px
     align-items center
 
   .color-picker
     flex 0 0 2.7rem
     display flex
+    width 356px
+    height 40px
     .selected-color
       flex 0 0 30%
       margin 0.1rem 0.2rem 0.1rem 0
@@ -65,7 +71,7 @@ export default {
       display flex
       flex-wrap: wrap
       .color-block
-        flex 0 0 1.15rem
+        flex 0 0 22px
         margin 0.1rem
         cursor pointer
         &:hover

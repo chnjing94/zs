@@ -85,11 +85,14 @@ export default {
   #background-color
     display flex
     flex-direction column
-    padding 0.5rem 1rem 0 1rem
+    width 385px
+    margin 5px 0px
+    padding 0 0 0 5px
   
   .hint
     flex 1 0 2rem
     display flex
+    width 356px
     align-items flex-start
     justify-content center
     .main-hint
@@ -103,6 +106,7 @@ export default {
 
   .color-picker
     flex 0 0 2.7rem
+    width 356px
     display flex
     .selected-color
       flex 0 0 30%
@@ -121,7 +125,7 @@ export default {
       display flex
       flex-wrap: wrap;
       .color-block
-        flex 0 0 1.15rem
+        flex 0 0 22px
         margin 0.1rem
         cursor pointer
         &:hover
@@ -136,16 +140,18 @@ export default {
       color rgb(0, 125, 113)
 
   .opacity-bar
-    flex 1 0 2rem
+    flex 0 1 auto
     display flex
     .opacity-title
       flex 1 1 30%
       display flex
+      height 30px
       justify-content flex-end
       align-items center
     .bar
       flex 1 1 70%
       display flex
+      height 30px
       align-items center
       justify-content center
   .ant-slider

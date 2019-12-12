@@ -74,9 +74,9 @@ export default {
 
 <style scoped>
   #edit-area {
-    width: 21.5rem;
+    width: 420px;
     margin-left: 10px;
     background-color: white;
-    margin: 0.5rem
+    margin: 0.5rem 0.5rem 0.5rem 18px
   }
 </style>

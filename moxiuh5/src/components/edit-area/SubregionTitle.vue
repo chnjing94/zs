@@ -135,4 +135,5 @@ export default {
   #subregion-title
     display flex
     flex-direction column
+    padding 0 15px 20px
 </style>

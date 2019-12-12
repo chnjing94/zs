@@ -19,5 +19,5 @@ export default {
 <style lang="stylus" scoped>
   .validation-error 
     flex 1 0 atuo
-    padding 0 1rem
+    padding 0 5px
 </style>

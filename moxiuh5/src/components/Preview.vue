@@ -97,7 +97,7 @@ export default {
     left 1px
     width 77px
     height 30px
-    box-shadow 0px 0px 0px 0.1rem grey
+    border dashed 1px #007d71
   .float-text-content
     height 100%
     width 100%

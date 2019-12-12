@@ -140,8 +140,9 @@ export default {
   #float-text
     display flex
     flex-direction column
-
+    padding 0 15px 20px
+    
   .show-text-toggle
-    padding 0.5rem 1rem
+    padding 0.5rem 5px
 
 </style>

@@ -6,6 +6,7 @@
     <div class="line"></div>
     <div class="buttons">
       <div class="button cancel" @click="Cancel">取消</div>
+      <div class="button space"></div>
       <div class="button confirm" @click="Confirm">确定</div>
     </div>
     <div class="notification">
@@ -43,7 +44,9 @@ export default {
   #button-group-wrapper
     display flex
     flex-direction column
-    padding 0.5rem 1rem
+    width 385px
+    margin 5px 0px
+    padding 0 0 0 5px
 
   .msg
     flex 0 0 2rem
@@ -61,10 +64,9 @@ export default {
   .buttons
     display flex
     align-items center
-    justify-content space-around
+    justify-content center
     padding 0.5rem 0
     .button
-      flex 0 0 30%
       line-height 2rem
       border solid 1px rgb(51, 187, 172)
       display flex
@@ -72,10 +74,17 @@ export default {
       justify-content center
       cursor pointer
     .cancel
+      flex 0 0 120px
+      height 40px
       color rgb(0, 125, 113)
       &:hover
         background-color rgb(226, 243, 241)
+    .space
+      flex 0 0 40px
+      border none
     .confirm
+      flex 0 0 120px
+      height 40px
       background-color rgb(0, 125, 113)
       color white
       opacity 0.8
@@ -87,5 +96,5 @@ export default {
     justify-content center
     align-items center
     color rgb(189, 189, 189)
-    font-size 14px
+    font-size 13px
 </style>

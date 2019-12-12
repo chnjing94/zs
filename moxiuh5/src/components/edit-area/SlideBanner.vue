@@ -221,6 +221,7 @@ export default {
   #slide-banner
     display flex
     flex-direction column
+    padding 0 15px 20px
   
   .delete
     animation: hide 0.5s;

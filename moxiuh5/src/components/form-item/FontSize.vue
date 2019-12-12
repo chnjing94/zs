@@ -47,15 +47,21 @@ export default {
   #font-size
     display flex
     flex-direction column
-    padding 0.5rem 1rem
+    width 385px
+    margin 5px 0px
+    padding 0 0 0 5px
   
   .hint
     flex 1 0 auto
     display flex
+    height 40px
+    width 356px
     align-items center
 
   .select-area
     display flex
+    height 40px
+    width 356px
     align-items center
     flex 1 0 2rem
   
