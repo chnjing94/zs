@@ -1,19 +1,20 @@
 <template>
-  <div id="float-text" v-if="refresh">
+  <div id="float-text">
     <Title :title="'浮动文字'"/>
-    <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="componentName"/>
-    <ErrorMsg :message="validateComponentName" v-if="validateComponentName&&showValidationMsg"/>
-
-    <ImageUploader :title="'背景图片'" :imgPrefix="'FloatText'" :required="false" @success="uploadImageSuccess"/>
-    <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
-    <TextInput :title="'文字'" :placeholder="'请输入浮动文字'" :hint="'（支持最多16位中文汉字和英文输入，超过显示框的文字将不在手机端展示）'" required noSymbol :maxLength="16" v-model="text"/>
-    <ErrorMsg :message="validateText" v-if="validateText&&showValidationMsg"/>
-    <FontSize v-model="fontSize"/>
-    <FontColor v-model="fontColor"/>
-    <div class="show-text-toggle">
-      <a-checkbox @change="onChange" :checked="show">展示文字</a-checkbox><span style="color: #868686">（取消勾选后不展示该组件）</span>
+    <div class="form">
+      <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="componentName"/>
+      <ErrorMsg :message="validateComponentName" v-if="validateComponentName&&showValidationMsg"/>
+      <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :imgPrefix="'FloatText'" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
+      <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
+      <TextInput :title="'文字'" :placeholder="'请输入浮动文字'" :hint="'（支持最多16位中文汉字和英文输入，超过显示框的文字将不在手机端展示）'" required noSymbol :maxLength="16" v-model="text"/>
+      <ErrorMsg :message="validateText" v-if="validateText&&showValidationMsg"/>
+      <FontSize v-model="fontSize"/>
+      <FontColor v-model="fontColor"/>
+      <div class="show-text-toggle">
+        <a-checkbox @change="onChange" :checked="show">展示文字</a-checkbox><span style="color: #868686">（取消勾选后不展示该组件）</span>
+      </div>
     </div>
-    <ButtonGroup :success="validated&&!editing&&showValidationMsg" @buttonConfirmed="confirm" @buttonCanceled="cancel" :notes="notes"/>
+    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" :notes="notes"/>
   </div>
 </template>
 
@@ -42,40 +43,32 @@ export default {
   },
   data () {
     return {
-      refresh: true,
       showValidationMsg: false,
-      editing: false,
       notes: '1.浮动文字可输入领导寄语，支持拖拽调整位置，大小。2.带*为必须配置项，其余配置项无配置内容不展示相关组件',
       
       componentName: '',
-      backgroundImgUrl: '',
+      backgroundImgName: '',
       backgroundImgUrlRel: '',
       backgroundColor: '',
       backgroundOpacity: 0,
-      text: '领导寄语',
-      fontSize: 16,
-      fontColor: "#000000",
+      text: '',
+      fontSize: 0,
+      fontColor: '',
       show: true,
     }
   },
   watch: {
     output () {
-      this.editing = true
-    },
-    dataLoaded () {
-      if (this.dataLoaded) {
-        this.reset(this.floatText)
-      }
+      this.commit()
     }
   },
   computed: {
     ...mapState({
-      dataLoaded: state => state.dataLoaded,
       floatText: state => state.floatText,
     }),
     output () {
-      const { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor, show } = this
-      return { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor, show }
+      const { componentName, backgroundImgName, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor, show } = this
+      return { componentName, backgroundImgName, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor, show }
     },
     validateComponentName () {
       const error = !this.componentName ? '必填项不能为空' : ''
@@ -91,47 +84,42 @@ export default {
   },
   methods: {
     uploadImageSuccess (res) {
-      this.backgroundImgUrl = res.data.AbsPath
+      this.backgroundImgName = res.fileName
       this.backgroundImgUrlRel = res.data.RelativePath
-      this.commit({ backgroundImgUrlRel: res.data.RelativePath})
+    },
+    removeImg () {
+      this.backgroundImgName = ''
+      this.backgroundImgUrlRel = ''
     },
     onChange (evt) {
       this.show = evt.target.checked
     },
-    commit (payload) {
-      this.$store.commit('changeFloatText', payload ? payload : this.output)
+    commit () {
+      this.$store.commit('changeFloatText', this.output)
     },
     confirm () {
       if (this.validated) {
-        this.commit()
+        this.$store.commit('save')
+        this.$store.commit('changeEditArea', '')
       }
       this.showValidationMsg = true
-      this.editing = false
     },
     cancel () {
-      this.reset()
-      this.commit()
-      this.rerender()
-      this.showValidationMsg = false
-      this.editing = false
+      this.$store.commit('rollback')
+      this.$store.commit('changeEditArea', '')
     },
-    reset (data) {
-      this.componentName = data ? data.componentName : '',
-      this.backgroundImgUrl = data ? data.backgroundImgUrl : '',
-      this.backgroundImgUrlRel = data ? data.backgroundImgUrlRel : '',
-      this.backgroundColor = data ? data.backgroundColor : '',
-      this.backgroundOpacity = data ? data.backgroundOpacity : 0,
-      this.text = data ? data.text : '领导寄语',
-      this.fontSize = data ? data.fontSize : 16,
-      this.fontColor = data ? data.fontColor : "#000000",
-      this.show = data ? data.show : true
-    },
-    rerender () {
-      this.refresh= false
-      this.$nextTick(()=>{
-        this.refresh = true
-      })
-    }
+  },
+  created () {
+    const data = this.floatText
+    this.componentName = data.componentName,
+    this.backgroundImgName = data.backgroundImgName,
+    this.backgroundImgUrlRel = data.backgroundImgUrlRel,
+    this.backgroundColor = data.backgroundColor,
+    this.backgroundOpacity = data.backgroundOpacity,
+    this.text = data.text,
+    this.fontSize = data.fontSize,
+    this.fontColor = data.fontColor,
+    this.show = data.show
   }
 }
 </script>
@@ -141,7 +129,12 @@ export default {
     display flex
     flex-direction column
     padding 0 15px 20px
-    
+  
+  .form
+    max-height 500px
+    overflow-x hidden
+    overflow-y auto
+
   .show-text-toggle
     padding 0.5rem 5px
 

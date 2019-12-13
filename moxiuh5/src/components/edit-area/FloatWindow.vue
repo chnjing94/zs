@@ -1,12 +1,12 @@
 <template>
-  <div id="float-window" v-if="refresh">
+  <div id="float-window">
     <Title :title="'浮动弹窗'"/>
-    <ImageUploader :title="'背景图片'" :preferSize="'540*60px'" :imgPrefix="'FloatWindow'" :required="false" @success="uploadImgSuccess"/>
+    <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :preferSize="'540*60px'" :imgPrefix="'FloatWindow'" :required="false" @success="uploadImgSuccess" @remove="removeImg"/>
     <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
     <TextInput :title="'文字'" :hint="'（支持最多50位中文汉字和英文输入，超过显示框的文字将不在手机端展示）'" :maxLength="50" v-model="text"/>
     <FontSize v-model="fontSize"/>
     <FontColor v-model="fontColor"/>
-    <ButtonGroup :success="!editing&&showValidationMsg" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -33,75 +33,61 @@ export default {
   },
   data () {
     return {
-      refresh: true,
       showValidationMsg: false,
-      editing: false,
       
-      backgroundImgUrl: '',
+      backgroundImgName: '',
       backgroundImgUrlRel: '',
       backgroundColor: '',
       backgroundOpacity: 0,
       text: '',
-      fontSize: 16,
-      fontColor: '#000000'
+      fontSize: 0,
+      fontColor: ''
     }
   },
   watch: {
     output () {
-      this.editing = true
+      this.commit()
     },
-    dataLoaded () {
-      if (this.dataLoaded) {
-        this.reset(this.floatWindow)
-      }
-    }
   },
   computed: {
     ...mapState({
-      dataLoaded: state => state.dataLoaded,
       floatWindow: state => state.floatWindow,
     }),
     output () {
-      const { backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor } = this
-      return { backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor }
+      const { backgroundImgName, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor } = this
+      return { backgroundImgName, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor }
     },
   },
   methods: {
     uploadImgSuccess (res) {
-      this.backgroundImgUrl = res.data.AbsPath
+      this.backgroundImgName = res.fileName
       this.backgroundImgUrlRel = res.data.RelativePath
-      this.commit({ backgroundImgUrlRel: res.data.RelativePath})
     },
-    commit (payload) {
-      this.$store.commit('changeFloatWindow', payload ? payload : this.output)
+    removeImg () {
+      this.backgroundImgName = ''
+      this.backgroundImgUrlRel = ''
+    },
+    commit () {
+      this.$store.commit('changeFloatWindow', this.output)
     },
     confirm () {
-      this.commit()
-      this.showValidationMsg = true
-      this.editing = false
+      this.$store.commit('save')
+      this.$store.commit('changeEditArea', '')
     },
     cancel () {
-      this.reset()
-      this.commit()
-      this.rerender()
-      this.showValidationMsg = false
-      this.editing = false
-    },
-    reset (data) {
-      this.backgroundImgUrl = data ? data.backgroundImgUrl : '',
-      this.backgroundImgUrlRel = data ? data.backgroundImgUrlRel : '',
-      this.backgroundColor = data ? data.backgroundColor : '',
-      this.backgroundOpacity = data ? data.backgroundOpacity : 0,
-      this.text = data ? data.text : '',
-      this.fontSize = data ? data.fontSize : 16,
-      this.fontColor = data ? data.fontColor : '#000000'
-    },
-    rerender () {
-      this.refresh= false
-      this.$nextTick(()=>{
-        this.refresh = true
-      })
+      this.$store.commit('rollback')
+      this.$store.commit('changeEditArea', '')
     }
+  },
+  created () {
+    const data = this.floatWindow
+    this.backgroundImgName = data.backgroundImgName,
+    this.backgroundImgUrlRel = data.backgroundImgUrlRel,
+    this.backgroundColor = data.backgroundColor,
+    this.backgroundOpacity = data.backgroundOpacity,
+    this.text = data.text,
+    this.fontSize = data.fontSize,
+    this.fontColor = data.fontColor
   }
 }
 </script>

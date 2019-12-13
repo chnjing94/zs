@@ -56,4 +56,8 @@ export default {
     height 40px
     flex 1 0 2rem
   
+  /deep/ .ant-select-selection--single
+    height 40px
+    display flex
+    align-items center
 </style>

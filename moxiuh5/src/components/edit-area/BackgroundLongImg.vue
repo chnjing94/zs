@@ -1,9 +1,9 @@
 <template>
   <div id="background-long-img-wrapper">
     <Title :title="'背景长图'"/>
-    <ImageUploader :imgPrefix="'BackgroundLongImg'" @success="uploadImageSuccess" />
-    <ErrorMsg :message="validteBackgroundImg" v-if="validteBackgroundImg&&showValidationMsg"/>
-    <ButtonGroup :success="validated&&!editing&&showValidationMsg" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ImageUploader :imgPrefix="'BackgroundLongImg'" :fileName="backgroundImgName" @success="uploadImageSuccess" @remove="removeImg"/>
+    <ErrorMsg :message="validteBackgroundImg" v-if="showValidationMsg&&validteBackgroundImg"/>
+    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -25,65 +25,55 @@ export default {
   data () {
     return {
       showValidationMsg: false,
-      editing: false,
-
-      backgroundImgUrl: '',
+      
+      backgroundImgName: '',
       backgroundImgUrlRel: '',
     }
   },
   methods: {
     uploadImageSuccess (res) {
-      this.backgroundImgUrl = res.data.AbsPath
+      this.backgroundImgName = res.fileName
       this.backgroundImgUrlRel = res.data.RelativePath
-      this.commit({ backgroundImgUrlRel: res.data.RelativePath })
+    },
+    removeImg () {
+      this.backgroundImgName = ''
+      this.backgroundImgUrlRel = ''
     },
     confirm () {
       if (this.validated) {
-        this.commit()
+        this.$store.commit('save')
+        this.$store.commit('changeEditArea', '')
       }
       this.showValidationMsg = true
-      this.editing = false
     },
     cancel () {
-      this.reset()
-      this.commit()
-      this.showValidationMsg = false
-      this.editing = false
-    },
-    reset (data) {
-      this.backgroundImgUrl = data ? data.backgroundImgUrl : '',
-      this.backgroundImgUrlRel = data ? data.backgroundImgUrl : ''
+      this.$store.commit('rollback')
+      this.$store.commit('changeEditArea', '')
     },
     commit (payload) {
-      this.$store.commit('changeBackgroundLongImg', payload ? payload : this.output)
+      this.$store.commit('changeBackgroundLongImg', payload)
     },
   },
   watch: {
-    output () {
-      this.editing = true
+    backgroundImgUrlRel () {
+      this.commit({ backgroundImgUrlRel: this.backgroundImgUrlRel, backgroundImgName: this.backgroundImgName })
     },
-    dataLoaded () {
-      if (this.dataLoaded) {
-        this.reset(this.backgroundLongImg)
-      }
-    }
   },
   computed: {
     ...mapState({
-      dataLoaded: state => state.dataLoaded,
       backgroundLongImg: state => state.backgroundLongImg,
     }),
-    output () {
-      const { backgroundImgUrl, backgroundImgUrlRel } = this
-      return { backgroundImgUrl, backgroundImgUrlRel }
-    },
     validteBackgroundImg () {
-      const error = (!this.backgroundImgUrl || !this.backgroundImgUrlRel) ? '必填项不能为空' : ''
+      const error = !this.backgroundImgUrlRel ? '必填项不能为空' : ''
       return error
     },
     validated () {
       return !this.validteBackgroundImg
     }
+  },
+  created () {
+    this.backgroundImgName = this.backgroundLongImg.backgroundImgName
+    this.backgroundImgUrlRel = this.backgroundLongImg.backgroundImgUrlRel
   }
 }
 </script>

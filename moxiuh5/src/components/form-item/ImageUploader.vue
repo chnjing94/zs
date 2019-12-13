@@ -9,7 +9,11 @@
       </div>
     </div>
     <div class="image-uploader">
-      <div class="text">点击浏览图片上传...</div>
+      <div class="text">
+        <a-input-search disabled :placeholder="fileName || '点击浏览图片上传...'" @search="remove" size="large">
+          <a-button slot="enterButton"><a-icon type="close" /></a-button>
+        </a-input-search>
+      </div>
       <div class="button" @click="onClick">浏览</div>
       <input v-show="false" type="file" accept="image/*" ref="imgInput" @change="onChange">
     </div>
@@ -25,6 +29,7 @@
 export default {
   name: 'ImageUploader',
   props: {
+    fileName: String,
     required: {
       type: Boolean,
       default: true
@@ -44,10 +49,13 @@ export default {
   },
   data () {
     return {
-      exceedMaxFileSize: false
+      exceedMaxFileSize: false,
     }
   },
   methods: {
+    remove () {
+      this.$emit('remove')
+    },
     onClick () {
       this.$refs.imgInput.click()
     },
@@ -68,7 +76,7 @@ export default {
       axios
         .post('/Mpage/PicUpload', formData, { 'Content-Type':'multipart/form-data' })
         .then(response => {
-          this.$emit('success', response)
+          this.$emit('success', Object.assign(response, {fileName: this.$refs.imgInput.files[0].name}))
           this.$refs.imgInput.value = ''
         })
     },
@@ -90,6 +98,10 @@ export default {
 }
 </script>
 
+<style lang="stylus">
+  .ant-input-disabled
+    background-color #ffffff
+</style>
 <style scoped lang="stylus">
   #image-uploader-wrapper
     display flex
@@ -123,13 +135,12 @@ export default {
     flex-direction row
     justify-content space-between
     .text
-      line-height 2rem
       flex 0 0 83%
-      border 1px solid #ddd
       color #AEADAD
       display flex
       justify-content center
       align-items center
+      overflow hidden
     .button
       line-height 2rem
       flex 0 0 15%
@@ -144,6 +155,9 @@ export default {
         background-color #F1F1F1
   .warning
     flex 1 0 auto
+
+  /deep/ .ant-input-disabled
+    background-color #FFFFFF
 
   .no-prefer-size
     display flex

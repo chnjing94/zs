@@ -32,7 +32,7 @@
     <div class="opacity-bar">
       <div class="opacity-title">透明度: {{opacity}}</div>
       <div class="bar">
-        <a-slider style="width: 80%" v-model="opacityLocal" :tipFormatter="null" @change="$emit('update:opacity', opacityLocal)" :disabled="!selectedColor"/>
+        <a-slider style="width: 80%" v-model="opacityLocal" @afterChange="$emit('update:opacity', opacityLocal)" :disabled="!selectedColor"/>
       </div>
     </div>
   </div>

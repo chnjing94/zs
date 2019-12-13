@@ -7,11 +7,6 @@
       <div class="title" :style="{color: floatText.fontColor}">{{floatText.text}}</div>
       <div class="text" :style="textStyle">{{floatWindow.text || '请输入文字'}}</div>
     </div>
-    <div class="select-phone">
-      <a-select defaultValue="IPhoneX" style="width: 120px">
-        <a-select-option value="IPhoneX">IPhoneX</a-select-option>
-      </a-select>
-    </div>
   </div>
 </template>
 

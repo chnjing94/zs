@@ -1,33 +1,33 @@
 <template>
   <div id="edit-area">
-    <BackgroundLongImg v-show="editAreaId==='BackgroundLongImg'"/>
-    <FixedFloatWindow v-show="editAreaId==='FixedFloatWindow'"/>
-    <FloatText v-show="editAreaId==='FloatText'"/>
-    <FloatWindow v-show="editAreaId==='FloatWindow'"/>
+    <BackgroundLongImg v-if="editAreaId==='BackgroundLongImg'"/>
+    <FixedFloatWindow v-if="editAreaId==='FixedFloatWindow'"/>
+    <FloatText v-if="editAreaId==='FloatText'"/>
+    <FloatWindow v-if="editAreaId==='FloatWindow'"/>
 
-    <Subtitle v-show="editAreaId==='Subtitle'"/>
+    <Subtitle v-if="editAreaId==='Subtitle'"/>
 
-    <SubregionTitle :subregionId="'SlideBanner'" v-show="editAreaId==='SubregionTitleTop'"/>
-    <SlideBanner v-show="editAreaId==='SlideBanner'"/>
+    <SubregionTitle :subregionId="'SlideBanner'" v-if="editAreaId==='SubregionTitleTop'"/>
+    <SlideBanner v-if="editAreaId==='SlideBanner'"/>
     
-    <SubregionTitle :subregionId="'AdAreaMid'" v-show="editAreaId==='SubregionTitleMid'"/>
+    <SubregionTitle :subregionId="'AdAreaMid'" v-if="editAreaId==='SubregionTitleMid'"/>
     <div v-for="n in [1,2]" :key="'banner'+n">
-      <BannerTitle :bannerId="'ad'+n" v-show="editAreaId==='BannerTitle'+n"/>
-      <BannerSubtitle :bannerId="'ad'+n" v-show="editAreaId==='BannerSubtitle'+n"/>
-      <GuideIcon :bannerId="'ad'+n" v-show="editAreaId==='GuideIcon'+n"/>
-      <BannerBackgroundImg :bannerId="'ad'+n" v-show="editAreaId==='BannerBackgroundImg'+n"/>
+      <BannerTitle :bannerId="'ad'+n" v-if="editAreaId==='BannerTitle'+n"/>
+      <BannerSubtitle :bannerId="'ad'+n" v-if="editAreaId==='BannerSubtitle'+n"/>
+      <GuideIcon :bannerId="'ad'+n" v-if="editAreaId==='GuideIcon'+n"/>
+      <BannerBackgroundImg :bannerId="'ad'+n" v-if="editAreaId==='BannerBackgroundImg'+n"/>
     </div>
     
-    <SubregionTitle :subregionId="'AdAreaBottm'" v-show="editAreaId==='SubregionTitleBottom'"/>
+    <SubregionTitle :subregionId="'AdAreaBottm'" v-if="editAreaId==='SubregionTitleBottom'"/>
     <div v-for="n in [3,4,5]" :key="'banner'+n">
-      <BannerTitle :bannerId="'ad'+n" v-show="editAreaId==='BannerTitle'+n"/>
-      <BannerSubtitle :bannerId="'ad'+n" v-show="editAreaId==='BannerSubtitle'+n"/>
-      <GuideIcon :bannerId="'ad'+n" v-show="editAreaId==='GuideIcon'+n"/>
-      <BannerBackgroundImg :bannerId="'ad'+n" v-show="editAreaId==='BannerBackgroundImg'+n"/>
+      <BannerTitle :bannerId="'ad'+n" v-if="editAreaId==='BannerTitle'+n"/>
+      <BannerSubtitle :bannerId="'ad'+n" v-if="editAreaId==='BannerSubtitle'+n"/>
+      <GuideIcon :bannerId="'ad'+n" v-if="editAreaId==='GuideIcon'+n"/>
+      <BannerBackgroundImg :bannerId="'ad'+n" v-if="editAreaId==='BannerBackgroundImg'+n"/>
     </div>
     
-    <FixedBanner v-show="editAreaId==='FixedBanner'"/>
-    <BottomState v-show="editAreaId==='BottomState'"/>
+    <FixedBanner v-if="editAreaId==='FixedBanner'"/>
+    <BottomState v-if="editAreaId==='BottomState'"/>
   </div>
 </template>
 
@@ -75,8 +75,8 @@ export default {
 <style scoped>
   #edit-area {
     width: 420px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     background-color: white;
-    margin: 0.5rem 0.5rem 0.5rem 18px
+    margin: 0.5rem 0
   }
 </style>

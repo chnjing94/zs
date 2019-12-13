@@ -1,18 +1,18 @@
 <template>
-  <div id="fixed-float-window" v-if="refresh">
+  <div id="fixed-float-window">
     <Title :title="'固定悬浮窗'"/>
 
     <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" v-model="componentName" :maxLength="16" required noSymbol/>
     <ErrorMsg :message="validateComponentName" v-if="validateComponentName&&showValidationMsg"/>
 
-    <ImageUploader :imgPrefix="'FixedFloatWindow'" :preferSize="'160*145px'" @success="uploadImageSuccess"/>
+    <ImageUploader :imgPrefix="'FixedFloatWindow'" :fileName="backgroundImgName" :preferSize="'160*145px'" @success="uploadImageSuccess" @remove="removeImg"/>
     <ErrorMsg :message="validteBackgroundImg" v-if="validteBackgroundImg&&showValidationMsg"/>
 
     <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" v-model="link" required/>
     <ErrorMsg :message="validteLink" v-if="validteLink&&showValidationMsg"/>
 
     <RedictWay v-model="way"/>
-    <ButtonGroup :success="validated&&!editing&&showValidationMsg" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -37,42 +37,39 @@ export default {
   },
   data () {
     return {
-      refresh: true,
       showValidationMsg: false,
-      editing: false,
 
       componentName: '',
-      backgroundImgUrl: '',
+      backgroundImgName: '',
       backgroundImgUrlRel: '',
       link: '',
-      way: 0
+      way: null
     }
   },
   watch: {
-    output () {
-      this.editing = true
+    componentName () {
+      this.commit({ componentName: this.componentName })
     },
-    dataLoaded () {
-      if (this.dataLoaded) {
-        this.reset(this.fixedFloatingWindow)
-      }
+    backgroundImgUrlRel () {
+      this.commit({ backgroundImgUrlRel: this.backgroundImgUrlRel, backgroundImgName: this.backgroundImgName })
+    },
+    link () {
+      this.commit({ link: this.link })
+    },
+    way () {
+      this.commit({ way: this.way })
     }
   },
   computed: {
     ...mapState({
-      dataLoaded: state => state.dataLoaded,
       fixedFloatingWindow: state => state.fixedFloatingWindow,
     }),
-    output () {
-      const { componentName, backgroundImgUrl, backgroundImgUrlRel, link, way } = this
-      return { componentName, backgroundImgUrl, backgroundImgUrlRel, link, way }
-    },
     validateComponentName () {
       const error = !this.componentName ? '必填项不能为空' : ''
       return error
     },
     validteBackgroundImg () {
-      const error = (!this.backgroundImgUrl || !this.backgroundImgUrlRel) ? '必填项不能为空' : ''
+      const error = !this.backgroundImgUrlRel ? '必填项不能为空' : ''
       return error
     },
     validteLink () {
@@ -90,40 +87,35 @@ export default {
   },
   methods: {
     uploadImageSuccess (res) {
-      this.backgroundImgUrl = res.data.AbsPath
+      this.backgroundImgName = res.fileName
       this.backgroundImgUrlRel = res.data.RelativePath
-      this.commit({ backgroundImgUrlRel: res.data.RelativePath })
+    },
+    removeImg () {
+      this.backgroundImgName = ''
+      this.backgroundImgUrlRel = ''
     },
     commit (payload) {
-      this.$store.commit('changeFixedFloatWindow', payload ? payload : this.output)
+      this.$store.commit('changeFixedFloatWindow', payload)
     },
     confirm () {
       if (this.validated) {
-        this.commit()
+        this.$store.commit('save')
+        this.$store.commit('changeEditArea', '')
       }
       this.showValidationMsg = true
-      this.editing = false
     },
     cancel () {
-      this.reset()
-      this.commit()
-      this.rerender()
-      this.showValidationMsg = false
-      this.editing = false
+      this.$store.commit('rollback')
+      this.$store.commit('changeEditArea', '')
     },
-    reset (data) {
-      this.componentName = data ? data.componentName : '',
-      this.backgroundImgUrl = data ? data.backgroundImgUrl : '',
-      this.backgroundImgUrlRel = data ? data.backgroundImgUrlRel : '',
-      this.link = data ? data.link : '',
-      this.way = data ? data.way : 0
-    },
-    rerender () {
-      this.refresh= false
-      this.$nextTick(()=>{
-        this.refresh = true
-      })
-    }
+  },
+  created () {
+    const data = this.fixedFloatingWindow
+    this.componentName = data.componentName,
+    this.backgroundImgName = data.backgroundImgName
+    this.backgroundImgUrlRel = data.backgroundImgUrlRel,
+    this.link = data.link,
+    this.way = data.way
   }
 }
 </script>

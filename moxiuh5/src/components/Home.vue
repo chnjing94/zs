@@ -31,23 +31,18 @@ export default {
 
 <style scoped>
 #content {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(20, 5vh);
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   min-width: 1350px;
 }
 
 header {
+  flex: 0 0 50px;
   background-color: rgb(0, 125, 113);
-  grid-row-start: 1;
-  grid-row-end: 2;
 }
 
 main {
   background-color: rgb(235, 241, 241);
-  grid-row-start: 2;
-  grid-row-end: 20;
   display: flex;
   justify-content: center;
 }
@@ -57,10 +52,10 @@ main {
 }
 
 #preview {
-  flex: 0 0 390px;
+  flex: 0 0 393px;
   margin-top: 0.5rem;
-  overflow-x: hidden;
-  overflow-y: auto;
+  /* overflow-x: hidden; */
+  /* overflow-y: auto; */
 }
 
 #right-panel {
@@ -69,8 +64,7 @@ main {
 }
 
 footer {
+  flex: 0 0 50px;
   border-top: solid 1px rgb(223, 223, 223);
-  grid-row-start: 20;
-  grid-row-end: 21;
 }
 </style>

@@ -25,14 +25,14 @@
     </div>
 
     <div v-for="n in [1,2,3,4,5]" :key="'banner'+n">
-      <div :id="'banner-title-'+n" class="text-content-left" :class="{'selected': editAreaId==='BannerTitle'+n}" @click.stop="changeEditArea('BannerTitle'+n)" :style="bannerTitleStyle(n)">{{fiveBanners['ad'+n].title.text}}</div>
-      <div :id="'banner-subtitle-'+n" class="text-content-left" :class="{'selected': editAreaId==='BannerSubtitle'+n}" @click.stop="changeEditArea('BannerSubtitle'+n)" :style="bannerSubtitleStyle(n)">{{fiveBanners['ad'+n].subtitle.text}}</div>
+      <div :id="'banner-title-'+n" class="banner-title" :class="{'selected': editAreaId==='BannerTitle'+n}" @click.stop="changeEditArea('BannerTitle'+n)" :style="bannerTitleStyle(n)">{{fiveBanners['ad'+n].title.text}}</div>
+      <div :id="'banner-subtitle-'+n" class="banner-subtitle" :class="{'selected': editAreaId==='BannerSubtitle'+n}" @click.stop="changeEditArea('BannerSubtitle'+n)" :style="bannerSubtitleStyle(n)">{{fiveBanners['ad'+n].subtitle.text}}</div>
       <div :id="'guide-icon-'+n" :class="{'selected': editAreaId==='GuideIcon'+n}" @click.stop="changeEditArea('GuideIcon'+n)" :style="bannerGuideIconStyle(n)"></div>
       <div :id="'banner-background-img-'+n" :class="{'selected': editAreaId==='BannerBackgroundImg'+n}" @click.stop="changeEditArea('BannerBackgroundImg'+n)" :style="bannerBackgroundImgStyle(n)"></div>
     </div>
 
     <div id="fixed-banner" :class="{'selected': editAreaId==='FixedBanner'}" @click.stop="changeEditArea('FixedBanner')" :style="fixedBannerStyle"></div>
-    <div id="bottom-state" class="text-content" :class="{'selected': editAreaId==='BottomState'}" @click.stop="changeEditArea('BottomState')" :style="{color: footText.fontColor, fontSize: footText.fontSize+'px'}">{{footText.text}}</div>
+    <div id="bottom-state"  :class="{'selected': editAreaId==='BottomState'}" @click.stop="changeEditArea('BottomState')" :style="{color: footText.fontColor, fontSize: footText.fontSize+'px'}">{{footText.text}}</div>
   </div>
 </template>
 
@@ -110,12 +110,13 @@ export default {
     text-overflow clip
     white-space nowrap
 
-  .text-content-left
+  .banner-title
+    overflow hidden
+
+  .banner-subtitle
     display flex
     align-items center
-    overflow hidden
-    text-overflow clip
-    white-space nowrap
+    justify-content flex-start
 
   #fixed-float-window
     position absolute
@@ -195,7 +196,7 @@ export default {
     position absolute
     top 656px
     left 43px
-    width 150px
+    width 200px
     height 19px
     
     z-index 2
@@ -204,9 +205,8 @@ export default {
     position absolute
     top 678px
     left 43px
-    width 75px
+    width 200px
     height 15px
-    
     z-index 2
 
   #guide-icon-1
@@ -231,18 +231,16 @@ export default {
     position absolute
     top 743px
     left 43px
-    width 150px
+    width 200px
     height 19px
-    
     z-index 2
 
   #banner-subtitle-2
     position absolute
     top 765px
     left 43px
-    width 75px
+    width 200px
     height 15px
-    
     z-index 2
 
   #guide-icon-2
@@ -275,11 +273,11 @@ export default {
 
   #banner-title-3
     position absolute
+    overflow hidden 
     top 914px
     left 28px
     width 125px
     height 25px
-    
     z-index 2
 
   #banner-subtitle-3
@@ -288,7 +286,8 @@ export default {
     left 28px
     width 125px
     height 25px
-    
+    display flex
+    justify-content center
     z-index 2
 
   #guide-icon-3
@@ -324,7 +323,8 @@ export default {
     left 28px
     width 125px
     height 25px
-    
+    display flex
+    justify-content center
     z-index 2
 
   #guide-icon-4
@@ -351,7 +351,6 @@ export default {
     left 28px
     width 125px
     height 25px
-    
     z-index 2
 
   #banner-subtitle-5
@@ -360,8 +359,9 @@ export default {
     left 28px
     width 125px
     height 25px
-    
     z-index 2
+    display flex
+    justify-content center
 
   #guide-icon-5
     position absolute
@@ -369,7 +369,6 @@ export default {
     left 244px
     width 94px
     height 30px
-    
     z-index 2
 
   #banner-background-img-5
@@ -378,16 +377,15 @@ export default {
     left 28px
     width 319px
     height 70px
-    
     z-index 1
 
   #bottom-state
     position absolute
-    top 1292px
-    left 1px
-    width 374px
-    height 35px
-    
+    text-align center
+    top 1280px
+    left 88px
+    width 200px
+    height 40px
 
   #fixed-banner
     position absolute
@@ -395,6 +393,5 @@ export default {
     left 28px
     width 319px
     height 70px
-    
     z-index 1 
 </style>

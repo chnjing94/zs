@@ -4,80 +4,255 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
+    savedJson: {},
     editAreaId: 'BackgroundLongImg',
     currentBannerIndex: 0,
     dataLoaded: false,
-
     backgroundLongImg: {
-      backgroundImgUrlRel: 'image/backlong.png'
+      backgroundImgName: 'backlong.png',
+      backgroundImgUrlRel: './image/backlong.png'
     },
     fixedFloatingWindow: {
-      backgroundImgUrlRel: 'image/floatwindow.png',
+      backgroundImgName: 'floatwindow.png',
+      backgroundImgUrlRel: './image/floatwindow.png',
       componentName: "fixedfloatwindow",
       backgroundColor: "",
       link: 'http://',
       way: 0
     },
     floatText: {
-      backgroundImgUrlRel: 'image/floattext.png',
+      componentName: 'floatText',
+      backgroundImgName: 'floattext.png',
+      backgroundImgUrlRel: './image/floattext.png',
+      backgroundColor: '',
+      backgroundOpacity: 0,
       text: '领导寄语',
-      show: true
+      fontSize: 16,
+      fontColor: "#000000",
+      show: true,
     },
-    floatWindow: {},
+    floatWindow: {
+      backgroundImgName: '',
+      backgroundImgUrlRel: '',
+      backgroundColor: '#FFFFFF',
+      backgroundOpacity: 0,
+      text: '',
+      fontSize: 16,
+      fontColor: '#000000'
+    },
     subtitle: {
-      backgroundImgUrlRel: 'image/subtitle.png',
+      backgroundImgUrl: '',
+      backgroundImgUrlRel: './image/subtitle.png',
+      backgroundColor: '',
+      backgroundOpacity: 0,
+      text: '好礼送不停优质企业专享',
+      fontSize: 20,
+      fontColor: '#FFFFFF',
     },
     fixedBanner: {
-      backgroundImgUrlRel: 'image/pink.png',
+      backgroundImgUrlRel: './image/pink.png',
     },
-    footText: {},
+    footText: {
+      text: '基金过往业绩并不预示其未来表现市场有风险,投资需谨慎',
+      fontSize: 13,
+      fontColor: '#FFFFFF'
+    },
     slideBanner: {
-      backgroundImgUrlRel: 'image/subregiontitle.png',
+      backgroundImgUrlRel: './image/subregiontitle.png',
+      title: '活动专区',
+      backgroundImgUrl: '',
+      fontColor: '#A78D43',
+      fontSize: 16,
+      backgroundColor: '',
+      backgroundOpacity: 0,
+      subtitle: '',
+      subtitleFontColor: '#000000',
+      subtitleFontSize: 13,
       banners: [{
-        backgroundImgUrlRel: 'image/slidebanner.png',
+        "backgroundImgUrlRel": './image/slidebanner.png',
+        "guideIconUrlRel": "./image/go.png",
+        "componentName": "banner1",
+        "backgroundImgUrl": "",
+        "backgroundColor": "",
+        "backgroundOpacity": 0,
+        "guideIconUrl": "",
+        "title": "参与竞猜赢取",
+        "titleFontSize": 16,
+        "fontColor": "#f56f13",
+        "subtitle": "中奖可获得99",
+        "subtitleFontSize": 14,
+        "subtitleFontColor": "#fb5d05",
+        "link": "",
+        "way": 0
+      },
+      {
+        "componentName": "2",
+        "backgroundImgUrl": "",
+        "backgroundImgUrlRel": "",
+        "backgroundColor": "#FDC927",
+        "backgroundOpacity": 0,
+        "guideIconUrl": "",
+        "title": "Banner2",
+        "titleFontSize": 16,
+        "fontColor": "#FF5547",
+        "subtitle": "test2",
+        "subtitleFontSize": 14,
+        "subtitleFontColor": "#000000",
+        "link": "",
+        "way": 0
       }]
     },
     adAreaMid: {
-      backgroundImgUrlRel: 'image/subregiontitle.png',
+      "backgroundImgUrlRel": "./image/subregiontitle.png",
+      "title": "福利票券",
+      "backgroundImgUrl": "",
+      "fontColor": "#F1A553",
+      "fontSize": 16,
+      "backgroundColor": "#FFFFFF",
+      "backgroundOpacity": 0,
+      "subtitle": "你想要的我都有",
+      "subtitleFontColor": "#FFFFFF",
+      "subtitleFontSize": 13
     },
     adAreaBottm: {
-      backgroundImgUrlRel: 'image/subregiontitle.png',
+      "backgroundImgUrlRel": './image/subregiontitle.png',
+      "title": "薪享理财",
+      "backgroundImgUrl": "",
+      "fontColor": "#A78D43",
+      "fontSize": 16,
+      "backgroundColor": "",
+      "backgroundOpacity": 0,
+      "subtitle": "工资卡专享，限时抢购！",
+      "subtitleFontColor": "#FFFFFF",
+      "subtitleFontSize": 13
     },
     fiveBanners: {
       ad1: {
         banner: {
-          backgroundImgUrlRel: 'image/1.png',
+          "backgroundImgUrlRel": "./image/1.png",
+          "componentName": "123",
+          "backgroundImgUrl": "",
+          "backgroundColor": "",
+          "backgroundOpacity": 0,
+          "link": "",
+          "way": 0
         },
-        title: {},
-        subtitle: {}
+        title: {
+          "text": "影票、饭票免费领！",
+          "fontSize": 16,
+          "fontColor": "#016afe",
+          "backgroundImgUrl": "",
+          "backgroundImgUrlRel": "",
+          "backgroundColor": "#4D8FF3",
+          "backgroundOpacity": 100
+        },
+        subtitle: {
+          "text": "每天10点开抢",
+          "fontSize": 13,
+          "fontColor": "#4D8FF3"
+        },
+        "guideIconUrlRel": "./image/g1.png",
       },
       ad2: {
         banner: {
-          backgroundImgUrlRel: 'image/2.png',
+          "backgroundImgUrlRel": "./image/2.png",
+          "componentName": "1",
+          "backgroundColor": "",
+          "backgroundOpacity": 0,
+          "link": "",
+          "way": 0
         },
-        title: {},
-        subtitle: {}
+        title: {
+          "text": "资产达标、商品券马上拿！",
+          "fontSize": 16,
+          "fontColor": "#A78D43",
+          "backgroundImgUrl": "",
+          "backgroundImgUrlRel": "",
+          "backgroundColor": "",
+          "backgroundOpacity": 0
+        },
+        subtitle: {
+          "text": "每天10点开抢",
+          "fontSize": 13,
+          "fontColor": "#A78D43"
+        },
+        "guideIconUrlRel": "./image/g2.png",
+        "guideIconUrl": "./image/g2.png"
       },
       ad3: {
         banner: {
-          backgroundImgUrlRel: 'image/3.png',
+          "backgroundImgUrlRel": "./image/3.png",
+          "componentName": "1",
+          "backgroundColor": "",
+          "backgroundOpacity": 0,
+          "link": "",
+          "way": 0
         },
-        title: {},
-        subtitle: {}
+        title: {
+          "text": "聚益生金系列90天A款",
+          "fontSize": 16,
+          "fontColor": "#FFFFFF",
+          "backgroundImgUrl": "",
+          "backgroundImgUrlRel": "",
+          "backgroundColor": "",
+          "backgroundOpacity": 0
+        },
+        subtitle: {
+          "text": "0折免息 期限3个月",
+          "fontSize": 13,
+          "fontColor": "#FFFFFF"
+        },
+        "guideIconUrlRel": "./image/g3.png",
       },
       ad4: {
         banner: {
-          backgroundImgUrlRel: 'image/4.png',
+          "backgroundImgUrlRel": "./image/4.png",
+          "componentName": "1",
+          "backgroundColor": "",
+          "backgroundOpacity": 0,
+          "link": "http://",
+          "way": 0
         },
-        title: {},
-        subtitle: {}
+        title: {
+          "text": "聚益生金系列90天A款",
+          "fontSize": 16,
+          "fontColor": "#FDC927",
+          "backgroundImgUrl": "",
+          "backgroundImgUrlRel": "",
+          "backgroundColor": "",
+          "backgroundOpacity": 0
+        },
+        subtitle: {
+          "text": "0折免息 期限3个月",
+          "fontSize": 13,
+          "fontColor": "#FFFFFF"
+        },
+        "guideIconUrlRel": "./image/g4.png",
       },
       ad5: {
         banner: {
-          backgroundImgUrlRel: 'image/5.png',
+          "backgroundImgUrlRel": "./image/5.png",
+          "componentName": "1",
+          "backgroundColor": "",
+          "backgroundOpacity": 0,
+          "link": "http://",
+          "way": 0
         },
-        title: {},
-        subtitle: {}
+        title: {
+          "text": "聚益生金系列90天A款",
+          "fontSize": 16,
+          "fontColor": "#FDC927",
+          "backgroundImgUrl": "",
+          "backgroundImgUrlRel": "",
+          "backgroundColor": "",
+          "backgroundOpacity": 0
+        },
+        subtitle: {
+          "text": "0折免息 期限3个月",
+          "fontSize": 13,
+          "fontColor": "#FFFFFF"
+        },
+        "guideIconUrlRel": "./image/g5.png",
       }
     },
     hexOpacity2rgba: (color, opacity) => {
@@ -92,6 +267,35 @@ export default new Vuex.Store({
   },
 
   mutations: {
+    save (state) {
+      state.savedJson = Object.assign({}, {
+        backgroundLongImg: state.backgroundLongImg,
+        fixedFloatingWindow: state.fixedFloatingWindow,
+        floatText: state.floatText,
+        floatWindow: state.floatWindow,
+        subtitle: state.subtitle,
+        fixedBanner: state.fixedBanner,
+        footText: state.footText,
+        slideBanner: state.slideBanner,
+        adAreaMid: state.adAreaMid,
+        adAreaBottm: state.adAreaBottm,
+        fiveBanners: state.fiveBanners,
+      })
+    },
+    rollback (state) {
+      const { backgroundLongImg, fixedFloatingWindow, floatText, floatWindow, subtitle, fixedBanner, footText, slideBanner, adAreaMid, adAreaBottm, fiveBanners} = state.savedJson
+      state.backgroundLongImg = backgroundLongImg
+      state.fixedFloatingWindow = fixedFloatingWindow
+      state.floatText = floatText
+      state.floatWindow = floatWindow
+      state.subtitle = subtitle
+      state.fixedBanner = fixedBanner
+      state.footText = footText
+      state.slideBanner = slideBanner
+      state.adAreaMid = adAreaMid
+      state.adAreaBottm = adAreaBottm
+      state.fiveBanners = fiveBanners
+    },
     loadData (state, data) {
       const { backgroundLongImg, fixedFloatingWindow, floatText, floatWindow, subtitle, fixedBanner, footText, slideBanner, adAreaMid, adAreaBottm, fiveBanners} = data
       state.backgroundLongImg = backgroundLongImg

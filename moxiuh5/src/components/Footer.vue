@@ -22,18 +22,17 @@ export default {
   #foot-wrapper
     display flex
     justify-content center
-    height 100%
 
   .button
     flex 1 0 auto
     margin 0.3rem 1rem
+    height 40px
     border solid 1px rgb(51, 187, 172)
     border-radius 0.3rem
     cursor pointer
-    min-height 1rem
   
   .last-step
-    flex 0 1 7rem
+    flex 0 0 120px
     display flex
     justify-content center
     align-items center
@@ -42,7 +41,7 @@ export default {
       background-color rgb(226, 243, 241)
     
   .save
-    flex 0 1 7rem
+    flex 0 0 120px
     background-color rgb(0, 125, 113)
     color white
     display flex

@@ -13,15 +13,16 @@ export default {
     Home
   },
   methods: {
-    handleMessage (event) {
-      const data = event.data
-      if(data){
-        this.$store.commit('loadData', JSON.parse(data))
-      }
-    }
+    // handleMessage (event) {
+    //   const data = event.data
+    //   if(data){
+    //     this.$store.commit('loadData', JSON.parse(data))
+    //   }
+    // }
   },
   mounted() {
-    window.addEventListener('message', this.handleMessage);
+    this.$store.commit('save')
+    // window.addEventListener('message', this.handleMessage);
   },
 }
 </script>

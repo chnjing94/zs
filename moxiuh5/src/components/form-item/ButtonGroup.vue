@@ -10,7 +10,6 @@
       <div class="button confirm" @click="Confirm">确定</div>
     </div>
     <div class="notification">
-
       <span>注：{{notes}}</span>
     </div>
   </div>

@@ -1,12 +1,12 @@
 <template>
-  <div id="subtitle-wrapper" v-if="refresh">
+  <div id="subtitle-wrapper">
     <Title :title="'副标题'"/>
     <ImageUploader :title="'背景图片'" :preferSize="'540*60px'" :imgPrefix="'Subtitle'" :required="false" @success="uploadImageSuccess"/>
     <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
     <TextInput :title="'文字'" :placeholder="'请输入副标题文字'" :hint="'（支持最多16位中文汉字和英文输入，超过显示框的文字将不在手机端展示）'" v-model="text" :maxLength="16" noSymbol/>
     <FontSize v-model="fontSize"/>
     <FontColor v-model="fontColor"/>
-    <ButtonGroup :success="!editing&&showValidationMsg" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -33,38 +33,36 @@ export default {
   },
   data () {
     return {
-      refresh: true,
-      showValidationMsg: false,
-      editing: false,
-
       backgroundImgUrl: '',
       backgroundImgUrlRel: '',
       backgroundColor: '',
       backgroundOpacity: 0,
       text: '',
-      fontSize: 24,
-      fontColor: '#000000',
+      fontSize: 0,
+      fontColor: '',
     }
   },
   watch: {
-    output () {
-      this.editing = true
+    backgroundColor () {
+      this.commit({ backgroundColor: this.backgroundColor })
     },
-    dataLoaded () {
-      if (this.dataLoaded) {
-        this.reset(this.subtitle)
-      }
+    backgroundOpacity () {
+      this.commit({ backgroundOpacity: this.backgroundOpacity })
+    },
+    text () {
+      this.commit({ text: this.text })
+    },
+    fontSize () {
+      this.commit({ fontSize: this.fontSize })
+    },
+    fontColor () {
+      this.commit({ fontColor: this.fontColor })
     }
   },
   computed: {
     ...mapState({
-      dataLoaded: state => state.dataLoaded,
       subtitle: state => state.subtitle,
     }),
-    output () {
-      const { backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor } = this
-      return { backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor }
-    },
   },
   methods: {
     uploadImageSuccess (res) {
@@ -73,35 +71,25 @@ export default {
       this.commit({ backgroundImgUrlRel: res.data.RelativePath})
     },
     commit (payload) {
-      this.$store.commit('changeSubtitle', payload ? payload : this.output)
+      this.$store.commit('changeSubtitle', payload)
     },
     confirm () {
-      this.commit()
-      this.showValidationMsg = true
-      this.editing = false
+      this.$store.commit('save')
+      this.$store.commit('changeEditArea', '')
     },
     cancel () {
-      this.reset()
-      this.commit()
-      this.rerender()
-      this.showValidationMsg = false
-      this.editing = false
-    },
-    reset (data) {
-      this.backgroundImgUrl = data ? data.backgroundImgUrl : '',
-      this.backgroundImgUrlRel = data ? data.backgroundImgUrlRel : '',
-      this.backgroundColor = data ? data.backgroundColor : '',
-      this.backgroundOpacity = data ? data.backgroundOpacity : 0,
-      this.text = data ? data.text : '',
-      this.fontSize = data ? data.fontSize : 24,
-      this.fontColor = data ? data.fontColor : '#000000'
-    },
-    rerender () {
-      this.refresh= false
-      this.$nextTick(()=>{
-        this.refresh = true
-      })
+      this.$store.commit('rollback')
+      this.$store.commit('changeEditArea', '')
     }
+  },
+  created () {
+    this.backgroundImgUrl = this.subtitle.backgroundImgUrl,
+    this.backgroundImgUrlRel = this.subtitle.backgroundImgUrlRel,
+    this.backgroundColor = this.subtitle.backgroundColor,
+    this.backgroundOpacity = this.subtitle.backgroundOpacity,
+    this.text = this.subtitle.text,
+    this.fontSize = this.subtitle.fontSize,
+    this.fontColor = this.subtitle.fontColor
   }
 }
 </script>
