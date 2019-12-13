@@ -13,7 +13,7 @@
     <div id="app">
         <div class="main">
             <div class="left" @click="testClick">left</div>
-            <div class="right"><iframe width="100%" height="100%" src="http://localhost:8080/zs/index.html" ref="iframe"></iframe></div>
+            <div class="right"><iframe width="100%" height="100%" src="http://localhost:8888/zs/index.html" ref="iframe"></iframe></div>
         </div>
     </div>
     <script src='./data.js'></script>
@@ -48,15 +48,10 @@
                 handleMessage (event) {
                     window.console.log('From child')
                     const data = event.data
-                    if(data && data.code === "save"){
-                        window.console.log(JSON.stringify(data.tplObj))
-                    }
+                    window.console.log(data)
                 },
                 testClick () {
-                    this.iframeWin.postMessage({
-                        code: 'loadData',
-                        tplObj: config
-                    }, '*')
+                    this.iframeWin.postMessage(JSON.stringify({...config}), '*')
                 }
             }
         })

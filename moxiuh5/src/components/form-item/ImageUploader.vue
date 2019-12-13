@@ -66,7 +66,7 @@ export default {
       formData.append('pictype', '0')
       formData.append('file', this.$refs.imgInput.files[0])
       axios
-        .post('/Mpage/PicUpload_1573460781472', formData, { 'Content-Type':'multipart/form-data' })
+        .post('/Mpage/PicUpload', formData, { 'Content-Type':'multipart/form-data' })
         .then(response => {
           this.$emit('success', response)
           this.$refs.imgInput.value = ''

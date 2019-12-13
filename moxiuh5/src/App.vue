@@ -15,10 +15,8 @@ export default {
   methods: {
     handleMessage (event) {
       const data = event.data
-
-      if(data && data.code === "loadData"){
-          window.console.log(data.tplObj)
-          this.$store.commit('loadData', data.tplObj)
+      if(data){
+        this.$store.commit('loadData', JSON.parse(data))
       }
     }
   },

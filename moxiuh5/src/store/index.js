@@ -8,44 +8,74 @@ export default new Vuex.Store({
     currentBannerIndex: 0,
     dataLoaded: false,
 
-    backgroundLongImg: {},
-    fixedFloatingWindow: {},
+    backgroundLongImg: {
+      backgroundImgUrlRel: 'image/backlong.png'
+    },
+    fixedFloatingWindow: {
+      backgroundImgUrlRel: 'image/floatwindow.png',
+      componentName: "fixedfloatwindow",
+      backgroundColor: "",
+      link: 'http://',
+      way: 0
+    },
     floatText: {
+      backgroundImgUrlRel: 'image/floattext.png',
       text: '领导寄语',
       show: true
     },
     floatWindow: {},
-    subtitle: {},
-    fixedBanner: {},
+    subtitle: {
+      backgroundImgUrlRel: 'image/subtitle.png',
+    },
+    fixedBanner: {
+      backgroundImgUrlRel: 'image/pink.png',
+    },
     footText: {},
     slideBanner: {
-      banners: [{}]
+      backgroundImgUrlRel: 'image/subregiontitle.png',
+      banners: [{
+        backgroundImgUrlRel: 'image/slidebanner.png',
+      }]
     },
-    adAreaMid: {},
-    adAreaBottm: {},
+    adAreaMid: {
+      backgroundImgUrlRel: 'image/subregiontitle.png',
+    },
+    adAreaBottm: {
+      backgroundImgUrlRel: 'image/subregiontitle.png',
+    },
     fiveBanners: {
       ad1: {
-        banner: {},
+        banner: {
+          backgroundImgUrlRel: 'image/1.png',
+        },
         title: {},
         subtitle: {}
       },
       ad2: {
-        banner: {},
+        banner: {
+          backgroundImgUrlRel: 'image/2.png',
+        },
         title: {},
         subtitle: {}
       },
       ad3: {
-        banner: {},
+        banner: {
+          backgroundImgUrlRel: 'image/3.png',
+        },
         title: {},
         subtitle: {}
       },
       ad4: {
-        banner: {},
+        banner: {
+          backgroundImgUrlRel: 'image/4.png',
+        },
         title: {},
         subtitle: {}
       },
       ad5: {
-        banner: {},
+        banner: {
+          backgroundImgUrlRel: 'image/5.png',
+        },
         title: {},
         subtitle: {}
       }

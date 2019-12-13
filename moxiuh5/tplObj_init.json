@@ -1,0 +1,246 @@
+{
+    "backgroundLongImg": {
+        "backgroundImgUrlRel": "",
+        "backgroundImgUrl": ""
+    },
+    "fixedFloatingWindow": {
+        "backgroundImgUrlRel": "",
+        "componentName": "",
+        "backgroundImgUrl": "",
+        "link": "",
+        "way": 0
+    },
+    "floatText": {
+        "text": "领导寄语",
+        "backgroundImgUrlRel": "",
+        "componentName": "",
+        "backgroundImgUrl": "",
+        "backgroundColor": "",
+        "backgroundOpacity": 0,
+        "fontSize": 16,
+        "fontColor": "#000000",
+        "show": true
+    },
+    "floatWindow": {
+        "backgroundImgUrl": "",
+        "backgroundImgUrlRel": "",
+        "backgroundColor": "",
+        "backgroundOpacity": 0,
+        "text": "",
+        "fontSize": 16,
+        "fontColor": "#000000"
+    },
+    "subtitle": {
+        "backgroundImgUrlRel": "",
+        "backgroundImgUrl": "",
+        "backgroundColor": "",
+        "backgroundOpacity": 0,
+        "text": "",
+        "fontSize": 20,
+        "fontColor": "#000000"
+    },
+    "fixedBanner": {
+        "backgroundImgUrlRel": "",
+        "componentName": "",
+        "backgroundImgUrl": "",
+        "link": "",
+        "way": 0
+    },
+    "slideBanner": {
+        "banners": [
+            {
+                "backgroundImgUrlRel": "",
+                "guideIconUrlRel": "",
+                "componentName": "",
+                "backgroundImgUrl": "",
+                "backgroundColor": "",
+                "backgroundOpacity": 0,
+                "guideIconUrl": "",
+                "title": "",
+                "titleFontSize": 16,
+                "fontColor": "#000000",
+                "subtitle": "",
+                "subtitleFontSize": 14,
+                "subtitleFontColor": "#000000",
+                "link": "",
+                "way": 0
+            }
+        ],
+        "backgroundImgUrlRel": "",
+        "title": "",
+        "backgroundImgUrl": "",
+        "fontColor": "#000000",
+        "fontSize": 16,
+        "backgroundColor": "",
+        "backgroundOpacity": 0,
+        "subtitle": "",
+        "subtitleFontColor": "#000000",
+        "subtitleFontSize": 13
+    },
+    "adAreaMid": {
+        "backgroundImgUrlRel": "",
+        "title": "",
+        "backgroundImgUrl": "",
+        "fontColor": "#000000",
+        "fontSize": 16,
+        "backgroundColor": "",
+        "backgroundOpacity": 0,
+        "subtitle": "",
+        "subtitleFontColor": "#000000",
+        "subtitleFontSize": 13
+    },
+    "adAreaBottm": {
+        "backgroundImgUrlRel": "",
+        "title": "",
+        "backgroundImgUrl": "",
+        "fontColor": "#000000",
+        "fontSize": 16,
+        "backgroundColor": "",
+        "backgroundOpacity": 0,
+        "subtitle": "",
+        "subtitleFontColor": "#000000",
+        "subtitleFontSize": 13
+    },
+    "fiveBanners": {
+        "ad1": {
+            "banner": {
+                "backgroundImgUrlRel": "",
+                "componentName": "",
+                "backgroundImgUrl": "",
+                "backgroundColor": "",
+                "backgroundOpacity": 0,
+                "link": "",
+                "way": 0
+            },
+            "title": {
+                "text": "",
+                "fontSize": 16,
+                "fontColor": "#000000",
+                "backgroundImgUrl": "",
+                "backgroundImgUrlRel": "",
+                "backgroundColor": "",
+                "backgroundOpacity": 0
+            },
+            "subtitle": {
+                "text": "",
+                "fontSize": 13,
+                "fontColor": "#000000"
+            },
+            "guideIconUrlRel": "",
+            "guideIconUrl": ""
+        },
+        "ad2": {
+            "banner": {
+                "backgroundImgUrlRel": "",
+                "componentName": "",
+                "backgroundImgUrl": "",
+                "backgroundColor": "",
+                "backgroundOpacity": 0,
+                "link": "",
+                "way": 0
+            },
+            "title": {
+                "text": "",
+                "fontSize": 16,
+                "fontColor": "#000000",
+                "backgroundImgUrl": "",
+                "backgroundImgUrlRel": "",
+                "backgroundColor": "",
+                "backgroundOpacity": 0
+            },
+            "subtitle": {
+                "text": "",
+                "fontSize": 13,
+                "fontColor": "#000000"
+            },
+            "guideIconUrlRel": "",
+            "guideIconUrl": ""
+        },
+        "ad3": {
+            "banner": {
+                "backgroundImgUrlRel": "",
+                "componentName": "",
+                "backgroundImgUrl": "",
+                "backgroundColor": "",
+                "backgroundOpacity": 0,
+                "link": "",
+                "way": 0
+            },
+            "title": {
+                "text": "",
+                "fontSize": 16,
+                "fontColor": "#000000",
+                "backgroundImgUrl": "",
+                "backgroundImgUrlRel": "",
+                "backgroundColor": "",
+                "backgroundOpacity": 0
+            },
+            "subtitle": {
+                "text": "",
+                "fontSize": 13,
+                "fontColor": "#000000"
+            },
+            "guideIconUrlRel": "",
+            "guideIconUrl": ""
+        },
+        "ad4": {
+            "banner": {
+                "backgroundImgUrlRel": "",
+                "componentName": "",
+                "backgroundImgUrl": "",
+                "backgroundColor": "",
+                "backgroundOpacity": 0,
+                "link": "",
+                "way": 0
+            },
+            "title": {
+                "text": "",
+                "fontSize": 16,
+                "fontColor": "#000000",
+                "backgroundImgUrl": "",
+                "backgroundImgUrlRel": "",
+                "backgroundColor": "",
+                "backgroundOpacity": 0
+            },
+            "subtitle": {
+                "text": "",
+                "fontSize": 13,
+                "fontColor": "#000000"
+            },
+            "guideIconUrlRel": "",
+            "guideIconUrl": ""
+        },
+        "ad5": {
+            "banner": {
+                "backgroundImgUrlRel": "",
+                "componentName": "",
+                "backgroundImgUrl": "",
+                "backgroundColor": "",
+                "backgroundOpacity": 0,
+                "link": "",
+                "way": 0
+            },
+            "title": {
+                "text": "",
+                "fontSize": 16,
+                "fontColor": "#000000",
+                "backgroundImgUrl": "",
+                "backgroundImgUrlRel": "",
+                "backgroundColor": "",
+                "backgroundOpacity": 0
+            },
+            "subtitle": {
+                "text": "",
+                "fontSize": 13,
+                "fontColor": "#000000"
+            },
+            "guideIconUrlRel": "",
+            "guideIconUrl": ""
+        }
+    },
+    "footText": {
+        "text": "",
+        "fontSize": 13,
+        "fontColor": "#000000"
+    }
+}

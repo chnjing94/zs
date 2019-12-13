@@ -12,10 +12,7 @@ export default {
       save () {
         const { backgroundLongImg, fixedFloatingWindow, floatText, floatWindow, subtitle, fixedBanner, footText, slideBanner, adAreaMid, adAreaBottm, fiveBanners} = this.$store.state
 
-        window.parent.postMessage({
-          code:"save",
-          tplObj: { backgroundLongImg, fixedFloatingWindow, floatText, floatWindow, subtitle, fixedBanner, footText, slideBanner, adAreaMid, adAreaBottm, fiveBanners}
-        }, '*');
+        window.parent.postMessage(JSON.stringify({ backgroundLongImg, fixedFloatingWindow, floatText, floatWindow, subtitle, fixedBanner, footText, slideBanner, adAreaMid, adAreaBottm, fiveBanners}),'*');
       }
     }
 }

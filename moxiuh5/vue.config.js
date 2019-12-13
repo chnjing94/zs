@@ -1,6 +1,7 @@
 // vue.config.js
 module.exports = {
-  publicPath: '/zs/',
+  // publicPath: '/zs/',
+  // assetsDir: 'image',
   css: {
     loaderOptions: {
       less: {
