@@ -1,16 +1,16 @@
 <template>
-  <div id="banner-background-img" v-if="refresh">
+  <div id="banner-background-img">
     <Title :title="'banner图背景'"/>
     <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="componentName"/>
     <ErrorMsg :message="validateComponentName" v-if="validateComponentName&&showValidationMsg"/>
 
-    <ImageUploader :title="'背景图片'" :imgPrefix="'BannerBackgroundImg'+bannerId" :preferSize="'468*60px'" :required="false" @success="uploadImageSuccess"/>
+    <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :imgPrefix="'BannerBackgroundImg'+bannerId" :preferSize="'468*60px'" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
     <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
     <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" required v-model="link"/>
     <ErrorMsg :message="validteLink" v-if="validteLink&&showValidationMsg"/>
 
     <RedictWay v-model="way"/>
-    <ButtonGroup :success="validated&&!editing&&showValidationMsg" @buttonConfirmed="confirm" @buttonCanceled="cancel"/>
+    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel"/>
   </div>
 </template>
 
@@ -43,12 +43,10 @@ export default {
   },
   data () {
     return {
-      refresh: true,
       showValidationMsg: false,
-      editing: false,
       
       componentName: '',
-      backgroundImgUrl: '',
+      backgroundImgName: '',
       backgroundImgUrlRel: '',
       backgroundColor: '',
       backgroundOpacity: 0,
@@ -58,23 +56,20 @@ export default {
   },
   watch: {
     output () {
-      this.editing = true
+      this.commit()
     },
-    dataLoaded () {
-      if (this.dataLoaded) {
-        this.reset(this.fiveBanners[this.bannerId].banner)
-      }
+    bannerId () {
+      this.load()
     }
   },
   computed: {
     ...mapState({
-      dataLoaded: state => state.dataLoaded,
       fiveBanners: state => state.fiveBanners,
     }),
     output () {
-      const { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, link, way } = this
+      const { componentName, backgroundImgName, backgroundImgUrlRel, backgroundColor, backgroundOpacity, link, way } = this
       return { 
-        payload: { componentName, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity, link, way },
+        payload: { componentName, backgroundImgName, backgroundImgUrlRel, backgroundColor, backgroundOpacity, link, way },
         n: this.bannerId
       }
     },    
@@ -97,42 +92,40 @@ export default {
   },
   methods: {
     uploadImageSuccess (res) {
-      this.backgroundImgUrl = res.data.AbsPath
+      this.backgroundImgName = res.fileName
       this.backgroundImgUrlRel = res.data.RelativePath
-      this.commit({ payload: { backgroundImgUrlRel: res.data.RelativePath }, n: this.bannerId })
     },
-    commit (payload) {
-      this.$store.commit('changeFiveBannersBackground', payload ? payload : this.output)
+    removeImg () {
+      this.backgroundImgName = ''
+      this.backgroundImgUrlRel = ''
+    },
+    commit () {
+      this.$store.commit('changeFiveBannersBackground', this.output)
     },
     confirm () {
       if (this.validated) {
-        this.commit()
+        this.$store.commit('save')
+        this.$store.commit('changeEditArea', '')      
       }
       this.showValidationMsg = true
-      this.editing = false
     },
     cancel () {
-      this.reset()
-      this.commit()
-      this.rerender()
-      this.showValidationMsg = false
-      this.editing = false
+      this.$store.commit('rollback')
+      this.$store.commit('changeEditArea', '')
     },
-    reset (data) {
-      this.componentName = data ? data.componentName : '',
-      this.backgroundImgUrl = data ? data.backgroundImgUrl : '',
-      this.backgroundImgUrlRel = data ? data.backgroundImgUrlRel : '',
-      this.backgroundColor = data ? data.backgroundColor : '',
-      this.backgroundOpacity = data ? data.backgroundOpacity : 0,
-      this.link = data ? data.link : '',
-      this.way = data ? data.way : 0
+    load () {
+      const data = this.fiveBanners[this.bannerId].banner
+      this.componentName = data.componentName,
+      this.backgroundImgName = data.backgroundImgName,
+      this.backgroundImgUrlRel = data.backgroundImgUrlRel,
+      this.backgroundColor = data.backgroundColor,
+      this.backgroundOpacity = data.backgroundOpacity,
+      this.link = data.link,
+      this.way = data.way
     },
-    rerender () {
-      this.refresh= false
-      this.$nextTick(()=>{
-        this.refresh = true
-      })
-    }
+  },
+  created () {
+    this.load()
   }
 }
 </script>

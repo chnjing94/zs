@@ -5,6 +5,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     savedJson: {},
+    resPath: './image/',
     editAreaId: 'BackgroundLongImg',
     currentBannerIndex: 0,
     dataLoaded: false,
@@ -41,7 +42,7 @@ export default new Vuex.Store({
       fontColor: '#000000'
     },
     subtitle: {
-      backgroundImgUrl: '',
+      backgroundImgName: 'subtitle.png',
       backgroundImgUrlRel: './image/subtitle.png',
       backgroundColor: '',
       backgroundOpacity: 0,
@@ -50,7 +51,11 @@ export default new Vuex.Store({
       fontColor: '#FFFFFF',
     },
     fixedBanner: {
+      componentName: 'fixedBanner',
+      backgroundImgName: 'pink.png',
       backgroundImgUrlRel: './image/pink.png',
+      link: 'http://',
+      way: 0
     },
     footText: {
       text: '基金过往业绩并不预示其未来表现市场有风险,投资需谨慎',
@@ -60,7 +65,7 @@ export default new Vuex.Store({
     slideBanner: {
       backgroundImgUrlRel: './image/subregiontitle.png',
       title: '活动专区',
-      backgroundImgUrl: '',
+      backgroundImgName: 'subregiontitle.png',
       fontColor: '#A78D43',
       fontSize: 16,
       backgroundColor: '',
@@ -69,7 +74,9 @@ export default new Vuex.Store({
       subtitleFontColor: '#000000',
       subtitleFontSize: 13,
       banners: [{
+        "backgroundImgName": 'slidebanner.png',
         "backgroundImgUrlRel": './image/slidebanner.png',
+        "guideIconName": "go.png",
         "guideIconUrlRel": "./image/go.png",
         "componentName": "banner1",
         "backgroundImgUrl": "",
@@ -82,30 +89,31 @@ export default new Vuex.Store({
         "subtitle": "中奖可获得99",
         "subtitleFontSize": 14,
         "subtitleFontColor": "#fb5d05",
-        "link": "",
+        "link": "https://t.cmbchina.com/zamQJn",
         "way": 0
       },
       {
         "componentName": "2",
-        "backgroundImgUrl": "",
+        "backgroundImgName": "",
         "backgroundImgUrlRel": "",
         "backgroundColor": "#FDC927",
         "backgroundOpacity": 0,
-        "guideIconUrl": "",
+        "guideIconName": "",
+        "guideIconUrlRel": "",
         "title": "Banner2",
         "titleFontSize": 16,
         "fontColor": "#FF5547",
         "subtitle": "test2",
         "subtitleFontSize": 14,
         "subtitleFontColor": "#000000",
-        "link": "",
+        "link": "https://t.cmbchina.com/zamQJn",
         "way": 0
       }]
     },
     adAreaMid: {
       "backgroundImgUrlRel": "./image/subregiontitle.png",
       "title": "福利票券",
-      "backgroundImgUrl": "",
+      "backgroundImgName": 'subregiontitleadAreaMid.png',
       "fontColor": "#F1A553",
       "fontSize": 16,
       "backgroundColor": "#FFFFFF",
@@ -117,12 +125,12 @@ export default new Vuex.Store({
     adAreaBottm: {
       "backgroundImgUrlRel": './image/subregiontitle.png',
       "title": "薪享理财",
-      "backgroundImgUrl": "",
+      "backgroundImgName": 'subregiontitleadAreaBottm.png',
       "fontColor": "#A78D43",
       "fontSize": 16,
       "backgroundColor": "",
       "backgroundOpacity": 0,
-      "subtitle": "工资卡专享，限时抢购！",
+      "subtitle": "工资卡专享限时抢购",
       "subtitleFontColor": "#FFFFFF",
       "subtitleFontSize": 13
     },
@@ -131,42 +139,44 @@ export default new Vuex.Store({
         banner: {
           "backgroundImgUrlRel": "./image/1.png",
           "componentName": "123",
-          "backgroundImgUrl": "",
+          "backgroundImgName": "1.png",
           "backgroundColor": "",
           "backgroundOpacity": 0,
-          "link": "",
+          "link": "http://",
           "way": 0
         },
         title: {
           "text": "影票、饭票免费领！",
           "fontSize": 16,
           "fontColor": "#016afe",
-          "backgroundImgUrl": "",
+          "backgroundImgName": "",
           "backgroundImgUrlRel": "",
-          "backgroundColor": "#4D8FF3",
-          "backgroundOpacity": 100
+          "backgroundColor": "",
+          "backgroundOpacity": 0
         },
         subtitle: {
           "text": "每天10点开抢",
           "fontSize": 13,
           "fontColor": "#4D8FF3"
         },
-        "guideIconUrlRel": "./image/g1.png",
+        "guideIconName": "g1.png",
+        "guideIconUrlRel": "./image/g1.png"
       },
       ad2: {
         banner: {
           "backgroundImgUrlRel": "./image/2.png",
+          "backgroundImgName": "2.png",
           "componentName": "1",
           "backgroundColor": "",
           "backgroundOpacity": 0,
-          "link": "",
+          "link": "http://",
           "way": 0
         },
         title: {
           "text": "资产达标、商品券马上拿！",
           "fontSize": 16,
           "fontColor": "#A78D43",
-          "backgroundImgUrl": "",
+          "backgroundImgName": "",
           "backgroundImgUrlRel": "",
           "backgroundColor": "",
           "backgroundOpacity": 0
@@ -177,22 +187,23 @@ export default new Vuex.Store({
           "fontColor": "#A78D43"
         },
         "guideIconUrlRel": "./image/g2.png",
-        "guideIconUrl": "./image/g2.png"
+        "guideIconName": "g2.png"
       },
       ad3: {
         banner: {
           "backgroundImgUrlRel": "./image/3.png",
+          "backgroundImgName": "3.png",
           "componentName": "1",
           "backgroundColor": "",
           "backgroundOpacity": 0,
-          "link": "",
+          "link": "http://",
           "way": 0
         },
         title: {
           "text": "聚益生金系列90天A款",
           "fontSize": 16,
           "fontColor": "#FFFFFF",
-          "backgroundImgUrl": "",
+          "backgroundImgName": "",
           "backgroundImgUrlRel": "",
           "backgroundColor": "",
           "backgroundOpacity": 0
@@ -203,10 +214,12 @@ export default new Vuex.Store({
           "fontColor": "#FFFFFF"
         },
         "guideIconUrlRel": "./image/g3.png",
+        "guideIconName": "g3.png"
       },
       ad4: {
         banner: {
           "backgroundImgUrlRel": "./image/4.png",
+          "backgroundImgName": "4.png",
           "componentName": "1",
           "backgroundColor": "",
           "backgroundOpacity": 0,
@@ -217,7 +230,7 @@ export default new Vuex.Store({
           "text": "聚益生金系列90天A款",
           "fontSize": 16,
           "fontColor": "#FDC927",
-          "backgroundImgUrl": "",
+          "backgroundImgName": "",
           "backgroundImgUrlRel": "",
           "backgroundColor": "",
           "backgroundOpacity": 0
@@ -228,10 +241,12 @@ export default new Vuex.Store({
           "fontColor": "#FFFFFF"
         },
         "guideIconUrlRel": "./image/g4.png",
+        "guideIconName": "g4.png"
       },
       ad5: {
         banner: {
           "backgroundImgUrlRel": "./image/5.png",
+          "backgroundImgName": "5.png",
           "componentName": "1",
           "backgroundColor": "",
           "backgroundOpacity": 0,
@@ -242,7 +257,7 @@ export default new Vuex.Store({
           "text": "聚益生金系列90天A款",
           "fontSize": 16,
           "fontColor": "#FDC927",
-          "backgroundImgUrl": "",
+          "backgroundImgName": "",
           "backgroundImgUrlRel": "",
           "backgroundColor": "",
           "backgroundOpacity": 0
@@ -253,6 +268,7 @@ export default new Vuex.Store({
           "fontColor": "#FFFFFF"
         },
         "guideIconUrlRel": "./image/g5.png",
+        "guideIconName": "g5.png"
       }
     },
     hexOpacity2rgba: (color, opacity) => {
@@ -276,10 +292,10 @@ export default new Vuex.Store({
         subtitle: state.subtitle,
         fixedBanner: state.fixedBanner,
         footText: state.footText,
-        slideBanner: state.slideBanner,
+        slideBanner: JSON.parse(JSON.stringify(state.slideBanner)),
         adAreaMid: state.adAreaMid,
         adAreaBottm: state.adAreaBottm,
-        fiveBanners: state.fiveBanners,
+        fiveBanners: JSON.parse(JSON.stringify(state.fiveBanners)),
       })
     },
     rollback (state) {
@@ -291,10 +307,10 @@ export default new Vuex.Store({
       state.subtitle = subtitle
       state.fixedBanner = fixedBanner
       state.footText = footText
-      state.slideBanner = slideBanner
+      state.slideBanner = JSON.parse(JSON.stringify(slideBanner))
       state.adAreaMid = adAreaMid
       state.adAreaBottm = adAreaBottm
-      state.fiveBanners = fiveBanners
+      state.fiveBanners = JSON.parse(JSON.stringify(fiveBanners))
     },
     loadData (state, data) {
       const { backgroundLongImg, fixedFloatingWindow, floatText, floatWindow, subtitle, fixedBanner, footText, slideBanner, adAreaMid, adAreaBottm, fiveBanners} = data
@@ -310,6 +326,10 @@ export default new Vuex.Store({
       state.adAreaBottm = adAreaBottm
       state.fiveBanners = fiveBanners
       state.dataLoaded = true
+    },
+
+    changeResPath(state, data) {
+      state.resPath = data
     },
 
     changeEditArea(state, data) {
@@ -373,11 +393,8 @@ export default new Vuex.Store({
     },
 
     changeSlideBanner (state, data) {
-      Vue.set(state.slideBanner.banners, data.n, {...state.slideBanner.banners[data.n], ...data.payload})
-    },
-
-    deleteSlideBanner (state, data) {
-      state.slideBanner.banners.splice(data, 1)
+      state.slideBanner.banners = data
+      // Vue.set(state.slideBanner.banners, data.n, {...state.slideBanner.banners[data.n], ...data.payload})
     },
 
     setCurrentBannerIndex (state, data) {

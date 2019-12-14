@@ -191,6 +191,7 @@ export default {
 
   .subregion-sub-title
     flex 5 0 auto
+    text-align center
 
   #banner-title-1
     position absolute

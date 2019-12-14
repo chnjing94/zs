@@ -20,6 +20,9 @@
     <div class="warning" v-if="exceedMaxFileSize" >
       <span style="color: red">图片大小超出限制</span>
     </div>
+    <div class="warning" v-if="uploadFailed" >
+      <span style="color: red">图片上传失败</span>
+    </div>
   </div>
 </template>
 
@@ -50,6 +53,7 @@ export default {
   data () {
     return {
       exceedMaxFileSize: false,
+      uploadFailed: false,
     }
   },
   methods: {
@@ -76,8 +80,21 @@ export default {
       axios
         .post('/Mpage/PicUpload', formData, { 'Content-Type':'multipart/form-data' })
         .then(response => {
-          this.$emit('success', Object.assign(response, {fileName: this.$refs.imgInput.files[0].name}))
+          const res = {
+            fileName: this.$refs.imgInput.files[0].name,
+            data: {
+              RelativePath: this.$store.state.resPath + response.data.AbsPath
+            }
+          }
+          this.$emit('success', res)
           this.$refs.imgInput.value = ''
+        })
+        .catch(() => {
+          this.uploadFailed = true
+          this.$refs.imgInput.value = ''
+          setTimeout(()=> {
+            this.uploadFailed = false
+          }, 3000)
         })
     },
 

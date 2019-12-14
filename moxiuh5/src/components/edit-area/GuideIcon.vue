@@ -1,8 +1,8 @@
 <template>
-  <div id="guide-icon" v-if="refresh">
+  <div id="guide-icon">
     <Title :title="'引导图标'"/>
-    <ImageUploader :preferSize="'175*50px'" :imgPrefix="'GuideIcon'+bannerId" :required="false" @success="uploadImageSuccess"/>
-    <ButtonGroup :success="!editing&&showValidationMsg" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ImageUploader :preferSize="'175*50px'" :fileName="guideIconName" :imgPrefix="'GuideIcon'+bannerId" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
+    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -27,71 +27,58 @@ export default {
   },
   data () {
     return {
-      refresh: true,
-      showValidationMsg: false,
-      editing: false,
-      
-      guideIconUrl: '',
+      guideIconName: '',
       guideIconUrlRel: ''
     }
   },
   watch: {
     output () {
-      this.editing = true
+      this.commit()
     },
-    dataLoaded () {
-      if (this.dataLoaded) {
-        this.reset(this.fiveBanners[this.bannerId])
-      }
+    bannerId () {
+      this.load()
     }
   },
   computed: {
     ...mapState({
-      dataLoaded: state => state.dataLoaded,
       fiveBanners: state => state.fiveBanners,
     }),
     output () {
-      const { guideIconUrl, guideIconUrlRel } = this
+      const { guideIconName, guideIconUrlRel } = this
       return {
-        payload: { guideIconUrl, guideIconUrlRel },
+        payload: { guideIconName, guideIconUrlRel },
         n: this.bannerId
       }
     },
   },
   methods: {      
     uploadImageSuccess (res) {
-      this.guideIconUrl = res.data.AbsPath
+      this.guideIconName = res.fileName
       this.guideIconUrlRel = res.data.RelativePath
-      this.commit({
-        payload: {guideIconUrlRel: res.data.RelativePath },
-        n: this.bannerId
-      })
     },
-    commit (payload) {
-      this.$store.commit('changeFiveBannersGuideIcon', payload ? payload : this.output)
+    removeImg () {
+      this.guideIconName = ''
+      this.guideIconUrlRel = ''
+    },
+    commit () {
+      this.$store.commit('changeFiveBannersGuideIcon', this.output)
     },
     confirm () {
-      this.commit()
-      this.showValidationMsg = true
-      this.editing = false
+      this.$store.commit('save')
+      this.$store.commit('changeEditArea', '')  
     },
     cancel () {
-      this.reset()
-      this.commit()
-      this.rerender()
-      this.showValidationMsg = false
-      this.editing = false
+      this.$store.commit('rollback')
+      this.$store.commit('changeEditArea', '')
     },
-    reset (data) {
-      this.guideIconUrl = data ? data.guideIconUrl : '',
-      this.guideIconUrlRel = data ? data.guideIconUrlRel : ''
-    },
-    rerender () {
-      this.refresh= false
-      this.$nextTick(()=>{
-        this.refresh = true
-      })
+    load () {
+      const data = this.fiveBanners[this.bannerId]
+      this.guideIconName = data.guideIconName,
+      this.guideIconUrlRel = data.guideIconUrlRel
     }
+  },
+  created () {
+    this.load()
   }
 }
 </script>

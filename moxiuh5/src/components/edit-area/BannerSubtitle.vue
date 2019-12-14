@@ -1,5 +1,5 @@
 <template>
-  <div id="banner-subtitle" v-if="refresh">
+  <div id="banner-subtitle">
     <Title :title="'分区副标题'"/>
     <TextInput :title="'文字'" :placeholder="'请输入副标题文字'" :hint="'（支持12位字符、中文汉字和英文输入，超过展示区域手机端不展示）'" :maxLength="12" v-model="text"/>
     <FontColor v-model="fontColor"/>
@@ -30,28 +30,18 @@ export default {
   },
   data () {
     return {
-      refresh: true,
-      showValidationMsg: false,
-      editing: false,
-
       text: '',
-      fontSize: 13,
-      fontColor: '#000000'
+      fontSize: 0,
+      fontColor: ''
     }
   },
   watch: {
     output () {
-      this.editing = true
+      this.commit()
     },
-    dataLoaded () {
-      if (this.dataLoaded) {
-        this.reset(this.fiveBanners[this.bannerId].subtitle)
-      }
-    }
   },
   computed: {
     ...mapState({
-      dataLoaded: state => state.dataLoaded,
       fiveBanners: state => state.fiveBanners,
     }),
     output () {
@@ -67,28 +57,22 @@ export default {
       this.$store.commit('changeFiveBannersSubtitle', this.output)
     },
     confirm () {
-      this.commit()
-      this.showValidationMsg = true
-      this.editing = false
+      this.$store.commit('save')
+      this.$store.commit('changeEditArea', '')  
     },
     cancel () {
-      this.reset()
-      this.commit()
-      this.rerender()
-      this.showValidationMsg = false
-      this.editing = false
+      this.$store.commit('rollback')
+      this.$store.commit('changeEditArea', '')
     },
-    reset (data) {
-      this.text = data ? data.text : '',
-      this.fontSize = data ? data.fontSize : 13,
-      this.fontColor = data ? data.fontColor : '#000000'
-    },
-    rerender () {
-      this.refresh= false
-      this.$nextTick(()=>{
-        this.refresh = true
-      })
+    load () {
+      const data = this.fiveBanners[this.bannerId].subtitle
+      this.text = data.text,
+      this.fontSize = data.fontSize,
+      this.fontColor = data.fontColor
     }
+  },
+  created () {
+    this.load()
   }
 }
 </script>

@@ -1,133 +1,133 @@
 const backgroundLongImg = {
   Status: "0",
-  AbsPath: "http://localhost:8888/backlong.png",
-  RelativePath: "http://localhost:8888/backlong.png",
+  AbsPath: "backlong.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const FixedFloatWindow = {
   Status: "0",
-  AbsPath: "http://localhost:8888/floatwindow.png",
-  RelativePath: "http://localhost:8888/floatwindow.png",
+  AbsPath: "floatwindow.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const FloatText = {
   Status: "0",
-  AbsPath: "http://localhost:8888/floattext.png",
-  RelativePath: "http://localhost:8888/floattext.png",
+  AbsPath: "floattext.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const Subtitle = {
   Status: "0",
-  AbsPath: "http://localhost:8888/subtitle.png",
-  RelativePath: "http://localhost:8888/subtitle.png",
+  AbsPath: "subtitle.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const FixedBanner = {
   Status: "0",
-  AbsPath: "http://localhost:8888/pink.png",
-  RelativePath: "http://localhost:8888/pink.png",
+  AbsPath: "pink.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const SlideBannerTitle = {
   Status: "0",
-  AbsPath: "http://localhost:8888/subregiontitle.png",
-  RelativePath: "http://localhost:8888/subregiontitle.png",
+  AbsPath: "subregiontitle.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const BannerBackgroundImgad1 = {
   Status: "0",
-  AbsPath: "http://localhost:8888/1.png",
-  RelativePath: "http://localhost:8888/1.png",
+  AbsPath: "1.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const BannerBackgroundImgad2 = {
   Status: "0",
-  AbsPath: "http://localhost:8888/2.png",
-  RelativePath: "http://localhost:8888/2.png",
+  AbsPath: "2.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const BannerBackgroundImgad3 = {
   Status: "0",
-  AbsPath: "http://localhost:8888/3.png",
-  RelativePath: "http://localhost:8888/3.png",
+  AbsPath: "3.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const BannerBackgroundImgad4 = {
   Status: "0",
-  AbsPath: "http://localhost:8888/4.png",
-  RelativePath: "http://localhost:8888/4.png",
+  AbsPath: "4.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const BannerBackgroundImgad5 = {
   Status: "0",
-  AbsPath: "http://localhost:8888/5.png",
-  RelativePath: "http://localhost:8888/5.png",
+  AbsPath: "5.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const BannerTitle = {
   Status: "0",
-  AbsPath: "http://localhost:8888/6.png",
-  RelativePath: "http://localhost:8888/6.png",
+  AbsPath: "6.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const BannerGuideIcon1 = {
   Status: "0",
-  AbsPath: "http://localhost:8888/g1.png",
-  RelativePath: "http://localhost:8888/g1.png",
+  AbsPath: "g1.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const BannerGuideIcon2 = {
   Status: "0",
-  AbsPath: "http://localhost:8888/g2.png",
-  RelativePath: "http://localhost:8888/g2.png",
+  AbsPath: "g2.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const BannerGuideIcon3 = {
   Status: "0",
-  AbsPath: "http://localhost:8888/g3.png",
-  RelativePath: "http://localhost:8888/g3.png",
+  AbsPath: "g3.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const BannerGuideIcon4 = {
   Status: "0",
-  AbsPath: "http://localhost:8888/g4.png",
-  RelativePath: "http://localhost:8888/g4.png",
+  AbsPath: "g4.png",
+  RelativePath: "",
   Msg: "",
 }
 
 const BannerGuideIcon5 = {
   Status: "0",
-  AbsPath: "http://localhost:8888/g5.png",
-  RelativePath: "http://localhost:8888/g5.png",
+  AbsPath: "g5.png",
+  RelativePath: "g5.png",
   Msg: "",
 }
 
 const SlideBannerBG = {
   Status: "0",
-  AbsPath: "http://localhost:8888/slidebanner.png",
-  RelativePath: "http://localhost:8888/slidebanner.png",
+  AbsPath: "slidebanner.png",
+  RelativePath: "slidebanner.png",
   Msg: "",
 }
 
 const SlideBannerGuide = {
   Status: "0",
-  AbsPath: "http://localhost:8888/go.png",
-  RelativePath: "http://localhost:8888/go.png",
+  AbsPath: "go.png",
+  RelativePath: "go.png",
   Msg: "",
 }
 

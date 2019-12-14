@@ -13,16 +13,27 @@ export default {
     Home
   },
   methods: {
-    // handleMessage (event) {
-    //   const data = event.data
-    //   if(data){
-    //     this.$store.commit('loadData', JSON.parse(data))
-    //   }
-    // }
+    handleMessage (event) {
+      try {
+        if (!event.data) {
+          return false
+        }
+        const json = JSON.parse(event.data)
+        this.$store.commit('loadData', json)
+        this.$store.commit('save')
+        const resPath = window.parent.document.getElementById('resPath').value
+        if (resPath) {
+          this.$store.commit('changeResPath', resPath)
+        }
+      }
+      catch(e) {
+        return
+      }
+    }
   },
   mounted() {
     this.$store.commit('save')
-    // window.addEventListener('message', this.handleMessage);
+    window.addEventListener('message', this.handleMessage);
   },
 }
 </script>

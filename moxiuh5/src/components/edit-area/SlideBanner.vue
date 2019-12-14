@@ -1,26 +1,28 @@
 <template>
-  <div id="slide-banner" v-if="refresh">
+  <div id="slide-banner">
     <Title :title="'滑动banner图'" :subtitle="'配置多张可滑动，5秒自动切换，最多可配置5张'"/>
-    <div v-for="(banner,index) in banners" :key="index" @click="selectBanner(index)" :class="{delete: index===deleteIndex}">
-      <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="banner.componentName"/>
-      <ErrorMsg :message="validateComponentName(index)" v-if="validateComponentName(index)&&showValidationMsg"/>
+    <div class="form">
+      <div v-for="(banner,index) in banners" :key="index" @click="selectBanner(index)" :class="{delete: index===deleteIndex}">
+        <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="banner.componentName"/>
+        <ErrorMsg :message="validateComponentName(index)" v-if="validateComponentName(index)&&showValidationMsg"/>
 
-      <ImageUploader :title="'背景图片'+(index+1)" :imgPrefix="'SlideBannerBG'" :preferSize="'502*224px'" :required="false" @success="uploadImageSuccess"/>
-      <BackgroundColor :title="'背景颜色'+(index+1)" v-model="banner.backgroundColor" :opacity.sync="banner.backgroundOpacity"/>
-      <ImageUploader :title="'引导图标'+(index+1)" :imgPrefix="'SlideBannerGuide'" :preferSize="'72x72px'" :required="false" @success="uploadGuideIconSuccess"/>
-      <TextInput :title="'主标题'" :hint="'（支持7位中文汉字和英文输入，超过展示区域文字的内容不在手机端展示）'" :placeholder="'请输入主标题文字'" noSymbol :maxLength="7" v-model="banner.title"/>
-      <FontColor v-model="banner.fontColor"/>
-      <TextInput :title="'副标题'" :hint="'（支持7位中文汉字和英文输入输入，超过7位不展示）'" :placeholder="'请输入副标题文字'" noSymbol :maxLength="7" v-model="banner.subtitle"/>
-      <FontColor v-model="banner.subtitleFontColor"/>
-      <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" required v-model="banner.link"/>
-      <ErrorMsg :message="validateLink(index)" v-if="validateLink(index)&&showValidationMsg"/>
-      <RedictWay v-model="banner.way"/>
-      <div class="edit-button">
-        <div class="button add" v-if="index==banners.length-1" @click="addBanner"><a-icon type="plus" /></div>
-        <div class="button delete" @click="deleteBanner(index)"><a-icon type="minus" /></div>
+        <ImageUploader :title="'背景图片'+(index+1)" :fileName="banner.backgroundImgName" :imgPrefix="'SlideBannerBG'" :preferSize="'502*224px'" :required="false" @success="uploadImageSuccess" @remove="removeBackgroundImg(banner)"/>
+        <BackgroundColor :title="'背景颜色'+(index+1)" v-model="banner.backgroundColor" :opacity.sync="banner.backgroundOpacity"/>
+        <ImageUploader :title="'引导图标'+(index+1)" :fileName="banner.guideIconName" :imgPrefix="'SlideBannerGuide'" :preferSize="'72x72px'" :required="false" @success="uploadGuideIconSuccess" @remove="removeIconImg(banner)"/>
+        <TextInput :title="'主标题'" :hint="'（支持7位中文汉字和英文输入，超过展示区域文字的内容不在手机端展示）'" :placeholder="'请输入主标题文字'" noSymbol :maxLength="7" v-model="banner.title"/>
+        <FontColor v-model="banner.fontColor"/>
+        <TextInput :title="'副标题'" :hint="'（支持7位中文汉字和英文输入输入，超过7位不展示）'" :placeholder="'请输入副标题文字'" noSymbol :maxLength="7" v-model="banner.subtitle"/>
+        <FontColor v-model="banner.subtitleFontColor"/>
+        <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" required v-model="banner.link"/>
+        <ErrorMsg :message="validateLink(index)" v-if="validateLink(index)&&showValidationMsg"/>
+        <RedictWay v-model="banner.way"/>
+        <div class="edit-button">
+          <div class="button add" v-if="index==banners.length-1" @click="addBanner"><a-icon type="plus" /></div>
+          <div class="button delete" @click="deleteBanner(index)"><a-icon type="minus" /></div>
+        </div>
       </div>
     </div>
-    <ButtonGroup :success="validated&&!editing&&showValidationMsg" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -49,9 +51,8 @@ export default {
   },
   data () {
     return {
-      refresh: true,
       showValidationMsg: false,
-      editing: false,
+
       currentBannerIndex: 0,
       deleteIndex: '',
       banners: []
@@ -59,17 +60,11 @@ export default {
   },
   watch: {
     output () {
-      this.editing = true
-    },
-    dataLoaded () {
-      if (this.dataLoaded) {
-        this.reset(this.slideBanner.banners)
-      }
+      this.commit()
     }
   },
   computed: {
     ...mapState({
-      dataLoaded: state => state.dataLoaded,
       slideBanner: state => state.slideBanner
     }),
     output () {
@@ -115,24 +110,24 @@ export default {
     },
     uploadGuideIconSuccess (res) {
       const index = this.currentBannerIndex
-      this.banners[index].guideIconUrl = res.data.AbsPath
+      this.banners[index].guideIconName = res.fileName
       this.banners[index].guideIconUrlRel = res.data.RelativePath
-      this.commit({
-        payload: { guideIconUrlRel: res.data.RelativePath },
-        n: index
-      })
     },
     uploadImageSuccess (res) {
       const index = this.currentBannerIndex
-      this.banners[index].backgroundImgUrl = res.data.AbsPath
+      this.banners[index].backgroundImgName = res.fileName
       this.banners[index].backgroundImgUrlRel = res.data.RelativePath
-      this.commit({
-        payload: { backgroundImgUrlRel: res.data.RelativePath },
-        n: index
-      })
     },
-    commit (payload) {
-      this.$store.commit('changeSlideBanner', payload )
+    removeBackgroundImg (banner) {
+      banner.backgroundImgName = '',
+      banner.backgroundImgUrlRel = ''
+    },
+    removeIconImg (banner) {
+      banner.guideIconName = '',
+      banner.guideIconUrlRel = ''
+    },
+    commit () {
+      this.$store.commit('changeSlideBanner', this.banners )
     },
     addBanner () {
       if (this.banners.length >=5) {
@@ -140,11 +135,12 @@ export default {
       }
       this.banners.push({
         "componentName": "",
-        "backgroundImgUrl": "",
+        "backgroundImgName": "",
         "backgroundImgUrlRel": "",
         "backgroundColor": "",
         "backgroundOpacity": 0,
-        "guideIconUrl": "",
+        "guideIconName": "",
+        "guideIconUrlRel": "",
         "title": "",
         "titleFontSize": 16,
         "fontColor": "#000000",
@@ -161,58 +157,35 @@ export default {
         this.banners.splice(index, 1)
         this.deleteIndex = ''
         this.currentBannerIndex = 0
-        this.$store.commit('deleteSlideBanner', index )
         this.$store.commit('setCurrentBannerIndex', 0 )
         if (this.banners.length === 0) {
           this.addBanner()
-          this.rerender()
         }
       }, 600)
 
     },
     selectBanner (index) {
-      this.currentBannerIndex = index
-      this.$store.commit('setCurrentBannerIndex', index )
+      if (index !== this.currentBannerIndex){
+        this.currentBannerIndex = index
+        this.$store.commit('setCurrentBannerIndex', index)
+      }
     },
     confirm () {
       if (this.validated) {
-        this.banners.forEach((banner,index) => {
-          this.commit({
-            payload: banner,
-            n: index
-          })
-        })
+        this.$store.commit('save')
+        this.$store.commit('changeEditArea', '')      
+        this.$store.commit('setCurrentBannerIndex', 0)
       }
       this.showValidationMsg = true
-      this.editing = false
     },
     cancel () {
-      for (let i = 0; i < this.banners.length; i++) { 
-        this.$store.commit('deleteSlideBanner', 0 )
-      }
-      this.$store.commit('setCurrentBannerIndex', '' )
-      this.reset()
-      this.rerender()
-      this.showValidationMsg = false
-      this.editing = false
-    },
-    reset (data) {
-      if (data) {
-        this.banners = JSON.parse(JSON.stringify(data))
-      } else {
-        this.banners = []
-        this.addBanner()
-      }
-    },
-    rerender () {
-      this.refresh= false
-      this.$nextTick(()=>{
-        this.refresh = true
-      })
+      this.$store.commit('rollback')
+      this.$store.commit('changeEditArea', '')
+      this.$store.commit('setCurrentBannerIndex', 0)
     }
   },
   mounted () {
-    this.addBanner()
+    this.banners = this.slideBanner.banners
   }
 }
 </script>
@@ -222,7 +195,12 @@ export default {
     display flex
     flex-direction column
     padding 0 15px 20px
-  
+
+  .form
+    max-height 500px
+    overflow-x hidden
+    overflow-y auto
+
   .delete
     animation: hide 0.5s;
   

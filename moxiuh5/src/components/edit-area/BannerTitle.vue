@@ -1,11 +1,11 @@
 <template>
-  <div id="banner-title" v-if="refresh">
+  <div id="banner-title">
     <Title :title="'分区主标题'"/>
     <TextInput :title="'文字'" :placeholder="'请输入主标题文字'" :hint="'（支持12位字符、中文汉字和英文输入，超过7位不在手机端展示）'" :maxLength="12" v-model="text"/>
     <FontColor v-model="fontColor"/>
-    <ImageUploader :title="'背景图片'" :preferSize="'250*50px'" :imgPrefix="'BannerTitle'+bannerId" :required="false" @success="uploadImageSuccess"/>
+    <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :preferSize="'250*50px'" :imgPrefix="'BannerTitle'+bannerId" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
     <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
-    <ButtonGroup :success="!editing&&showValidationMsg" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -36,14 +36,10 @@ export default {
   },
   data () {
     return {
-      refresh: true,
-      showValidationMsg: false,
-      editing: false,
-      
       text: '',
-      fontSize: 16,
-      fontColor: '#000000',
-      backgroundImgUrl: '',
+      fontSize: 0,
+      fontColor: '',
+      backgroundImgName: '',
       backgroundImgUrlRel: '',
       backgroundColor: '',
       backgroundOpacity: 0
@@ -51,63 +47,57 @@ export default {
   },
   watch: {
     output () {
-      this.editing = true
+      this.commit()
     },
-    dataLoaded () {
-      if (this.dataLoaded) {
-        this.reset(this.fiveBanners[this.bannerId].title)
-      }
+    bannerId () {
+      this.load()
     }
   },
   computed: {
     ...mapState({
-      dataLoaded: state => state.dataLoaded,
       fiveBanners: state => state.fiveBanners,
     }),
     output () {
-      const { text, fontSize, fontColor, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity } = this
+      const { text, fontSize, fontColor, backgroundImgName, backgroundImgUrlRel, backgroundColor, backgroundOpacity } = this
       return {
-        payload: { text, fontSize, fontColor, backgroundImgUrl, backgroundImgUrlRel, backgroundColor, backgroundOpacity },
+        payload: { text, fontSize, fontColor, backgroundImgName, backgroundImgUrlRel, backgroundColor, backgroundOpacity },
         n: this.bannerId
       }
     },
   },
   methods: {
     uploadImageSuccess (res) {
-      this.backgroundImgUrl = res.data.AbsPath
+      this.backgroundImgName = res.fileName
       this.backgroundImgUrlRel = res.data.RelativePath
-      this.commit({payload : {backgroundImgUrlRel: res.data.RelativePath}, n: this.bannerId})
     },
-    commit (payload) {
-      this.$store.commit('changeFiveBannersTitle', payload ? payload : this.output)
+    removeImg () {
+      this.backgroundImgName = ''
+      this.backgroundImgUrlRel = ''
+    },
+    commit () {
+      this.$store.commit('changeFiveBannersTitle', this.output)
     },
     confirm () {
-      this.commit()
-      this.showValidationMsg = true
-      this.editing = false
+      this.$store.commit('save')
+      this.$store.commit('changeEditArea', '')     
     },
     cancel () {
-      this.reset()
-      this.commit()
-      this.rerender()
-      this.showValidationMsg = false
-      this.editing = false
+      this.$store.commit('rollback')
+      this.$store.commit('changeEditArea', '')
     },
-    reset (data) {
-      this.text = data ? data.text : '',
-      this.fontSize = data ? data.fontSize : 16,
-      this.fontColor = data ? data.fontColor : '#000000'
-      this.backgroundImgUrl = data ? data.backgroundImgUrl : '',
-      this.backgroundImgUrlRel = data ? data.backgroundImgUrlRel : '',
-      this.backgroundColor = data ? data.backgroundColor : '',
-      this.backgroundOpacity = data ? data.backgroundOpacity : 0
-    },
-    rerender () {
-      this.refresh= false
-      this.$nextTick(()=>{
-        this.refresh = true
-      })
+    load () {
+      const data = this.fiveBanners[this.bannerId].title
+      this.text = data.text,
+      this.fontSize = data.fontSize,
+      this.fontColor = data.fontColor,
+      this.backgroundImgName = data.backgroundImgName,
+      this.backgroundImgUrlRel = data.backgroundImgUrlRel,
+      this.backgroundColor = data.backgroundColor,
+      this.backgroundOpacity = data.backgroundOpacity
     }
+  },
+  created () {
+    this.load()
   }
 }
 </script>

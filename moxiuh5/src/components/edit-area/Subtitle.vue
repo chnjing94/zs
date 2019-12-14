@@ -1,7 +1,7 @@
 <template>
   <div id="subtitle-wrapper">
     <Title :title="'副标题'"/>
-    <ImageUploader :title="'背景图片'" :preferSize="'540*60px'" :imgPrefix="'Subtitle'" :required="false" @success="uploadImageSuccess"/>
+    <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :preferSize="'540*60px'" :imgPrefix="'Subtitle'" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
     <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
     <TextInput :title="'文字'" :placeholder="'请输入副标题文字'" :hint="'（支持最多16位中文汉字和英文输入，超过显示框的文字将不在手机端展示）'" v-model="text" :maxLength="16" noSymbol/>
     <FontSize v-model="fontSize"/>
@@ -33,7 +33,7 @@ export default {
   },
   data () {
     return {
-      backgroundImgUrl: '',
+      backgroundImgName: '',
       backgroundImgUrlRel: '',
       backgroundColor: '',
       backgroundOpacity: 0,
@@ -43,35 +43,30 @@ export default {
     }
   },
   watch: {
-    backgroundColor () {
-      this.commit({ backgroundColor: this.backgroundColor })
-    },
-    backgroundOpacity () {
-      this.commit({ backgroundOpacity: this.backgroundOpacity })
-    },
-    text () {
-      this.commit({ text: this.text })
-    },
-    fontSize () {
-      this.commit({ fontSize: this.fontSize })
-    },
-    fontColor () {
-      this.commit({ fontColor: this.fontColor })
+    output () {
+      this.commit()
     }
   },
   computed: {
     ...mapState({
       subtitle: state => state.subtitle,
     }),
+    output () {
+      const {backgroundImgName, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor} = this
+      return {backgroundImgName, backgroundImgUrlRel, backgroundColor, backgroundOpacity, text, fontSize, fontColor}
+    }
   },
   methods: {
     uploadImageSuccess (res) {
-      this.backgroundImgUrl = res.data.AbsPath
+      this.backgroundImgName = res.fileName
       this.backgroundImgUrlRel = res.data.RelativePath
-      this.commit({ backgroundImgUrlRel: res.data.RelativePath})
     },
-    commit (payload) {
-      this.$store.commit('changeSubtitle', payload)
+    removeImg () {
+      this.backgroundImgName = ''
+      this.backgroundImgUrlRel = ''
+    },
+    commit () {
+      this.$store.commit('changeSubtitle', this.output)
     },
     confirm () {
       this.$store.commit('save')
@@ -83,13 +78,14 @@ export default {
     }
   },
   created () {
-    this.backgroundImgUrl = this.subtitle.backgroundImgUrl,
-    this.backgroundImgUrlRel = this.subtitle.backgroundImgUrlRel,
-    this.backgroundColor = this.subtitle.backgroundColor,
-    this.backgroundOpacity = this.subtitle.backgroundOpacity,
-    this.text = this.subtitle.text,
-    this.fontSize = this.subtitle.fontSize,
-    this.fontColor = this.subtitle.fontColor
+    const data = this.subtitle
+    this.backgroundImgName = data.backgroundImgName,
+    this.backgroundImgUrlRel = data.backgroundImgUrlRel,
+    this.backgroundColor = data.backgroundColor,
+    this.backgroundOpacity = data.backgroundOpacity,
+    this.text = data.text,
+    this.fontSize = data.fontSize,
+    this.fontColor = data.fontColor
   }
 }
 </script>
