@@ -15,6 +15,11 @@
             <div class="left" @click="testClick">left</div>
             <div class="right"><iframe width="100%" height="100%" src="http://localhost:8888/zs/index.html" ref="iframe"></iframe></div>
         </div>
+        <div id="dataJson" ></div>
+        <div id="dataImg" ></div>
+        <div id="resPath" ></div>
+        <div id="frameSave" @click="window.console.log('frameSave')"></div>
+        <div id="frameCancel" @click="window.console.log('frameCancel')"></div>
     </div>
     <script src='./data.js'></script>
     <script src='./vue.js'></script>
@@ -22,36 +27,17 @@
         new Vue({
             el: '#app',
             data: {
-                backgroundLongImg: config.backgroundLongImg,
-                fixedFloatingWindow: config.fixedFloatingWindow,
-                subtitle: config.subtitle,
-                floatText: config.floatText,
-                slideBanner: config.slideBanner,
-                banners: config.slideBanner.banners,
-                adAreaMid: config.adAreaMid,
-                fiveBanners: config.fiveBanners,
-                adAreaBottm: config.adAreaBottm,
-                fixBanner: config.fixBanner,
-                fixedBanner: config.fixedBanner,
-                footText: config.footText,
-                floatWindow: config.floatWindow,
-                showFloatWindow: false,
                 iframeWin: '',
             },
             computed: {
             },
             mounted () {
-                window.addEventListener('message', this.handleMessage);
                 this.iframeWin = this.$refs.iframe.contentWindow;
+                window.document.getElementById('resPath').value = './image/'
             },
             methods: {
-                handleMessage (event) {
-                    window.console.log('From child')
-                    const data = event.data
-                    window.console.log(data)
-                },
                 testClick () {
-                    this.iframeWin.postMessage(JSON.stringify({...config}), '*')
+                    this.iframeWin.postMessage(JSON.stringify(config), '*')
                 }
             }
         })

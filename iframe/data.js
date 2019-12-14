@@ -1,40 +1,39 @@
 var config = {
-    "editAreaId": "BannerBackgroundImg5",
-    "currentBannerIndex": 0,
     "backgroundLongImg": {
-        "backgroundImgUrlRel": "http://192.168.0.101:8888/backlong.png",
-        "backgroundImgUrl": "http://192.168.0.101:8888/backlong.png"
+        "backgroundImgName": "backlong.png",
+        "backgroundImgUrlRel": "./image/backlong.png"
     },
     "fixedFloatingWindow": {
-        "backgroundImgUrlRel": "http://192.168.0.101:8888/floatwindow.png",
+        "backgroundImgName": "floatwindow.png",
+        "backgroundImgUrlRel": "./image/floatwindow.png",
         "componentName": "fixedfloatwindow",
-        "backgroundImgUrl": "http://192.168.0.101:8888/floatwindow.png",
+        "backgroundColor": "",
         "link": "http://",
         "way": 0
     },
     "floatText": {
+        "componentName": "floatText",
+        "backgroundImgName": "floattext.png",
+        "backgroundImgUrlRel": "./image/floattext.png",
+        "backgroundColor": "",
+        "backgroundOpacity": 0,
         "text": "领导寄语",
-        "backgroundImgUrlRel": "http://192.168.0.101:8888/floattext.png",
-        "componentName": "123",
-        "backgroundImgUrl": "http://192.168.0.101:8888/floattext.png",
-        "backgroundColor": "#FFFFFF",
-        "backgroundOpacity": 2,
-        "fontSize": 17,
-        "fontColor": "#FFFFFF",
+        "fontSize": 16,
+        "fontColor": "#000000",
         "show": true
     },
     "floatWindow": {
-        "backgroundImgUrl": "",
+        "backgroundImgName": "",
         "backgroundImgUrlRel": "",
-        "backgroundColor": "#FF0000",
-        "backgroundOpacity": 2,
-        "text": "领导说2",
-        "fontSize": 17,
-        "fontColor": "#FF0000"
+        "backgroundColor": "#FFFFFF",
+        "backgroundOpacity": 0,
+        "text": "",
+        "fontSize": 16,
+        "fontColor": "#000000"
     },
     "subtitle": {
-        "backgroundImgUrlRel": "http://192.168.0.101:8888/subtitle.png",
-        "backgroundImgUrl": "http://192.168.0.101:8888/subtitle.png",
+        "backgroundImgName": "subtitle.png",
+        "backgroundImgUrlRel": "./image/subtitle.png",
         "backgroundColor": "",
         "backgroundOpacity": 0,
         "text": "好礼送不停优质企业专享",
@@ -42,68 +41,70 @@ var config = {
         "fontColor": "#FFFFFF"
     },
     "fixedBanner": {
-        "backgroundImgUrlRel": "http://192.168.0.101:8888/pink.png",
-        "componentName": "123",
-        "backgroundImgUrl": "http://192.168.0.101:8888/pink.pngG",
-        "link": "https://",
+        "componentName": "fixedBanner",
+        "backgroundImgName": "pink.png",
+        "backgroundImgUrlRel": "./image/pink.png",
+        "link": "http://",
         "way": 0
     },
     "footText": {
-        "text": "基金过往业绩并不预示其未来表现市场有风险",
-        "fontSize": 16,
+        "text": "基金过往业绩并不预示其未来表现市场有风险,投资需谨慎",
+        "fontSize": 13,
         "fontColor": "#FFFFFF"
     },
     "slideBanner": {
-        "banners": [
-            {
-                "backgroundImgUrlRel": "http://192.168.0.101:8888/slidebanner.png",
-                "guideIconUrlRel": "http://192.168.0.101:8888/go.png",
-                "componentName": "banner1",
-                "backgroundImgUrl": "http://192.168.0.101:8888/slidebanner.png",
-                "backgroundColor": "",
-                "backgroundOpacity": 0,
-                "guideIconUrl": "http://192.168.0.101:8888/go.png",
-                "title": "参与竞猜赢取",
-                "titleFontSize": 16,
-                "fontColor": "#f56f13",
-                "subtitle": "中奖可获得99",
-                "subtitleFontSize": 14,
-                "subtitleFontColor": "#fb5d05",
-                "link": "http://",
-                "way": 0
-            },
-            {
-                "componentName": "2",
-                "backgroundImgUrl": "",
-                "backgroundImgUrlRel": "",
-                "backgroundColor": "#FDC927",
-                "backgroundOpacity": 0,
-                "guideIconUrl": "",
-                "title": "Banner2",
-                "titleFontSize": 16,
-                "fontColor": "#FF5547",
-                "subtitle": "test2",
-                "subtitleFontSize": 14,
-                "subtitleFontColor": "#000000",
-                "link": "http://",
-                "way": 0
-            }
-        ],
-        "backgroundImgUrlRel": "http://192.168.0.101:8888/subregiontitle.png",
+        "backgroundImgUrlRel": "./image/subregiontitle.png",
         "title": "活动专区",
-        "backgroundImgUrl": "http://192.168.0.101:8888/subregiontitle.png",
+        "backgroundImgName": "subregiontitle.png",
         "fontColor": "#A78D43",
         "fontSize": 16,
         "backgroundColor": "",
         "backgroundOpacity": 0,
         "subtitle": "",
         "subtitleFontColor": "#000000",
-        "subtitleFontSize": 13
+        "subtitleFontSize": 13,
+        "banners": [
+            {
+                "backgroundImgName": "slidebanner.png",
+                "backgroundImgUrlRel": "./image/slidebanner.png",
+                "guideIconName": "go.png",
+                "guideIconUrlRel": "./image/go.png",
+                "componentName": "banner1",
+                "backgroundColor": "",
+                "backgroundOpacity": 0,
+                "guideIconUrl": "",
+                "title": "参与竞猜赢取",
+                "titleFontSize": 16,
+                "fontColor": "#f56f13",
+                "subtitle": "中奖可获得99",
+                "subtitleFontSize": 14,
+                "subtitleFontColor": "#fb5d05",
+                "link": "https://t.cmbchina.com/zamQJn",
+                "way": 0
+            },
+            {
+                "componentName": "2",
+                "backgroundImgName": "",
+                "backgroundImgUrlRel": "",
+                "backgroundColor": "#FDC927",
+                "backgroundOpacity": 0,
+                "guideIconName": "",
+                "guideIconUrlRel": "",
+                "title": "Banner2",
+                "titleFontSize": 16,
+                "fontColor": "#FF5547",
+                "subtitle": "test2",
+                "subtitleFontSize": 14,
+                "subtitleFontColor": "#000000",
+                "link": "https://t.cmbchina.com/zamQJn",
+                "way": 0
+            }
+        ]
     },
     "adAreaMid": {
-        "backgroundImgUrlRel": "http://192.168.0.101:8888/subregiontitle.png",
+        "backgroundImgUrlRel": "./image/subregiontitle.png",
         "title": "福利票券",
-        "backgroundImgUrl": "http://192.168.0.101:8888/subregiontitle.png",
+        "backgroundImgName": "subregiontitleadAreaMid.png",
         "fontColor": "#F1A553",
         "fontSize": 16,
         "backgroundColor": "#FFFFFF",
@@ -113,23 +114,23 @@ var config = {
         "subtitleFontSize": 13
     },
     "adAreaBottm": {
-        "backgroundImgUrlRel": "http://192.168.0.101:8888/subregiontitle.png",
+        "backgroundImgUrlRel": "./image/subregiontitle.png",
         "title": "薪享理财",
-        "backgroundImgUrl": "http://192.168.0.101:8888/subregiontitle.png",
+        "backgroundImgName": "subregiontitleadAreaBottm.png",
         "fontColor": "#A78D43",
         "fontSize": 16,
         "backgroundColor": "",
         "backgroundOpacity": 0,
-        "subtitle": "工资卡专享，限时抢购！",
+        "subtitle": "工资卡专享限时抢购",
         "subtitleFontColor": "#FFFFFF",
         "subtitleFontSize": 13
     },
     "fiveBanners": {
         "ad1": {
             "banner": {
-                "backgroundImgUrlRel": "http://192.168.0.101:8888/1.png",
+                "backgroundImgUrlRel": "./image/1.png",
                 "componentName": "123",
-                "backgroundImgUrl": "http://192.168.0.101:8888/1.png",
+                "backgroundImgName": "1.png",
                 "backgroundColor": "",
                 "backgroundOpacity": 0,
                 "link": "http://",
@@ -139,24 +140,24 @@ var config = {
                 "text": "影票、饭票免费领！",
                 "fontSize": 16,
                 "fontColor": "#016afe",
-                "backgroundImgUrl": "",
+                "backgroundImgName": "",
                 "backgroundImgUrlRel": "",
-                "backgroundColor": "#4D8FF3",
-                "backgroundOpacity": 100
+                "backgroundColor": "",
+                "backgroundOpacity": 0
             },
             "subtitle": {
                 "text": "每天10点开抢",
                 "fontSize": 13,
                 "fontColor": "#4D8FF3"
             },
-            "guideIconUrlRel": "http://192.168.0.101:8888/g1.png",
-            "guideIconUrl": "http://192.168.0.101:8888/g1.png"
+            "guideIconName": "g1.png",
+            "guideIconUrlRel": "./image/g1.png"
         },
         "ad2": {
             "banner": {
-                "backgroundImgUrlRel": "http://192.168.0.101:8888/2.png",
+                "backgroundImgUrlRel": "./image/2.png",
+                "backgroundImgName": "2.png",
                 "componentName": "1",
-                "backgroundImgUrl": "http://192.168.0.101:8888/2.png",
                 "backgroundColor": "",
                 "backgroundOpacity": 0,
                 "link": "http://",
@@ -166,7 +167,7 @@ var config = {
                 "text": "资产达标、商品券马上拿！",
                 "fontSize": 16,
                 "fontColor": "#A78D43",
-                "backgroundImgUrl": "",
+                "backgroundImgName": "",
                 "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 0
@@ -176,14 +177,14 @@ var config = {
                 "fontSize": 13,
                 "fontColor": "#A78D43"
             },
-            "guideIconUrlRel": "http://192.168.0.101:8888/g2.png",
-            "guideIconUrl": "http://192.168.0.101:8888/g2.png"
+            "guideIconUrlRel": "./image/g2.png",
+            "guideIconName": "g2.png"
         },
         "ad3": {
             "banner": {
-                "backgroundImgUrlRel": "http://192.168.0.101:8888/3.png",
+                "backgroundImgUrlRel": "./image/3.png",
+                "backgroundImgName": "3.png",
                 "componentName": "1",
-                "backgroundImgUrl": "http://192.168.0.101:8888/3.png",
                 "backgroundColor": "",
                 "backgroundOpacity": 0,
                 "link": "http://",
@@ -193,7 +194,7 @@ var config = {
                 "text": "聚益生金系列90天A款",
                 "fontSize": 16,
                 "fontColor": "#FFFFFF",
-                "backgroundImgUrl": "",
+                "backgroundImgName": "",
                 "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 0
@@ -203,14 +204,14 @@ var config = {
                 "fontSize": 13,
                 "fontColor": "#FFFFFF"
             },
-            "guideIconUrlRel": "http://192.168.0.101:8888/g3.png",
-            "guideIconUrl": "http://192.168.0.101:8888/g3.png"
+            "guideIconUrlRel": "./image/g3.png",
+            "guideIconName": "g3.png"
         },
         "ad4": {
             "banner": {
-                "backgroundImgUrlRel": "http://192.168.0.101:8888/4.png",
+                "backgroundImgUrlRel": "./image/4.png",
+                "backgroundImgName": "4.png",
                 "componentName": "1",
-                "backgroundImgUrl": "http://192.168.0.101:8888/4.png",
                 "backgroundColor": "",
                 "backgroundOpacity": 0,
                 "link": "http://",
@@ -220,7 +221,7 @@ var config = {
                 "text": "聚益生金系列90天A款",
                 "fontSize": 16,
                 "fontColor": "#FDC927",
-                "backgroundImgUrl": "",
+                "backgroundImgName": "",
                 "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 0
@@ -230,24 +231,24 @@ var config = {
                 "fontSize": 13,
                 "fontColor": "#FFFFFF"
             },
-            "guideIconUrlRel": "http://192.168.0.101:8888/g4.png",
-            "guideIconUrl": "http://192.168.0.101:8888/g4.png"
+            "guideIconUrlRel": "./image/g4.png",
+            "guideIconName": "g4.png"
         },
         "ad5": {
             "banner": {
-                "backgroundImgUrlRel": "http://192.168.0.101:8888/5.png",
+                "backgroundImgUrlRel": "./image/5.png",
+                "backgroundImgName": "5.png",
                 "componentName": "1",
-                "backgroundImgUrl": "http://192.168.0.101:8888/5.png",
                 "backgroundColor": "",
                 "backgroundOpacity": 0,
-                "link": "https://",
+                "link": "http://",
                 "way": 0
             },
             "title": {
                 "text": "聚益生金系列90天A款",
                 "fontSize": 16,
                 "fontColor": "#FDC927",
-                "backgroundImgUrl": "",
+                "backgroundImgName": "",
                 "backgroundImgUrlRel": "",
                 "backgroundColor": "",
                 "backgroundOpacity": 0
@@ -257,19 +258,8 @@ var config = {
                 "fontSize": 13,
                 "fontColor": "#FFFFFF"
             },
-            "guideIconUrlRel": "http://192.168.0.101:8888/g5.png",
-            "guideIconUrl": "http://192.168.0.101:8888/g5.png"
+            "guideIconUrlRel": "./image/g5.png",
+            "guideIconName": "g5.png"
         }
-    },
-    "fixBanner": {
-        "componentName": "",
-        "backgroundImgUrl": "http://192.168.43.30:8888/pic/fix-banner.png",
-        "link": "http://",
-        "way": 0
-    },
-    "footText": {
-        "text": "基金过往业绩并不预示其未来表现市场有风险，投资需谨慎",
-        "fontSize": 13,
-        "fontColor": "#FFFFFF"
     }
 }

@@ -21,19 +21,23 @@ export default {
         const json = JSON.parse(event.data)
         this.$store.commit('loadData', json)
         this.$store.commit('save')
-        const resPath = window.parent.document.getElementById('resPath').value
-        if (resPath) {
-          this.$store.commit('changeResPath', resPath)
-        }
+        this.getResPath()
       }
       catch(e) {
         return
+      }
+    },
+    getResPath () {
+      const resPath = window.parent.document.getElementById('resPath').value
+      if (resPath) {
+        this.$store.commit('changeResPath', resPath)
       }
     }
   },
   mounted() {
     this.$store.commit('save')
-    window.addEventListener('message', this.handleMessage);
+    window.addEventListener('message', this.handleMessage)
+    this.getResPath()
   },
 }
 </script>

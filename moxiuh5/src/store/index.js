@@ -8,7 +8,6 @@ export default new Vuex.Store({
     resPath: './image/',
     editAreaId: 'BackgroundLongImg',
     currentBannerIndex: 0,
-    dataLoaded: false,
     backgroundLongImg: {
       backgroundImgName: 'backlong.png',
       backgroundImgUrlRel: './image/backlong.png'
@@ -79,7 +78,6 @@ export default new Vuex.Store({
         "guideIconName": "go.png",
         "guideIconUrlRel": "./image/go.png",
         "componentName": "banner1",
-        "backgroundImgUrl": "",
         "backgroundColor": "",
         "backgroundOpacity": 0,
         "guideIconUrl": "",
@@ -325,7 +323,6 @@ export default new Vuex.Store({
       state.adAreaMid = adAreaMid
       state.adAreaBottm = adAreaBottm
       state.fiveBanners = fiveBanners
-      state.dataLoaded = true
     },
 
     changeResPath(state, data) {

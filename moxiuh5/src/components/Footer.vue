@@ -13,7 +13,6 @@ export default {
         window.parent.document.getElementById('dataJson').value = JSON.stringify(this.$store.state.savedJson)
         window.parent.document.getElementById('dataImg').value = JSON.stringify(this.getImgList())
         window.parent.document.getElementById('frameSave').click()
-        // this.getImgList()
       },
       cancel () {
         window.parent.document.getElementById('frameCancel').click()
@@ -73,7 +72,7 @@ export default {
           }
         }
 
-        window.console.log(imgList)
+        return imgList
       }
     }
 }
