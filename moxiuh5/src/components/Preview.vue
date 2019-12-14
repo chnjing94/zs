@@ -152,10 +152,10 @@ export default {
     z-index 1
   #slide-banner-title
     position absolute
-    top 483px
+    top 478px
     left 107px
     width 170px
-    height 15px
+    height 16px
     z-index 2
     display flex
     align-items center

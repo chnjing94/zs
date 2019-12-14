@@ -224,9 +224,9 @@ export default {
       cursor pointer
     .add
       background-color #007D71
+      opacity 0.8
       &:hover
-        opacity 0.8
-      // border-bottom-left-radius: 0.5em;
+        opacity 1
       color white
     .delete
       &:hover

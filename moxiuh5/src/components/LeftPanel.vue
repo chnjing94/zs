@@ -4,7 +4,7 @@
       <div class="close">
         <a-icon type="close-circle" />
       </div>
-      <div class="title" :style="{color: floatText.fontColor}">{{floatText.text}}</div>
+      <div class="title" :style="{color: floatWindow.fontColor}">{{floatText.text}}</div>
       <div class="text" :style="textStyle">{{floatWindow.text || '请输入文字'}}</div>
     </div>
   </div>
@@ -17,7 +17,6 @@ export default {
   name: 'LeftPanel',
   methods: {
     changeEditArea (editAreaId) {
-      window.console.log(editAreaId)
       this.$store.commit('changeEditArea', editAreaId)
     },
     hexOpacity2rgba (color, opacity) {
