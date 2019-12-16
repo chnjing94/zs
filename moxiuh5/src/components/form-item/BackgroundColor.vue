@@ -116,7 +116,7 @@ export default {
       margin 0.1rem 0.2rem 0.1rem 0
       display flex
       flex-wrap: wrap;
-      border solid 1px grey
+      border solid 1px #dbe3e8
       .transparent-block
         flex 0 0 12.5%
         opacity 0.5
