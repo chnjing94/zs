@@ -43,7 +43,9 @@ export default {
   name: 'Preview',
   methods: {
     changeEditArea (editAreaId) {
-      this.$store.commit('changeEditArea', editAreaId)
+      if (this.editAreaId === '') {
+        this.$store.commit('changeEditArea', editAreaId)
+      }
     }
   },
   computed: {

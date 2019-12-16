@@ -111,6 +111,7 @@ export default {
     .selected-color
       flex 0 0 30%
       margin 0.1rem 0.2rem 0.1rem 0
+      border solid 1px #dbe3e8
     .transparent
       flex 0 0 30%
       margin 0.1rem 0.2rem 0.1rem 0

@@ -10,7 +10,7 @@
     </div>
     <div class="image-uploader">
       <div class="text">
-        <a-input-search disabled :placeholder="fileName || '点击浏览图片上传...'" @search="remove" size="large">
+        <a-input-search disabled :placeholder="fileName || '点击浏览图片上传...'" @search="remove">
           <a-button slot="enterButton"><a-icon type="close" /></a-button>
         </a-input-search>
       </div>
@@ -175,6 +175,10 @@ export default {
 
   /deep/ .ant-input-disabled
     background-color #FFFFFF
+    height 40px
+
+  /deep/ .ant-input-search-button
+    height 40px
 
   .no-prefer-size
     display flex
