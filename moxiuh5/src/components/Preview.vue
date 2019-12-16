@@ -159,8 +159,7 @@ export default {
     width 170px
     height 16px
     z-index 2
-    display flex
-    align-items center
+    text-align center
   #slide-banner-subtitle
     position absolute
     top 500px
@@ -168,8 +167,7 @@ export default {
     width 170px
     height 12px
     z-index 2
-    display flex
-    align-items center
+    text-align center
   #slide-banner-guide-icon
     position absolute
     top 465px
