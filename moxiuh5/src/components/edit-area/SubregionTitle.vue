@@ -6,8 +6,8 @@
       <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :preferSize="'240*60px'" :imgPrefix="subregionId+'Title'" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
       <FontColor v-model="fontColor"/>
       <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
-      <TextInput v-if="subregionId!=='SlideBanner'" :title="'副标题'" :placeholder="'请输入副标题文字'" :hint="'（支持最多12位中文汉字和英文输入，超过显示框的文字将不在手机端展示）'" :maxLength="12" v-model="subtitle"/>
-      <FontColor v-if="subregionId!=='SlideBanner'" v-model="subtitleFontColor"/>
+      <TextInput :title="'副标题'" :placeholder="'请输入副标题文字'" :hint="'（支持最多12位中文汉字和英文输入，超过显示框的文字将不在手机端展示）'" :maxLength="12" v-model="subtitle"/>
+      <FontColor v-model="subtitleFontColor"/>
     </div>
     <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>

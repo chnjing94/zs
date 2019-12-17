@@ -28,7 +28,7 @@ export default new Vuex.Store({
       backgroundOpacity: 0,
       text: '领导寄语',
       fontSize: 16,
-      fontColor: "#000000",
+      fontColor: "#FFFFFF",
       show: true,
     },
     floatWindow: {
@@ -473,7 +473,6 @@ export default new Vuex.Store({
           backgroundColor: state.hexOpacity2rgba(state.slideBanner.backgroundColor, state.slideBanner.backgroundOpacity)
         }
       }
-      style.boxShadow = state.editAreaId==='SubregionTitleTop' ? '0px 0px 0px 1px #007d71' : ''
       return {...style, ...{color: state.slideBanner.fontColor, fontSize: state.slideBanner.fontSize+'px'}}
     },
 

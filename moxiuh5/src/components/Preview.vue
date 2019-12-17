@@ -9,19 +9,22 @@
       {{subtitle.text}}
     </div>
 
-    <div id="subregion-title-top" class="text-content" @click.stop="changeEditArea('SubregionTitleTop')" :style="slideBannerTopStyle">{{slideBanner.title}}</div>
+    <div id="subregion-title-top" :class="{'selected': editAreaId==='SubregionTitleTop'}" @click.stop="changeEditArea('SubregionTitleTop')" >
+      <div v-if="slideBanner.subtitle"  class="subregion-sub-title text-content" :style="{color: slideBanner.subtitleFontColor, fontSize: slideBanner.subtitleFontSize+'px'}">{{slideBanner.subtitle.slice(0, 8)}}</div>
+      <div class="subregion-title text-content" :style="slideBannerTopStyle">{{slideBanner.title}}</div>
+    </div>
     <div id="slide-banner" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerStyle" ></div>
     <div id="slide-banner-title"  @click.stop="changeEditArea('SlideBanner')" :style="slideBannerTitleStyle">{{getSlideBannerTitle}}</div>
     <div id="slide-banner-subtitle" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerSubtitleStyle">{{getSlideBannerSubtitle}}</div>
     <div id="slide-banner-guide-icon" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerGuideIconStyle"></div>
 
     <div id="subregion-title-mid" :class="{'selected': editAreaId==='SubregionTitleMid'}" @click.stop="changeEditArea('SubregionTitleMid')">
+      <div v-if="adAreaMid.subtitle" class="subregion-sub-title text-content" :style="{color: adAreaMid.subtitleFontColor, fontSize: adAreaMid.subtitleFontSize+'px'}">{{adAreaMid.subtitle.slice(0, 8)}}</div>
       <div class="subregion-title text-content" :style="subregionTitleMidStyle">{{adAreaMid.title}}</div>
-      <div class="subregion-sub-title text-content" :style="{color: adAreaMid.subtitleFontColor, fontSize: adAreaMid.subtitleFontSize+'px'}">{{adAreaMid.subtitle}}</div>
     </div>
     <div id="subregion-title-bottom" :class="{'selected': editAreaId==='SubregionTitleBottom'}" @click.stop="changeEditArea('SubregionTitleBottom')">
+      <div v-if="adAreaBottm.subtitle" class="subregion-sub-title text-content" :style="{color: adAreaBottm.subtitleFontColor, fontSize: adAreaBottm.subtitleFontSize+'px'}">{{adAreaBottm.subtitle.slice(0, 8)}}</div>
       <div class="subregion-title text-content" :style="subregionTitleBottomStyle">{{adAreaBottm.title}}</div>
-      <div class="subregion-sub-title text-content" :style="{color: adAreaBottm.subtitleFontColor, fontSize: adAreaBottm.subtitleFontSize+'px'}">{{adAreaBottm.subtitle}}</div>
     </div>
 
     <div v-for="n in [1,2,3,4,5]" :key="'banner'+n">
@@ -43,9 +46,7 @@ export default {
   name: 'Preview',
   methods: {
     changeEditArea (editAreaId) {
-      if (this.editAreaId === '') {
-        this.$store.commit('changeEditArea', editAreaId)
-      }
+      this.$store.commit('changeEditArea', editAreaId)
     }
   },
   computed: {
@@ -138,23 +139,23 @@ export default {
 
   #subregion-title-top
     position absolute
-    top 415px
+    top 405px
     left 128px
     width 120px
-    height 30px
-    
+    height 53px
+    display flex
+    flex-direction column-reverse
 
   #slide-banner
     position absolute
-    top 453px
+    top 463px
     left 18px
     width 339px
     height 81px
-    
     z-index 1
   #slide-banner-title
     position absolute
-    top 478px
+    top 488px
     left 107px
     width 170px
     height 16px
@@ -162,7 +163,7 @@ export default {
     text-align center
   #slide-banner-subtitle
     position absolute
-    top 500px
+    top 510px
     left 107px
     width 170px
     height 12px
@@ -170,7 +171,7 @@ export default {
     text-align center
   #slide-banner-guide-icon
     position absolute
-    top 465px
+    top 475px
     left 283px
     width 54px
     height 54px
@@ -178,19 +179,18 @@ export default {
 
   #subregion-title-mid
     position absolute
-    top 561px
+    top 556px
     left 128px
     width 120px
     height 53px
-    
     display flex
-    flex-direction column
+    flex-direction column-reverse
   
   .subregion-title
-    flex 6 0 auto
+    flex 0 0 30px
 
   .subregion-sub-title
-    flex 5 0 auto
+    flex 0 0 23px
     text-align center
 
   #banner-title-1
@@ -263,13 +263,12 @@ export default {
 
   #subregion-title-bottom
     position absolute
-    top 836px
+    top 832px
     left 128px
     width 120px
     height 53px
-    
     display flex
-    flex-direction column
+    flex-direction column-reverse
 
   #banner-title-3
     position absolute

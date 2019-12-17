@@ -6,7 +6,7 @@
         <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="banner.componentName"/>
         <ErrorMsg :message="validateComponentName(index)" v-if="validateComponentName(index)&&showValidationMsg"/>
 
-        <ImageUploader :title="'背景图片'+(index+1)" :fileName="banner.backgroundImgName" :imgPrefix="'SlideBannerBG'" :preferSize="'502*224px'" :required="false" @success="uploadImageSuccess" @remove="removeBackgroundImg(banner)"/>
+        <ImageUploader :title="'背景图片'+(index+1)" :fileName="banner.backgroundImgName" :imgPrefix="'SlideBannerBG'" :preferSize="'670*155px'" :required="false" @success="uploadImageSuccess" @remove="removeBackgroundImg(banner)"/>
         <BackgroundColor :title="'背景颜色'+(index+1)" v-model="banner.backgroundColor" :opacity.sync="banner.backgroundOpacity"/>
         <ImageUploader :title="'引导图标'+(index+1)" :fileName="banner.guideIconName" :imgPrefix="'SlideBannerGuide'" :preferSize="'72x72px'" :required="false" @success="uploadGuideIconSuccess" @remove="removeIconImg(banner)"/>
         <TextInput :title="'主标题'" :hint="'（支持7位中文汉字和英文输入，超过展示区域文字的内容不在手机端展示）'" :placeholder="'请输入主标题文字'" noSymbol :maxLength="7" v-model="banner.title"/>
