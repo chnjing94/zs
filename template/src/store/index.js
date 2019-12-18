@@ -155,7 +155,7 @@ export default new Vuex.Store({
         subtitle: {
           "text": "每天10点开抢",
           "fontSize": 13,
-          "fontColor": "#4D8FF3"
+          "fontColor": "#0748C6"
         },
         "guideIconName": "g1.png",
         "guideIconUrlRel": "./image/g1.png"
@@ -173,7 +173,7 @@ export default new Vuex.Store({
         title: {
           "text": "资产达标、商品券马上拿！",
           "fontSize": 16,
-          "fontColor": "#A78D43",
+          "fontColor": "#7f5d0f",
           "backgroundImgName": "",
           "backgroundImgUrlRel": "",
           "backgroundColor": "",
@@ -182,7 +182,7 @@ export default new Vuex.Store({
         subtitle: {
           "text": "每天10点开抢",
           "fontSize": 13,
-          "fontColor": "#A78D43"
+          "fontColor": "#7f5d0f"
         },
         "guideIconUrlRel": "./image/g2.png",
         "guideIconName": "g2.png"
@@ -200,7 +200,7 @@ export default new Vuex.Store({
         title: {
           "text": "聚益生金系列90天A款",
           "fontSize": 16,
-          "fontColor": "#FFFFFF",
+          "fontColor": "#fbeacd",
           "backgroundImgName": "",
           "backgroundImgUrlRel": "",
           "backgroundColor": "",
@@ -209,7 +209,7 @@ export default new Vuex.Store({
         subtitle: {
           "text": "0折免息 期限3个月",
           "fontSize": 13,
-          "fontColor": "#FFFFFF"
+          "fontColor": "#7f5d0f"
         },
         "guideIconUrlRel": "./image/g3.png",
         "guideIconName": "g3.png"
@@ -227,7 +227,7 @@ export default new Vuex.Store({
         title: {
           "text": "聚益生金系列90天A款",
           "fontSize": 16,
-          "fontColor": "#FDC927",
+          "fontColor": "#fbeacd",
           "backgroundImgName": "",
           "backgroundImgUrlRel": "",
           "backgroundColor": "",
@@ -254,7 +254,7 @@ export default new Vuex.Store({
         title: {
           "text": "聚益生金系列90天A款",
           "fontSize": 16,
-          "fontColor": "#FDC927",
+          "fontColor": "#fbeacd",
           "backgroundImgName": "",
           "backgroundImgUrlRel": "",
           "backgroundColor": "",
