@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>zsh5</title>
+    <link rel="stylesheet" href="./css/swiper.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script>
+        (function (designWidth, maxWidth) {
+            var doc = document,
+                win = window,
+                docEl = doc.documentElement,
+                tid
+            function refreshRem() {
+                var width = docEl.getBoundingClientRect().width
+                maxWidth = maxWidth || 540
+                width > maxWidth && (width = maxWidth)
+                var rem = (width * 100) / designWidth
+                docEl.style.fontSize = rem + 'px'
+            }
+
+            //要等 wiewport 设置好后才能执行 refreshRem，不然 refreshRem 会执行2次；
+            refreshRem()
+
+            win.addEventListener(
+                'resize',
+                function () {
+                    clearTimeout(tid) //防止执行两次
+                    tid = setTimeout(refreshRem, 300)
+                },
+                false
+            )
+
+            win.addEventListener(
+                'pageshow',
+                function (e) {
+                    if (e.persisted) {
+                        // 浏览器后退的时候重新计算
+                        clearTimeout(tid)
+                        tid = setTimeout(refreshRem, 300)
+                    }
+                },
+                false
+            )
+
+            if (doc.readyState === 'complete') {
+                doc.body.style.fontSize = '16px'
+            } else {
+                doc.addEventListener(
+                    'DOMContentLoaded',
+                    function (e) {
+                        doc.body.style.fontSize = '16px'
+                    },
+                    false
+                )
+            }
+        })(750, 750)
+    </script>
+</head>
+
+<body>
+    <noscript>
+        <strong>We're sorry but zsh5 doesn't work properly without JavaScript enabled. Please enable it to
+            continue.</strong>
+    </noscript>
+    <div id="app" style='display: none'>
+        <div class="index-wrapper" :style="{ backgroundImage: `url(${backgroundLongImg.backgroundImgUrlRel})` }">
+            <!-- 右上角浮窗 -->
+            <img
+                class='fixed-floating-window'
+                :url="fixedFloatingWindow.link"
+                :way="fixedFloatingWindow.way"
+                :moduleName="'模板组件'"
+                :widgetNoForOut="'ZJZ02000N'"
+                :widgetNo="'ZJY02000N'"
+                :widgetName="fixedFloatingWindow.componentName"
+                @click="goPage(fixedFloatingWindow.link, $event)"
+                :src="fixedFloatingWindow.backgroundImgUrlRel"
+            />
+            <!-- 页面副标题 -->
+            <div class='page-subtitle-wrapper'
+                :style="{ fontSize: `0.${subtitle.fontSize * 2}rem`, color: subtitle.fontColor }">
+                <div class='bg' :style="subTitleBgStyle"></div>
+                <div class='text'>{{subtitle.text}}</div>
+            </div>
+            <!-- 左上角浮动文案 -->
+            <div
+                v-if="floatText.show"
+                @click="showFloatWindowFunc(true)"
+                class='float-text-wrapper'
+            >
+                <div class='bg' :style="floatText.backgroundImgUrlRel
+                      ? { backgroundImage: `url(${floatText.backgroundImgUrlRel})` }
+                      : { backgroundColor: floatText.backgroundColor, opacity: ( 1 - floatText.backgroundOpacity / 100) }"></div>
+                <div class='text' :style="{ fontSize: `0.${floatText.fontSize * 2}rem`, color: floatText.fontColor }">
+                    {{floatText.text}}</div>
+            </div>
+            <!-- 活动专区 -->
+            <div class='slide-banner'>
+                <div class='title-area'>
+                    <div class='title' :style="!slideBanner.subtitle ? {} : { marginTop: '-0.5rem' }">
+                        <div class='bg' :style="slideBanner.backgroundImgUrlRel 
+                          ? { backgroundImage: `url(${slideBanner.backgroundImgUrlRel})` }
+                          : { backgroundColor: slideBanner.backgroundColor, opacity: ( 1 - slideBanner.backgroundOpacity / 100) }">
+                        </div>
+                        <div class='text' :style="{ color: slideBanner.fontColor, fontSize: '0.32rem' }">
+                            {{slideBanner.title}}</div>
+                    </div>
+                    <div v-if="slideBanner.subtitle" class='sub-title'
+                        :style="{ color: slideBanner.subtitleFontColor, fontSize: `0.${slideBanner.subtitleFontSize * 2}rem` }">{{slideBanner.subtitle}}</div>
+                </div>
+                <div class="swiper-container">
+                    <div class='swiper-wrapper'>
+                        <div
+                            class='swiper-slide'
+                            @click="goPage(item.link, $event)"
+                            v-for="(item) in banners"
+                            :key="item.componentName"
+                            :url="item.link"
+                            :way="item.way"
+                            :moduleName="'模板组件'"
+                            :widgetNoForOut="'ZJZ02000N'"
+                            :widgetNo="'ZJY02000N'"
+                            :widgetName="item.componentName"
+                        >
+                            <div class='bg' :style="item.backgroundImgUrlRel
+                            ? { backgroundImage: `url(${item.backgroundImgUrlRel})` }
+                            : { backgroundColor: item.backgroundColor, opacity: ( 1 - item.backgroundOpacity / 100) }"></div>
+                            <div class='title' :style="{ color: item.fontColor }">{{item.title}}</div>
+                            <div class='subtitle' :style="{ color: item.subtitleFontColor }">{{item.subtitle}}</div>
+                            <img class='icon' :src="item.guideIconUrlRel" />
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <!-- 福利彩票 -->
+            <div class='area-mid'>
+                <div class='title-area'>
+                    <div class='title' :style="adAreaMid.subtitle ? {} : { margin: '0.35rem 0 0.4rem 0' }">
+                        <div class='bg' :style="adAreaMid.backgroundImgUrlRel 
+                          ? { backgroundImage: `url(${adAreaMid.backgroundImgUrlRel})` }
+                          : { backgroundColor: adAreaMid.backgroundColor, opacity: ( 1 - adAreaMid.backgroundOpacity / 100) }">
+                        </div>
+                        <div class='text' :style="{ color: adAreaMid.fontColor, fontSize: `0.${adAreaBottm.fontSize * 2}rem` }">
+                            {{adAreaMid.title}}</div>
+                    </div>
+                    <div v-if="adAreaMid.subtitle" class='sub-title' :style="{ color: adAreaMid.subtitleFontColor, fontSize: `0.${adAreaMid.subtitleFontSize * 2}rem` }">
+                        {{adAreaMid.subtitle}}</div>
+                </div>
+                <div class='banner-group'>
+                    <div
+                        class='banner banner1'
+                        @click="goPage(fiveBanners.ad1.banner.link, $event)"
+                        :url="fiveBanners.ad1.banner.link"
+                        :way="fiveBanners.ad1.banner.way"
+                        :moduleName="'模板组件'"
+                        :widgetNoForOut="'ZJZ02000N'"
+                        :widgetNo="'ZJY02000N'"
+                        :widgetName="fiveBanners.ad1.banner.widgetName"
+                    >
+                        <div class='bg'
+                            :style="fiveBanners.ad1.banner.backgroundImgUrlRel
+                          ? { backgroundImage: `url(${fiveBanners.ad1.banner.backgroundImgUrlRel})` }
+                          : { backgroundColor: fiveBanners.ad1.banner.backgroundColor, opacity: ( 1 - fiveBanners.ad1.banner.backgroundOpacity / 100) }">
+                        </div>
+                        <div class='title' :style="{ color: fiveBanners.ad1.title.fontColor }">
+                            {{fiveBanners.ad1.title.text}}</div>
+                        <div class='subtitle' :style="{ color: fiveBanners.ad1.subtitle.fontColor }">
+                            {{fiveBanners.ad1.subtitle.text}}</div>
+                        <img class='icon' :src="fiveBanners.ad1.guideIconUrlRel" />
+                    </div>
+                    <div
+                        class='banner banner2'
+                        @click="goPage(fiveBanners.ad2.banner.link, $event)"
+                        :url="fiveBanners.ad2.banner.link"
+                        :way="fiveBanners.ad2.banner.way"
+                        :moduleName="'模板组件'"
+                        :widgetNoForOut="'ZJZ02000N'"
+                        :widgetNo="'ZJY02000N'"
+                        :widgetName="fiveBanners.ad2.banner.widgetName"
+                    >
+                        <div class='bg'
+                            :style="fiveBanners.ad2.banner.backgroundImgUrlRel
+                          ? { backgroundImage: `url(${fiveBanners.ad2.banner.backgroundImgUrlRel})` }
+                          : { backgroundColor: fiveBanners.ad2.banner.backgroundColor, opacity: ( 1 - fiveBanners.ad2.banner.backgroundOpacity / 100) }">
+                        </div>
+                        <div class='title' :style="{ color: fiveBanners.ad2.title.fontColor }">
+                            {{fiveBanners.ad2.title.text}}</div>
+                        <div class='subtitle' :style="{ color: fiveBanners.ad2.subtitle.fontColor }">
+                            {{fiveBanners.ad2.subtitle.text}}</div>
+                        <img class='icon' :src="fiveBanners.ad2.guideIconUrlRel" />
+                    </div>
+                </div>
+            </div>
+            <!-- 薪享理财 -->
+            <div class='area-bottom'>
+                <div class='title-area'>
+                    <div class='title' :style="adAreaBottm.subtitle ? {} : { margin: '0.4rem 0' }">
+                        <div class='bg' :style="adAreaBottm.backgroundImgUrlRel 
+                          ? { backgroundImage: `url(${adAreaBottm.backgroundImgUrlRel})` }
+                          : { backgroundColor: adAreaBottm.backgroundColor, opacity: ( 1 - adAreaBottm.backgroundOpacity / 100) }">
+                        </div>
+                        <div class='text' :style="{ color: adAreaBottm.fontColor, fontSize: `0.${adAreaBottm.fontSize * 2}rem` }">
+                            {{adAreaBottm.title}}</div>
+                    </div>
+                    <div v-if="adAreaBottm.subtitle" class='sub-title'
+                        :style="{ color: adAreaBottm.subtitleFontColor, fontSize: `0.${adAreaBottm.subtitleFontSize * 2}rem`}">{{adAreaBottm.subtitle}}</div>
+                </div>
+                <div class='banner-group'>
+                    <div
+                        class='banner banner3'
+                        @click="goPage(fiveBanners.ad3.banner.link, $event)"
+                        :url="fiveBanners.ad3.banner.link"
+                        :way="fiveBanners.ad3.banner.way"
+                        :moduleName="'模板组件'"
+                        :widgetNoForOut="'ZJZ02000N'"
+                        :widgetNo="'ZJY02000N'"
+                        :widgetName="fiveBanners.ad3.banner.widgetName"
+                    >
+                        <div class='bg'
+                            :style="fiveBanners.ad3.banner.backgroundImgUrlRel
+                          ? { backgroundImage: `url(${fiveBanners.ad3.banner.backgroundImgUrlRel})` }
+                          : { backgroundColor: fiveBanners.ad3.banner.backgroundColor, opacity: ( 1 - fiveBanners.ad3.banner.backgroundOpacity / 100) }">
+                        </div>
+                        <div class='title' :style="{ color: fiveBanners.ad3.title.fontColor }">
+                            {{fiveBanners.ad3.title.text}}</div>
+                        <div class='subtitle' :style="{ color: fiveBanners.ad3.subtitle.fontColor }">
+                            {{fiveBanners.ad3.subtitle.text}}</div>
+                        <img class='icon' :src="fiveBanners.ad3.guideIconUrlRel" />
+                    </div>
+                    <div
+                        class='banner banner4'
+                        @click="goPage(fiveBanners.ad4.banner.link, $event)"
+                        :url="fiveBanners.ad4.banner.link"
+                        :way="fiveBanners.ad4.banner.way"
+                        :moduleName="'模板组件'"
+                        :widgetNoForOut="'ZJZ02000N'"
+                        :widgetNo="'ZJY02000N'"
+                        :widgetName="fiveBanners.ad4.banner.widgetName"
+                    >
+                        <div class='bg'
+                            :style="fiveBanners.ad4.banner.backgroundImgUrlRel
+                          ? { backgroundImage: `url(${fiveBanners.ad4.banner.backgroundImgUrlRel})` }
+                          : { backgroundColor: fiveBanners.ad4.banner.backgroundColor, opacity: ( 1 - fiveBanners.ad4.banner.backgroundOpacity / 100) }">
+                        </div>
+                        <div class='title' :style="{ color: fiveBanners.ad4.title.fontColor }">
+                            {{fiveBanners.ad4.title.text}}</div>
+                        <div class='subtitle' :style="{ color: fiveBanners.ad4.subtitle.fontColor }">
+                            {{fiveBanners.ad4.subtitle.text}}</div>
+                        <img class='icon' :src="fiveBanners.ad4.guideIconUrlRel" />
+                    </div>
+                    <div
+                        class='banner banner5'
+                        @click="goPage(fiveBanners.ad5.banner.link, $event)"
+                        :url="fiveBanners.ad5.banner.link"
+                        :way="fiveBanners.ad5.banner.way"
+                        :moduleName="'模板组件'"
+                        :widgetNoForOut="'ZJZ02000N'"
+                        :widgetNo="'ZJY02000N'"
+                        :widgetName="fiveBanners.ad5.banner.widgetName"
+                    >
+                        <div class='bg'
+                            :style="fiveBanners.ad5.banner.backgroundImgUrlRel
+                          ? { backgroundImage: `url(${fiveBanners.ad5.banner.backgroundImgUrlRel})` }
+                          : { backgroundColor: fiveBanners.ad5.banner.backgroundColor, opacity: ( 1 - fiveBanners.ad5.banner.backgroundOpacity / 100) }">
+                        </div>
+                        <div class='title' :style="{ color: fiveBanners.ad5.title.fontColor }">
+                            {{fiveBanners.ad5.title.text}}</div>
+                        <div class='subtitle' :style="{ color: fiveBanners.ad5.subtitle.fontColor }">
+                            {{fiveBanners.ad5.subtitle.text}}</div>
+                        <img class='icon' :src="fiveBanners.ad5.guideIconUrlRel" />
+                    </div>
+                </div>
+            </div>
+            <!-- 底部 -->
+            <div
+                class='fix-banner'
+                :style="{ backgroundImage: `url(${fixedBanner.backgroundImgUrlRel})` }"
+                @click="goPage(fixedBanner.link, $event)"
+                :url="fixedBanner.link"
+                :way="fixedBanner.way"
+                :moduleName="'模板组件'"
+                :widgetNoForOut="'ZJZ02000N'"
+                :widgetNo="'ZJY02000N'"
+                :widgetName="fixedBanner.widgetName"
+            ></div>
+            <!-- 底部文案 -->
+            <div class='foot-text' :style="{ color: footText.fontColor, fontSize: `0.${footText.fontSize * 2}rem` }">
+                {{footText.text}}</div>
+            <!-- 领导寄语弹窗 -->
+            <div v-if="showFloatWindow" class='float-window-wrapper' @click="showFloatWindowFunc(false)">
+                <div class='float-window' @click.stop="showFloatWindowFunc(true)">
+                    <div class="bg" :style="floatWindow.backgroundImgUrlRel
+                        ? { backgroundImage: `url(${floatWindow.backgroundImgUrlRel})` }
+                        : { backgroundColor: floatWindow.backgroundColor, opacity: ( 1 - floatWindow.backgroundOpacity / 100) }">
+                    </div>
+                    <div class='title' :style="{ color: floatWindow.fontColor, fontSize: `0.${16 * 2}rem` }">{{floatText.text}}</div>
+                    <div class='text'
+                        :style="{ color: floatWindow.fontColor, fontSize: `0.${floatWindow.fontSize * 2}rem` }">
+                        {{floatWindow.text}}</div>
+                    <div class='close-btn' :style="{ color: floatWindow.fontColor }"
+                        @click.stop="showFloatWindowFunc(false)">&times;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src='./js/cmb_behavior.js'></script>
+    <script src='./js/cmb_log.js'></script>
+    <script src='./js/vue.js'></script>
+    <script src='./js/swiper.min.js'></script>
+    <script src='./js/index.js'></script>
+    <script id='inject-script'>
+        var shortUrl = 'https://t.cmbchina.com/zamQJn'
+        var json = {
+            "backgroundLongImg": {
+                "backgroundImgName": "backlong.png",
+                "backgroundImgUrlRel": "./image/backlong.png"
+            },
+            "fixedFloatingWindow": {
+                "backgroundImgName": "floatwindow.png",
+                "backgroundImgUrlRel": "./image/floatwindow.png",
+                "componentName": "fixedfloatwindow",
+                "backgroundColor": "",
+                "link": "http://baidu.com",
+                "way": 0
+            },
+            "floatText": {
+                "componentName": "floatText",
+                "backgroundImgName": "floattext.png",
+                "backgroundImgUrlRel": "./image/floattext.png",
+                "backgroundColor": "",
+                "backgroundOpacity": 0,
+                "text": "领导寄语",
+                "fontSize": 16,
+                "fontColor": "#FFFFFF",
+                "show": true
+            },
+            "floatWindow": {
+                "backgroundImgName": "",
+                "backgroundImgUrlRel": "",
+                "backgroundColor": "#FFFFFF",
+                "backgroundOpacity": 0,
+                "text": "领导寄语领导寄语领导寄语领导寄语领导寄语领导寄语领导寄语领导寄语",
+                "fontSize": 13,
+                "fontColor": "#000000"
+            },
+            "subtitle": {
+                "backgroundImgName": "subtitle.png",
+                "backgroundImgUrlRel": "./image/subtitle.png",
+                "backgroundColor": "",
+                "backgroundOpacity": 0,
+                "text": "好礼送不停优质企业专享",
+                "fontSize": 20,
+                "fontColor": "#FFFFFF"
+            },
+            "fixedBanner": {
+                "componentName": "fixedBanner",
+                "backgroundImgName": "pink.png",
+                "backgroundImgUrlRel": "./image/pink.png",
+                "link": "http://",
+                "way": 0
+            },
+            "footText": {
+                "text": "基金过往业绩并不预示其未来表现市场有风险,投资需谨慎",
+                "fontSize": 13,
+                "fontColor": "#FFFFFF"
+            },
+            "slideBanner": {
+                "backgroundImgUrlRel": "./image/subregiontitle.png",
+                "title": "活动专区",
+                "backgroundImgName": "subregiontitle.png",
+                "fontColor": "#826219",
+                "fontSize": 16,
+                "backgroundColor": "",
+                "backgroundOpacity": 0,
+                "subtitle": "",
+                "subtitleFontColor": "#000000",
+                "subtitleFontSize": 13,
+                "banners": [
+                    {
+                        "backgroundImgName": "slidebanner.png",
+                        "backgroundImgUrlRel": "./image/slidebanner.png",
+                        "guideIconName": "go.png",
+                        "guideIconUrlRel": "./image/go.png",
+                        "componentName": "banner1",
+                        "backgroundColor": "",
+                        "backgroundOpacity": 0,
+                        "guideIconUrl": "",
+                        "title": "参与竞猜赢取",
+                        "titleFontSize": 16,
+                        "fontColor": "#f56f13",
+                        "subtitle": "中奖可获得99",
+                        "subtitleFontSize": 14,
+                        "subtitleFontColor": "#fb5d05",
+                        "link": "https://t.cmbchina.com/zamQJn",
+                        "way": 0
+                    },
+                    {
+                        "componentName": "2",
+                        "backgroundImgName": "",
+                        "backgroundImgUrlRel": "",
+                        "backgroundColor": "#FDC927",
+                        "backgroundOpacity": 0,
+                        "guideIconName": "",
+                        "guideIconUrlRel": "",
+                        "title": "Banner2",
+                        "titleFontSize": 16,
+                        "fontColor": "#FF5547",
+                        "subtitle": "test2",
+                        "subtitleFontSize": 14,
+                        "subtitleFontColor": "#000000",
+                        "link": "https://t.cmbchina.com/zamQJn",
+                        "way": 0
+                    }
+                ]
+            },
+            "adAreaMid": {
+                "backgroundImgUrlRel": "./image/subregiontitle.png",
+                "title": "福利票券",
+                "backgroundImgName": "subregiontitleadAreaMid.png",
+                "fontColor": "#826219",
+                "fontSize": 16,
+                "backgroundColor": "#FFFFFF",
+                "backgroundOpacity": 0,
+                "subtitle": "你想要的我都有",
+                "subtitleFontColor": "#FFFFFF",
+                "subtitleFontSize": 13
+            },
+            "adAreaBottm": {
+                "backgroundImgUrlRel": "./image/subregiontitle.png",
+                "title": "薪享理财",
+                "backgroundImgName": "subregiontitleadAreaBottm.png",
+                "fontColor": "#826219",
+                "fontSize": 16,
+                "backgroundColor": "",
+                "backgroundOpacity": 0,
+                "subtitle": "工资卡专享限时抢购",
+                "subtitleFontColor": "#FFFFFF",
+                "subtitleFontSize": 13
+            },
+            "fiveBanners": {
+                "ad1": {
+                    "banner": {
+                        "backgroundImgUrlRel": "./image/1.png",
+                        "componentName": "123",
+                        "backgroundImgName": "1.png",
+                        "backgroundColor": "",
+                        "backgroundOpacity": 0,
+                        "link": "http://",
+                        "way": 0
+                    },
+                    "title": {
+                        "text": "影票、饭票免费领！",
+                        "fontSize": 16,
+                        "fontColor": "#0748C6",
+                        "backgroundImgName": "",
+                        "backgroundImgUrlRel": "",
+                        "backgroundColor": "",
+                        "backgroundOpacity": 0
+                    },
+                    "subtitle": {
+                        "text": "每天10点开抢",
+                        "fontSize": 13,
+                        "fontColor": "#4D8FF3"
+                    },
+                    "guideIconName": "g1.png",
+                    "guideIconUrlRel": "./image/g1.png"
+                },
+                "ad2": {
+                    "banner": {
+                        "backgroundImgUrlRel": "./image/2.png",
+                        "backgroundImgName": "2.png",
+                        "componentName": "1",
+                        "backgroundColor": "",
+                        "backgroundOpacity": 0,
+                        "link": "http://",
+                        "way": 0
+                    },
+                    "title": {
+                        "text": "资产达标、商品券马上拿！",
+                        "fontSize": 16,
+                        "fontColor": "#A78D43",
+                        "backgroundImgName": "",
+                        "backgroundImgUrlRel": "",
+                        "backgroundColor": "",
+                        "backgroundOpacity": 0
+                    },
+                    "subtitle": {
+                        "text": "每天10点开抢",
+                        "fontSize": 13,
+                        "fontColor": "#A78D43"
+                    },
+                    "guideIconUrlRel": "./image/g2.png",
+                    "guideIconName": "g2.png"
+                },
+                "ad3": {
+                    "banner": {
+                        "backgroundImgUrlRel": "./image/3.png",
+                        "backgroundImgName": "3.png",
+                        "componentName": "1",
+                        "backgroundColor": "",
+                        "backgroundOpacity": 0,
+                        "link": "http://",
+                        "way": 0
+                    },
+                    "title": {
+                        "text": "聚益生金系列90天A款",
+                        "fontSize": 16,
+                        "fontColor": "#FFFFFF",
+                        "backgroundImgName": "",
+                        "backgroundImgUrlRel": "",
+                        "backgroundColor": "",
+                        "backgroundOpacity": 0
+                    },
+                    "subtitle": {
+                        "text": "0折免息 期限3个月",
+                        "fontSize": 13,
+                        "fontColor": "#FFFFFF"
+                    },
+                    "guideIconUrlRel": "./image/g3.png",
+                    "guideIconName": "g3.png"
+                },
+                "ad4": {
+                    "banner": {
+                        "backgroundImgUrlRel": "./image/4.png",
+                        "backgroundImgName": "4.png",
+                        "componentName": "1",
+                        "backgroundColor": "",
+                        "backgroundOpacity": 0,
+                        "link": "http://",
+                        "way": 0
+                    },
+                    "title": {
+                        "text": "聚益生金系列90天A款",
+                        "fontSize": 16,
+                        "fontColor": "#FDC927",
+                        "backgroundImgName": "",
+                        "backgroundImgUrlRel": "",
+                        "backgroundColor": "",
+                        "backgroundOpacity": 0
+                    },
+                    "subtitle": {
+                        "text": "0折免息 期限3个月",
+                        "fontSize": 13,
+                        "fontColor": "#FFFFFF"
+                    },
+                    "guideIconUrlRel": "./image/g4.png",
+                    "guideIconName": "g4.png"
+                },
+                "ad5": {
+                    "banner": {
+                        "backgroundImgUrlRel": "./image/5.png",
+                        "backgroundImgName": "5.png",
+                        "componentName": "1",
+                        "backgroundColor": "",
+                        "backgroundOpacity": 0,
+                        "link": "http://",
+                        "way": 0
+                    },
+                    "title": {
+                        "text": "聚益生金系列90天A款",
+                        "fontSize": 16,
+                        "fontColor": "#FDC927",
+                        "backgroundImgName": "",
+                        "backgroundImgUrlRel": "",
+                        "backgroundColor": "",
+                        "backgroundOpacity": 0
+                    },
+                    "subtitle": {
+                        "text": "0折免息 期限3个月",
+                        "fontSize": 13,
+                        "fontColor": "#FFFFFF"
+                    },
+                    "guideIconUrlRel": "./image/g5.png",
+                    "guideIconName": "g5.png"
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
