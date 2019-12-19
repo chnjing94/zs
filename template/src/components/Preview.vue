@@ -139,7 +139,7 @@ export default {
 
   #subregion-title-top
     position absolute
-    top 405px
+    top 397px
     left 128px
     width 120px
     height 53px
@@ -148,14 +148,14 @@ export default {
 
   #slide-banner
     position absolute
-    top 463px
+    top 455px
     left 18px
     width 339px
     height 81px
     z-index 1
   #slide-banner-title
     position absolute
-    top 488px
+    top 477px
     left 107px
     width 170px
     height 16px
@@ -163,7 +163,7 @@ export default {
     text-align center
   #slide-banner-subtitle
     position absolute
-    top 510px
+    top 500px
     left 107px
     width 170px
     height 12px
@@ -171,7 +171,7 @@ export default {
     text-align center
   #slide-banner-guide-icon
     position absolute
-    top 475px
+    top 467px
     left 283px
     width 54px
     height 54px
@@ -195,7 +195,7 @@ export default {
 
   #banner-title-1
     position absolute
-    top 655px
+    top 654px
     left 44px
     width 200px
     height 25px
@@ -203,7 +203,7 @@ export default {
 
   #banner-subtitle-1
     position absolute
-    top 681px
+    top 680px
     left 44px
     width 200px
     height 15px
@@ -211,25 +211,23 @@ export default {
 
   #guide-icon-1
     position absolute
-    top 656px
+    top 655px
     left 242px
     width 94px
     height 30px
-    
     z-index 2
 
   #banner-background-img-1
     position absolute
-    top 632px
+    top 631px
     left 29px
     width 319px
     height 80px
-    
     z-index 1
 
   #banner-title-2
     position absolute
-    top 743px
+    top 742px
     left 44px
     width 200px
     height 25px
@@ -237,7 +235,7 @@ export default {
 
   #banner-subtitle-2
     position absolute
-    top 769px
+    top 768px
     left 44px
     width 200px
     height 15px
@@ -245,16 +243,15 @@ export default {
 
   #guide-icon-2
     position absolute
-    top 744px
+    top 743px
     left 242px
     width 94px
     height 30px
-    
     z-index 2
 
   #banner-background-img-2
     position absolute
-    top 720px
+    top 719px
     left 29px
     width 319px
     height 80px
@@ -309,17 +306,16 @@ export default {
 
   #banner-title-4
     position absolute
-    top 992px
+    top 990px
     left 29px
     width 125px
     height 25px
-    
     z-index 2
 
   #banner-subtitle-4
     position absolute
-    top 1021px
-    left 28px
+    top 1019px
+    left 29px
     width 125px
     height 25px
     display flex
@@ -328,25 +324,23 @@ export default {
 
   #guide-icon-4
     position absolute
-    top 1004px
+    top 1002px
     left 245px
     width 94px
     height 30px
-    
     z-index 2
 
   #banner-background-img-4
     position absolute
-    top 985px
+    top 983px
     left 29px
     width 319px
     height 70px
-    
     z-index 1
 
   #banner-title-5
     position absolute
-    top 1070px
+    top 1068px
     left 29px
     width 125px
     height 25px
@@ -354,7 +348,7 @@ export default {
 
   #banner-subtitle-5
     position absolute
-    top 1099px
+    top 1097px
     left 29px
     width 125px
     height 25px
@@ -364,7 +358,7 @@ export default {
 
   #guide-icon-5
     position absolute
-    top 1082px
+    top 1080px
     left 245px
     width 94px
     height 30px
@@ -372,7 +366,7 @@ export default {
 
   #banner-background-img-5
     position absolute
-    top 1063px
+    top 1061px
     left 29px
     width 319px
     height 70px
@@ -388,7 +382,7 @@ export default {
 
   #fixed-banner
     position absolute
-    top 1187px
+    top 1185px
     left 29px
     width 319px
     height 70px
