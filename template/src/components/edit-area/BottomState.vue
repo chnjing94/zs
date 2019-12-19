@@ -1,7 +1,7 @@
 <template>
   <div id="bottom-state">
     <Title :title="'底部说明'"/>
-    <TextInput :title="'文字'" :placeholder="'请输入文字'" :hint="'（支持20位字符、中文汉字和英文输入，超过展示区手机端不展示）'" v-model="text" :maxLength="20"/>
+    <TextInput :title="'文字'" :placeholder="'请输入文字'" :hint="'（支持30位字符、中文汉字和英文输入，超过展示区手机端不展示）'" v-model="text" :maxLength="30"/>
     <FontSize v-model="fontSize"/>
     <FontColor v-model="fontColor"/>
     <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel"/>

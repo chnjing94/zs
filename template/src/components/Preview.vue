@@ -1,7 +1,7 @@
 <template>
   <div id="background-long-img" :style="backgroundLongImgStyle" @click="changeEditArea('BackgroundLongImg')">
     <div id="fixed-float-window" @click.stop="changeEditArea('FixedFloatWindow')" :style="fixedFloatWindowStyle"></div>
-    <div id="float-text" @click.stop="changeEditArea('FloatText')" >
+    <div id="float-text" :class="{'selected': editAreaId==='FloatText'}" @click.stop="changeEditArea('FloatText')" >
       <div v-if="floatText.show" :style="floatTextStyle" class="float-text-content text-content">{{floatText.text}}</div>
     </div>
 

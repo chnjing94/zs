@@ -413,7 +413,6 @@ export default new Vuex.Store({
           backgroundColor: state.hexOpacity2rgba(state.floatText.backgroundColor, state.floatText.backgroundOpacity)
         }
       }
-      style.boxShadow = state.editAreaId==='FloatText' ? '0px 0px 0px 1px #007d71' : ''
       return {...style, ...{color: state.floatText.fontColor, fontSize: state.floatText.fontSize+'px'}}
     },
 
