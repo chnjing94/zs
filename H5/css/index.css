@@ -30,7 +30,7 @@
 .index-wrapper .page-subtitle-wrapper .bg {
 	width: 100%;
 	height: 100%;
-	background-size: contain;
+	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	position: absolute;
 	top: 0;
@@ -59,7 +59,7 @@
 .index-wrapper .float-text-wrapper .bg {
 	width: 100%;
 	height: 100%;
-	background-size: contain;
+	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	position: absolute;
 	top: 0;
@@ -91,7 +91,7 @@
 .index-wrapper .slide-banner .title-area .title .bg {
 	width: 100%;
 	height: 100%;
-	background-size: contain;
+	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	position: absolute;
 	top: 0;
@@ -137,7 +137,7 @@
 .index-wrapper .slide-banner .swiper-container .swiper-wrapper .swiper-slide .bg {
 	width: 6.7rem;
 	height: 1.6rem;
-	background-size: contain;
+	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	position: absolute;
 	left: .4rem;
@@ -182,7 +182,7 @@
 .index-wrapper .area-mid .title-area .title .bg {
 	width: 100%;
 	height: 100%;
-	background-size: contain;
+	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	position: absolute;
 	top: 0;
@@ -218,7 +218,7 @@
 .index-wrapper .area-mid .banner-group .banner .bg {
 	width: 6.38rem;
 	height: 1.6rem;
-	background-size: contain;
+	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	position: absolute;
 	z-index: 1
@@ -265,7 +265,7 @@
 .index-wrapper .area-bottom .title-area .title .bg {
 	width: 100%;
 	height: 100%;
-	background-size: contain;
+	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	position: absolute;
 	top: 0;
@@ -299,8 +299,8 @@
 
 .index-wrapper .area-bottom .banner-group .banner .bg {
 	width: 6.38rem;
-	height: 1.6rem;
-	background-size: contain;
+	height: 1.4rem;
+	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	position: absolute;
 	z-index: 1
@@ -334,10 +334,10 @@
 
 .index-wrapper .fix-banner {
 	width: 6.38rem;
-	height: 1.6rem;
+	height: 1.4rem;
 	/* position: relative; */
-	margin: 0.83rem auto 0 auto;
-	background-size: contain;
+	margin: 0.93rem auto 0 auto;
+	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	background-position: 50%;
 }
