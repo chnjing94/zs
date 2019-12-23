@@ -1,7 +1,7 @@
 <template>
   <div id="guide-icon">
     <Title :title="'引导图标'"/>
-    <ImageUploader :preferSize="'175*50px'" :fileName="guideIconName" :imgPrefix="'GuideIcon'+bannerId" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
+    <ImageUploader :fileName="guideIconName" :imgPrefix="'GuideIcon'+bannerId" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
     <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>

@@ -4,7 +4,7 @@
     <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="componentName"/>
     <ErrorMsg :message="validateComponentName" v-if="validateComponentName&&showValidationMsg"/>
 
-    <ImageUploader :imgPrefix="'FixedBanner'" :fileName="backgroundImgName" :preferSize="'640*140px'" @success="uploadImageSuccess" @remove="removeImg"/>
+    <ImageUploader :imgPrefix="'FixedBanner'" :fileName="backgroundImgName" @success="uploadImageSuccess" @remove="removeImg"/>
     <ErrorMsg :message="validteBackgroundImg" v-if="validteBackgroundImg&&showValidationMsg"/>
 
     <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" required v-model="link"/>

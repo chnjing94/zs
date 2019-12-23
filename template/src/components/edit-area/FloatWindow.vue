@@ -1,9 +1,9 @@
 <template>
   <div id="float-window">
     <Title :title="'浮动弹窗'"/>
-    <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :preferSize="'540*60px'" :imgPrefix="'FloatWindow'" :required="false" @success="uploadImgSuccess" @remove="removeImg"/>
+    <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :imgPrefix="'FloatWindow'" :required="false" @success="uploadImgSuccess" @remove="removeImg"/>
     <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
-    <TextInput :title="'文字'" :hint="'（支持最多50位中文汉字和英文输入，超过显示框的文字将不在手机端展示）'" :maxLength="50" v-model="text"/>
+    <TextInput :title="'文字'" :hint="'（限50个字以内输入）'" :maxLength="50" v-model="text"/>
     <FontSize v-model="fontSize"/>
     <FontColor v-model="fontColor"/>
     <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />

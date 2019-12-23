@@ -5,7 +5,7 @@
         {{title}}
       </div>
       <div class="sub-hint">
-        （若配置了背景图片，背景颜色和透明度不在手机端展示）
+        (上传背景图片后，背景颜色和透明度不展示)
       </div>
     </div>
     <div class="color-picker">
@@ -93,7 +93,7 @@ export default {
     flex 1 0 2rem
     display flex
     width 356px
-    align-items flex-start
+    align-items center
     justify-content center
     .main-hint
       flex 1 0 auto

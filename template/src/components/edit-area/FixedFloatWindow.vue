@@ -5,7 +5,7 @@
     <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" v-model="componentName" :maxLength="16" required noSymbol/>
     <ErrorMsg :message="validateComponentName" v-if="validateComponentName&&showValidationMsg"/>
 
-    <ImageUploader :imgPrefix="'FixedFloatWindow'" :fileName="backgroundImgName" :preferSize="'160*145px'" @success="uploadImageSuccess" @remove="removeImg"/>
+    <ImageUploader :imgPrefix="'FixedFloatWindow'" :fileName="backgroundImgName" @success="uploadImageSuccess" @remove="removeImg"/>
     <ErrorMsg :message="validteBackgroundImg" v-if="validteBackgroundImg&&showValidationMsg"/>
 
     <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" v-model="link" required/>

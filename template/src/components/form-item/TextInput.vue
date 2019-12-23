@@ -1,6 +1,6 @@
 <template>
   <div id="test-input">
-    <div class="hint" :style="{margin: highTitle ? '0.5rem 0' : ''}">
+    <div class="hint" >
       <div class="main-hint" :style="{alignItems: highTitle ? '' : 'center'}">
         <span style="color: red" v-if="required">*</span>{{title}}
       </div>
@@ -85,19 +85,19 @@ export default {
 
   .hint
     flex 1 0 auto
-    display flex
-    align-items flex-start
     width 356px
+    display flex
     .main-hint
       flex 0 0 auto
-      height 40px
-      font-weight 600
-      display flex
-    .sub-hint
-      flex 1 1 auto
-      height 40px
       display flex
       align-items center
+      height 40px
+      font-weight 600
+    .sub-hint
+      display flex
+      align-items center
+      flex 1 1 auto
+      height 40px
 
   .test-area
     flex 1 0 2rem

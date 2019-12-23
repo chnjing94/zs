@@ -2,11 +2,11 @@
   <div id="subregion-title">
     <Title :title="'分区标题'"/>
     <div class="form">
-      <TextInput :title="'主标题'" :placeholder="'请输入主标题文字'" :hint="'（支持7位中文汉字和英文输入，超过展示区域手机端不展示不展示）'" noSymbol :maxLength="7" v-model="title"/>
-      <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :preferSize="'240*60px'" :imgPrefix="subregionId+'Title'" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
+      <TextInput :title="'主标题'" :placeholder="'请输入主标题文字'" :hint="'（限7个字以内输入）'" noSymbol :maxLength="7" v-model="title"/>
+      <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :imgPrefix="subregionId+'Title'" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
       <FontColor v-model="fontColor"/>
       <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
-      <TextInput :title="'副标题'" :placeholder="'请输入副标题文字'" :hint="'（支持最多12位中文汉字和英文输入，超过显示框的文字将不在手机端展示）'" :maxLength="12" v-model="subtitle"/>
+      <TextInput :title="'副标题'" :placeholder="'请输入副标题文字'" :hint="'（限12个字以内输入）'" :maxLength="12" v-model="subtitle"/>
       <FontColor v-model="subtitleFontColor"/>
     </div>
     <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />

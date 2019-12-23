@@ -1,9 +1,9 @@
 <template>
   <div id="banner-title">
     <Title :title="'分区主标题'"/>
-    <TextInput :title="'文字'" :placeholder="'请输入主标题文字'" :hint="'（支持12位字符、中文汉字和英文输入，超过7位不在手机端展示）'" :maxLength="12" v-model="text"/>
+    <TextInput :title="'文字'" :placeholder="'请输入主标题文字'" :hint="'（限12个字以内输入）'" :maxLength="12" v-model="text"/>
     <FontColor v-model="fontColor"/>
-    <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :preferSize="'250*50px'" :imgPrefix="'BannerTitle'+bannerId" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
+    <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :imgPrefix="'BannerTitle'+bannerId" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
     <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
     <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>

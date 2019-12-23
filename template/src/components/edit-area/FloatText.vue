@@ -6,7 +6,7 @@
       <ErrorMsg :message="validateComponentName" v-if="validateComponentName&&showValidationMsg"/>
       <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :imgPrefix="'FloatText'" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
       <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
-      <TextInput :title="'文字'" :placeholder="'请输入浮动文字'" :hint="'（支持最多16位中文汉字和英文输入，超过显示框的文字将不在手机端展示）'" required noSymbol :maxLength="16" v-model="text"/>
+      <TextInput :title="'文字'" :placeholder="'请输入浮动文字'" :hint="'（限16个字以内输入）'" required noSymbol :maxLength="16" v-model="text"/>
       <ErrorMsg :message="validateText" v-if="validateText&&showValidationMsg"/>
       <FontSize v-model="fontSize"/>
       <FontColor v-model="fontColor"/>
