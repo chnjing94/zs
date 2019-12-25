@@ -15,7 +15,7 @@
         </a-input-search>
       </div>
       <div class="button" @click="onClick">浏览</div>
-      <input v-show="false" type="file" accept="image/*" ref="imgInput" @change="onChange">
+      <input v-show="false" type="file" accept="images/*" ref="imgInput" @change="onChange">
     </div>
     <div class="warning" v-if="exceedMaxFileSize" >
       <span style="color: red">图片大小超出限制</span>
@@ -74,20 +74,30 @@ export default {
         return
       }
       const formData = new FormData();
-      formData.append('filename', this.imgPrefix + '-' + this.uuid() + '.' + this.$refs.imgInput.files[0].type.split('/')[1])
-      formData.append('pictype', '0')
+      formData.append('imgtype', '2')
+      formData.append('filename', "pic" + (new Date() - new Date(1970,1,1)))
+      formData.append('tplRelativePath', this.$store.state.resPath)
       formData.append('file', this.$refs.imgInput.files[0])
       axios
-        .post('/Mpage/PicUpload', formData, { 'Content-Type':'multipart/form-data' })
+        .post('/MPageManage/Mpage/PicUpload', formData, { 'Content-Type':'multipart/form-data' })
         .then(response => {
-          const res = {
-            fileName: this.$refs.imgInput.files[0].name,
-            data: {
-              RelativePath: this.$store.state.resPath + response.data.AbsPath
+          if(response.data !== "" && response.data.Status === "0"){
+            const res = {
+              fileName: this.$refs.imgInput.files[0].name,
+              data: {
+                RelativePath: response.data.RelativePath
+              }
             }
+            this.$emit('success', res)
+            this.$refs.imgInput.value = ''
           }
-          this.$emit('success', res)
-          this.$refs.imgInput.value = ''
+          else{
+            this.uploadFailed = true
+            this.$refs.imgInput.value = ''
+            setTimeout(()=> {
+              this.uploadFailed = false
+            }, 3000)
+          }
         })
         .catch(() => {
           this.uploadFailed = true
@@ -96,20 +106,6 @@ export default {
             this.uploadFailed = false
           }, 3000)
         })
-    },
-
-    uuid() {
-      let s = [];
-      const hexDigits = "0123456789abcdef";
-      for (var i = 0; i < 36; i++) {
-          s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
-      }
-      s[14] = "4";
-      s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);
-      s[8] = s[13] = s[18] = s[23] = "-";
-  
-      var uuid = s.join("");
-      return uuid;
     }
   }
 }

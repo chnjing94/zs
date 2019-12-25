@@ -4,17 +4,19 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
+    state: true,
+    orgImg: ["backlong.png","floatwindow.png","floattext.png","subtitle.png","pink.png","subregiontitle.png","slidebanner.png","go.png","subregiontitle.png","subregiontitle.png","1.png","g1.png","2.png","g2.png","3.png","3_1.png","g3.png","4.png","4_1.png","g4.png","5.png","5_1.png","g5.png"],
     savedJson: {},
-    resPath: './images/',
+    resPath: 'images/',
     editAreaId: 'BackgroundLongImg',
     currentBannerIndex: 0,
     backgroundLongImg: {
       backgroundImgName: 'backlong.png',
-      backgroundImgUrlRel: './images/backlong.png'
+      backgroundImgUrlRel: 'backlong.png'
     },
     fixedFloatingWindow: {
       backgroundImgName: 'floatwindow.png',
-      backgroundImgUrlRel: './images/floatwindow.png',
+      backgroundImgUrlRel: 'floatwindow.png',
       componentName: "fixedfloatwindow",
       backgroundColor: "",
       link: 'http://',
@@ -23,7 +25,7 @@ export default new Vuex.Store({
     floatText: {
       componentName: 'floatText',
       backgroundImgName: 'floattext.png',
-      backgroundImgUrlRel: './images/floattext.png',
+      backgroundImgUrlRel: 'floattext.png',
       backgroundColor: '',
       backgroundOpacity: 0,
       text: '领导寄语',
@@ -42,7 +44,7 @@ export default new Vuex.Store({
     },
     subtitle: {
       backgroundImgName: 'subtitle.png',
-      backgroundImgUrlRel: './images/subtitle.png',
+      backgroundImgUrlRel: 'subtitle.png',
       backgroundColor: '',
       backgroundOpacity: 0,
       text: '好礼送不停优质企业专享',
@@ -52,7 +54,7 @@ export default new Vuex.Store({
     fixedBanner: {
       componentName: 'fixedBanner',
       backgroundImgName: 'pink.png',
-      backgroundImgUrlRel: './images/pink.png',
+      backgroundImgUrlRel: 'pink.png',
       link: 'http://',
       way: 0
     },
@@ -62,7 +64,7 @@ export default new Vuex.Store({
       fontColor: '#FFFFFF'
     },
     slideBanner: {
-      backgroundImgUrlRel: './images/subregiontitle.png',
+      backgroundImgUrlRel: 'subregiontitle.png',
       title: '活动专区',
       backgroundImgName: 'subregiontitle.png',
       fontColor: '#826219',
@@ -74,9 +76,9 @@ export default new Vuex.Store({
       subtitleFontSize: 13,
       banners: [{
         "backgroundImgName": 'slidebanner.png',
-        "backgroundImgUrlRel": './images/slidebanner.png',
+        "backgroundImgUrlRel": 'slidebanner.png',
         "guideIconName": "go.png",
-        "guideIconUrlRel": "./images/go.png",
+        "guideIconUrlRel": "go.png",
         "componentName": "banner1",
         "backgroundColor": "",
         "backgroundOpacity": 0,
@@ -109,7 +111,7 @@ export default new Vuex.Store({
       }]
     },
     adAreaMid: {
-      "backgroundImgUrlRel": "./images/subregiontitle.png",
+      "backgroundImgUrlRel": "subregiontitle.png",
       "title": "福利票券",
       "backgroundImgName": 'subregiontitleadAreaMid.png',
       "fontColor": "#826219",
@@ -121,7 +123,7 @@ export default new Vuex.Store({
       "subtitleFontSize": 13
     },
     adAreaBottm: {
-      "backgroundImgUrlRel": './images/subregiontitle.png',
+      "backgroundImgUrlRel": 'subregiontitle.png',
       "title": "薪享理财",
       "backgroundImgName": 'subregiontitleadAreaBottm.png',
       "fontColor": "#826219",
@@ -135,7 +137,7 @@ export default new Vuex.Store({
     fiveBanners: {
       ad1: {
         banner: {
-          "backgroundImgUrlRel": "./images/1.png",
+          "backgroundImgUrlRel": "1.png",
           "componentName": "123",
           "backgroundImgName": "1.png",
           "backgroundColor": "",
@@ -158,11 +160,11 @@ export default new Vuex.Store({
           "fontColor": "#0748C6"
         },
         "guideIconName": "g1.png",
-        "guideIconUrlRel": "./images/g1.png"
+        "guideIconUrlRel": "g1.png"
       },
       ad2: {
         banner: {
-          "backgroundImgUrlRel": "./images/2.png",
+          "backgroundImgUrlRel": "2.png",
           "backgroundImgName": "2.png",
           "componentName": "1",
           "backgroundColor": "",
@@ -184,12 +186,12 @@ export default new Vuex.Store({
           "fontSize": 13,
           "fontColor": "#7f5d0f"
         },
-        "guideIconUrlRel": "./images/g2.png",
+        "guideIconUrlRel": "g2.png",
         "guideIconName": "g2.png"
       },
       ad3: {
         banner: {
-          "backgroundImgUrlRel": "./images/3.png",
+          "backgroundImgUrlRel": "3.png",
           "backgroundImgName": "3.png",
           "componentName": "1",
           "backgroundColor": "",
@@ -202,7 +204,7 @@ export default new Vuex.Store({
           "fontSize": 16,
           "fontColor": "#fbeacd",
           "backgroundImgName": "3_1.png",
-          "backgroundImgUrlRel": "./images/3_1.png",
+          "backgroundImgUrlRel": "3_1.png",
           "backgroundColor": "",
           "backgroundOpacity": 0
         },
@@ -211,12 +213,12 @@ export default new Vuex.Store({
           "fontSize": 13,
           "fontColor": "#7f5d0f"
         },
-        "guideIconUrlRel": "./images/g3.png",
+        "guideIconUrlRel": "g3.png",
         "guideIconName": "g3.png"
       },
       ad4: {
         banner: {
-          "backgroundImgUrlRel": "./images/4.png",
+          "backgroundImgUrlRel": "4.png",
           "backgroundImgName": "4.png",
           "componentName": "1",
           "backgroundColor": "",
@@ -229,7 +231,7 @@ export default new Vuex.Store({
           "fontSize": 16,
           "fontColor": "#fbeacd",
           "backgroundImgName": "4_1.png",
-          "backgroundImgUrlRel": "./images/4_1.png",
+          "backgroundImgUrlRel": "4_1.png",
           "backgroundColor": "",
           "backgroundOpacity": 0
         },
@@ -238,12 +240,12 @@ export default new Vuex.Store({
           "fontSize": 13,
           "fontColor": "#FFFFFF"
         },
-        "guideIconUrlRel": "./images/g4.png",
+        "guideIconUrlRel": "g4.png",
         "guideIconName": "g4.png"
       },
       ad5: {
         banner: {
-          "backgroundImgUrlRel": "./images/5.png",
+          "backgroundImgUrlRel": "5.png",
           "backgroundImgName": "5.png",
           "componentName": "1",
           "backgroundColor": "",
@@ -256,7 +258,7 @@ export default new Vuex.Store({
           "fontSize": 16,
           "fontColor": "#fbeacd",
           "backgroundImgName": "5_1.png",
-          "backgroundImgUrlRel": "./images/5_1.png",
+          "backgroundImgUrlRel": "5_1.png",
           "backgroundColor": "",
           "backgroundOpacity": 0
         },
@@ -265,7 +267,7 @@ export default new Vuex.Store({
           "fontSize": 13,
           "fontColor": "#FFFFFF"
         },
-        "guideIconUrlRel": "./images/g5.png",
+        "guideIconUrlRel": "g5.png",
         "guideIconName": "g5.png"
       }
     },
@@ -281,6 +283,14 @@ export default new Vuex.Store({
   },
 
   mutations: {
+    modifyStatus(state, data) {
+      state.state = data
+    },
+
+    saveOrgImgList (state, data) {
+      state.orgImg = data
+    },
+
     save (state) {
       state.savedJson = Object.assign({}, {
         backgroundLongImg: state.backgroundLongImg,
@@ -296,6 +306,7 @@ export default new Vuex.Store({
         fiveBanners: JSON.parse(JSON.stringify(state.fiveBanners)),
       })
     },
+
     rollback (state) {
       const { backgroundLongImg, fixedFloatingWindow, floatText, floatWindow, subtitle, fixedBanner, footText, slideBanner, adAreaMid, adAreaBottm, fiveBanners} = state.savedJson
       state.backgroundLongImg = backgroundLongImg
@@ -310,6 +321,7 @@ export default new Vuex.Store({
       state.adAreaBottm = adAreaBottm
       state.fiveBanners = JSON.parse(JSON.stringify(fiveBanners))
     },
+
     loadData (state, data) {
       const { backgroundLongImg, fixedFloatingWindow, floatText, floatWindow, subtitle, fixedBanner, footText, slideBanner, adAreaMid, adAreaBottm, fiveBanners} = data
       state.backgroundLongImg = backgroundLongImg
@@ -400,12 +412,70 @@ export default new Vuex.Store({
   },
 
   getters: {
+    getImgList: state => {
+      let imgList = []
+      const {backgroundLongImg, fixedFloatingWindow, floatText, floatWindow, subtitle, fixedBanner, slideBanner, adAreaMid, adAreaBottm, fiveBanners} = state.savedJson
+
+      if (backgroundLongImg.backgroundImgUrlRel) {
+        imgList.push(backgroundLongImg.backgroundImgUrlRel)
+      }
+      if (fixedFloatingWindow.backgroundImgUrlRel) {
+        imgList.push(fixedFloatingWindow.backgroundImgUrlRel)
+      }
+      if (floatText.backgroundImgUrlRel) {
+        imgList.push(floatText.backgroundImgUrlRel)
+      }
+      if (floatWindow.backgroundImgUrlRel) {
+        imgList.push(floatWindow.backgroundImgUrlRel)
+      }
+      if (subtitle.backgroundImgUrlRel) {
+        imgList.push(subtitle.backgroundImgUrlRel)
+      }
+      if (fixedBanner.backgroundImgUrlRel) {
+        imgList.push(fixedBanner.backgroundImgUrlRel)
+      }
+      if (slideBanner.backgroundImgUrlRel) {
+        imgList.push(slideBanner.backgroundImgUrlRel)
+      }
+      slideBanner.banners.forEach(banner => {
+        if (banner.backgroundImgUrlRel) {
+          imgList.push(banner.backgroundImgUrlRel)
+        }
+        if (banner.guideIconUrlRel) {
+          imgList.push(banner.guideIconUrlRel)
+        }
+      })
+
+      if (adAreaMid.backgroundImgUrlRel) {
+        imgList.push(adAreaMid.backgroundImgUrlRel)
+      }
+      if (adAreaBottm.backgroundImgUrlRel) {
+        imgList.push(adAreaBottm.backgroundImgUrlRel)
+      }
+
+      for(let i = 1; i <= 5; ++i) {
+        const id = 'ad' + i
+        const ad = fiveBanners[id]
+        if (ad.banner.backgroundImgUrlRel) {
+          imgList.push(ad.banner.backgroundImgUrlRel)
+        }
+        if (ad.title.backgroundImgUrlRel) {
+          imgList.push(ad.title.backgroundImgUrlRel)
+        }
+        if (ad.guideIconUrlRel) {
+          imgList.push(ad.guideIconUrlRel)
+        }
+      }
+
+      return imgList
+    },
+
     floatTextStyle: state => {
       let style = {}
       if (state.floatText.backgroundImgUrlRel){
         style = {
-          backgroundImage: 'url(' + state.floatText.backgroundImgUrlRel + ')',
-          backgroundSize: '100%100%',
+          backgroundImage: 'url(' + state.resPath + state.floatText.backgroundImgUrlRel + ')',
+          backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
         }
       } else if (state.floatText.backgroundColor){
@@ -434,8 +504,8 @@ export default new Vuex.Store({
       const banner = state.slideBanner.banners[state.currentBannerIndex]
       if (banner && banner.guideIconUrlRel) {
         return {
-          backgroundImage: banner ? 'url(' + banner.guideIconUrlRel + ')' : '',
-          backgroundSize: '100%100%',
+          backgroundImage: banner ? 'url('  + state.resPath + banner.guideIconUrlRel + ')' : '',
+          backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
         }
       }
@@ -446,8 +516,8 @@ export default new Vuex.Store({
       let style = {}
       if (banner && banner.backgroundImgUrlRel){
         style = {
-          backgroundImage: 'url(' + banner.backgroundImgUrlRel + ')',
-          backgroundSize: '100%100%',
+          backgroundImage: 'url(' + state.resPath + banner.backgroundImgUrlRel + ')',
+          backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
         }
       } else if (banner && banner.backgroundColor){
@@ -463,8 +533,8 @@ export default new Vuex.Store({
       let style = {}
       if (state.slideBanner.backgroundImgUrlRel){
         style = {
-          backgroundImage: 'url(' + state.slideBanner.backgroundImgUrlRel + ')',
-          backgroundSize: '100%100%',
+          backgroundImage: 'url(' + state.resPath + state.slideBanner.backgroundImgUrlRel + ')',
+          backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
         }
       } else if (state.slideBanner.backgroundColor){
@@ -479,8 +549,8 @@ export default new Vuex.Store({
       let style = {}
       if (state.subtitle.backgroundImgUrlRel){
         style = {
-          backgroundImage: 'url(' + state.subtitle.backgroundImgUrlRel + ')',
-          backgroundSize: '100%100%',
+          backgroundImage: 'url(' + state.resPath + state.subtitle.backgroundImgUrlRel + ')',
+          backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
         }
       } else if (state.subtitle.backgroundColor){
@@ -495,8 +565,8 @@ export default new Vuex.Store({
     backgroundLongImgStyle: state => {
       if (state.backgroundLongImg.backgroundImgUrlRel) {
         return {
-          backgroundImage: 'url(' + state.backgroundLongImg.backgroundImgUrlRel + ')',
-          backgroundSize: '100%100%',
+          backgroundImage: 'url(' + state.resPath + state.backgroundLongImg.backgroundImgUrlRel + ')',
+          backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
         }
       }
@@ -506,10 +576,9 @@ export default new Vuex.Store({
       let style = {}
       if (state.fixedFloatingWindow.backgroundImgUrlRel) {
         style =  {
-          backgroundImage: 'url(' + state.fixedFloatingWindow.backgroundImgUrlRel + ')',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center center'
+          backgroundImage: 'url(' + state.resPath + state.fixedFloatingWindow.backgroundImgUrlRel + ')',
+          backgroundSize: '100% 100%',
+          backgroundRepeat: 'no-repeat'
         }
       }
       style.boxShadow = state.editAreaId==='FixedFloatWindow' ? '0px 0px 0px 1px #007d71' : ''
@@ -519,8 +588,8 @@ export default new Vuex.Store({
     fixedBannerStyle: state => {
       if (state.fixedBanner.backgroundImgUrlRel) {
         return {
-          backgroundImage: 'url(' + state.fixedBanner.backgroundImgUrlRel + ')',
-          backgroundSize: '100%100%',
+          backgroundImage: 'url(' + state.resPath + state.fixedBanner.backgroundImgUrlRel + ')',
+          backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
         }
       }
@@ -530,8 +599,8 @@ export default new Vuex.Store({
       let style = {}
       if (state.adAreaMid.backgroundImgUrlRel){
         style = {
-          backgroundImage: 'url(' + state.adAreaMid.backgroundImgUrlRel + ')',
-          backgroundSize: '100%100%',
+          backgroundImage: 'url(' + state.resPath + state.adAreaMid.backgroundImgUrlRel + ')',
+          backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
         }
       } else if (state.adAreaMid.backgroundColor){
@@ -546,8 +615,8 @@ export default new Vuex.Store({
       let style = {}
       if (state.adAreaBottm.backgroundImgUrlRel){
         style = {
-          backgroundImage: 'url(' + state.adAreaBottm.backgroundImgUrlRel + ')',
-          backgroundSize: '100%100%',
+          backgroundImage: 'url(' + state.resPath + state.adAreaBottm.backgroundImgUrlRel + ')',
+          backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
         }
       } else if (state.adAreaBottm.backgroundColor){
@@ -563,8 +632,8 @@ export default new Vuex.Store({
       let style = {}
       if (banner.backgroundImgUrlRel){
         style = {
-          backgroundImage: 'url(' + banner.backgroundImgUrlRel + ')',
-          backgroundSize: '100%100%',
+          backgroundImage: 'url(' + state.resPath + banner.backgroundImgUrlRel + ')',
+          backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
         }
       } else if (banner.backgroundColor){
@@ -578,8 +647,8 @@ export default new Vuex.Store({
     bannerGuideIconStyle: (state) => (n) => {
       if (state.fiveBanners['ad'+n].guideIconUrlRel) {
         return {
-          backgroundImage: 'url(' + state.fiveBanners['ad'+n].guideIconUrlRel + ')',
-          backgroundSize: '100%100%',
+          backgroundImage: 'url(' + state.resPath + state.fiveBanners['ad'+n].guideIconUrlRel + ')',
+          backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
         }
       }
@@ -611,8 +680,8 @@ export default new Vuex.Store({
       let style = {}
       if (title.backgroundImgUrlRel){
         style = {
-          backgroundImage: 'url(' + title.backgroundImgUrlRel + ')',
-          backgroundSize: '100%100%',
+          backgroundImage: 'url(' + state.resPath + title.backgroundImgUrlRel + ')',
+          backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
         }
       } else if (title.backgroundColor){

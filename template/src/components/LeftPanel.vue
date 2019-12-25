@@ -1,6 +1,6 @@
 <template>
   <div id="left-panel">
-    <div class="float-text-preview" v-if="(editAreaId==='FloatText'||editAreaId==='FloatWindow')&&floatText.componentName" @click.stop="changeEditArea('FloatWindow')" :style="floatWindowStyle">
+    <div class="float-text-preview" v-if="showEditPanel()" @click.stop="changeEditArea('FloatWindow')" :style="floatWindowStyle">
       <div class="close">
         <a-icon type="close-circle" />
       </div>
@@ -16,6 +16,9 @@ import { mapState } from 'vuex'
 export default {
   name: 'LeftPanel',
   methods: {
+    showEditPanel() {
+      return (this.editAreaId==='FloatText' || this.editAreaId==='FloatWindow') && this.floatText.componentName && this.allowEdit === true
+    },
     changeEditArea (editAreaId) {
       this.$store.commit('changeEditArea', editAreaId)
     },
@@ -31,9 +34,10 @@ export default {
   },
   computed: {
     ...mapState({
-        editAreaId: state => state.editAreaId,
-        floatText: state => state.floatText,
-        floatWindow: state => state.floatWindow,
+      allowEdit: state => state.state,
+      editAreaId: state => state.editAreaId,
+      floatText: state => state.floatText,
+      floatWindow: state => state.floatWindow,
     }),
 
     floatWindowStyle () {

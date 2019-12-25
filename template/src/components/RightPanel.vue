@@ -1,33 +1,33 @@
 <template>
   <div id="edit-area">
-    <BackgroundLongImg v-if="editAreaId==='BackgroundLongImg'"/>
-    <FixedFloatWindow v-if="editAreaId==='FixedFloatWindow'"/>
-    <FloatText v-if="editAreaId==='FloatText'"/>
-    <FloatWindow v-if="editAreaId==='FloatWindow'"/>
+    <BackgroundLongImg v-if="showEditPanel('BackgroundLongImg')"/>
+    <FixedFloatWindow v-if="showEditPanel('FixedFloatWindow')"/>
+    <FloatText v-if="showEditPanel('FloatText')"/>
+    <FloatWindow v-if="showEditPanel('FloatWindow')"/>
 
-    <Subtitle v-if="editAreaId==='Subtitle'"/>
+    <Subtitle v-if="showEditPanel('Subtitle')"/>
 
-    <SubregionTitle :subregionId="'SlideBanner'" v-if="editAreaId==='SubregionTitleTop'"/>
-    <SlideBanner v-if="editAreaId==='SlideBanner'"/>
+    <SubregionTitle :subregionId="'SlideBanner'" v-if="showEditPanel('SubregionTitleTop')"/>
+    <SlideBanner v-if="showEditPanel('SlideBanner')"/>
     
-    <SubregionTitle :subregionId="'AdAreaMid'" v-if="editAreaId==='SubregionTitleMid'"/>
+    <SubregionTitle :subregionId="'AdAreaMid'" v-if="showEditPanel('SubregionTitleMid')"/>
     <div v-for="n in [1,2]" :key="'banner'+n">
-      <BannerTitle :bannerId="'ad'+n" v-if="editAreaId==='BannerTitle'+n"/>
-      <BannerSubtitle :bannerId="'ad'+n" v-if="editAreaId==='BannerSubtitle'+n"/>
-      <GuideIcon :bannerId="'ad'+n" v-if="editAreaId==='GuideIcon'+n"/>
-      <BannerBackgroundImg :bannerId="'ad'+n" v-if="editAreaId==='BannerBackgroundImg'+n"/>
+      <BannerTitle :bannerId="'ad'+n" v-if="showEditPanel('BannerTitle'+n)"/>
+      <BannerSubtitle :bannerId="'ad'+n" v-if="showEditPanel('BannerSubtitle'+n)"/>
+      <GuideIcon :bannerId="'ad'+n" v-if="showEditPanel('GuideIcon'+n)"/>
+      <BannerBackgroundImg :bannerId="'ad'+n" v-if="showEditPanel('BannerBackgroundImg'+n)"/>
     </div>
     
-    <SubregionTitle :subregionId="'AdAreaBottm'" v-if="editAreaId==='SubregionTitleBottom'"/>
+    <SubregionTitle :subregionId="'AdAreaBottm'" v-if="showEditPanel('SubregionTitleBottom')"/>
     <div v-for="n in [3,4,5]" :key="'banner'+n">
-      <BannerTitle :bannerId="'ad'+n" v-if="editAreaId==='BannerTitle'+n"/>
-      <BannerSubtitle :bannerId="'ad'+n" v-if="editAreaId==='BannerSubtitle'+n"/>
-      <GuideIcon :bannerId="'ad'+n" v-if="editAreaId==='GuideIcon'+n"/>
-      <BannerBackgroundImg :bannerId="'ad'+n" v-if="editAreaId==='BannerBackgroundImg'+n"/>
+      <BannerTitle :bannerId="'ad'+n" v-if="showEditPanel('BannerTitle'+n)"/>
+      <BannerSubtitle :bannerId="'ad'+n" v-if="showEditPanel('BannerSubtitle'+n)"/>
+      <GuideIcon :bannerId="'ad'+n" v-if="showEditPanel('GuideIcon'+n)"/>
+      <BannerBackgroundImg :bannerId="'ad'+n" v-if="showEditPanel('BannerBackgroundImg'+n)"/>
     </div>
     
-    <FixedBanner v-if="editAreaId==='FixedBanner'"/>
-    <BottomState v-if="editAreaId==='BottomState'"/>
+    <FixedBanner v-if="showEditPanel('FixedBanner')"/>
+    <BottomState v-if="showEditPanel('BottomState')"/>
   </div>
 </template>
 
@@ -66,8 +66,14 @@ export default {
   },
   computed: {
     ...mapState({
+        allowEdit: state => state.state,
         editAreaId: state => state.editAreaId,
     })
+  },
+  methods: {
+    showEditPanel (editAreaId) {
+      return editAreaId === this.editAreaId && this.allowEdit === true
+    }
   }
 }
 </script>

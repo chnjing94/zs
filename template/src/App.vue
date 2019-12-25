@@ -21,11 +21,17 @@ export default {
         const json = JSON.parse(event.data)
         this.$store.commit('loadData', json)
         this.$store.commit('save')
+        this.$store.commit('saveOrgImgList', this.$store.getters.getImgList)
+        this.$store.commit("modifyStatus", this.getStatus("opr") !== "1");
         this.getResPath()
       }
       catch(e) {
         return
       }
+    },
+    getStatus: function(name){
+        var url = "?" + window.parent.location.href.split("?")[1];
+        return  decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url) || [""])[1].replace(/\+/g, '%20')) || "";
     },
     getResPath () {
       const resPath = window.parent.document.getElementById('resPath').value

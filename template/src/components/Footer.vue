@@ -11,68 +11,13 @@ export default {
     methods: {
       save () {
         window.parent.document.getElementById('dataJson').value = JSON.stringify(this.$store.state.savedJson)
-        window.parent.document.getElementById('dataImg').value = JSON.stringify(this.getImgList())
+        window.parent.document.getElementById('dataImg').value = JSON.stringify(this.$store.getters.getImgList)
         window.parent.document.getElementById('frameSave').click()
       },
       cancel () {
+        //最原始的输入的imglist
+        window.parent.document.getElementById("dataImg").value = this.$store.state.orgImg;
         window.parent.document.getElementById('frameCancel').click()
-      },
-      getImgList () {
-        let imgList = []
-        const {backgroundLongImg, fixedFloatingWindow, floatText, floatWindow, subtitle, fixedBanner, slideBanner, adAreaMid, adAreaBottm, fiveBanners} = this.$store.state.savedJson
-
-        if (backgroundLongImg.backgroundImgUrlRel) {
-          imgList.push(backgroundLongImg.backgroundImgUrlRel)
-        }
-        if (fixedFloatingWindow.backgroundImgUrlRel) {
-          imgList.push(fixedFloatingWindow.backgroundImgUrlRel)
-        }
-        if (floatText.backgroundImgUrlRel) {
-          imgList.push(floatText.backgroundImgUrlRel)
-        }
-        if (floatWindow.backgroundImgUrlRel) {
-          imgList.push(floatWindow.backgroundImgUrlRel)
-        }
-        if (subtitle.backgroundImgUrlRel) {
-          imgList.push(subtitle.backgroundImgUrlRel)
-        }
-        if (fixedBanner.backgroundImgUrlRel) {
-          imgList.push(fixedBanner.backgroundImgUrlRel)
-        }
-        if (slideBanner.backgroundImgUrlRel) {
-          imgList.push(slideBanner.backgroundImgUrlRel)
-        }
-        slideBanner.banners.forEach(banner => {
-          if (banner.backgroundImgUrlRel) {
-            imgList.push(banner.backgroundImgUrlRel)
-          }
-          if (banner.guideIconUrlRel) {
-            imgList.push(banner.guideIconUrlRel)
-          }
-        })
-
-        if (adAreaMid.backgroundImgUrlRel) {
-          imgList.push(adAreaMid.backgroundImgUrlRel)
-        }
-        if (adAreaBottm.backgroundImgUrlRel) {
-          imgList.push(adAreaBottm.backgroundImgUrlRel)
-        }
-
-        for(let i = 1; i <= 5; ++i) {
-          const id = 'ad' + i
-          const ad = fiveBanners[id]
-          if (ad.banner.backgroundImgUrlRel) {
-            imgList.push(ad.banner.backgroundImgUrlRel)
-          }
-          if (ad.title.backgroundImgUrlRel) {
-            imgList.push(ad.title.backgroundImgUrlRel)
-          }
-          if (ad.guideIconUrlRel) {
-            imgList.push(ad.guideIconUrlRel)
-          }
-        }
-
-        return imgList
       }
     }
 }
