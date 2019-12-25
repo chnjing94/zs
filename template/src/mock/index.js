@@ -34,11 +34,11 @@ Mock.mock('/Mpage/PicUpload', 'post', (req) => {
     case "BannerTitlead2":
       return MockData.BannerTitle
     case "BannerTitlead3":
-      return MockData.BannerTitle
+      return MockData.BannerTitle3
     case "BannerTitlead4":
-      return MockData.BannerTitle 
+      return MockData.BannerTitle4
     case "BannerTitlead5":
-      return MockData.BannerTitle
+      return MockData.BannerTitle5
     case "GuideIconad1":
         return MockData.BannerGuideIcon1
     case "GuideIconad2":

@@ -1,5 +1,5 @@
 <template>
-  <div id="background-long-img" :style="backgroundLongImgStyle" @click="changeEditArea('BackgroundLongImg')">
+  <div id="background-long-img" :class="{'selected': editAreaId==='BackgroundLongImg'}"  :style="backgroundLongImgStyle" @click="changeEditArea('BackgroundLongImg')">
     <div id="fixed-float-window" @click.stop="changeEditArea('FixedFloatWindow')" :style="fixedFloatWindowStyle"></div>
     <div id="float-text" :class="{'selected': editAreaId==='FloatText'}" @click.stop="changeEditArea('FloatText')" >
       <div v-if="floatText.show" :style="floatTextStyle" class="float-text-content text-content">{{floatText.text}}</div>
@@ -91,7 +91,7 @@ export default {
   #background-long-img
     position relative
     width 375px
-    height 1328px
+    height 1615px
     background-color white
   
   #float-text
@@ -123,10 +123,10 @@ export default {
 
   #fixed-float-window
     position absolute
-    top 18px
-    left 285px
-    width 83px
-    height 75px
+    top 222px
+    left 297px
+    width 75px
+    height 88px
     
 
   #subtitle
@@ -139,23 +139,24 @@ export default {
 
   #subregion-title-top
     position absolute
-    top 397px
+    top 399px
     left 128px
     width 120px
     height 53px
     display flex
+    justify-content: space-around
     flex-direction column-reverse
 
   #slide-banner
     position absolute
-    top 455px
-    left 18px
-    width 339px
-    height 81px
+    top 453px
+    left 28px
+    width 319px
+    height 111px
     z-index 1
   #slide-banner-title
     position absolute
-    top 477px
+    top 487px
     left 107px
     width 170px
     height 16px
@@ -163,27 +164,28 @@ export default {
     text-align center
   #slide-banner-subtitle
     position absolute
-    top 500px
+    top 510px
     left 107px
     width 170px
-    height 12px
+    height 14px
     z-index 2
     text-align center
   #slide-banner-guide-icon
     position absolute
-    top 467px
-    left 283px
+    top 483px
+    left 278px
     width 54px
     height 54px
     z-index 2 
 
   #subregion-title-mid
     position absolute
-    top 556px
+    top 596px
     left 128px
     width 120px
     height 53px
     display flex
+    justify-content: space-around
     flex-direction column-reverse
   
   .subregion-title
@@ -195,7 +197,7 @@ export default {
 
   #banner-title-1
     position absolute
-    top 654px
+    top 703px
     left 44px
     width 200px
     height 25px
@@ -203,7 +205,7 @@ export default {
 
   #banner-subtitle-1
     position absolute
-    top 680px
+    top 728px
     left 44px
     width 200px
     height 15px
@@ -211,7 +213,7 @@ export default {
 
   #guide-icon-1
     position absolute
-    top 655px
+    top 710px
     left 242px
     width 94px
     height 30px
@@ -219,15 +221,15 @@ export default {
 
   #banner-background-img-1
     position absolute
-    top 631px
+    top 667px
     left 29px
     width 319px
-    height 80px
+    height 111px
     z-index 1
 
   #banner-title-2
     position absolute
-    top 742px
+    top 822px
     left 44px
     width 200px
     height 25px
@@ -235,7 +237,7 @@ export default {
 
   #banner-subtitle-2
     position absolute
-    top 768px
+    top 847px
     left 44px
     width 200px
     height 15px
@@ -243,7 +245,7 @@ export default {
 
   #guide-icon-2
     position absolute
-    top 743px
+    top 829px
     left 242px
     width 94px
     height 30px
@@ -251,36 +253,39 @@ export default {
 
   #banner-background-img-2
     position absolute
-    top 719px
+    top 786px
     left 29px
     width 319px
-    height 80px
-    
+    height 111px
     z-index 1
 
   #subregion-title-bottom
     position absolute
-    top 832px
+    top 933px
     left 128px
     width 120px
     height 53px
     display flex
+    justify-content: space-around
     flex-direction column-reverse
 
   #banner-title-3
     position absolute
-    overflow hidden 
-    top 914px
+    white-space nowrap
+    top 1025px
     left 29px
-    width 125px
-    height 25px
+    width 161px
+    height 31px
+    display flex
+    align-items center
+    justify-content center
     z-index 2
 
   #banner-subtitle-3
     position absolute
-    top 943px
+    top 1065px
     left 29px
-    width 125px
+    width 161px
     height 25px
     display flex
     justify-content center
@@ -288,35 +293,37 @@ export default {
 
   #guide-icon-3
     position absolute
-    top 926px
+    top 1046px
     left 245px
     width 94px
     height 30px
-    
     z-index 2
 
   #banner-background-img-3
     position absolute
-    top 907px
+    top 1005px
     left 29px
     width 319px
-    height 70px
-    
+    height 111px
     z-index 1
 
   #banner-title-4
     position absolute
-    top 990px
+    white-space nowrap
+    top 1140px
     left 29px
-    width 125px
-    height 25px
+    width 161px
+    height 31px
+    display flex
+    align-items center
+    justify-content center
     z-index 2
 
   #banner-subtitle-4
     position absolute
-    top 1019px
+    top 1180px
     left 29px
-    width 125px
+    width 161px
     height 25px
     display flex
     justify-content center
@@ -324,7 +331,7 @@ export default {
 
   #guide-icon-4
     position absolute
-    top 1002px
+    top 1166px
     left 245px
     width 94px
     height 30px
@@ -332,33 +339,37 @@ export default {
 
   #banner-background-img-4
     position absolute
-    top 983px
+    top 1124px
     left 29px
     width 319px
-    height 70px
+    height 111px
     z-index 1
 
   #banner-title-5
     position absolute
-    top 1068px
+    white-space nowrap
+    top 1263px
     left 29px
-    width 125px
-    height 25px
+    width 161px
+    height 31px
+    display flex
+    align-items center
+    justify-content center
     z-index 2
 
   #banner-subtitle-5
     position absolute
-    top 1097px
+    top 1303px
     left 29px
-    width 125px
+    width 161px
     height 25px
-    z-index 2
     display flex
     justify-content center
+    z-index 2
 
   #guide-icon-5
     position absolute
-    top 1080px
+    top 1285px
     left 245px
     width 94px
     height 30px
@@ -366,25 +377,25 @@ export default {
 
   #banner-background-img-5
     position absolute
-    top 1061px
+    top 1243px
     left 29px
     width 319px
-    height 70px
+    height 111px
     z-index 1
 
   #bottom-state
     position absolute
     text-align center
-    top 1280px
+    top 1543px
     left 88px
     width 200px
     height 40px
 
   #fixed-banner
     position absolute
-    top 1185px
+    top 1408px
     left 29px
     width 319px
-    height 70px
+    height 111px
     z-index 1 
 </style>

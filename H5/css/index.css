@@ -13,9 +13,10 @@
 
 .index-wrapper .fixed-floating-window {
 	position: fixed;
-	top: .36rem;
+	top: 4.44rem;
 	right: .15rem;
-	width: 1.57rem;
+	width: 1.5rem;
+	height: 1.76rem;
 	z-index: 1002
 }
 
@@ -118,7 +119,7 @@
 
 .index-wrapper .slide-banner .swiper-container {
 	width: 100%;
-	height: 2.1rem
+	height: 2.86rem
 }
 
 .index-wrapper .slide-banner .swiper-container .swiper-wrapper {
@@ -129,18 +130,17 @@
 .index-wrapper .slide-banner .swiper-container .swiper-wrapper .swiper-slide {
 	color: #fff;
 	display: block;
-	width: 6.7rem;
-	height: 1.6rem;
+	height: 2.22rem;
 	margin: 0 auto
 }
 
 .index-wrapper .slide-banner .swiper-container .swiper-wrapper .swiper-slide .bg {
-	width: 6.7rem;
-	height: 1.6rem;
+	width: 6.38rem;
+	height: 2.22rem;
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	position: absolute;
-	left: .4rem;
+	left: .56rem;
 	z-index: 1
 }
 
@@ -148,7 +148,7 @@
 	font-size: .32rem;
 	position: absolute;
 	z-index: 2;
-	top: .4rem;
+	top: .68rem;
 	left: 2.75rem
 }
 
@@ -156,16 +156,16 @@
 	font-size: .28rem;
 	position: absolute;
 	z-index: 2;
-	top: .86rem;
+	top: 1.14rem;
 	left: 2.75rem
 }
 
 .index-wrapper .slide-banner .swiper-container .swiper-wrapper .swiper-slide .icon {
 	position: absolute;
 	z-index: 2;
-	width: 1.44rem;
-	top: .08rem;
-	right: .48rem
+	width: 1.08rem;
+	top: .58rem;
+	right: .88rem
 }
 
 .index-wrapper .area-mid .title-area {
@@ -208,7 +208,7 @@
 
 .index-wrapper .area-mid .banner-group .banner {
 	width: 6.38rem;
-	height: 1.6rem;
+	height: 2.2rem;
 	position: relative;
 	margin: 0 auto;
 	margin-bottom: .15rem;
@@ -217,7 +217,7 @@
 
 .index-wrapper .area-mid .banner-group .banner .bg {
 	width: 6.38rem;
-	height: 1.6rem;
+	height: 2.22rem;
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	position: absolute;
@@ -228,14 +228,14 @@
 	font-size: .32rem;
 	position: relative;
 	z-index: 2;
-	margin: .4rem 0 0 .3rem
+	margin: .7rem 2.05rem 0 .3rem
 }
 
 .index-wrapper .area-mid .banner-group .banner .subtitle {
 	font-size: .26rem;
 	position: relative;
 	z-index: 2;
-	margin: .05rem 0 0 .3rem
+	margin: 0 2.05rem 0 .3rem
 }
 
 .index-wrapper .area-mid .banner-group .banner .icon {
@@ -243,7 +243,7 @@
 	z-index: 2;
 	width: 1.78rem;
 	right: .25rem;
-	top: .54rem
+	top: .86rem
 }
 
 .index-wrapper .area-bottom {
@@ -290,7 +290,7 @@
 
 .index-wrapper .area-bottom .banner-group .banner {
 	width: 6.37rem;
-    height: 1.4rem;
+    height: 2.23rem;
 	position: relative;
 	margin: 0 auto;
 	margin-bottom: .15rem;
@@ -299,7 +299,7 @@
 
 .index-wrapper .area-bottom .banner-group .banner .bg {
 	width: 6.38rem;
-	height: 1.4rem;
+	height: 2.23rem;
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	position: absolute;
@@ -310,18 +310,27 @@
 	font-size: .32rem;
 	position: relative;
 	z-index: 2;
-    margin: .15rem 0 0 .05rem;
-    width: 2.5rem;
-	height: 0.46rem;
-	line-height: 0.46rem;
-    overflow: hidden;
+    margin: .4rem 0 0 0;
+    width: 3.2rem;
+	height: 0.6rem;
+	line-height: 0.6rem;
+	overflow: hidden;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	display: flex;
+    align-items: center;
+    justify-content: center
 }
 
 .index-wrapper .area-bottom .banner-group .banner .subtitle {
 	font-size: .26rem;
+	width: 3.2rem;
 	position: relative;
 	z-index: 2;
-	margin: .15rem 0 0 .3rem
+	margin: .15rem 0 0 0;
+	display: flex;
+    align-items: center;
+    justify-content: center
 }
 
 .index-wrapper .area-bottom .banner-group .banner .icon {
@@ -329,12 +338,12 @@
 	z-index: 2;
 	width: 1.78rem;
 	right: .25rem;
-	top: .5rem
+	top: .86rem
 }
 
 .index-wrapper .fix-banner {
 	width: 6.38rem;
-	height: 1.4rem;
+	height: 2.22rem;
 	/* position: relative; */
 	margin: 0.93rem auto 0 auto;
 	background-size: 100% 100%;
@@ -344,10 +353,10 @@
 
 .index-wrapper .foot-text {
 	text-align: center;
+	height: 1.44rem;
 	margin: 0 auto;
 	margin-top: 0.5rem;
-	width: 5.44rem;
-	padding-bottom: .05rem
+	width: 4rem;
 }
 
 .index-wrapper .float-window-wrapper {

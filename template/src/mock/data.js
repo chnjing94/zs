@@ -82,6 +82,27 @@ const BannerTitle = {
   Msg: "",
 }
 
+const BannerTitle3 = {
+  Status: "0",
+  AbsPath: "3_1.png",
+  RelativePath: "",
+  Msg: "",
+}
+
+const BannerTitle4 = {
+  Status: "0",
+  AbsPath: "4_1.png",
+  RelativePath: "",
+  Msg: "",
+}
+
+const BannerTitle5 = {
+  Status: "0",
+  AbsPath: "5_1.png",
+  RelativePath: "",
+  Msg: "",
+}
+
 const BannerGuideIcon1 = {
   Status: "0",
   AbsPath: "g1.png",
@@ -144,6 +165,9 @@ const MockData = {
   BannerBackgroundImgad4,
   BannerBackgroundImgad5,
   BannerTitle,
+  BannerTitle3,
+  BannerTitle4,
+  BannerTitle5,
   BannerGuideIcon1,
   BannerGuideIcon2,
   BannerGuideIcon3,

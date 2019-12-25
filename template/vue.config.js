@@ -1,6 +1,6 @@
 // vue.config.js
 module.exports = {
-  publicPath: '/',
+  publicPath: '/zs',
   css: {
     loaderOptions: {
       less: {

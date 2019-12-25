@@ -5,16 +5,16 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     savedJson: {},
-    resPath: './image/',
+    resPath: './images/',
     editAreaId: 'BackgroundLongImg',
     currentBannerIndex: 0,
     backgroundLongImg: {
       backgroundImgName: 'backlong.png',
-      backgroundImgUrlRel: './image/backlong.png'
+      backgroundImgUrlRel: './images/backlong.png'
     },
     fixedFloatingWindow: {
       backgroundImgName: 'floatwindow.png',
-      backgroundImgUrlRel: './image/floatwindow.png',
+      backgroundImgUrlRel: './images/floatwindow.png',
       componentName: "fixedfloatwindow",
       backgroundColor: "",
       link: 'http://',
@@ -23,7 +23,7 @@ export default new Vuex.Store({
     floatText: {
       componentName: 'floatText',
       backgroundImgName: 'floattext.png',
-      backgroundImgUrlRel: './image/floattext.png',
+      backgroundImgUrlRel: './images/floattext.png',
       backgroundColor: '',
       backgroundOpacity: 0,
       text: '领导寄语',
@@ -42,7 +42,7 @@ export default new Vuex.Store({
     },
     subtitle: {
       backgroundImgName: 'subtitle.png',
-      backgroundImgUrlRel: './image/subtitle.png',
+      backgroundImgUrlRel: './images/subtitle.png',
       backgroundColor: '',
       backgroundOpacity: 0,
       text: '好礼送不停优质企业专享',
@@ -52,7 +52,7 @@ export default new Vuex.Store({
     fixedBanner: {
       componentName: 'fixedBanner',
       backgroundImgName: 'pink.png',
-      backgroundImgUrlRel: './image/pink.png',
+      backgroundImgUrlRel: './images/pink.png',
       link: 'http://',
       way: 0
     },
@@ -62,7 +62,7 @@ export default new Vuex.Store({
       fontColor: '#FFFFFF'
     },
     slideBanner: {
-      backgroundImgUrlRel: './image/subregiontitle.png',
+      backgroundImgUrlRel: './images/subregiontitle.png',
       title: '活动专区',
       backgroundImgName: 'subregiontitle.png',
       fontColor: '#826219',
@@ -74,9 +74,9 @@ export default new Vuex.Store({
       subtitleFontSize: 13,
       banners: [{
         "backgroundImgName": 'slidebanner.png',
-        "backgroundImgUrlRel": './image/slidebanner.png',
+        "backgroundImgUrlRel": './images/slidebanner.png',
         "guideIconName": "go.png",
-        "guideIconUrlRel": "./image/go.png",
+        "guideIconUrlRel": "./images/go.png",
         "componentName": "banner1",
         "backgroundColor": "",
         "backgroundOpacity": 0,
@@ -109,7 +109,7 @@ export default new Vuex.Store({
       }]
     },
     adAreaMid: {
-      "backgroundImgUrlRel": "./image/subregiontitle.png",
+      "backgroundImgUrlRel": "./images/subregiontitle.png",
       "title": "福利票券",
       "backgroundImgName": 'subregiontitleadAreaMid.png',
       "fontColor": "#826219",
@@ -121,7 +121,7 @@ export default new Vuex.Store({
       "subtitleFontSize": 13
     },
     adAreaBottm: {
-      "backgroundImgUrlRel": './image/subregiontitle.png',
+      "backgroundImgUrlRel": './images/subregiontitle.png',
       "title": "薪享理财",
       "backgroundImgName": 'subregiontitleadAreaBottm.png',
       "fontColor": "#826219",
@@ -135,7 +135,7 @@ export default new Vuex.Store({
     fiveBanners: {
       ad1: {
         banner: {
-          "backgroundImgUrlRel": "./image/1.png",
+          "backgroundImgUrlRel": "./images/1.png",
           "componentName": "123",
           "backgroundImgName": "1.png",
           "backgroundColor": "",
@@ -158,11 +158,11 @@ export default new Vuex.Store({
           "fontColor": "#0748C6"
         },
         "guideIconName": "g1.png",
-        "guideIconUrlRel": "./image/g1.png"
+        "guideIconUrlRel": "./images/g1.png"
       },
       ad2: {
         banner: {
-          "backgroundImgUrlRel": "./image/2.png",
+          "backgroundImgUrlRel": "./images/2.png",
           "backgroundImgName": "2.png",
           "componentName": "1",
           "backgroundColor": "",
@@ -184,12 +184,12 @@ export default new Vuex.Store({
           "fontSize": 13,
           "fontColor": "#7f5d0f"
         },
-        "guideIconUrlRel": "./image/g2.png",
+        "guideIconUrlRel": "./images/g2.png",
         "guideIconName": "g2.png"
       },
       ad3: {
         banner: {
-          "backgroundImgUrlRel": "./image/3.png",
+          "backgroundImgUrlRel": "./images/3.png",
           "backgroundImgName": "3.png",
           "componentName": "1",
           "backgroundColor": "",
@@ -201,8 +201,8 @@ export default new Vuex.Store({
           "text": "聚益生金系列90天A款",
           "fontSize": 16,
           "fontColor": "#fbeacd",
-          "backgroundImgName": "",
-          "backgroundImgUrlRel": "",
+          "backgroundImgName": "3_1.png",
+          "backgroundImgUrlRel": "./images/3_1.png",
           "backgroundColor": "",
           "backgroundOpacity": 0
         },
@@ -211,12 +211,12 @@ export default new Vuex.Store({
           "fontSize": 13,
           "fontColor": "#7f5d0f"
         },
-        "guideIconUrlRel": "./image/g3.png",
+        "guideIconUrlRel": "./images/g3.png",
         "guideIconName": "g3.png"
       },
       ad4: {
         banner: {
-          "backgroundImgUrlRel": "./image/4.png",
+          "backgroundImgUrlRel": "./images/4.png",
           "backgroundImgName": "4.png",
           "componentName": "1",
           "backgroundColor": "",
@@ -228,8 +228,8 @@ export default new Vuex.Store({
           "text": "聚益生金系列90天A款",
           "fontSize": 16,
           "fontColor": "#fbeacd",
-          "backgroundImgName": "",
-          "backgroundImgUrlRel": "",
+          "backgroundImgName": "4_1.png",
+          "backgroundImgUrlRel": "./images/4_1.png",
           "backgroundColor": "",
           "backgroundOpacity": 0
         },
@@ -238,12 +238,12 @@ export default new Vuex.Store({
           "fontSize": 13,
           "fontColor": "#FFFFFF"
         },
-        "guideIconUrlRel": "./image/g4.png",
+        "guideIconUrlRel": "./images/g4.png",
         "guideIconName": "g4.png"
       },
       ad5: {
         banner: {
-          "backgroundImgUrlRel": "./image/5.png",
+          "backgroundImgUrlRel": "./images/5.png",
           "backgroundImgName": "5.png",
           "componentName": "1",
           "backgroundColor": "",
@@ -255,8 +255,8 @@ export default new Vuex.Store({
           "text": "聚益生金系列90天A款",
           "fontSize": 16,
           "fontColor": "#fbeacd",
-          "backgroundImgName": "",
-          "backgroundImgUrlRel": "",
+          "backgroundImgName": "5_1.png",
+          "backgroundImgUrlRel": "./images/5_1.png",
           "backgroundColor": "",
           "backgroundOpacity": 0
         },
@@ -265,7 +265,7 @@ export default new Vuex.Store({
           "fontSize": 13,
           "fontColor": "#FFFFFF"
         },
-        "guideIconUrlRel": "./image/g5.png",
+        "guideIconUrlRel": "./images/g5.png",
         "guideIconName": "g5.png"
       }
     },
@@ -507,8 +507,9 @@ export default new Vuex.Store({
       if (state.fixedFloatingWindow.backgroundImgUrlRel) {
         style =  {
           backgroundImage: 'url(' + state.fixedFloatingWindow.backgroundImgUrlRel + ')',
-          backgroundSize: '100%100%',
-          backgroundRepeat: 'no-repeat'
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center center'
         }
       }
       style.boxShadow = state.editAreaId==='FixedFloatWindow' ? '0px 0px 0px 1px #007d71' : ''
