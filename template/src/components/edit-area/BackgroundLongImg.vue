@@ -1,7 +1,7 @@
 <template>
   <div id="background-long-img-wrapper">
     <Title :title="'背景长图'"/>
-    <ImageUploader :imgPrefix="'BackgroundLongImg'" :fileName="backgroundImgName" @success="uploadImageSuccess" @remove="removeImg"/>
+    <ImageUploader :imgPrefix="'BackgroundLongImg'" :maxSize="1000000" :fileName="backgroundImgName" @success="uploadImageSuccess" @remove="removeImg"/>
     <ErrorMsg :message="validteBackgroundImg" v-if="showValidationMsg&&validteBackgroundImg"/>
     <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>

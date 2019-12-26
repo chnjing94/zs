@@ -2,7 +2,7 @@ var shortUrl, json, config
 function initPage() {
     setTimeout(function () {
         if ((shortUrl !== undefined) && (json !== undefined)) {
-            config = json
+            config = JSON.parse(json)
             initVue()
         } else {
             initPage()
@@ -11,7 +11,6 @@ function initPage() {
 }
 
 function initVue() {
-    console.log(config)
     var shortUrl = ''
     new Vue({
         el: '#app',
@@ -40,7 +39,6 @@ function initVue() {
                     style.backgroundColor = subtitle.backgroundColor
                     style.opacity = (1 - subtitle.opacity / 100)
                 }
-                console.log(style)
                 return style
             }
         },
@@ -61,13 +59,11 @@ function initVue() {
                 },
             })
             document.getElementById('app').style.display = 'block';
-            console.log(mySwiper)
             // 页面曝光埋点
             pageLog.onPageLoadLog()
         },
         methods: {
             goPage(url, event) {
-                console.log('click event')
                 pageLog.onClickLog(event, event.currentTarget)
             },
             showFloatWindowFunc(status) {

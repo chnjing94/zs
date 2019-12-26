@@ -16,7 +16,7 @@ export default {
       },
       cancel () {
         //最原始的输入的imglist
-        window.parent.document.getElementById("dataImg").value = this.$store.state.orgImg;
+        window.parent.document.getElementById("dataImg").value = JSON.stringify(this.$store.state.orgImg);
         window.parent.document.getElementById('frameCancel').click()
       }
     }

@@ -5,7 +5,7 @@
         <span style="color: red" v-if="required">*</span>{{title}}
       </div>
       <div class="sub-hint" :class="{'no-prefer-size': !preferSize}">
-        （支持10M以内，<span v-if="preferSize">建议{{preferSize}}尺寸的</span>jpg/jpeg/png/gif图片格式）
+        （支持{{maxSize===1000000 ? '1M' : '500K'}}以内，jpg/jpeg/png/gif图片格式）
       </div>
     </div>
     <div class="image-uploader">
@@ -15,7 +15,7 @@
         </a-input-search>
       </div>
       <div class="button" @click="onClick">浏览</div>
-      <input v-show="false" type="file" accept="images/*" ref="imgInput" @change="onChange">
+      <input v-show="false" type="file" accept="image/*" ref="imgInput" @change="onChange">
     </div>
     <div class="warning" v-if="exceedMaxFileSize" >
       <span style="color: red">图片大小超出限制</span>
@@ -41,8 +41,9 @@ export default {
       type: String,
       default: "图片"
     },
-    preferSize: {
-      type: String,
+    maxSize: {
+      type: Number,
+      default: 500000
     },
     imgPrefix: {
       type: String,
@@ -65,7 +66,7 @@ export default {
     },
 
     onChange () {
-      if (this.$refs.imgInput.files[0].size > 10000000) {
+      if (this.$refs.imgInput.files[0].size > this.maxSize) {
         this.exceedMaxFileSize = true
         this.$refs.imgInput.value = ''
         setTimeout(()=> {

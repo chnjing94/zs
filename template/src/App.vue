@@ -31,7 +31,7 @@ export default {
     },
     getStatus: function(name){
         var url = "?" + window.parent.location.href.split("?")[1];
-        return  decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url) || [""])[1].replace(/\+/g, '%20')) || "";
+        return  decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url) || ["",""])[1].replace(/\+/g, '%20')) || "";
     },
     getResPath () {
       const resPath = window.parent.document.getElementById('resPath').value
