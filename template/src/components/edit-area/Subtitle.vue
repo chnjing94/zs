@@ -6,7 +6,7 @@
     <TextInput :title="'文字'" :placeholder="'请输入副标题文字'" :hint="'（限16个字以内输入）'" v-model="text" :maxLength="16" noSymbol/>
     <FontSize v-model="fontSize"/>
     <FontColor v-model="fontColor"/>
-    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -33,6 +33,8 @@ export default {
   },
   data () {
     return {
+      confirmed: false,
+
       backgroundImgName: '',
       backgroundImgUrlRel: '',
       backgroundColor: '',
@@ -45,6 +47,7 @@ export default {
   watch: {
     output () {
       this.commit()
+      this.confirmed = false
     }
   },
   computed: {
@@ -70,22 +73,26 @@ export default {
     },
     confirm () {
       this.$store.commit('save')
-      this.$store.commit('changeEditArea', '')
+      this.confirmed = true
     },
     cancel () {
       this.$store.commit('rollback')
-      this.$store.commit('changeEditArea', '')
+      this.load()
+    },
+    load () {
+      this.confirmed = false
+      const data = this.subtitle
+      this.backgroundImgName = data.backgroundImgName,
+      this.backgroundImgUrlRel = data.backgroundImgUrlRel,
+      this.backgroundColor = data.backgroundColor,
+      this.backgroundOpacity = data.backgroundOpacity,
+      this.text = data.text,
+      this.fontSize = data.fontSize,
+      this.fontColor = data.fontColor
     }
   },
   created () {
-    const data = this.subtitle
-    this.backgroundImgName = data.backgroundImgName,
-    this.backgroundImgUrlRel = data.backgroundImgUrlRel,
-    this.backgroundColor = data.backgroundColor,
-    this.backgroundOpacity = data.backgroundOpacity,
-    this.text = data.text,
-    this.fontSize = data.fontSize,
-    this.fontColor = data.fontColor
+    this.load()
   }
 }
 </script>

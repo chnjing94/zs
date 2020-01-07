@@ -2,7 +2,7 @@
   <div id="guide-icon">
     <Title :title="'引导图标'"/>
     <ImageUploader :fileName="guideIconName" :imgPrefix="'GuideIcon'+bannerId" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
-    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -27,6 +27,8 @@ export default {
   },
   data () {
     return {
+      confirmed: false,
+
       guideIconName: '',
       guideIconUrlRel: ''
     }
@@ -34,6 +36,7 @@ export default {
   watch: {
     output () {
       this.commit()
+      this.confirmed = false
     },
     bannerId () {
       this.load()
@@ -65,13 +68,14 @@ export default {
     },
     confirm () {
       this.$store.commit('save')
-      this.$store.commit('changeEditArea', '')  
+      this.confirmed = true
     },
     cancel () {
       this.$store.commit('rollback')
-      this.$store.commit('changeEditArea', '')
+      this.load()
     },
     load () {
+      this.confirmed = false
       const data = this.fiveBanners[this.bannerId]
       this.guideIconName = data.guideIconName,
       this.guideIconUrlRel = data.guideIconUrlRel

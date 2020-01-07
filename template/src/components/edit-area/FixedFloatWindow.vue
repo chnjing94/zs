@@ -12,7 +12,7 @@
     <ErrorMsg :message="validteLink" v-if="validteLink&&showValidationMsg"/>
 
     <RedictWay v-model="way"/>
-    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -37,6 +37,7 @@ export default {
   },
   data () {
     return {
+      confirmed: false,
       showValidationMsg: false,
 
       componentName: '',
@@ -47,23 +48,19 @@ export default {
     }
   },
   watch: {
-    componentName () {
-      this.commit({ componentName: this.componentName })
-    },
-    backgroundImgUrlRel () {
-      this.commit({ backgroundImgUrlRel: this.backgroundImgUrlRel, backgroundImgName: this.backgroundImgName })
-    },
-    link () {
-      this.commit({ link: this.link })
-    },
-    way () {
-      this.commit({ way: this.way })
+    output () {
+      this.commit()
+      this.confirmed = false
     }
   },
   computed: {
     ...mapState({
       fixedFloatingWindow: state => state.fixedFloatingWindow,
     }),
+    output () {
+      const { componentName, backgroundImgName, backgroundImgUrlRel, link, way } = this
+      return { componentName, backgroundImgName, backgroundImgUrlRel, link, way }
+    },
     validateComponentName () {
       const error = !this.componentName ? '必填项不能为空' : ''
       return error
@@ -94,28 +91,32 @@ export default {
       this.backgroundImgName = ''
       this.backgroundImgUrlRel = ''
     },
-    commit (payload) {
-      this.$store.commit('changeFixedFloatWindow', payload)
+    commit () {
+      this.$store.commit('changeFixedFloatWindow', this.output)
     },
     confirm () {
       if (this.validated) {
         this.$store.commit('save')
-        this.$store.commit('changeEditArea', '')
+        this.confirmed = true
       }
       this.showValidationMsg = true
     },
     cancel () {
       this.$store.commit('rollback')
-      this.$store.commit('changeEditArea', '')
+      this.load()
     },
+    load () {
+      this.confirmed = false
+      const data = this.fixedFloatingWindow
+      this.componentName = data.componentName,
+      this.backgroundImgName = data.backgroundImgName
+      this.backgroundImgUrlRel = data.backgroundImgUrlRel,
+      this.link = data.link,
+      this.way = data.way
+    }
   },
   created () {
-    const data = this.fixedFloatingWindow
-    this.componentName = data.componentName,
-    this.backgroundImgName = data.backgroundImgName
-    this.backgroundImgUrlRel = data.backgroundImgUrlRel,
-    this.link = data.link,
-    this.way = data.way
+    this.load()
   }
 }
 </script>

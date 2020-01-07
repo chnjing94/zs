@@ -13,10 +13,28 @@
       <div v-if="slideBanner.subtitle"  class="subregion-sub-title text-content" :style="{color: slideBanner.subtitleFontColor, fontSize: slideBanner.subtitleFontSize+'px'}">{{slideBanner.subtitle.slice(0, 8)}}</div>
       <div class="subregion-title text-content" :style="slideBannerTopStyle">{{slideBanner.title}}</div>
     </div>
-    <div id="slide-banner" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerStyle" ></div>
-    <div id="slide-banner-title"  @click.stop="changeEditArea('SlideBanner')" :style="slideBannerTitleStyle">{{getSlideBannerTitle}}</div>
-    <div id="slide-banner-subtitle" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerSubtitleStyle">{{getSlideBannerSubtitle}}</div>
-    <div id="slide-banner-guide-icon" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerGuideIconStyle"></div>
+
+    <!-- <div id="slide-banner" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerStyle" >
+      <div id="slide-banner-title" :style="slideBannerTitleStyle">{{getSlideBannerTitle}}</div>
+      <div id="slide-banner-subtitle"  :style="slideBannerSubtitleStyle">{{getSlideBannerSubtitle}}</div>
+      <div id="slide-banner-guide-icon" :style="slideBannerGuideIconStyle"></div>
+    </div> -->
+    <div id="slide-banner" :class="{'selected': editAreaId==='SlideBanner'}" @click.stop="changeEditArea('SlideBanner')">
+      <swiper :options="swiperOption" ref="mySwiper">
+        <!-- slides -->
+        <swiper-slide 
+          v-for="(banner, index) in slideBanner.banners" 
+          :key="index"
+          :style="sliderBannerStyle(banner)">
+          <div id="slide-banner-title" :style="{color: banner.fontColor, fontSize: banner.titleFontSize + 'px' }">{{banner.title}}</div>
+          <div id="slide-banner-subtitle"  :style="{color: banner.subtitleFontColor, fontSize: banner.subtitleFontSize + 'px' }">{{banner.subtitle}}</div>
+          <div id="slide-banner-guide-icon" :style="banner.guideIconUrlRel ? { backgroundImage: 'url('  + resPath + banner.guideIconUrlRel + ')', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat', } : {}"></div>
+        </swiper-slide>
+        <!-- Optional controls -->
+        <div class="swiper-pagination"  slot="pagination"></div>
+      </swiper>
+    </div>
+
 
     <div id="subregion-title-mid" :class="{'selected': editAreaId==='SubregionTitleMid'}" @click.stop="changeEditArea('SubregionTitleMid')">
       <div v-if="adAreaMid.subtitle" class="subregion-sub-title text-content" :style="{color: adAreaMid.subtitleFontColor, fontSize: adAreaMid.subtitleFontSize+'px'}">{{adAreaMid.subtitle.slice(0, 8)}}</div>
@@ -41,16 +59,63 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 export default {
   name: 'Preview',
+  components: {
+    swiper,
+    swiperSlide
+  },
+  data () {
+    return {
+      swiperOption: {
+        direction: 'horizontal', // 垂直切换选项
+        loop: false, // 循环模式选项
+        observer: true,
+        observeParents: true,
+        observeSlideChildren: true,
+        autoplay: {
+            disableOnInteraction: false,
+            delay: 5000,
+        },
+        speed: 300,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+      }
+    }
+  },
   methods: {
+    sliderBannerStyle (banner) {
+      let style = {}
+      if (banner.backgroundImgUrlRel){
+        style = {
+          backgroundImage: 'url(' + this.resPath + banner.backgroundImgUrlRel + ')',
+          backgroundSize: '100% 100%',
+          backgroundRepeat: 'no-repeat',
+        }
+      } else if (banner.backgroundColor){
+        style = {
+          backgroundColor: this.hexOpacity2rgba(banner.backgroundColor, banner.backgroundOpacity)
+        }
+      }
+      style.height = '111px'
+      return style
+    },
     changeEditArea (editAreaId) {
       this.$store.commit('changeEditArea', editAreaId)
     }
   },
   computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper
+    },
     ...mapState({
+      hexOpacity2rgba: state => state.hexOpacity2rgba,
+      resPath: state => state.resPath,
       editAreaId: state => state.editAreaId,
       floatText: state => state.floatText,
       subtitle: state => state.subtitle,
@@ -62,10 +127,6 @@ export default {
     }),
     ...mapGetters([
       'floatTextStyle',
-      'slideBannerTitleStyle',
-      'slideBannerSubtitleStyle',
-      'slideBannerGuideIconStyle',
-      'slideBannerStyle',
       'slideBannerTopStyle',
       'subtitleStyle',
       'backgroundLongImgStyle',
@@ -76,8 +137,6 @@ export default {
       'bannerBackgroundImgStyle',
       'bannerGuideIconStyle',
       'bannerSubtitleStyle',
-      'getSlideBannerTitle',
-      'getSlideBannerSubtitle',
       'bannerTitleStyle'
     ]),
   }
@@ -154,26 +213,33 @@ export default {
     width 319px
     height 111px
     z-index 1
+  .swiper-pagination
+    position relative
+    top 3px
+  /deep/ .swiper-pagination-bullet-active
+    background #f5da85
+    opacity 1
+    
   #slide-banner-title
-    position absolute
-    top 487px
-    left 107px
+    position relative
+    top 34px
+    left 79px
     width 170px
     height 16px
     z-index 2
     text-align center
   #slide-banner-subtitle
-    position absolute
-    top 510px
-    left 107px
+    position relative
+    top 40px
+    left 79px
     width 170px
     height 14px
     z-index 2
     text-align center
   #slide-banner-guide-icon
     position absolute
-    top 483px
-    left 278px
+    top 30px
+    left 250px
     width 54px
     height 54px
     z-index 2 

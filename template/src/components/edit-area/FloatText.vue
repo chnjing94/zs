@@ -14,7 +14,7 @@
         <a-checkbox @change="onChange" :checked="show">展示文字</a-checkbox><span style="color: #868686">（取消勾选后不展示该组件）</span>
       </div>
     </div>
-    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" :notes="notes"/>
+    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" :notes="notes"/>
   </div>
 </template>
 
@@ -43,6 +43,7 @@ export default {
   },
   data () {
     return {
+      confirmed: false,
       showValidationMsg: false,
       notes: '1.浮动文字可输入领导寄语，支持拖拽调整位置，大小。2.带*为必须配置项，其余配置项无配置内容不展示相关组件',
       
@@ -60,6 +61,7 @@ export default {
   watch: {
     output () {
       this.commit()
+      this.confirmed = false
     }
   },
   computed: {
@@ -100,26 +102,30 @@ export default {
     confirm () {
       if (this.validated) {
         this.$store.commit('save')
-        this.$store.commit('changeEditArea', '')
+        this.confirmed = true
       }
       this.showValidationMsg = true
     },
     cancel () {
       this.$store.commit('rollback')
-      this.$store.commit('changeEditArea', '')
+      this.load()
     },
+    load () {
+      this.confirmed = false
+      const data = this.floatText
+      this.componentName = data.componentName,
+      this.backgroundImgName = data.backgroundImgName,
+      this.backgroundImgUrlRel = data.backgroundImgUrlRel,
+      this.backgroundColor = data.backgroundColor,
+      this.backgroundOpacity = data.backgroundOpacity,
+      this.text = data.text,
+      this.fontSize = data.fontSize,
+      this.fontColor = data.fontColor,
+      this.show = data.show
+    }
   },
   created () {
-    const data = this.floatText
-    this.componentName = data.componentName,
-    this.backgroundImgName = data.backgroundImgName,
-    this.backgroundImgUrlRel = data.backgroundImgUrlRel,
-    this.backgroundColor = data.backgroundColor,
-    this.backgroundOpacity = data.backgroundOpacity,
-    this.text = data.text,
-    this.fontSize = data.fontSize,
-    this.fontColor = data.fontColor,
-    this.show = data.show
+    this.load()
   }
 }
 </script>

@@ -50,7 +50,7 @@ function initVue() {
                 observeParents: true,
                 autoplay: {
                     disableOnInteraction: false,
-                    delay: 100000,
+                    delay: 5000,
                 },
                 speed: 300,
                 pagination: {

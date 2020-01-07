@@ -10,7 +10,7 @@
     <ErrorMsg :message="validteLink" v-if="validteLink&&showValidationMsg"/>
 
     <RedictWay v-model="way"/>
-    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel"/>
+    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel"/>
   </div>
 </template>
 
@@ -44,7 +44,8 @@ export default {
   data () {
     return {
       showValidationMsg: false,
-      
+      confirmed: false,
+
       componentName: '',
       backgroundImgName: '',
       backgroundImgUrlRel: '',
@@ -57,6 +58,7 @@ export default {
   watch: {
     output () {
       this.commit()
+      this.confirmed = false
     },
     bannerId () {
       this.load()
@@ -105,15 +107,16 @@ export default {
     confirm () {
       if (this.validated) {
         this.$store.commit('save')
-        this.$store.commit('changeEditArea', '')      
+        this.confirmed = true
       }
       this.showValidationMsg = true
     },
     cancel () {
       this.$store.commit('rollback')
-      this.$store.commit('changeEditArea', '')
+      this.load()
     },
     load () {
+      this.confirmed = false
       const data = this.fiveBanners[this.bannerId].banner
       this.componentName = data.componentName,
       this.backgroundImgName = data.backgroundImgName,

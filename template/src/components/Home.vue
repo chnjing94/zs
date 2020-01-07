@@ -52,7 +52,7 @@ main {
 }
 
 #right-panel {
-  flex: 1 0 auto;
+  flex: 1 0 450px;
   overflow-y: scroll;
 }
 

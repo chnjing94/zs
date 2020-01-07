@@ -3,7 +3,7 @@
     <Title :title="'背景长图'"/>
     <ImageUploader :imgPrefix="'BackgroundLongImg'" :maxSize="1000000" :fileName="backgroundImgName" @success="uploadImageSuccess" @remove="removeImg"/>
     <ErrorMsg :message="validteBackgroundImg" v-if="showValidationMsg&&validteBackgroundImg"/>
-    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -25,7 +25,8 @@ export default {
   data () {
     return {
       showValidationMsg: false,
-      
+      confirmed: false,
+
       backgroundImgName: '',
       backgroundImgUrlRel: '',
     }
@@ -42,13 +43,18 @@ export default {
     confirm () {
       if (this.validated) {
         this.$store.commit('save')
-        this.$store.commit('changeEditArea', '')
+        this.confirmed = true
       }
       this.showValidationMsg = true
     },
     cancel () {
       this.$store.commit('rollback')
-      this.$store.commit('changeEditArea', '')
+      this.load()
+    },
+    load () {
+      this.confirmed = false
+      this.backgroundImgName = this.backgroundLongImg.backgroundImgName
+      this.backgroundImgUrlRel = this.backgroundLongImg.backgroundImgUrlRel
     },
     commit (payload) {
       this.$store.commit('changeBackgroundLongImg', payload)
@@ -57,6 +63,7 @@ export default {
   watch: {
     backgroundImgUrlRel () {
       this.commit({ backgroundImgUrlRel: this.backgroundImgUrlRel, backgroundImgName: this.backgroundImgName })
+      this.confirmed = false
     },
   },
   computed: {
@@ -72,8 +79,7 @@ export default {
     }
   },
   created () {
-    this.backgroundImgName = this.backgroundLongImg.backgroundImgName
-    this.backgroundImgUrlRel = this.backgroundLongImg.backgroundImgUrlRel
+    this.load()
   }
 }
 </script>

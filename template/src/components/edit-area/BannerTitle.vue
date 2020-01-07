@@ -5,7 +5,7 @@
     <FontColor v-model="fontColor"/>
     <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :imgPrefix="'BannerTitle'+bannerId" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
     <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
-    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -36,6 +36,8 @@ export default {
   },
   data () {
     return {
+      confirmed: false,
+
       text: '',
       fontSize: 0,
       fontColor: '',
@@ -48,6 +50,7 @@ export default {
   watch: {
     output () {
       this.commit()
+      this.confirmed = false
     },
     bannerId () {
       this.load()
@@ -79,13 +82,14 @@ export default {
     },
     confirm () {
       this.$store.commit('save')
-      this.$store.commit('changeEditArea', '')     
+      this.confirmed = true
     },
     cancel () {
       this.$store.commit('rollback')
-      this.$store.commit('changeEditArea', '')
+      this.load()
     },
     load () {
+      this.confirmed = false
       const data = this.fiveBanners[this.bannerId].title
       this.text = data.text,
       this.fontSize = data.fontSize,

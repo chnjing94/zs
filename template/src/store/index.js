@@ -486,49 +486,6 @@ export default new Vuex.Store({
       return {...style, ...{color: state.floatText.fontColor, fontSize: state.floatText.fontSize+'px'}}
     },
 
-    slideBannerTitleStyle: state => {
-      const banner  = state.slideBanner.banners[state.currentBannerIndex]
-      if (banner) {
-        return {color: banner.fontColor, fontSize: banner.titleFontSize + 'px' }
-      }
-    },
-    
-    slideBannerSubtitleStyle: state => {
-      const banner  = state.slideBanner.banners[state.currentBannerIndex]
-      if (banner) {
-        return {color: banner.subtitleFontColor, fontSize: banner.subtitleFontSize + 'px' }
-      }
-    },
-
-    slideBannerGuideIconStyle: state => {
-      const banner = state.slideBanner.banners[state.currentBannerIndex]
-      if (banner && banner.guideIconUrlRel) {
-        return {
-          backgroundImage: banner ? 'url('  + state.resPath + banner.guideIconUrlRel + ')' : '',
-          backgroundSize: '100% 100%',
-          backgroundRepeat: 'no-repeat',
-        }
-      }
-    },
-
-    slideBannerStyle: state => {
-      const banner = state.slideBanner.banners[state.currentBannerIndex]
-      let style = {}
-      if (banner && banner.backgroundImgUrlRel){
-        style = {
-          backgroundImage: 'url(' + state.resPath + banner.backgroundImgUrlRel + ')',
-          backgroundSize: '100% 100%',
-          backgroundRepeat: 'no-repeat',
-        }
-      } else if (banner && banner.backgroundColor){
-        style = {
-          backgroundColor: state.hexOpacity2rgba(banner.backgroundColor, banner.backgroundOpacity)
-        }
-      }
-      style.boxShadow = state.editAreaId==='SlideBanner' ? '0px 0px 0px 1px #007d71' : ''
-      return style
-    },
-
     slideBannerTopStyle: state => {
       let style = {}
       if (state.slideBanner.backgroundImgUrlRel){
@@ -659,20 +616,6 @@ export default new Vuex.Store({
         color: state.fiveBanners['ad'+n].subtitle.fontColor,
         fontSize: state.fiveBanners['ad'+n].subtitle.fontSize + 'px'
       }
-    },
-
-    getSlideBannerTitle: (state) => {
-      if (state.slideBanner.banners[state.currentBannerIndex]) {
-        return state.slideBanner.banners[state.currentBannerIndex].title
-      }
-      return ''
-    },
-
-    getSlideBannerSubtitle: (state) => {
-      if (state.slideBanner.banners[state.currentBannerIndex]) {
-        return state.slideBanner.banners[state.currentBannerIndex].subtitle
-      }
-      return ''
     },
 
     bannerTitleStyle: (state) => (n) => {

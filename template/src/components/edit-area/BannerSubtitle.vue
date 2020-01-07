@@ -3,7 +3,7 @@
     <Title :title="'分区副标题'"/>
     <TextInput :title="'文字'" :placeholder="'请输入副标题文字'" :hint="'（限12个字以内输入）'" :maxLength="12" v-model="text"/>
     <FontColor v-model="fontColor"/>
-    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -30,6 +30,8 @@ export default {
   },
   data () {
     return {
+      confirmed: false,
+
       text: '',
       fontSize: 0,
       fontColor: ''
@@ -38,6 +40,7 @@ export default {
   watch: {
     output () {
       this.commit()
+      this.confirmed = false
     },
   },
   computed: {
@@ -58,13 +61,14 @@ export default {
     },
     confirm () {
       this.$store.commit('save')
-      this.$store.commit('changeEditArea', '')  
+      this.confirmed = true
     },
     cancel () {
       this.$store.commit('rollback')
-      this.$store.commit('changeEditArea', '')
+      this.load()
     },
     load () {
+      this.confirmed = false
       const data = this.fiveBanners[this.bannerId].subtitle
       this.text = data.text,
       this.fontSize = data.fontSize,

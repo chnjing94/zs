@@ -83,6 +83,7 @@ export default {
     width: 420px;
     /* margin-left: 10px; */
     background-color: white;
-    margin: 0.5rem 0
+    position: fixed;
+    top: 0.5rem;
   }
 </style>

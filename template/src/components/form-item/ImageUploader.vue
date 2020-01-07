@@ -1,10 +1,10 @@
 <template>
   <div id="image-uploader-wrapper">
     <div class="hint">
-      <div class="main-hint" :style="{alignItems: preferSize ? '' : 'center'}">
+      <div class="main-hint">
         <span style="color: red" v-if="required">*</span>{{title}}
       </div>
-      <div class="sub-hint" :class="{'no-prefer-size': !preferSize}">
+      <div class="sub-hint" :class="{'no-prefer-size': true}">
         （支持{{maxSize===1000000 ? '1M' : '500K'}}以内，jpg/jpeg/png/gif图片格式）
       </div>
     </div>
@@ -128,12 +128,13 @@ export default {
     display flex
     width 356px
     justify-content center
-    align-items flex-start
+    align-items center
     .main-hint
       flex 0 0 auto
       height 40px
       font-weight 600
       display flex
+      align-items center
     .sub-hint
       height 40px
       flex 1 1 auto

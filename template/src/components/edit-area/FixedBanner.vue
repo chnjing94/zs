@@ -10,7 +10,7 @@
     <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" required v-model="link"/>
     <ErrorMsg :message="validteLink" v-if="validteLink&&showValidationMsg"/>
     <RedictWay v-model="way"/>
-    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -35,6 +35,7 @@ export default {
   },
   data () {
     return {
+      confirmed: false,
       showValidationMsg: false,
       
       componentName: '',
@@ -47,6 +48,7 @@ export default {
   watch: {
     output () {
       this.commit()
+      this.confirmed = false
     }
   },
   computed: {
@@ -93,22 +95,26 @@ export default {
     confirm () {
       if (this.validated) {
         this.$store.commit('save')
-        this.$store.commit('changeEditArea', '')  
+        this.confirmed = true
       }
       this.showValidationMsg = true
     },
     cancel () {
       this.$store.commit('rollback')
-      this.$store.commit('changeEditArea', '')
+      this.load()
+    },
+    load () {
+      this.confirmed = false
+      const data = this.fixedBanner
+      this.componentName = data.componentName,
+      this.backgroundImgName = data.backgroundImgName,
+      this.backgroundImgUrlRel = data.backgroundImgUrlRel,
+      this.link = data.link,
+      this.way = data.way
     }
   },
   created () {
-    const data = this.fixedBanner
-    this.componentName = data.componentName,
-    this.backgroundImgName = data.backgroundImgName,
-    this.backgroundImgUrlRel = data.backgroundImgUrlRel,
-    this.link = data.link,
-    this.way = data.way
+    this.load()
   }
 }
 </script>

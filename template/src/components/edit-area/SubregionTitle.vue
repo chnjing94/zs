@@ -9,7 +9,7 @@
       <TextInput :title="'副标题'" :placeholder="'请输入副标题文字'" :hint="'（限12个字以内输入）'" :maxLength="12" v-model="subtitle"/>
       <FontColor v-model="subtitleFontColor"/>
     </div>
-    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -39,6 +39,8 @@ export default {
   },
   data () {
     return {
+      confirmed: false,
+
       title: '',
       backgroundImgName: '',
       backgroundImgUrlRel: '',
@@ -54,6 +56,7 @@ export default {
   watch: {
     output () {
       this.commit()
+      this.confirmed = false
     },
     subregionId () {
       this.load()
@@ -78,14 +81,15 @@ export default {
       this.$store.commit(`change${this.subregionId}Title`, this.output)
     },
     confirm () {
-      this.$store.commit('save')
-      this.$store.commit('changeEditArea', '')      
+      this.$store.commit('save') 
+      this.confirmed = true
     },
     cancel () {
       this.$store.commit('rollback')
-      this.$store.commit('changeEditArea', '')
+      this.load()
     },
     load () {
+      this.confirmed = false
       const id = this.subregionId.substr(0,1).toLowerCase() + this.subregionId.substr(1,this.subregionId.length-1)
       let data = this.$store.state[id]
 

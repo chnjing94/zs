@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <ButtonGroup @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -51,6 +51,7 @@ export default {
   },
   data () {
     return {
+      confirmed: false,
       showValidationMsg: false,
 
       currentBannerIndex: 0,
@@ -61,6 +62,7 @@ export default {
   watch: {
     output () {
       this.commit()
+      this.confirmed = false
     }
   },
   computed: {
@@ -156,8 +158,6 @@ export default {
       setTimeout(()=>{
         this.banners.splice(index, 1)
         this.deleteIndex = ''
-        this.currentBannerIndex = 0
-        this.$store.commit('setCurrentBannerIndex', 0 )
         if (this.banners.length === 0) {
           this.addBanner()
         }
@@ -167,24 +167,22 @@ export default {
     selectBanner (index) {
       if (index !== this.currentBannerIndex){
         this.currentBannerIndex = index
-        this.$store.commit('setCurrentBannerIndex', index)
       }
     },
     confirm () {
       if (this.validated) {
         this.$store.commit('save')
-        this.$store.commit('changeEditArea', '')      
-        this.$store.commit('setCurrentBannerIndex', 0)
+        this.confirmed = true
       }
       this.showValidationMsg = true
     },
     cancel () {
       this.$store.commit('rollback')
-      this.$store.commit('changeEditArea', '')
-      this.$store.commit('setCurrentBannerIndex', 0)
+      this.banners = this.slideBanner.banners
+      this.confirmed = false
     }
   },
-  mounted () {
+  created () {
     this.banners = this.slideBanner.banners
   }
 }

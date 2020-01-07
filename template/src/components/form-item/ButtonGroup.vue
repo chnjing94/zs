@@ -1,7 +1,7 @@
 <template>
   <div id="button-group-wrapper">
     <div class="msg" v-show="success">
-      <span >配置成功，可在左侧预览区查看</span>
+      <span >配置保存成功</span>
     </div>
     <div class="line"></div>
     <div class="buttons">
