@@ -1,8 +1,9 @@
 var shortUrl, json, config
 function initPage() {
     setTimeout(function () {
-        if ((shortUrl !== undefined) && (json !== undefined)) {
+        if (json !== undefined) {
             config = JSON.parse(json)
+            shortUrl = document.getElementById('shortUrl') ? document.getElementById('shortUrl').value : 'http://t.cmbchina.com/zamQJn'
             initVue()
         } else {
             initPage()
@@ -11,7 +12,6 @@ function initPage() {
 }
 
 function initVue() {
-    var shortUrl = ''
     new Vue({
         el: '#app',
         data: {

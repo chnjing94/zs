@@ -403,7 +403,6 @@ export default new Vuex.Store({
 
     changeSlideBanner (state, data) {
       state.slideBanner.banners = data
-      // Vue.set(state.slideBanner.banners, data.n, {...state.slideBanner.banners[data.n], ...data.payload})
     },
 
     setCurrentBannerIndex (state, data) {

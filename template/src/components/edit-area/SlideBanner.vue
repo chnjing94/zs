@@ -63,6 +63,9 @@ export default {
     output () {
       this.commit()
       this.confirmed = false
+    },
+    currentBannerIndex (newval) {
+      this.$store.commit('setCurrentBannerIndex', newval)
     }
   },
   computed: {
@@ -161,6 +164,7 @@ export default {
         if (this.banners.length === 0) {
           this.addBanner()
         }
+        this.currentBannerIndex = 0
       }, 600)
 
     },

@@ -1,26 +1,31 @@
-// 从url里解析一些信息
-var urlInfo = {};
+/* 
+从url里解析一些信息
+Author: wangbicheng/80234525 
+*/
+var urlInfo = urlInfo || {};
 (function getUrlInfo() {
-    var lowerUrl = window.location.href.toLowerCase();
-    // 获取页面组编号
-    var pgnPattern = /\/\d{15}\//
-    var pgnStart = lowerUrl.search(pgnPattern);
-    urlInfo.pageGroupNo = window.location.href.substr(pgnStart + 1, 15);
-    // 获取文件名
-    var flnPattern = /\.html/
-    var flnEnd = lowerUrl.search(flnPattern);
-    var flnStart = flnEnd;
-    for (var i = flnEnd; i >= 0; i--) {
-        if (window.location.href[i] == "/") {
-            flnStart = i;
-            break;
-        }
-    }
-    urlInfo.filename = window.location.href.substring(flnStart + 1, flnEnd);
-    // 获取queryString
-    urlInfo.queryString = window.location.search.substr(1);
-    // 获取页面状态
-    urlInfo.status = lowerUrl.indexOf("/online/") > -1 ? "online" : "preview";
+	if (typeof urlInfo === 'object' && Object.keys(urlInfo).length < 1) {
+		var lowerUrl = window.location.href.toLowerCase();
+		// 获取页面组编号
+		var pgnPattern = /\/\d{15}\//
+		var pgnStart = lowerUrl.search(pgnPattern);
+		urlInfo.pageGroupNo = window.location.href.substr(pgnStart + 1, 15);
+		// 获取文件名
+		var flnPattern = /\.html/
+		var flnEnd = lowerUrl.search(flnPattern);
+		var flnStart = flnEnd;
+		for (var i = flnEnd; i >= 0; i--) {
+			if (window.location.href[i] == "/") {
+				flnStart = i;
+				break;
+			}
+		}
+		urlInfo.filename = window.location.href.substring(flnStart + 1, flnEnd);
+		// 获取queryString
+		urlInfo.queryString = window.location.search.substr(1);
+		// 获取页面状态
+		urlInfo.status = lowerUrl.indexOf("/online/") > -1 ? "online" : "preview";
+	}
 })();
 
 var pageLog = {

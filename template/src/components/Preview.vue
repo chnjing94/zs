@@ -14,11 +14,6 @@
       <div class="subregion-title text-content" :style="slideBannerTopStyle">{{slideBanner.title}}</div>
     </div>
 
-    <!-- <div id="slide-banner" @click.stop="changeEditArea('SlideBanner')" :style="slideBannerStyle" >
-      <div id="slide-banner-title" :style="slideBannerTitleStyle">{{getSlideBannerTitle}}</div>
-      <div id="slide-banner-subtitle"  :style="slideBannerSubtitleStyle">{{getSlideBannerSubtitle}}</div>
-      <div id="slide-banner-guide-icon" :style="slideBannerGuideIconStyle"></div>
-    </div> -->
     <div id="slide-banner" :class="{'selected': editAreaId==='SlideBanner'}" @click.stop="changeEditArea('SlideBanner')">
       <swiper :options="swiperOption" ref="mySwiper">
         <!-- slides -->
@@ -106,7 +101,18 @@ export default {
       return style
     },
     changeEditArea (editAreaId) {
+      if (this.editAreaId != 'SlideBanner' && editAreaId === 'SlideBanner') {
+        this.$refs.mySwiper.swiper.autoplay.stop()
+      }
+      if (this.editAreaId === 'SlideBanner' && editAreaId != 'SlideBanner') {
+        this.$refs.mySwiper.swiper.autoplay.start()
+      }
       this.$store.commit('changeEditArea', editAreaId)
+    }
+  },
+  watch: {
+    currentBannerIndex (newval) {
+      this.$refs.mySwiper.swiper.slideTo(newval)
     }
   },
   computed: {
@@ -115,6 +121,7 @@ export default {
     },
     ...mapState({
       hexOpacity2rgba: state => state.hexOpacity2rgba,
+      currentBannerIndex: state => state.currentBannerIndex,
       resPath: state => state.resPath,
       editAreaId: state => state.editAreaId,
       floatText: state => state.floatText,
