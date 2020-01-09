@@ -188,6 +188,7 @@ export default {
   },
   created () {
     this.banners = this.slideBanner.banners
+    this.currentBannerIndex = 0
   }
 }
 </script>
@@ -199,7 +200,7 @@ export default {
     padding 0 15px 20px
 
   .form
-    max-height 500px
+    max-height 50vh
     overflow-x hidden
     overflow-y auto
 

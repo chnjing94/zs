@@ -103,6 +103,7 @@ export default {
     changeEditArea (editAreaId) {
       if (this.editAreaId != 'SlideBanner' && editAreaId === 'SlideBanner') {
         this.$refs.mySwiper.swiper.autoplay.stop()
+        this.$refs.mySwiper.swiper.slideTo(0)
       }
       if (this.editAreaId === 'SlideBanner' && editAreaId != 'SlideBanner') {
         this.$refs.mySwiper.swiper.autoplay.start()
