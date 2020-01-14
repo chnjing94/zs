@@ -5,18 +5,18 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     state: true,
-    orgImg: ["backlong.png","floatwindow.png","floattext.png","subtitle.png","pink.png","subregiontitle.png","slidebanner.png","go.png","subregiontitle.png","subregiontitle.png","1.png","g1.png","2.png","g2.png","3.png","3_1.png","g3.png","4.png","4_1.png","g4.png","5.png","5_1.png","g5.png"],
+    orgImg: ["images/backlong.png","images/floatwindow.png","images/floattext.png","images/subtitle.png","images/pink.png","images/subregiontitle.png","images/slidebanner.png","images/go.png","images/subregiontitle.png","images/subregiontitle.png","images/1.png","images/g1.png","images/2.png","images/g2.png","images/3.png","images/3_1.png","images/g3.png","images/4.png","images/4_1.png","images/g4.png","images/5.png","images/5_1.png","images/g5.png"],
     savedJson: {},
-    resPath: 'images/',
+    resPath: '',
     editAreaId: 'BackgroundLongImg',
     currentBannerIndex: 0,
     backgroundLongImg: {
       backgroundImgName: 'backlong.png',
-      backgroundImgUrlRel: 'backlong.png'
+      backgroundImgUrlRel: 'images/backlong.png'
     },
     fixedFloatingWindow: {
       backgroundImgName: 'floatwindow.png',
-      backgroundImgUrlRel: 'floatwindow.png',
+      backgroundImgUrlRel: 'images/floatwindow.png',
       componentName: "fixedfloatwindow",
       backgroundColor: "",
       link: 'http://',
@@ -25,7 +25,7 @@ export default new Vuex.Store({
     floatText: {
       componentName: 'floatText',
       backgroundImgName: 'floattext.png',
-      backgroundImgUrlRel: 'floattext.png',
+      backgroundImgUrlRel: 'images/floattext.png',
       backgroundColor: '',
       backgroundOpacity: 0,
       text: '领导寄语',
@@ -44,7 +44,7 @@ export default new Vuex.Store({
     },
     subtitle: {
       backgroundImgName: 'subtitle.png',
-      backgroundImgUrlRel: 'subtitle.png',
+      backgroundImgUrlRel: 'images/subtitle.png',
       backgroundColor: '',
       backgroundOpacity: 0,
       text: '好礼送不停优质企业专享',
@@ -54,7 +54,7 @@ export default new Vuex.Store({
     fixedBanner: {
       componentName: 'fixedBanner',
       backgroundImgName: 'pink.png',
-      backgroundImgUrlRel: 'pink.png',
+      backgroundImgUrlRel: 'images/pink.png',
       link: 'http://',
       way: 0
     },
@@ -64,7 +64,7 @@ export default new Vuex.Store({
       fontColor: '#FFFFFF'
     },
     slideBanner: {
-      backgroundImgUrlRel: 'subregiontitle.png',
+      backgroundImgUrlRel: 'images/subregiontitle.png',
       title: '活动专区',
       backgroundImgName: 'subregiontitle.png',
       fontColor: '#826219',
@@ -76,9 +76,9 @@ export default new Vuex.Store({
       subtitleFontSize: 13,
       banners: [{
         "backgroundImgName": 'slidebanner.png',
-        "backgroundImgUrlRel": 'slidebanner.png',
+        "backgroundImgUrlRel": 'images/slidebanner.png',
         "guideIconName": "go.png",
-        "guideIconUrlRel": "go.png",
+        "guideIconUrlRel": "images/go.png",
         "componentName": "banner1",
         "backgroundColor": "",
         "backgroundOpacity": 0,
@@ -111,7 +111,7 @@ export default new Vuex.Store({
       }]
     },
     adAreaMid: {
-      "backgroundImgUrlRel": "subregiontitle.png",
+      "backgroundImgUrlRel": "images/subregiontitle.png",
       "title": "福利票券",
       "backgroundImgName": 'subregiontitleadAreaMid.png',
       "fontColor": "#826219",
@@ -123,7 +123,7 @@ export default new Vuex.Store({
       "subtitleFontSize": 13
     },
     adAreaBottm: {
-      "backgroundImgUrlRel": 'subregiontitle.png',
+      "backgroundImgUrlRel": 'images/subregiontitle.png',
       "title": "薪享理财",
       "backgroundImgName": 'subregiontitleadAreaBottm.png',
       "fontColor": "#826219",
@@ -137,7 +137,7 @@ export default new Vuex.Store({
     fiveBanners: {
       ad1: {
         banner: {
-          "backgroundImgUrlRel": "1.png",
+          "backgroundImgUrlRel": "images/1.png",
           "componentName": "123",
           "backgroundImgName": "1.png",
           "backgroundColor": "",
@@ -160,11 +160,11 @@ export default new Vuex.Store({
           "fontColor": "#0748C6"
         },
         "guideIconName": "g1.png",
-        "guideIconUrlRel": "g1.png"
+        "guideIconUrlRel": "images/g1.png"
       },
       ad2: {
         banner: {
-          "backgroundImgUrlRel": "2.png",
+          "backgroundImgUrlRel": "images/2.png",
           "backgroundImgName": "2.png",
           "componentName": "1",
           "backgroundColor": "",
@@ -186,12 +186,12 @@ export default new Vuex.Store({
           "fontSize": 13,
           "fontColor": "#7f5d0f"
         },
-        "guideIconUrlRel": "g2.png",
+        "guideIconUrlRel": "images/g2.png",
         "guideIconName": "g2.png"
       },
       ad3: {
         banner: {
-          "backgroundImgUrlRel": "3.png",
+          "backgroundImgUrlRel": "images/3.png",
           "backgroundImgName": "3.png",
           "componentName": "1",
           "backgroundColor": "",
@@ -204,7 +204,7 @@ export default new Vuex.Store({
           "fontSize": 16,
           "fontColor": "#fbeacd",
           "backgroundImgName": "3_1.png",
-          "backgroundImgUrlRel": "3_1.png",
+          "backgroundImgUrlRel": "images/3_1.png",
           "backgroundColor": "",
           "backgroundOpacity": 0
         },
@@ -213,12 +213,12 @@ export default new Vuex.Store({
           "fontSize": 13,
           "fontColor": "#7f5d0f"
         },
-        "guideIconUrlRel": "g3.png",
+        "guideIconUrlRel": "images/g3.png",
         "guideIconName": "g3.png"
       },
       ad4: {
         banner: {
-          "backgroundImgUrlRel": "4.png",
+          "backgroundImgUrlRel": "images/4.png",
           "backgroundImgName": "4.png",
           "componentName": "1",
           "backgroundColor": "",
@@ -231,7 +231,7 @@ export default new Vuex.Store({
           "fontSize": 16,
           "fontColor": "#fbeacd",
           "backgroundImgName": "4_1.png",
-          "backgroundImgUrlRel": "4_1.png",
+          "backgroundImgUrlRel": "images/4_1.png",
           "backgroundColor": "",
           "backgroundOpacity": 0
         },
@@ -240,12 +240,12 @@ export default new Vuex.Store({
           "fontSize": 13,
           "fontColor": "#FFFFFF"
         },
-        "guideIconUrlRel": "g4.png",
+        "guideIconUrlRel": "images/g4.png",
         "guideIconName": "g4.png"
       },
       ad5: {
         banner: {
-          "backgroundImgUrlRel": "5.png",
+          "backgroundImgUrlRel": "images/5.png",
           "backgroundImgName": "5.png",
           "componentName": "1",
           "backgroundColor": "",
@@ -258,7 +258,7 @@ export default new Vuex.Store({
           "fontSize": 16,
           "fontColor": "#fbeacd",
           "backgroundImgName": "5_1.png",
-          "backgroundImgUrlRel": "5_1.png",
+          "backgroundImgUrlRel": "images/5_1.png",
           "backgroundColor": "",
           "backgroundOpacity": 0
         },
@@ -267,7 +267,7 @@ export default new Vuex.Store({
           "fontSize": 13,
           "fontColor": "#FFFFFF"
         },
-        "guideIconUrlRel": "g5.png",
+        "guideIconUrlRel": "images/g5.png",
         "guideIconName": "g5.png"
       }
     },

@@ -146,7 +146,7 @@ function CmbLoading() {
     this.init = function () {
         var style = `
         .cmb-loading-body {
-            overflow: hidden;
+            overflow: hidden !important;
         }
         .cmb-loading-hide {
             display: none;
@@ -318,7 +318,12 @@ function CmbLoading() {
         // 展示
         this.cmbLoadingContainer.setAttribute("class", "cmb-loading-container");
         // 暂时禁止body滑动
-        document.body.setAttribute("style", "overflow: hidden");
+        this.previewBodyClass = document.body.getAttribute("class");
+        if (!!this.previewBodyClass && this.previewBodyClass !== "") {
+            document.body.setAttribute("class", this.previewBodyClass + " cmb-loading-body");
+        } else {
+            document.body.setAttribute("class", "cmb-loading-body");
+        }
 
         this.progressVal = 0;
         var that = this;
@@ -344,7 +349,11 @@ function CmbLoading() {
         setTimeout(function () {
             that.cmbLoadingContainer.setAttribute("class", "cmb-loading-container-hide cmb-loading-hide");
             // 解除禁止body滑动
-            document.body.setAttribute("style", "");
+            if (!!this.previewBodyClass && this.previewBodyClass !== "") {
+                document.body.setAttribute("class", this.previewBodyClass);
+            } else {
+                document.body.setAttribute("class", "");
+            }
         }, 300);
     }
 
@@ -392,28 +401,28 @@ Author: wangbicheng/80234525
 */
 var urlInfo = urlInfo || {};
 (function getUrlInfo() {
-	if (typeof urlInfo === 'object' && Object.keys(urlInfo).length < 1) {
-		var lowerUrl = window.location.href.toLowerCase();
-		// 获取页面组编号
-		var pgnPattern = /\/\d{15}\//
-		var pgnStart = lowerUrl.search(pgnPattern);
-		urlInfo.pageGroupNo = window.location.href.substr(pgnStart + 1, 15);
-		// 获取文件名
-		var flnPattern = /\.html/
-		var flnEnd = lowerUrl.search(flnPattern);
-		var flnStart = flnEnd;
-		for (var i = flnEnd; i >= 0; i--) {
-			if (window.location.href[i] == "/") {
-				flnStart = i;
-				break;
-			}
-		}
-		urlInfo.filename = window.location.href.substring(flnStart + 1, flnEnd);
-		// 获取queryString
-		urlInfo.queryString = window.location.search.substr(1);
-		// 获取页面状态
-		urlInfo.status = lowerUrl.indexOf("/online/") > -1 ? "online" : "preview";
-	}
+    if (typeof urlInfo === 'object' && Object.keys(urlInfo).length < 1) {
+        var lowerUrl = window.location.href.toLowerCase();
+        // 获取页面组编号
+        var pgnPattern = /\/\d{15}\//
+        var pgnStart = lowerUrl.search(pgnPattern);
+        urlInfo.pageGroupNo = window.location.href.substr(pgnStart + 1, 15);
+        // 获取文件名
+        var flnPattern = /\.html/
+        var flnEnd = lowerUrl.search(flnPattern);
+        var flnStart = flnEnd;
+        for (var i = flnEnd; i >= 0; i--) {
+            if (window.location.href[i] == "/") {
+                flnStart = i;
+                break;
+            }
+        }
+        urlInfo.filename = window.location.href.substring(flnStart + 1, flnEnd);
+        // 获取queryString
+        urlInfo.queryString = window.location.search.substr(1);
+        // 获取页面状态
+        urlInfo.status = lowerUrl.indexOf("/online/") > -1 ? "online" : "preview";
+    }
 })();
 
 (function initRedirect() {

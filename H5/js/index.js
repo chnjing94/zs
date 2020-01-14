@@ -59,8 +59,6 @@ function initVue() {
                 },
             })
             document.getElementById('app').style.display = 'block';
-            // 页面曝光埋点
-            pageLog.onPageLoadLog()
         },
         methods: {
             goPage(url, event) {
