@@ -74,7 +74,7 @@
         <div class="index-wrapper" :style="{ backgroundImage: `url(${backgroundLongImg.backgroundImgUrlRel})` }">
             <!-- 右上角浮窗 -->
             <img class='fixed-floating-window' :url="fixedFloatingWindow.link" :way="fixedFloatingWindow.way"
-                :moduleName="'模板组件'" :widgetNoForOut="'ZJZ02000N'" :widgetNo="'ZJY02000N'"
+                :moduleName="'模板组件'" :widgetNoForOut="'ZJZ020001'" :widgetNo="'ZJY020001'"
                 :widgetName="fixedFloatingWindow.componentName" @click="goPage(fixedFloatingWindow.link, $event)"
                 :src="fixedFloatingWindow.backgroundImgUrlRel" />
             <!-- 页面副标题 -->
@@ -112,7 +112,7 @@
                     <div class='swiper-wrapper'>
                         <div class='swiper-slide' @click="goPage(item.link, $event)" v-for="(item) in banners"
                             :key="item.componentName" :url="item.link" :way="item.way" :moduleName="'模板组件'"
-                            :widgetNoForOut="'ZJZ02000N'" :widgetNo="'ZJY02000N'" :widgetName="item.componentName">
+                            :widgetNoForOut="'ZJZ020002'" :widgetNo="'ZJY020002'" :widgetName="item.componentName">
                             <div class='bg' :style="item.backgroundImgUrlRel
                             ? { backgroundImage: `url(${item.backgroundImgUrlRel})` }
                             : { backgroundColor: item.backgroundColor, opacity: ( 1 - item.backgroundOpacity / 100) }">
@@ -145,7 +145,7 @@
                 <div class='banner-group'>
                     <div class='banner banner1' @click="goPage(fiveBanners.ad1.banner.link, $event)"
                         :url="fiveBanners.ad1.banner.link" :way="fiveBanners.ad1.banner.way" :moduleName="'模板组件'"
-                        :widgetNoForOut="'ZJZ02000N'" :widgetNo="'ZJY02000N'"
+                        :widgetNoForOut="'ZJZ020003'" :widgetNo="'ZJY020003'"
                         :widgetName="fiveBanners.ad1.banner.widgetName">
                         <div class='bg'
                             :style="fiveBanners.ad1.banner.backgroundImgUrlRel
@@ -160,7 +160,7 @@
                     </div>
                     <div class='banner banner2' @click="goPage(fiveBanners.ad2.banner.link, $event)"
                         :url="fiveBanners.ad2.banner.link" :way="fiveBanners.ad2.banner.way" :moduleName="'模板组件'"
-                        :widgetNoForOut="'ZJZ02000N'" :widgetNo="'ZJY02000N'"
+                        :widgetNoForOut="'ZJZ020004'" :widgetNo="'ZJY020004'"
                         :widgetName="fiveBanners.ad2.banner.widgetName">
                         <div class='bg'
                             :style="fiveBanners.ad2.banner.backgroundImgUrlRel
@@ -195,7 +195,7 @@
                 <div class='banner-group'>
                     <div class='banner banner3' @click="goPage(fiveBanners.ad3.banner.link, $event)"
                         :url="fiveBanners.ad3.banner.link" :way="fiveBanners.ad3.banner.way" :moduleName="'模板组件'"
-                        :widgetNoForOut="'ZJZ02000N'" :widgetNo="'ZJY02000N'"
+                        :widgetNoForOut="'ZJZ020005'" :widgetNo="'ZJY020005'"
                         :widgetName="fiveBanners.ad3.banner.widgetName">
                         <div class='bg'
                             :style="fiveBanners.ad3.banner.backgroundImgUrlRel
@@ -213,7 +213,7 @@
                     </div>
                     <div class='banner banner4' @click="goPage(fiveBanners.ad4.banner.link, $event)"
                         :url="fiveBanners.ad4.banner.link" :way="fiveBanners.ad4.banner.way" :moduleName="'模板组件'"
-                        :widgetNoForOut="'ZJZ02000N'" :widgetNo="'ZJY02000N'"
+                        :widgetNoForOut="'ZJZ020006'" :widgetNo="'ZJY020006'"
                         :widgetName="fiveBanners.ad4.banner.widgetName">
                         <div class='bg'
                             :style="fiveBanners.ad4.banner.backgroundImgUrlRel
@@ -231,7 +231,7 @@
                     </div>
                     <div class='banner banner5' @click="goPage(fiveBanners.ad5.banner.link, $event)"
                         :url="fiveBanners.ad5.banner.link" :way="fiveBanners.ad5.banner.way" :moduleName="'模板组件'"
-                        :widgetNoForOut="'ZJZ02000N'" :widgetNo="'ZJY02000N'"
+                        :widgetNoForOut="'ZJZ020007'" :widgetNo="'ZJY020007'"
                         :widgetName="fiveBanners.ad5.banner.widgetName">
                         <div class='bg'
                             :style="fiveBanners.ad5.banner.backgroundImgUrlRel
@@ -252,7 +252,7 @@
             <!-- 底部 -->
             <div class='fix-banner' :style="{ backgroundImage: `url(${fixedBanner.backgroundImgUrlRel})` }"
                 @click="goPage(fixedBanner.link, $event)" :url="fixedBanner.link" :way="fixedBanner.way"
-                :moduleName="'模板组件'" :widgetNoForOut="'ZJZ02000N'" :widgetNo="'ZJY02000N'"
+                :moduleName="'模板组件'" :widgetNoForOut="'ZJZ020008'" :widgetNo="'ZJY020008'"
                 :widgetName="fixedBanner.widgetName"></div>
             <!-- 底部文案 -->
             <div class='foot-text' :style="{ color: footText.fontColor, fontSize: `0.${footText.fontSize * 2}rem` }">
