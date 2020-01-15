@@ -3,26 +3,26 @@
     <Title :title="'滑动banner图'" :subtitle="'配置多张可滑动，5秒自动切换，最多可配置5张'"/>
     <div class="form">
       <div v-for="(banner,index) in banners" :key="index" @click="selectBanner(index)" :class="{delete: index===deleteIndex}">
-        <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="banner.componentName"/>
+        <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="banner.componentName" :disable="!allowEdit"/>
         <ErrorMsg :message="validateComponentName(index)" v-if="validateComponentName(index)&&showValidationMsg"/>
 
-        <ImageUploader :title="'背景图片'+(index+1)" :fileName="banner.backgroundImgName" :imgPrefix="'SlideBannerBG'" :required="false" @success="uploadImageSuccess" @remove="removeBackgroundImg(banner)"/>
-        <BackgroundColor :title="'背景颜色'+(index+1)" v-model="banner.backgroundColor" :opacity.sync="banner.backgroundOpacity"/>
-        <ImageUploader :title="'引导图标'+(index+1)" :fileName="banner.guideIconName" :imgPrefix="'SlideBannerGuide'" :required="false" @success="uploadGuideIconSuccess" @remove="removeIconImg(banner)"/>
-        <TextInput :title="'主标题'" :hint="'（限7个字以内输入）'" :placeholder="'请输入主标题文字'" noSymbol :maxLength="7" v-model="banner.title"/>
-        <FontColor v-model="banner.fontColor"/>
-        <TextInput :title="'副标题'" :hint="'（限7个字以内输入）'" :placeholder="'请输入副标题文字'" noSymbol :maxLength="7" v-model="banner.subtitle"/>
-        <FontColor v-model="banner.subtitleFontColor"/>
-        <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" required v-model="banner.link"/>
+        <ImageUploader :title="'背景图片'+(index+1)" :preferSize="'640*220'" :fileName="banner.backgroundImgName" :imgPrefix="'SlideBannerBG'" :required="false" @success="uploadImageSuccess" @remove="removeBackgroundImg(banner)" :disable="!allowEdit"/>
+        <BackgroundColor :title="'背景颜色'+(index+1)" v-model="banner.backgroundColor" :opacity.sync="banner.backgroundOpacity" :disable="!allowEdit"/>
+        <ImageUploader :title="'引导图标'+(index+1)" :preferSize="'72*72'" :fileName="banner.guideIconName" :imgPrefix="'SlideBannerGuide'" :required="false" @success="uploadGuideIconSuccess" @remove="removeIconImg(banner)" :disable="!allowEdit"/>
+        <TextInput :title="'主标题'" :hint="'（限7个字以内输入）'" :placeholder="'请输入主标题文字'" noSymbol :maxLength="7" v-model="banner.title" :disable="!allowEdit"/>
+        <FontColor v-model="banner.fontColor" :disable="!allowEdit"/>
+        <TextInput :title="'副标题'" :hint="'（限7个字以内输入）'" :placeholder="'请输入副标题文字'" noSymbol :maxLength="7" v-model="banner.subtitle" :disable="!allowEdit"/>
+        <FontColor v-model="banner.subtitleFontColor" :disable="!allowEdit"/>
+        <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" required v-model="banner.link" :disable="!allowEdit"/>
         <ErrorMsg :message="validateLink(index)" v-if="validateLink(index)&&showValidationMsg"/>
-        <RedictWay v-model="banner.way"/>
-        <div class="edit-button">
+        <RedictWay v-model="banner.way" :disable="!allowEdit"/>
+        <div class="edit-button" :style="{pointerEvents: !allowEdit ? 'none' : 'auto'}">
           <div class="button add" v-if="index==banners.length-1" @click="addBanner"><a-icon type="plus" /></div>
           <div class="button delete" @click="deleteBanner(index)"><a-icon type="minus" /></div>
         </div>
       </div>
     </div>
-    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup v-if="allowEdit" :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -70,6 +70,7 @@ export default {
   },
   computed: {
     ...mapState({
+      allowEdit: state => state.state,
       slideBanner: state => state.slideBanner
     }),
     output () {

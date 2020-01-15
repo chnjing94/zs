@@ -1,12 +1,12 @@
 <template>
   <div id="float-window">
     <Title :title="'浮动弹窗'"/>
-    <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :imgPrefix="'FloatWindow'" :required="false" @success="uploadImgSuccess" @remove="removeImg"/>
-    <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
-    <TextInput :title="'文字'" :hint="'（限50个字以内输入）'" :maxLength="50" v-model="text"/>
-    <FontSize v-model="fontSize"/>
-    <FontColor v-model="fontColor"/>
-    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ImageUploader :title="'背景图片'" :preferSize="'300*200'" :fileName="backgroundImgName" :imgPrefix="'FloatWindow'" :required="false" @success="uploadImgSuccess" @remove="removeImg" :disable="!allowEdit"/>
+    <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity" :disable="!allowEdit"/>
+    <TextInput :title="'文字'" :hint="'（限50个字以内输入）'" :maxLength="50" v-model="text" :disable="!allowEdit"/>
+    <FontSize v-model="fontSize" :disable="!allowEdit"/>
+    <FontColor v-model="fontColor" :disable="!allowEdit"/>
+    <ButtonGroup v-if="allowEdit" :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -53,6 +53,7 @@ export default {
   },
   computed: {
     ...mapState({
+      allowEdit: state => state.state,
       floatWindow: state => state.floatWindow,
     }),
     output () {

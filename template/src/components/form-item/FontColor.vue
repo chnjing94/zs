@@ -7,11 +7,11 @@
       <div class="selected-color" :style="{backgroundColor: selectedColor}"></div>
       <div class="color-panel">
         <div class="color-block" v-for="(color,index) in colors" :key="index" 
-        :style="{backgroundColor: color}"
+        :style="{backgroundColor: color, pointerEvents: disable ? 'none' : 'auto'}"
         @click="$emit('change', color)">
         </div>
       </div>
-      <div class="more-color" @click="onClick">
+      <div class="more-color" @click="onClick" :style="{pointerEvents: disable ? 'none' : 'auto'}">
         更多
         <input type="color" v-show="false" ref="moreColor" @change="$emit('change', $event.target.value)">
       </div>
@@ -27,7 +27,11 @@ export default {
     event: 'change'
   },
   props: {
-    selectedColor: String
+    selectedColor: String,
+    disable: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {

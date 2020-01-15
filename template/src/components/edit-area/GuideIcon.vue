@@ -1,8 +1,8 @@
 <template>
   <div id="guide-icon">
     <Title :title="'引导图标'"/>
-    <ImageUploader :fileName="guideIconName" :imgPrefix="'GuideIcon'+bannerId" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
-    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ImageUploader :fileName="guideIconName" :preferSize="'175*50'" :imgPrefix="'GuideIcon'+bannerId" :required="false" @success="uploadImageSuccess" @remove="removeImg" :disable="!allowEdit"/>
+    <ButtonGroup v-if="allowEdit" :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -44,6 +44,7 @@ export default {
   },
   computed: {
     ...mapState({
+      allowEdit: state => state.state,
       fiveBanners: state => state.fiveBanners,
     }),
     output () {

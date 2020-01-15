@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     showEditPanel (editAreaId) {
-      return editAreaId === this.editAreaId && this.allowEdit === true
+      return editAreaId === this.editAreaId
     }
   }
 }

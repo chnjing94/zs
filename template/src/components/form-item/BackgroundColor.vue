@@ -19,12 +19,12 @@
       </div>
       <div class="color-panel">
         <div class="color-block" v-for="(color,index) of colors" :key="index" 
-        :style="{backgroundColor: color}"
+        :style="{backgroundColor: color, pointerEvents: disable ? 'none' : 'auto'}"
         @click="$emit('change', color)">
 
         </div>
       </div>
-      <div class="more-color" @click="onClick">
+      <div class="more-color" @click="onClick" :style="{pointerEvents: disable ? 'none' : 'auto'}">
         更多
         <input type="color" v-show="false" ref="moreColor" @change="$emit('change', $event.target.value)">
       </div>
@@ -32,7 +32,7 @@
     <div class="opacity-bar">
       <div class="opacity-title">透明度: {{opacity}}</div>
       <div class="bar">
-        <a-slider style="width: 80%" v-model="opacityLocal" @afterChange="$emit('update:opacity', opacityLocal)" :disabled="!selectedColor"/>
+        <a-slider style="width: 80%" v-model="opacityLocal" @afterChange="$emit('update:opacity', opacityLocal)" :disabled="disable || !selectedColor"/>
       </div>
     </div>
   </div>
@@ -54,6 +54,10 @@ export default {
     opacity: {
       type: Number,
       default: 0
+    },
+    disable: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -66,12 +70,6 @@ export default {
     onClick () {
       this.$refs.moreColor.click()
     },
-    colorChange (evt) {
-      this.selectedColor = evt.target.value
-    },
-    setColor (color) {
-      this.selectedColor = color
-    }
   },
   watch: {
     selectedColor () {

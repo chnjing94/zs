@@ -1,12 +1,12 @@
 <template>
   <div id="subtitle-wrapper">
     <Title :title="'副标题'"/>
-    <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :imgPrefix="'Subtitle'" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
-    <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
-    <TextInput :title="'文字'" :placeholder="'请输入副标题文字'" :hint="'（限16个字以内输入）'" v-model="text" :maxLength="16" noSymbol/>
-    <FontSize v-model="fontSize"/>
-    <FontColor v-model="fontColor"/>
-    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ImageUploader :title="'背景图片'" :preferSize="'540*60'" :fileName="backgroundImgName" :imgPrefix="'Subtitle'" :required="false" @success="uploadImageSuccess" @remove="removeImg" :disable="!allowEdit"/>
+    <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity" :disable="!allowEdit"/>
+    <TextInput :title="'文字'" :placeholder="'请输入副标题文字'" :hint="'（限16个字以内输入）'" v-model="text" :maxLength="16" noSymbol :disable="!allowEdit"/>
+    <FontSize v-model="fontSize" :disable="!allowEdit"/>
+    <FontColor v-model="fontColor" :disable="!allowEdit"/>
+    <ButtonGroup v-if="allowEdit" :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -52,6 +52,7 @@ export default {
   },
   computed: {
     ...mapState({
+      allowEdit: state => state.state,
       subtitle: state => state.subtitle,
     }),
     output () {

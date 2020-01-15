@@ -17,7 +17,7 @@ export default {
   name: 'LeftPanel',
   methods: {
     showEditPanel() {
-      return (this.editAreaId==='FloatText' || this.editAreaId==='FloatWindow') && this.floatText.componentName && this.allowEdit === true
+      return (this.editAreaId==='FloatText' || this.editAreaId==='FloatWindow') && this.floatText.componentName
     },
     changeEditArea (editAreaId) {
       this.$store.commit('changeEditArea', editAreaId)

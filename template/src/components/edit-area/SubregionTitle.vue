@@ -2,14 +2,14 @@
   <div id="subregion-title">
     <Title :title="'分区标题'"/>
     <div class="form">
-      <TextInput :title="'主标题'" :placeholder="'请输入主标题文字'" :hint="'（限7个字以内输入）'" noSymbol :maxLength="7" v-model="title"/>
-      <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :imgPrefix="subregionId+'Title'" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
-      <FontColor v-model="fontColor"/>
-      <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
-      <TextInput :title="'副标题'" :placeholder="'请输入副标题文字'" :hint="'（限12个字以内输入）'" :maxLength="12" v-model="subtitle"/>
-      <FontColor v-model="subtitleFontColor"/>
+      <TextInput :title="'主标题'" :placeholder="'请输入主标题文字'" :hint="'（限7个字以内输入）'" noSymbol :maxLength="7" v-model="title" :disable="!allowEdit"/>
+      <ImageUploader :title="'背景图片'" :preferSize="'240*60'" :fileName="backgroundImgName" :imgPrefix="subregionId+'Title'" :required="false" @success="uploadImageSuccess" @remove="removeImg" :disable="!allowEdit"/>
+      <FontColor v-model="fontColor" :disable="!allowEdit"/>
+      <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity" :disable="!allowEdit"/>
+      <TextInput :title="'副标题'" :placeholder="'请输入副标题文字'" :hint="'（限12个字以内输入）'" :maxLength="12" v-model="subtitle" :disable="!allowEdit"/>
+      <FontColor v-model="subtitleFontColor" :disable="!allowEdit"/>
     </div>
-    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup v-if="allowEdit" :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -20,6 +20,7 @@ import TextInput from '../form-item/TextInput'
 import FontColor from '../form-item/FontColor'
 import ImageUploader from '../form-item/ImageUploader'
 import BackgroundColor from '../form-item/BackgroundColor'
+import { mapState } from 'vuex'
 
 export default {
   name: 'SubregionTitle',
@@ -63,6 +64,9 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      allowEdit: state => state.state
+    }),
     output () {
       const { title, backgroundImgName, backgroundImgUrlRel, fontColor, fontSize, backgroundColor, backgroundOpacity, subtitle, subtitleFontColor, subtitleFontSize } = this
       return { title, backgroundImgName, backgroundImgUrlRel, fontColor, fontSize, backgroundColor, backgroundOpacity, subtitle, subtitleFontColor, subtitleFontSize }

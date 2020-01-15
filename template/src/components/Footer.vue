@@ -1,11 +1,13 @@
 <template>
   <div id="foot-wrapper">
     <div class="button last-step" @click="cancel">上一步</div>
-    <div class="button save" @click="save">保存</div>
+    <div v-if="allowEdit" class="button save" @click="save">保存</div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
     name: 'Footer',
     methods: {
@@ -19,6 +21,11 @@ export default {
         window.parent.document.getElementById("dataImg").value = JSON.stringify(this.$store.state.orgImg);
         window.parent.document.getElementById('frameCancel').click()
       }
+    },
+    computed: {
+      ...mapState({
+        allowEdit: state => state.state,
+      })
     }
 }
 </script>

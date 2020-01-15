@@ -1,9 +1,9 @@
 <template>
   <div id="background-long-img-wrapper">
     <Title :title="'背景长图'"/>
-    <ImageUploader :imgPrefix="'BackgroundLongImg'" :maxSize="1000000" :fileName="backgroundImgName" @success="uploadImageSuccess" @remove="removeImg"/>
+    <ImageUploader :imgPrefix="'BackgroundLongImg'" :preferSize="'750*3200'" :maxSize="1000000" :fileName="backgroundImgName" @success="uploadImageSuccess" @remove="removeImg" :disable="!allowEdit"/>
     <ErrorMsg :message="validteBackgroundImg" v-if="showValidationMsg&&validteBackgroundImg"/>
-    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <ButtonGroup v-if="allowEdit" :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel"/>
   </div>
 </template>
 
@@ -68,6 +68,7 @@ export default {
   },
   computed: {
     ...mapState({
+      allowEdit: state => state.state,
       backgroundLongImg: state => state.backgroundLongImg,
     }),
     validteBackgroundImg () {

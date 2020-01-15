@@ -1,16 +1,16 @@
 <template>
   <div id="banner-background-img">
     <Title :title="'banner图背景'"/>
-    <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="componentName"/>
+    <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="componentName" :disable="!allowEdit"/>
     <ErrorMsg :message="validateComponentName" v-if="validateComponentName&&showValidationMsg"/>
 
-    <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :imgPrefix="'BannerBackgroundImg'+bannerId" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
-    <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
-    <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" required v-model="link"/>
+    <ImageUploader :title="'背景图片'" :preferSize="'640*220'" :fileName="backgroundImgName" :imgPrefix="'BannerBackgroundImg'+bannerId" :required="false" @success="uploadImageSuccess" @remove="removeImg" :disable="!allowEdit"/>
+    <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity" :disable="!allowEdit"/>
+    <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" required v-model="link" :disable="!allowEdit"/>
     <ErrorMsg :message="validteLink" v-if="validteLink&&showValidationMsg"/>
 
-    <RedictWay v-model="way"/>
-    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel"/>
+    <RedictWay v-model="way" :disable="!allowEdit"/>
+    <ButtonGroup v-if="allowEdit" :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel"/>
   </div>
 </template>
 
@@ -66,6 +66,7 @@ export default {
   },
   computed: {
     ...mapState({
+      allowEdit: state => state.state,
       fiveBanners: state => state.fiveBanners,
     }),
     output () {

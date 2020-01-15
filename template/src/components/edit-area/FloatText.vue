@@ -2,19 +2,19 @@
   <div id="float-text">
     <Title :title="'浮动文字'"/>
     <div class="form">
-      <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="componentName"/>
+      <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" required noSymbol :maxLength="16" v-model="componentName" :disable="!allowEdit"/>
       <ErrorMsg :message="validateComponentName" v-if="validateComponentName&&showValidationMsg"/>
-      <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :imgPrefix="'FloatText'" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
-      <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
-      <TextInput :title="'文字'" :placeholder="'请输入浮动文字'" :hint="'（限16个字以内输入）'" required noSymbol :maxLength="16" v-model="text"/>
+      <ImageUploader :title="'背景图片'" :preferSize="'120*40'" :fileName="backgroundImgName" :imgPrefix="'FloatText'" :required="false" @success="uploadImageSuccess" @remove="removeImg" :disable="!allowEdit"/>
+      <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity" :disable="!allowEdit"/>
+      <TextInput :title="'文字'" :placeholder="'请输入浮动文字'" :hint="'（限16个字以内输入）'" required noSymbol :maxLength="16" v-model="text" :disable="!allowEdit"/>
       <ErrorMsg :message="validateText" v-if="validateText&&showValidationMsg"/>
-      <FontSize v-model="fontSize"/>
-      <FontColor v-model="fontColor"/>
+      <FontSize v-model="fontSize" :disable="!allowEdit"/>
+      <FontColor v-model="fontColor" :disable="!allowEdit"/>
       <div class="show-text-toggle">
-        <a-checkbox @change="onChange" :checked="show">展示文字</a-checkbox><span style="color: #868686">（取消勾选后不展示该组件）</span>
+        <a-checkbox :disabled="!allowEdit" @change="onChange" :checked="show">展示文字</a-checkbox><span style="color: #868686">（取消勾选后不展示该组件）</span>
       </div>
     </div>
-    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" :notes="notes"/>
+    <ButtonGroup v-if="allowEdit" :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" :notes="notes"/>
   </div>
 </template>
 
@@ -66,6 +66,7 @@ export default {
   },
   computed: {
     ...mapState({
+      allowEdit: state => state.state,
       floatText: state => state.floatText,
     }),
     output () {

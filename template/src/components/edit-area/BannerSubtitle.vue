@@ -1,9 +1,9 @@
 <template>
   <div id="banner-subtitle">
     <Title :title="'分区副标题'"/>
-    <TextInput :title="'文字'" :placeholder="'请输入副标题文字'" :hint="'（限12个字以内输入）'" :maxLength="12" v-model="text"/>
-    <FontColor v-model="fontColor"/>
-    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <TextInput :title="'文字'" :placeholder="'请输入副标题文字'" :hint="'（限12个字以内输入）'" :maxLength="12" v-model="text" :disable="!allowEdit"/>
+    <FontColor v-model="fontColor" :disable="!allowEdit"/>
+    <ButtonGroup v-if="allowEdit" :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -45,6 +45,7 @@ export default {
   },
   computed: {
     ...mapState({
+      allowEdit: state => state.state,
       fiveBanners: state => state.fiveBanners,
     }),
     output () {

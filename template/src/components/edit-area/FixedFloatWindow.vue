@@ -2,17 +2,17 @@
   <div id="fixed-float-window">
     <Title :title="'固定悬浮窗'"/>
 
-    <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" v-model="componentName" :maxLength="16" required noSymbol/>
+    <TextInput :title="'组件名称'" :placeholder="'请输入组件名称'" v-model="componentName" :maxLength="16" required noSymbol :disable="!allowEdit"/>
     <ErrorMsg :message="validateComponentName" v-if="validateComponentName&&showValidationMsg"/>
 
-    <ImageUploader :imgPrefix="'FixedFloatWindow'" :fileName="backgroundImgName" @success="uploadImageSuccess" @remove="removeImg"/>
+    <ImageUploader :imgPrefix="'FixedFloatWindow'" :preferSize="'160*145'" :fileName="backgroundImgName" @success="uploadImageSuccess" @remove="removeImg" :disable="!allowEdit"/>
     <ErrorMsg :message="validteBackgroundImg" v-if="validteBackgroundImg&&showValidationMsg"/>
 
-    <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" v-model="link" required/>
+    <TextInput :title="'跳转链接'" :hint="'（必须一些http://或https://开始）'" :placeholder="'点击输入链接'" v-model="link" required :disable="!allowEdit"/>
     <ErrorMsg :message="validteLink" v-if="validteLink&&showValidationMsg"/>
 
-    <RedictWay v-model="way"/>
-    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <RedictWay v-model="way" :disable="!allowEdit"/>
+    <ButtonGroup v-if="allowEdit" :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -55,6 +55,7 @@ export default {
   },
   computed: {
     ...mapState({
+      allowEdit: state => state.state,
       fixedFloatingWindow: state => state.fixedFloatingWindow,
     }),
     output () {

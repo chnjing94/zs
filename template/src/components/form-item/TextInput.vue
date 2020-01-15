@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="test-area" >
-      <a-input :placeholder="placeholder" @change="onInputChanged" v-model="text"/>
+      <a-input :disabled="disable" :placeholder="placeholder" @change="onInputChanged" v-model="text"/>
     </div>
   </div>
 </template>
@@ -46,6 +46,10 @@ export default {
     maxLength: {
       type: Number,
       default: Number.MAX_VALUE
+    },
+    disable: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

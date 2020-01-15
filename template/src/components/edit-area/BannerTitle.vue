@@ -1,11 +1,11 @@
 <template>
   <div id="banner-title">
     <Title :title="'分区主标题'"/>
-    <TextInput :title="'文字'" :placeholder="'请输入主标题文字'" :hint="'（限12个字以内输入）'" :maxLength="12" v-model="text"/>
-    <FontColor v-model="fontColor"/>
-    <ImageUploader :title="'背景图片'" :fileName="backgroundImgName" :imgPrefix="'BannerTitle'+bannerId" :required="false" @success="uploadImageSuccess" @remove="removeImg"/>
-    <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity"/>
-    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
+    <TextInput :title="'文字'" :placeholder="'请输入主标题文字'" :hint="'（限12个字以内输入）'" :maxLength="12" v-model="text" :disable="!allowEdit"/>
+    <FontColor v-model="fontColor" :disable="!allowEdit"/>
+    <ImageUploader :title="'背景图片'" :preferSize="'250*50'" :fileName="backgroundImgName" :imgPrefix="'BannerTitle'+bannerId" :required="false" @success="uploadImageSuccess" @remove="removeImg" :disable="!allowEdit"/>
+    <BackgroundColor v-model="backgroundColor" :opacity.sync="backgroundOpacity" :disable="!allowEdit"/>
+    <ButtonGroup v-if="allowEdit" :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel" />
   </div>
 </template>
 
@@ -58,6 +58,7 @@ export default {
   },
   computed: {
     ...mapState({
+      allowEdit: state => state.state,
       fiveBanners: state => state.fiveBanners,
     }),
     output () {

@@ -1,10 +1,10 @@
 <template>
   <div id="bottom-state">
     <Title :title="'底部说明'"/>
-    <TextInput :title="'文字'" :placeholder="'请输入文字'" :hint="'（限30个字以内输入）'" v-model="text" :maxLength="30"/>
-    <FontSize v-model="fontSize"/>
-    <FontColor v-model="fontColor"/>
-    <ButtonGroup :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel"/>
+    <TextInput :title="'文字'" :placeholder="'请输入文字'" :hint="'（限30个字以内输入）'" v-model="text" :maxLength="30" :disable="!allowEdit"/>
+    <FontSize v-model="fontSize" :disable="!allowEdit"/>
+    <FontColor v-model="fontColor" :disable="!allowEdit"/>
+    <ButtonGroup v-if="allowEdit" :success="confirmed" @buttonConfirmed="confirm" @buttonCanceled="cancel"/>
   </div>
 </template>
 
@@ -42,6 +42,7 @@ export default {
   },
   computed: {
     ...mapState({
+      allowEdit: state => state.state,
       footText: state => state.footText,
     }),
     output () {

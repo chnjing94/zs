@@ -4,7 +4,7 @@
       <span style="color: red">*</span>站外点击唤起方式
     </div>
     <div class="select-area">
-      <a-select style="width: 100%; height: 40px" v-model="wayLocal">
+      <a-select :disabled="disable" style="width: 100%; height: 40px" v-model="wayLocal">
         <a-select-option value="0">点击唤起招商银行APP</a-select-option>
         <a-select-option value="1">点击仅跳转链接</a-select-option>
       </a-select>
@@ -20,7 +20,11 @@ export default {
     event: 'select'
   },
   props: {
-    way: Number
+    way: Number,
+    disable: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
