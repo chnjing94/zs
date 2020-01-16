@@ -154,7 +154,7 @@ function CmbLoading() {
         .cmb-loading-container {
             width: 100%;
             height: 100%;
-            position: absolute;
+            position: fixed;
             z-index: 9999;
             background: #ffffff;
             overflow: hidden;
@@ -162,7 +162,7 @@ function CmbLoading() {
         .cmb-loading-container-hide {
             width: 100%;
             height: 100%;
-            position: absolute;
+            position: fixed;
             z-index: 9999;
             background: #ffffff;
             animation: cmb-loading-hide 0.3s ease-in-out 1;
