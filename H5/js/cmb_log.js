@@ -66,7 +66,7 @@ var pageLog = {
                         return url.split('?')[1];
                     }
                     if (tmpurl.indexOf("funcid=16335001") > -1 || tmpurl.indexOf("act.cmbchina.com/actshipmobile/") > -1) {
-                        return getUrlKey(url.split("?")[1], "actgroupid");
+                        return pageLog.logUtils.getUrlKey(url.split("?")[1], "actgroupid");
                     }
                 }
             }
